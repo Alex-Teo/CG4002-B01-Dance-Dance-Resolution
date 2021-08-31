@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // Components
 
 // Screens
-import HomeScreen from "./screens/HomeScreen";
+import MainDashboard from "./screens/MainDashboard";
 
 function App() {
   return (
     <div>
-      <HomeScreen />
+      <MainDashboard />
     </div>
   );
 }

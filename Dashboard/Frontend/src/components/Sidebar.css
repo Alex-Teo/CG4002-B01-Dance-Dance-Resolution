@@ -1,0 +1,26 @@
+.pro-sidebar-inner {
+  background: white !important;
+}
+
+.pro-sidebar {
+  width: 80px !important;
+  min-width: 80px !important;
+  height: 100vh !important;
+}
+
+svg {
+  width: 2em;
+  height: 2em;
+}
+
+.danceLogo {
+  background: url(../images/Logo.svg);
+  width: auto;
+  height: 80px;
+  display: flex;
+  padding-left: 15px;
+  align-items: center;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
