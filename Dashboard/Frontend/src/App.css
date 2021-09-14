@@ -1,3 +1,19 @@
+/* Google Font Link */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 body {
   background-color: #e4f5f9;
+}
+
+.pageContainer {
+  position: relative;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
 }
