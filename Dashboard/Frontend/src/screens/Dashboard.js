@@ -1,8 +1,29 @@
 import "./Dashboard.css";
 import UserCard from "../components/UserCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MainDashboard = () => {
+  const [currentDateTime, setDateTime] = useState(new Date());
+  const [currentDay, setDay] = useState("");
+  const [currentTime, setTime] = useState("");
+  const [currentDate, setDate] = useState("");
+
+  useEffect(() => {
+    const timerId = setInterval(refreshClock, 1000);
+    return function cleanup() {
+      clearInterval(timerId);
+    };
+  }, []);
+
+  function refreshClock() {
+    setDateTime(new Date());
+    var dateArray = String(currentDateTime).split(" ");
+    console.log(dateArray);
+    setDay(dateArray[0]);
+    setTime(dateArray[4]);
+    setDate(dateArray[2] + " " + dateArray[1] + " " + dateArray[3]);
+  }
+
   return (
     <div>
       <div className="screenHeader">
@@ -11,9 +32,9 @@ const MainDashboard = () => {
           <h2>A closer look at your performance</h2>
         </div>
         <div className="dateTime">
-          <h1>Time</h1>
-          <h2>Date</h2>
-          <h2>Day</h2>
+          <h1>{currentDateTime.toLocaleTimeString()}</h1>
+          <h2>{currentDate}</h2>
+          <h2>{currentDay}</h2>
         </div>
       </div>
       <div className="cardWrapper">
