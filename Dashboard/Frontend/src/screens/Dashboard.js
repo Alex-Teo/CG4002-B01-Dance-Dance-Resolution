@@ -1,6 +1,8 @@
 import "./Dashboard.css";
 import UserCard from "../components/UserCard";
 import CoachCard from "../components/CoachCard";
+import Stream from "../components/Stream";
+
 import { useState, useEffect } from "react";
 
 const MainDashboard = () => {
@@ -38,26 +40,38 @@ const MainDashboard = () => {
           <h2>{currentDay}</h2>
         </div>
       </div>
-      <div className="cardWrapper">
-        <UserCard
-          dancerId="Dancer 1"
-          delay="Delay 1"
-          currentDance="Dance 1"
-          feedback="Feedback 1"
+      <div className="outerCardWrapper">
+        <div className="innerCardWrapper">
+          <div className="userCardWrapper">
+            <UserCard
+              dancerId="Dancer 1"
+              delay="Delay 1"
+              currentDance="Dance 1"
+              feedback="Feedback 1"
+            />
+            <UserCard
+              dancerId="Dancer 2"
+              delay="Delay 2"
+              currentDance="Dance 2"
+              feedback="Feedback 2"
+            />
+            <UserCard
+              dancerId="Dancer 3"
+              delay="Delay 3"
+              currentDance="Dance 3"
+              feedback="Feedback 3"
+            />
+          </div>
+          <div className="stream">
+            <div className="fatigue">Overall Fatigue</div>
+            <Stream />
+          </div>
+        </div>
+        <CoachCard
+          currentDance="Correct Dance"
+          currentPosition={[1, 2, 3]}
+          feedback={["Feedback 1", "Feedback 2", "Feedback 3"]}
         />
-        <UserCard
-          dancerId="Dancer 2"
-          delay="Delay 2"
-          currentDance="Dance 2"
-          feedback="Feedback 2"
-        />
-        <UserCard
-          dancerId="Dancer 3"
-          delay="Delay 3"
-          currentDance="Dance 3"
-          feedback="Feedback 3"
-        />
-        <CoachCard currentDance="Correct Dance" currentPosition={[1, 2, 3]} />
       </div>
     </div>
   );
