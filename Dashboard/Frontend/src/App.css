@@ -17,3 +17,7 @@ body {
   left: 78px;
   width: calc(100% - 78px);
 }
+
+* {
+  /* outline: 1px solid red; */
+}

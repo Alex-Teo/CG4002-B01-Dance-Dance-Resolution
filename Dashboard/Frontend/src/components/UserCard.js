@@ -1,16 +1,28 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import "./UserCard.css";
+import { Card, Row, Col } from "react-bootstrap";
+import { IoIosBody } from "react-icons/io";
+import { CgStopwatch } from "react-icons/cg";
 
-function UserCard({ title, dance, x, y, z }) {
+function UserCard({ dancerId, currentDance, delay, feedback }) {
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card>
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title className="cardTitle">{dancerId}</Card.Title>
         <Card.Text>
-          <h1>Dance: {dance}</h1>
-          <h1>X: {x}</h1>
-          <h1>Y: {y}</h1>
-          <h1>Z: {z}</h1>
+          <div className="miniCard">
+            <IoIosBody className="bodyIcon" />
+            <div>
+              <div className="valueHeader">Your Dance</div>
+              <div className="value">{currentDance}</div>
+            </div>
+          </div>
+          <div className="miniCard">
+            <CgStopwatch className="stopwatchIcon" />
+            <div>
+              <div className="valueHeader">Delay</div>
+              <div className="value">{delay}</div>
+            </div>
+          </div>
         </Card.Text>
       </Card.Body>
     </Card>

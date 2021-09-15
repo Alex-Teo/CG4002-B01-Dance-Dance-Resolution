@@ -1,0 +1,46 @@
+.cardTitle {
+  text-align: center;
+  font-weight: 800;
+  font-size: 40px;
+}
+
+.miniCard {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 10px 0 10px 0;
+}
+
+.bodyIcon,
+.stopwatchIcon {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+  align-self: center;
+}
+
+.bodyIcon {
+  color: rgba(127, 46, 114, 1);
+  background-color: rgba(127, 46, 114, 0.3);
+  border: none;
+}
+.stopwatchIcon {
+  color: rgba(234, 158, 45, 1);
+  background-color: rgba(234, 158, 45, 0.3);
+  border: none;
+}
+
+.valueHeader,
+.value {
+  font-size: 15px;
+  font-weight: 400;
+  color: black;
+  white-space: nowrap;
+  line-height: 100%;
+}
+.value {
+  font-size: 30px;
+  font-weight: 800;
+}
