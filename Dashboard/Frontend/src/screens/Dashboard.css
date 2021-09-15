@@ -1,5 +1,33 @@
-.dashboardWrapper {
-  height: 100vh;
+.screenHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 20px 0 20px;
+  height: 100px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 800;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 20%;
+}
+
+.dateTime h1 {
+  margin-bottom: 0;
+}
+
+.dateTime h2 {
+  font-size: 15px;
+  line-height: 50%;
+  text-align: center;
+}
+
+.cardWrapper {
+  height: calc(100vh - 100px);
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

@@ -3,9 +3,6 @@ import UserCard from "../components/UserCard";
 import { useState } from "react";
 
 const MainDashboard = () => {
-
-  const []
-
   return (
     <div>
       <div className="screenHeader">
