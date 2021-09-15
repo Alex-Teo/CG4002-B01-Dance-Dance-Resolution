@@ -1,5 +1,6 @@
 import "./Dashboard.css";
 import UserCard from "../components/UserCard";
+import CoachCard from "../components/CoachCard";
 import { useState, useEffect } from "react";
 
 const MainDashboard = () => {
@@ -56,6 +57,7 @@ const MainDashboard = () => {
           currentDance="Dance 3"
           feedback="Feedback 3"
         />
+        <CoachCard currentDance="Correct Dance" currentPosition={[1, 2, 3]} />
       </div>
     </div>
   );

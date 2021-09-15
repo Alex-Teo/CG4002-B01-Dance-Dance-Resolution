@@ -1,5 +1,5 @@
 import "./UserCard.css";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { IoIosBody } from "react-icons/io";
 import { CgStopwatch } from "react-icons/cg";
 

@@ -1,6 +1,7 @@
-.card {
-  background: none;
+#coachCard {
+  background: rgba(255, 255, 255, 0.4);
   border: none;
+  border-radius: 10px;
 }
 
 .cardTitle {
@@ -17,7 +18,7 @@
 }
 
 .bodyIcon,
-.stopwatchIcon {
+.positionIcon {
   height: 60px;
   width: 60px;
   object-fit: cover;
@@ -33,9 +34,9 @@
   background-color: rgba(127, 46, 114, 0.3);
   border: none;
 }
-.stopwatchIcon {
-  color: rgba(234, 158, 45, 1);
-  background-color: rgba(234, 158, 45, 0.3);
+.positionIcon {
+  color: rgba(46, 65, 127, 1);
+  background-color: rgba(46, 65, 127, 0.3);
   border: none;
 }
 
@@ -50,4 +51,10 @@
 .value {
   font-size: 25px;
   font-weight: 400;
+}
+
+#posValue {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
