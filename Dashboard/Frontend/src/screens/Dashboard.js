@@ -5,7 +5,7 @@ import Stream from "../components/Stream";
 
 import { useState, useEffect } from "react";
 
-const MainDashboard = () => {
+const Dashboard = () => {
   const [currentDateTime, setDateTime] = useState(new Date());
   const [currentDay, setDay] = useState("");
   const [currentTime, setTime] = useState("");
@@ -28,53 +28,54 @@ const MainDashboard = () => {
   }
 
   return (
-    <div>
-      <div className="screenHeader">
-        <div className="screenInfo">
+    <div className="dashboardWrapper">
+      <div className="header">
+        <div className="dashboardDesc">
           <h1>Dashboard</h1>
           <h2>A closer look at your performance</h2>
         </div>
-        <div className="dateTime">
+        <div className="timestamp">
           <h1>{currentDateTime.toLocaleTimeString()}</h1>
           <h2>{currentDate}</h2>
           <h2>{currentDay}</h2>
         </div>
       </div>
-      <div className="outerCardWrapper">
-        <div className="innerCardWrapper">
-          <div className="userCardWrapper">
-            <UserCard
-              dancerId="Dancer 1"
-              delay="Delay 1"
-              currentDance="Dance 1"
-              feedback="Feedback 1"
-            />
-            <UserCard
-              dancerId="Dancer 2"
-              delay="Delay 2"
-              currentDance="Dance 2"
-              feedback="Feedback 2"
-            />
-            <UserCard
-              dancerId="Dancer 3"
-              delay="Delay 3"
-              currentDance="Dance 3"
-              feedback="Feedback 3"
-            />
-          </div>
-          <div className="stream">
+      <div className="analytics">
+        <div className="users">
+          <UserCard
+            dancerId="Dancer 1"
+            delay="Delay 1"
+            currentDance="Dance 1"
+            feedback="Feedback 1"
+          />
+          <UserCard
+            dancerId="Dancer 2"
+            delay="Delay 2"
+            currentDance="Dance 2"
+            feedback="Feedback 2"
+          />
+          <UserCard
+            dancerId="Dancer 3"
+            delay="Delay 3"
+            currentDance="Dance 3"
+            feedback="Feedback 3"
+          />
+          <div className="graph">
             <div className="fatigue">Overall Fatigue</div>
             <Stream />
           </div>
         </div>
-        <CoachCard
-          currentDance="Correct Dance"
-          currentPosition={[1, 2, 3]}
-          feedback={["Feedback 1", "Feedback 2", "Feedback 3"]}
-        />
+
+        <div className="coach">
+          <CoachCard
+            currentDance="Correct Dance"
+            currentPosition={[1, 2, 3]}
+            feedback={["Feedback 1", "Feedback 2", "Feedback 3"]}
+          />
+        </div>
       </div>
     </div>
   );
 };
 
-export default MainDashboard;
+export default Dashboard;

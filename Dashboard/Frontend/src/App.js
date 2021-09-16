@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Screens
 import Sidebar from "./components/Sidebar";
-import Dashboard from "./screens/Dashboard";
 import History from "./screens/History";
+import Dashboard from "./screens/Dashboard";
 
 function App() {
   return (

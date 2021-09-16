@@ -1,9 +1,12 @@
-.screenHeader {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 10px 0 20px;
+.dashboardWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 30px 30px 0 30px;
   height: 100px;
 }
 
@@ -11,63 +14,44 @@ h1 {
   font-size: 40px;
   font-weight: 800;
 }
+
 h2 {
   font-size: 20px;
   font-weight: 100;
   line-height: 20%;
 }
 
-.dateTime {
+.timestamp {
+  justify-self: right;
+  text-align: center;
+  line-height: 20%;
   width: 250px;
 }
 
-.dateTime h1 {
-  font-size: 25px;
-  margin-bottom: 0;
-  text-align: center;
+.timestamp h2 {
+  line-height: 70%;
+  padding-top: -10px;
 }
 
-.dateTime h2 {
-  font-size: 15px;
-  line-height: 50%;
-  text-align: center;
-}
-
-.outerCardWrapper {
+.analytics {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  justify-items: space-evenly;
+  align-items: center;
   height: calc(100vh - 100px);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-content: center;
-  align-items: center;
-  padding-right: 20px;
-  padding-left: 20px;
-  margin-top: -50px;
+  padding: 0 50px 50px 50px;
 }
 
-.innerCardWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-content: center;
-  align-items: center;
+.users {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 20px;
 }
 
-.userCardWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-content: center;
-  align-items: center;
-  gap: 5vw;
-  padding-bottom: 5vh;
+.graph {
+  grid-column: 1/4;
+  height: 300px;
 }
-
-.stream {
-  height: calc(0.4 * (100vh - 100px));
-  width: 70vw;
-}
-
 .fatigue {
   text-align: center;
   font-weight: 600;
