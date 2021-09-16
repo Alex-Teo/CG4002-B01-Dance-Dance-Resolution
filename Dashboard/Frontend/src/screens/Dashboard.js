@@ -2,44 +2,18 @@ import "./Dashboard.css";
 import UserCard from "../components/UserCard";
 import CoachCard from "../components/CoachCard";
 import Stream from "../components/Stream";
+import ScreenHeader from "../components/ScreenHeader";
 
 import { useState, useEffect } from "react";
 
 const Dashboard = () => {
-  const [currentDateTime, setDateTime] = useState(new Date());
-  const [currentDay, setDay] = useState("");
-  const [currentTime, setTime] = useState("");
-  const [currentDate, setDate] = useState("");
-
-  useEffect(() => {
-    const timerId = setInterval(refreshClock, 1000);
-    return function cleanup() {
-      clearInterval(timerId);
-    };
-  }, []);
-
-  function refreshClock() {
-    setDateTime(new Date());
-    var dateArray = String(currentDateTime).split(" ");
-    console.log(dateArray);
-    setDay(dateArray[0]);
-    setTime(dateArray[4]);
-    setDate(dateArray[2] + " " + dateArray[1] + " " + dateArray[3]);
-  }
-
   return (
     <div className="dashboardWrapper">
-      <div className="header">
-        <div className="dashboardDesc">
-          <h1>Dashboard</h1>
-          <h2>A closer look at your performance</h2>
-        </div>
-        <div className="timestamp">
-          <h1>{currentDateTime.toLocaleTimeString()}</h1>
-          <h2>{currentDate}</h2>
-          <h2>{currentDay}</h2>
-        </div>
-      </div>
+      <ScreenHeader
+        screenTitle="Dashboard"
+        screenDesc="A closer look at your performance"
+      />
+
       <div className="analytics">
         <div className="users">
           <UserCard
