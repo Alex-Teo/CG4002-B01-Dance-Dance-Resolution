@@ -1,5 +1,7 @@
 #include <Wire.h> //for I2C communication
-#include<math.h>
+#include "I2Cdev.h"
+#include "MPU6050.h"
+#include <math.h>
 #include <string.h>
 
 //addresses according to datasheet
@@ -10,6 +12,16 @@
 #define ACCEL_OUT 0x3B //Starting register for accel readings
 #define GYRO_OUT 0x43 //Starting address for gyro readings 
 
+//offsets for set chest_1
+#define AXO -290
+#define AYO 350
+#define AZO -1160
+#define GXO -495
+#define GYO -92
+#define GZO 135
+
+MPU6050 mpu;
+
 //store raw data of accel and gyro
 long accelX, accelY, accelZ;  
 long gyroX, gyroY, gyroZ;
@@ -18,11 +30,12 @@ long gyroX, gyroY, gyroZ;
 float gForceX, gForceY, gForceZ;
 float rotX, rotY, rotZ;
 
-//counter for serial printing
-int positionIndex = 0;
-int danceIndex = 0; 
-int counterDance = 0;
-int counterPosition = 0;
+float preAX = 0;
+float preAY = 0;
+float preAZ = 16384;
+float preGX = 0;
+float preGY = 0;
+float preGZ = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -39,6 +52,11 @@ void loop() {
 
 //Set up registers to read data
 void setupMPU() {
+  mpu.initialize();
+  if (!mpu.testConnection()) {
+    Serial.println(F("!MPU6050 connection failed"));
+  }
+  
   Wire.beginTransmission(I2C_ADDR); //I2C address of MPU according to datasheet
   Wire.write(PWR_MGMT); //Power Management according to datasheet
   Wire.write(0b00000000); //Power on MPU6050 according to datasheet
@@ -56,7 +74,7 @@ void setupMPU() {
   Wire.write(0x00000000); //Set gyro full scale to +/- 250deg/sec
   Wire.endTransmission();
 }
-
+  
 //retrieving accel raw data
 void processAccelData() {
   Wire.beginTransmission(I2C_ADDR); //I2C address
@@ -71,20 +89,28 @@ void processAccelData() {
   accelX = Wire.read()<<8 | Wire.read();  //Store first two bytes.
   accelY = Wire.read()<<8 | Wire.read();  //Store middle two bytes
   accelZ = Wire.read()<<8 | Wire.read();  //Store last two bytes
-  
-  //process Accel Data
-  //convert data to g. LSB per g = 16384.0 from the datasheet.
-  //MPU6050 has the range of +-2g.
-  gForceX = accelX / 16384.0; 
-  gForceY = accelY / 16384.0; 
-  gForceZ = accelZ / 16384.0;
 
-  Serial.print("processed AccelX value:");
-  Serial.println(gForceX);
-  Serial.print("processed AccelY value:");
-  Serial.println(gForceY);
-  Serial.print("processed AccelZ value:");
-  Serial.println(gForceZ);
+  if (abs(accelX - preAX) < 8000 && abs(accelY - preAY) < 8000 && abs(accelZ - preAZ) < 8000 && 
+  abs(accelX - AXO) < 24576 && abs(accelY - AYO) < 24576 && abs(accelZ - AZO) < 24576) {
+    //process Accel Data
+    //convert data to g. LSB per g = 16384.0 from the datasheet.
+    //MPU6050 has the range of +-2g.
+    gForceX = (accelX - AXO) / 16384.0; 
+    gForceY = (accelY - AYO) / 16384.0; 
+    gForceZ = (accelZ - AZO) / 16384.0;
+
+    Serial.print("processed AccelX value:");
+    Serial.println(gForceX);
+    Serial.print("processed AccelY value:");
+    Serial.println(gForceY);
+    Serial.print("processed AccelZ value:");
+    Serial.println(gForceZ);
+
+    preAX = accelX;
+    preAY = accelY;
+    preAZ = accelZ;
+  }
+  
 }
 
 void processGyroData() {
@@ -97,19 +123,27 @@ void processGyroData() {
   gyroX = Wire.read()<<8 | Wire.read();  //Store first two bytes.
   gyroY = Wire.read()<<8 | Wire.read();  //Store middle two bytes 
   gyroZ = Wire.read()<<8 | Wire.read();  //Store last two bytes 
-  
-  //process Gyro Data
-  //convert data to degrees. 
-  //LSB per degrees per second = 131.0 according to the datasheet.
-  //range is 250 deg/s from datasheet.
-  rotX = gyroX / 131.0; 
-  rotY = gyroY / 131.0; 
-  rotZ = gyroZ / 131.0;
 
-  Serial.print("processed GyroX value:");
-  Serial.println(rotX);
-  Serial.print("processed GyroY value:");
-  Serial.println(rotY);
-  Serial.print("processed GyroZ value:");
-  Serial.println(rotZ);
+  if (abs(gyroX - preGX) < 8000 && abs(gyroY - preGY) < 8000 && abs(gyroZ - preGZ) < 8000 && 
+  abs(gyroX - GXO) < 27852 && abs(gyroY - GYO) < 27852 && abs(gyroZ - GZO) < 27852) {
+    //process Gyro Data
+    //convert data to degrees. 
+    //LSB per degrees per second = 131.0 according to the datasheet.
+    //range is 250 deg/s from datasheet.
+    rotX = (gyroX - GXO) / 131.0; 
+    rotY = (gyroY - GYO) / 131.0; 
+    rotZ = (gyroZ - GZO) / 131.0;
+
+    Serial.print("processed GyroX value:");
+    Serial.println(rotX);
+    Serial.print("processed GyroY value:");
+    Serial.println(rotY);
+    Serial.print("processed GyroZ value:");
+    Serial.println(rotZ);
+
+    preGX = gyroX;
+    preGY = gyroY;
+    preGZ = gyroZ;
+  }
+  
 }
