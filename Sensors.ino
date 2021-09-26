@@ -104,11 +104,13 @@ void processAccelData() {
     Serial.print("processed AccelY value:");
     Serial.println(gForceY);
     Serial.print("processed AccelZ value:");
-    Serial.println(gForceZ);
+    Serial.println(gForceZ); Serial.print("\t");
 
     preAX = accelX;
     preAY = accelY;
     preAZ = accelZ;
+  } else {
+    Serial.println("Exceed Threshold"); Serial.print("\t");
   }
   
 }
@@ -139,11 +141,13 @@ void processGyroData() {
     Serial.print("processed GyroY value:");
     Serial.println(rotY);
     Serial.print("processed GyroZ value:");
-    Serial.println(rotZ);
+    Serial.println(rotZ); Serial.print("\t");
 
     preGX = gyroX;
     preGY = gyroY;
     preGZ = gyroZ;
+  } else {
+    Serial.println("Exceed Threshold"); Serial.print("\t");
   }
   
 }
