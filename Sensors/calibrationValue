@@ -1,0 +1,31 @@
+This document contains the offsets of each IMU
+Check the IMU you use before dancing and use the code below to replace the code on the top
+========================================================================================
+
+Chest
+
+1.
+
+//offsets for set chest_1
+#define AXO -290
+#define AYO 350
+#define AZO -1160
+#define GXO -495
+#define GYO -92
+#define GZO 135
+
+
+
+========================================================================================
+
+Hand
+
+1.
+
+//offsets for set hand_1
+#define AXO 0
+#define AYO -740
+#define AZO 0
+#define GXO -370
+#define GYO 0
+#define GZO -130
