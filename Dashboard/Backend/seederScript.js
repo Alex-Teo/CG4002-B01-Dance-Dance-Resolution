@@ -1,8 +1,10 @@
 require("dotenv").config();
 
-const sensorDataDummy = require("./data/sensorDataDummy");
+const rawDataDummy = require("./data/rawDataDummy");
+const processedDataDummy = require("./data/processedDataDummy");
 
-const SensorData = require("./models/SensorData");
+const RawDataModel = require("./models/RawDataModel");
+const ProcessedDataModel = require("./models/ProcessedDataModel");
 
 const connectDB = require("./config/db");
 
@@ -10,10 +12,15 @@ connectDB();
 
 const importData = async () => {
   try {
-    await SensorData.deleteMany({});
-    await SensorData.insertMany(sensorDataDummy);
+    await RawDataModel.deleteMany({});
+    await RawDataModel.insertMany(rawDataDummy);
 
-    console.log("Data Import SUCCESS");
+    console.log("Raw Data Import: SUCCESS");
+
+    await ProcessedDataModel.deleteMany({});
+    await ProcessedDataModel.insertMany(processedDataDummy);
+
+    console.log("Processed Data Import: SUCCESS");
 
     process.exit();
   } catch (error) {
