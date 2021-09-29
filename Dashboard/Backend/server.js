@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const cors = require("cors");
 const express = require("express");
-const connectDB = require("./config/db");
+const { connectDB } = require("./config/db");
 
 const app = express();
 const server = require("http").createServer(app);
@@ -21,7 +21,10 @@ const io = require("socket.io")(server, {
 
 // Function runs everytime a client connects to the server
 io.on("connection", (socket) => {
-  console.log("Socket.io client-server connection established, ID:", socket.id);
+  console.log(
+    "Socket.io: Client-server connection established, ID -",
+    socket.id
+  );
 });
 
 // Connect MongoDB

@@ -1,9 +1,11 @@
-const rawDataDummy = [];
+const dancer1RawDataDummy = [];
+const dancer2RawDataDummy = [];
+const dancer3RawDataDummy = [];
 
 for (var i = 0; i < 100; i++) {
+  const timestamp = Date.now();
   for (var id = 0; id < 3; id++) {
     const userID = id;
-    const timestamp = Date.now();
     const aX = Math.random().toPrecision(4);
     const aY = Math.random().toPrecision(4);
     const aZ = Math.random().toPrecision(4);
@@ -12,18 +14,48 @@ for (var i = 0; i < 100; i++) {
     const gZ = Math.random().toPrecision(4);
     const emg = Math.random().toPrecision(3);
 
-    rawDataDummy.push({
-      userID: userID,
-      timestamp: timestamp,
-      aX: aX,
-      aY: aY,
-      aZ: aZ,
-      gX: gX,
-      gY: gY,
-      gZ: gZ,
-      emg: emg,
-    });
+    if (id == 0) {
+      dancer1RawDataDummy.push({
+        userID: userID,
+        timestamp: timestamp,
+        aX: aX,
+        aY: aY,
+        aZ: aZ,
+        gX: gX,
+        gY: gY,
+        gZ: gZ,
+        emg: emg,
+      });
+    } else if (id == 1) {
+      dancer2RawDataDummy.push({
+        userID: userID,
+        timestamp: timestamp,
+        aX: aX,
+        aY: aY,
+        aZ: aZ,
+        gX: gX,
+        gY: gY,
+        gZ: gZ,
+        emg: emg,
+      });
+    } else if (id == 2) {
+      dancer3RawDataDummy.push({
+        userID: userID,
+        timestamp: timestamp,
+        aX: aX,
+        aY: aY,
+        aZ: aZ,
+        gX: gX,
+        gY: gY,
+        gZ: gZ,
+        emg: emg,
+      });
+    }
   }
 }
 
-module.exports = rawDataDummy;
+module.exports = {
+  dancer1RawDataDummy,
+  dancer2RawDataDummy,
+  dancer3RawDataDummy,
+};

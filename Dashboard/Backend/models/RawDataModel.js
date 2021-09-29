@@ -12,6 +12,12 @@ const rawDataSchema = mongoose.Schema({
   emg: { type: String, required: true, trim: true },
 });
 
-const RawDataModel = mongoose.model("rawData", rawDataSchema);
+const Dancer1RawDataModel = mongoose.model("dancer_1_raw_data", rawDataSchema);
+const Dancer2RawDataModel = mongoose.model("dancer_2_raw_data", rawDataSchema);
+const Dancer3RawDataModel = mongoose.model("dancer_3_raw_data", rawDataSchema);
 
-module.exports = RawDataModel;
+module.exports = {
+  Dancer1RawDataModel,
+  Dancer2RawDataModel,
+  Dancer3RawDataModel,
+};

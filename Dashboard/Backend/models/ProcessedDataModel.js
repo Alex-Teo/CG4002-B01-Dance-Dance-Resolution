@@ -8,6 +8,21 @@ const processedDataSchema = mongoose.Schema({
   syncDelay: { type: String, required: true, trim: true },
 });
 
-const ProcessedDataModel = mongoose.model("processedData", processedDataSchema);
+const Dancer1ProcessedDataModel = mongoose.model(
+  "dancer_1_processed_data",
+  processedDataSchema
+);
+const Dancer2ProcessedDataModel = mongoose.model(
+  "dancer_2_processed_data",
+  processedDataSchema
+);
+const Dancer3ProcessedDataModel = mongoose.model(
+  "dancer_3_processed_data",
+  processedDataSchema
+);
 
-module.exports = ProcessedDataModel;
+module.exports = {
+  Dancer1ProcessedDataModel,
+  Dancer2ProcessedDataModel,
+  Dancer3ProcessedDataModel,
+};
