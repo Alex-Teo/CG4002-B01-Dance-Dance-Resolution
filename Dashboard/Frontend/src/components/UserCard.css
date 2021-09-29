@@ -3,17 +3,23 @@
   border: none;
 }
 
+.cardTitle {
+  text-align: center;
+  font-weight: 900;
+  font-size: 40px;
+}
+
 .cardTitle_correct {
   text-align: center;
-  font-weight: 600;
-  font-size: 40px;
+  font-weight: 300;
+  font-size: 30px;
   color: green;
 }
 
 .cardTitle_wrong {
   text-align: center;
-  font-weight: 600;
-  font-size: 40px;
+  font-weight: 300;
+  font-size: 30px;
   color: red;
 }
 

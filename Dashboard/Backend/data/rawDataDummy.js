@@ -12,8 +12,8 @@ for (var i = 0; i < 100; i++) {
     const gX = Math.random().toPrecision(4);
     const gY = Math.random().toPrecision(4);
     const gZ = Math.random().toPrecision(4);
-    const emg = 0;
-    while (emg != 0) {
+    let emg = 0;
+    while (emg === 0) {
       emg = Math.random().toPrecision(3);
     }
 

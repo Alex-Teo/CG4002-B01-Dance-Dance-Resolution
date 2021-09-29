@@ -59,7 +59,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     let div = coachDataDummy.length / dancer1RawDataDummy.length;
-    let delay = 10000;
+    let delay = 1000;
 
     // Clear exisiting collections
     await Dancer1RawDataModel.deleteMany({});

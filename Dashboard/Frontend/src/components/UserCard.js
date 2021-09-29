@@ -14,11 +14,11 @@ function UserCard({
   return (
     <Card>
       <Card.Body>
-        <Card.Title
-          className={posFlag ? "cardTitle_correct" : "cardTitle_wrong"}
-        >
+        <Card.Title className="cardTitle">
           {dancerId} <br />
-          (Pos: {currentPos})
+          <div className={posFlag ? "cardTitle_correct" : "cardTitle_wrong"}>
+            (Pos: {currentPos})
+          </div>
         </Card.Title>
         <Card.Text>
           <div className="miniCard">

@@ -229,6 +229,24 @@ const Dashboard = () => {
               currentCoachData.dancer2Feedback,
               currentCoachData.dancer3Feedback,
             ]}
+            dancer1Flag={
+              dancer1ProcessedData.predictedDance ===
+              currentCoachData.actualDance
+                ? 1
+                : 0
+            }
+            dancer2Flag={
+              dancer2ProcessedData.predictedDance ===
+              currentCoachData.actualDance
+                ? 1
+                : 0
+            }
+            dancer3Flag={
+              dancer3ProcessedData.predictedDance ===
+              currentCoachData.actualDance
+                ? 1
+                : 0
+            }
           />
         </div>
       </div>

@@ -32,9 +32,9 @@ for (var i = 0; i < 100; i++) {
       timestamp: timestamp,
       actualDance: actualDance,
       actualPositions: actualPositions,
-      dancer1Feedback: `Please dance ${actualDance}`,
-      dancer2Feedback: `Please dance ${actualDance}`,
-      dancer3Feedback: `Please dance ${actualDance}`,
+      dancer1Feedback: `Please dance ${actualDance} :(`,
+      dancer2Feedback: `Please dance ${actualDance} :(`,
+      dancer3Feedback: `Please dance ${actualDance} :(`,
     });
 
     if (id == 0) {
