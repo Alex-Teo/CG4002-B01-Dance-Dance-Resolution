@@ -191,7 +191,7 @@ const Dashboard = () => {
             }
             posFlag={
               currentCoachData.actualPositions.split(" ")[1] ===
-              dancer1ProcessedData.predictedPos
+              dancer2ProcessedData.predictedPos
                 ? 1
                 : 0
             }
@@ -209,7 +209,7 @@ const Dashboard = () => {
             }
             posFlag={
               currentCoachData.actualPositions.split(" ")[2] ===
-              dancer1ProcessedData.predictedPos
+              dancer3ProcessedData.predictedPos
                 ? 1
                 : 0
             }

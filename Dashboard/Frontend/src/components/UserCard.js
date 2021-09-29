@@ -17,7 +17,8 @@ function UserCard({
         <Card.Title
           className={posFlag ? "cardTitle_correct" : "cardTitle_wrong"}
         >
-          {dancerId} ({currentPos})
+          {dancerId} <br />
+          (Pos: {currentPos})
         </Card.Title>
         <Card.Text>
           <div className="miniCard">

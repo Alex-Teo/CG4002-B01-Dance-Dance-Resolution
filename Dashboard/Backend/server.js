@@ -59,7 +59,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     let div = coachDataDummy.length / dancer1RawDataDummy.length;
-    let delay = 0;
+    let delay = 10000;
 
     // Clear exisiting collections
     await Dancer1RawDataModel.deleteMany({});
@@ -79,12 +79,8 @@ const importData = async () => {
       await Dancer2ProcessedDataModel.insertMany(dancer2ProcessedDataDummy[i]);
       await Dancer3ProcessedDataModel.insertMany(dancer3ProcessedDataDummy[i]);
       // console.log(`Insert Raw and Processed Data ${i}`);
+      await CoachDataModel.insertMany(coachDataDummy[div * i]);
       await timer(delay);
-      for (var j = 0; j < div; j++) {
-        await CoachDataModel.insertMany(coachDataDummy[div * i + j]);
-        // console.log(`Insert Coach Data ${div * i + j}`);
-        await timer(delay / 1.5);
-      }
     }
     console.log(" MongoDB: Dummy data imported");
 
