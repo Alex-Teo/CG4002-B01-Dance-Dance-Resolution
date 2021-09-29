@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import { IoIosBody } from "react-icons/io";
 import { CgStopwatch } from "react-icons/cg";
 
-function UserCard({ dancerId, currentDance, delay, feedback }) {
+function UserCard({ dancerId, currentDance, delay }) {
   return (
     <Card>
       <Card.Body>

@@ -150,7 +150,119 @@ connection.once("open", async () => {
   const coachDataStream = connection.collection("coach_datas").watch();
   console.log(" MongoDB (Change Streams): Watching collections as streams");
 
-  // Setup io emits on changes detected in changeStream
+  // ---------------- Emit on Change ---------------- //
+
+  //Sockets for coach data
+  coachDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const coachData = {
+          timestamp: change.fullDocument.timestamp,
+          actualDance: change.fullDocument.actualDance,
+          actualPositions: change.fullDocument.actualPositions,
+          dancer1Feedback: change.fullDocument.dancer1Feedback,
+          dancer2Feedback: change.fullDocument.dancer2Feedback,
+          dancer3Feedback: change.fullDocument.dancer3Feedback,
+        };
+        io.emit("newCoachData", coachData);
+    }
+  });
+
+  // Sockets for raw data
+  dancer1RawDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const dancer1RawData = {
+          userID: change.fullDocument.userID,
+          timestamp: change.fullDocument.timestamp,
+          aX: change.fullDocument.aX,
+          aY: change.fullDocument.aY,
+          aZ: change.fullDocument.aZ,
+          gX: change.fullDocument.gX,
+          gY: change.fullDocument.gY,
+          gZ: change.fullDocument.gZ,
+          emg: change.fullDocument.emg,
+        };
+        io.emit("newDancer1RawData", dancer1RawData);
+    }
+  });
+  dancer2RawDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const dancer2RawData = {
+          userID: change.fullDocument.userID,
+          timestamp: change.fullDocument.timestamp,
+          aX: change.fullDocument.aX,
+          aY: change.fullDocument.aY,
+          aZ: change.fullDocument.aZ,
+          gX: change.fullDocument.gX,
+          gY: change.fullDocument.gY,
+          gZ: change.fullDocument.gZ,
+          emg: change.fullDocument.emg,
+        };
+        io.emit("newDancer2RawData", dancer2RawData);
+    }
+  });
+  dancer3RawDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const dancer3RawData = {
+          userID: change.fullDocument.userID,
+          timestamp: change.fullDocument.timestamp,
+          aX: change.fullDocument.aX,
+          aY: change.fullDocument.aY,
+          aZ: change.fullDocument.aZ,
+          gX: change.fullDocument.gX,
+          gY: change.fullDocument.gY,
+          gZ: change.fullDocument.gZ,
+          emg: change.fullDocument.emg,
+        };
+        io.emit("newDancer3RawData", dancer3RawData);
+    }
+  });
+
+  // Sockets for processed data
+  dancer1ProcessedDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const dancer1ProcessedData = {
+          userID: change.fullDocument.userID,
+          timestamp: change.fullDocument.timestamp,
+          predictedDance: change.fullDocument.predictedDance,
+          syncDelay: change.fullDocument.syncDelay,
+        };
+
+        io.emit("newDancer1ProcessedData", dancer1ProcessedData);
+    }
+  });
+  dancer2ProcessedDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const dancer2ProcessedData = {
+          userID: change.fullDocument.userID,
+          timestamp: change.fullDocument.timestamp,
+          predictedDance: change.fullDocument.predictedDance,
+          syncDelay: change.fullDocument.syncDelay,
+        };
+
+        io.emit("newDancer2ProcessedData", dancer2ProcessedData);
+    }
+  });
+  dancer3ProcessedDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const dancer3ProcessedData = {
+          userID: change.fullDocument.userID,
+          timestamp: change.fullDocument.timestamp,
+          predictedDance: change.fullDocument.predictedDance,
+          syncDelay: change.fullDocument.syncDelay,
+        };
+        io.emit("newDancer3ProcessedData", dancer3ProcessedData);
+    }
+  });
+
+  // Import dummy data
+  importData();
 });
 
 // ---------------- Routing (old) ---------------- //
