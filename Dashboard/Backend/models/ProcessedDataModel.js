@@ -8,15 +8,15 @@ const processedDataSchema = mongoose.Schema({
 });
 
 const Dancer1ProcessedDataModel = mongoose.model(
-  "dancer_1_processed_data_dummy",
+  "dancer_1_processed_data",
   processedDataSchema
 );
 const Dancer2ProcessedDataModel = mongoose.model(
-  "dancer_2_processed_data_dummy",
+  "dancer_2_processed_data",
   processedDataSchema
 );
 const Dancer3ProcessedDataModel = mongoose.model(
-  "dancer_3_processed_data_dummy",
+  "dancer_3_processed_data",
   processedDataSchema
 );
 

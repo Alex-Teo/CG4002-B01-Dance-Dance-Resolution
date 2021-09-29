@@ -70,7 +70,7 @@ const importData = async () => {
     await Dancer3ProcessedDataModel.deleteMany({});
     await Dancer3ProcessedDataModel.deleteMany({});
 
-    // Add in dummy data at 1000ms inetervals
+    // Add in dummy data at 1000ms intervals
     for (var i = 0; i < dancer1RawDataDummy.length; i++) {
       await Dancer1RawDataModel.insertMany(dancer1RawDataDummy[i]);
       await Dancer2RawDataModel.insertMany(dancer2RawDataDummy[i]);
@@ -110,26 +110,23 @@ connection.on(
 connection.once("open", async () => {
   console.log("MongoDB: Connected");
 
-  await connection.dropCollection("dancer_1_processed_data_dummies");
-  await connection.dropCollection("dancer_2_processed_data_dummies");
-  await connection.dropCollection("dancer_3_processed_data_dummies");
+  await connection.dropCollection("dancer_1_processed_datas");
+  await connection.dropCollection("dancer_2_processed_datas");
+  await connection.dropCollection("dancer_3_processed_datas");
   await connection.dropCollection("dancer_1_raw_datas");
   await connection.dropCollection("dancer_2_raw_datas");
   await connection.dropCollection("dancer_3_raw_datas");
   await connection.dropCollection("coach_datas");
   console.log(" MongoDB: Deleted old collections");
 
-  await connection.createCollection("dancer_1_processed_data_dummies");
-  await connection.createCollection("dancer_2_processed_data_dummies");
-  await connection.createCollection("dancer_3_processed_data_dummies");
+  await connection.createCollection("dancer_1_processed_datas");
+  await connection.createCollection("dancer_2_processed_datas");
+  await connection.createCollection("dancer_3_processed_datas");
   await connection.createCollection("dancer_1_raw_datas");
   await connection.createCollection("dancer_2_raw_datas");
   await connection.createCollection("dancer_3_raw_datas");
   await connection.createCollection("coach_datas");
   console.log(" MongoDB: Creating fresh collections");
-
-  // Fxn to import dummy data (to remove after individual testing)
-  importData();
 
   // Setup change streams
   const dancer1RawDataStream = connection
@@ -142,13 +139,13 @@ connection.once("open", async () => {
     .collection("dancer_3_raw_datas")
     .watch();
   const dancer1ProcessedDataStream = connection
-    .collection("dancer_1_processed_data_dummies")
+    .collection("dancer_1_processed_datas")
     .watch();
   const dancer2ProcessedDataStream = connection
-    .collection("dancer_2_processed_data_dummies")
+    .collection("dancer_2_processed_datas")
     .watch();
   const dancer3ProcessedDataStream = connection
-    .collection("dancer_3_processed_data_dummies")
+    .collection("dancer_3_processed_datas")
     .watch();
   const coachDataStream = connection.collection("coach_datas").watch();
   console.log(" MongoDB (Change Streams): Watching collections as streams");
