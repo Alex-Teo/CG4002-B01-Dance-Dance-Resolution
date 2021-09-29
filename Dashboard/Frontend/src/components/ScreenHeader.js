@@ -4,23 +4,21 @@ import { useState, useEffect } from "react";
 function ScreenHeader({ screenTitle, screenDesc }) {
   const [currentDateTime, setDateTime] = useState(new Date());
   const [currentDay, setDay] = useState("");
-  const [currentTime, setTime] = useState("");
   const [currentDate, setDate] = useState("");
 
   useEffect(() => {
+    function refreshClock() {
+      setDateTime(new Date());
+      var dateArray = String(currentDateTime).split(" ");
+      setDay(dateArray[0]);
+      setDate(dateArray[2] + " " + dateArray[1] + " " + dateArray[3]);
+    }
     const timerId = setInterval(refreshClock, 1000);
     return function cleanup() {
       clearInterval(timerId);
     };
   }, []);
 
-  function refreshClock() {
-    setDateTime(new Date());
-    var dateArray = String(currentDateTime).split(" ");
-    setDay(dateArray[0]);
-    setTime(dateArray[4]);
-    setDate(dateArray[2] + " " + dateArray[1] + " " + dateArray[3]);
-  }
   return (
     <div className="header">
       <div className="dashboardDesc">

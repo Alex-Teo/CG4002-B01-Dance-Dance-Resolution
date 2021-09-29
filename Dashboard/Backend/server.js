@@ -21,7 +21,7 @@ const io = require("socket.io")(server, {
 
 // Function runs everytime a client connects to the server
 io.on("connection", (socket) => {
-  console.log("Socket.io client-server connection established", socket.id);
+  console.log("Socket.io client-server connection established, ID:", socket.id);
 });
 
 // Connect MongoDB

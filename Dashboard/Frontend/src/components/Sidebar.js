@@ -43,7 +43,7 @@ function Sidebar() {
         </li>
         <li class="profile">
           <div class="profileDetails">
-            <img src={profilePlaceholder} />
+            <img src={profilePlaceholder} alt="" />
             <div class="name_job">
               <div class="name">Amir Azhar</div>
               <div class="job">Dancing since 2021</div>

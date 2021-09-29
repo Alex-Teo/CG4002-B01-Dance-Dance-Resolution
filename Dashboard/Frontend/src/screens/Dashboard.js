@@ -4,15 +4,15 @@ import CoachCard from "../components/CoachCard";
 import Stream from "../components/Stream";
 import ScreenHeader from "../components/ScreenHeader";
 
-import { useState, useEffect } from "react";
-import { socketIOClient, io } from "socket.io-client";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 
 const Dashboard = () => {
-  const [response, setResponse] = useState("");
+  // const [response, setResponse] = useState("");
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const socket = io.connect("http://localhost:5000");
     socket.on("connect", () => {
-      console.log(`Client connected with socket.io id: ${socket.id}`);
+      console.log(`Client connected with socket.io ID: ${socket.id}`);
     });
   }, []);
   return (
