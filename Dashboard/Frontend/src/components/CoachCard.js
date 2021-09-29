@@ -77,12 +77,12 @@ function CoachCard({ currentDance, actualPositions, feedback }) {
               <div>
                 <div className="valueHeader">Feedback</div>
                 <div className="value" id="feedbackWrapper">
-                  <div className="feedbackValue">Dancer 1</div>
-                  <div>{feedback[0]}</div>
-                  <div className="feedbackValue">Dancer 2</div>
-                  <div>{feedback[1]}</div>
-                  <div className="feedbackValue">Dancer 3</div>
-                  <div>{feedback[2]}</div>
+                  <div className="feedbackHeader">Dancer 1</div>
+                  <div className="feedbackValue">{feedback[0]}</div>
+                  <div className="feedbackHeader">Dancer 2</div>
+                  <div className="feedbackValue">{feedback[1]}</div>
+                  <div className="feedbackHeader">Dancer 3</div>
+                  <div className="feedbackValue">{feedback[2]}</div>
                 </div>
               </div>
             </div>

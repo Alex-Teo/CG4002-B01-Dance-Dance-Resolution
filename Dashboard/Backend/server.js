@@ -59,7 +59,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     let div = coachDataDummy.length / dancer1RawDataDummy.length;
-    let delay = 1000;
+    let delay = 0;
 
     // Clear exisiting collections
     await Dancer1RawDataModel.deleteMany({});
@@ -229,6 +229,7 @@ connection.once("open", async () => {
           userID: change.fullDocument.userID,
           timestamp: change.fullDocument.timestamp,
           predictedDance: change.fullDocument.predictedDance,
+          predictedPos: change.fullDocument.predictedPos,
           syncDelay: change.fullDocument.syncDelay,
         };
 
@@ -242,6 +243,7 @@ connection.once("open", async () => {
           userID: change.fullDocument.userID,
           timestamp: change.fullDocument.timestamp,
           predictedDance: change.fullDocument.predictedDance,
+          predictedPos: change.fullDocument.predictedPos,
           syncDelay: change.fullDocument.syncDelay,
         };
 
@@ -255,6 +257,7 @@ connection.once("open", async () => {
           userID: change.fullDocument.userID,
           timestamp: change.fullDocument.timestamp,
           predictedDance: change.fullDocument.predictedDance,
+          predictedPos: change.fullDocument.predictedPos,
           syncDelay: change.fullDocument.syncDelay,
         };
         io.emit("newDancer3ProcessedData", dancer3ProcessedData);

@@ -3,10 +3,18 @@
   border: none;
 }
 
-.cardTitle {
+.cardTitle_correct {
   text-align: center;
   font-weight: 600;
   font-size: 40px;
+  color: green;
+}
+
+.cardTitle_wrong {
+  text-align: center;
+  font-weight: 600;
+  font-size: 40px;
+  color: red;
 }
 
 .miniCard {
@@ -50,4 +58,16 @@
 .value {
   font-size: 30px;
   font-weight: 400;
+}
+
+.value_correct {
+  font-size: 30px;
+  font-weight: 400;
+  color: green;
+}
+
+.value_wrong {
+  font-size: 30px;
+  font-weight: 400;
+  color: red;
 }

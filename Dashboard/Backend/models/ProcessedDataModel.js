@@ -4,6 +4,7 @@ const processedDataSchema = mongoose.Schema({
   userID: { type: String, required: true, trim: true },
   timestamp: { type: String, required: true, default: Date.now(), trim: true },
   predictedDance: { type: String, required: true, trim: true },
+  predictedPos: { type: String, required: true, trim: true },
   syncDelay: { type: String, required: true, trim: true },
 });
 

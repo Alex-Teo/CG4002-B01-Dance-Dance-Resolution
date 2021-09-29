@@ -67,18 +67,21 @@ const Dashboard = () => {
     userID: " ",
     timestamp: Date.now(),
     predictedDance: " ",
+    predictedPos: " ",
     syncDelay: " ",
   });
   const [dancer2ProcessedData, setCurrentDancer2ProcessedData] = useState({
     userID: " ",
     timestamp: Date.now(),
     predictedDance: " ",
+    predictedPos: " ",
     syncDelay: " ",
   });
   const [dancer3ProcessedData, setCurrentDancer3ProcessedData] = useState({
     userID: " ",
     timestamp: Date.now(),
     predictedDance: " ",
+    predictedPos: " ",
     syncDelay: " ",
   });
 
@@ -99,6 +102,7 @@ const Dashboard = () => {
     // Sockets for raw data
     socket.on("newDancer1RawData", (dancer1RawData) => {
       setCurrentDancer1RawData(dancer1RawData);
+
       if (currentEmgData.length > 20) {
         currentEmgData.shift();
       }
@@ -129,6 +133,8 @@ const Dashboard = () => {
         Dancer2: currentEmgData[currentEmgData.length - 1]["Dancer2"],
         Dancer3: Number(currentDancer3RawData["emg"]),
       });
+
+      console.log(currentEmgData);
     });
 
     // Sockets for processed data
@@ -158,16 +164,55 @@ const Dashboard = () => {
             dancerId="Dancer 1"
             delay={dancer1ProcessedData.syncDelay}
             currentDance={dancer1ProcessedData.predictedDance}
+            currentPos={dancer1ProcessedData.predictedPos}
+            danceFlag={
+              dancer1ProcessedData.predictedDance ===
+              currentCoachData.actualDance
+                ? 1
+                : 0
+            }
+            posFlag={
+              currentCoachData.actualPositions.split(" ")[0] ===
+              dancer1ProcessedData.predictedPos
+                ? 1
+                : 0
+            }
           />
           <UserCard
             dancerId="Dancer 2"
             delay={dancer2ProcessedData.syncDelay}
             currentDance={dancer2ProcessedData.predictedDance}
+            currentPos={dancer2ProcessedData.predictedPos}
+            danceFlag={
+              dancer2ProcessedData.predictedDance ===
+              currentCoachData.actualDance
+                ? 1
+                : 0
+            }
+            posFlag={
+              currentCoachData.actualPositions.split(" ")[1] ===
+              dancer1ProcessedData.predictedPos
+                ? 1
+                : 0
+            }
           />
           <UserCard
             dancerId="Dancer 3"
             delay={dancer3ProcessedData.syncDelay}
             currentDance={dancer3ProcessedData.predictedDance}
+            currentPos={dancer3ProcessedData.predictedPos}
+            danceFlag={
+              dancer3ProcessedData.predictedDance ===
+              currentCoachData.actualDance
+                ? 1
+                : 0
+            }
+            posFlag={
+              currentCoachData.actualPositions.split(" ")[2] ===
+              dancer1ProcessedData.predictedPos
+                ? 1
+                : 0
+            }
           />
           <div className="graph">
             <div className="fatigue">Overall Fatigue</div>
