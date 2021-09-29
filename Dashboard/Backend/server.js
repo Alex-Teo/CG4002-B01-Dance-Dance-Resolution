@@ -57,22 +57,35 @@ const CoachDataModel = require("./models/CoachDataModel");
 // Fxn importData() used for testing -> importing of dummy data
 const importData = async () => {
   try {
+    const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+    let div = coachDataDummy.length / dancer1RawDataDummy.length;
+    let delay = 1000;
+
+    // Clear exisiting collections
     await Dancer1RawDataModel.deleteMany({});
-    await Dancer1RawDataModel.insertMany(dancer1RawDataDummy);
     await Dancer2RawDataModel.deleteMany({});
-    await Dancer2RawDataModel.insertMany(dancer2RawDataDummy);
     await Dancer3RawDataModel.deleteMany({});
-    await Dancer3RawDataModel.insertMany(dancer3RawDataDummy);
-
-    await Dancer1ProcessedDataModel.deleteMany({});
-    await Dancer1ProcessedDataModel.insertMany(dancer1ProcessedDataDummy);
     await Dancer2ProcessedDataModel.deleteMany({});
-    await Dancer2ProcessedDataModel.insertMany(dancer2ProcessedDataDummy);
+    await Dancer1ProcessedDataModel.deleteMany({});
     await Dancer3ProcessedDataModel.deleteMany({});
-    await Dancer3ProcessedDataModel.insertMany(dancer3ProcessedDataDummy);
+    await Dancer3ProcessedDataModel.deleteMany({});
 
-    await CoachDataModel.deleteMany({});
-    await CoachDataModel.insertMany(coachDataDummy);
+    // Add in dummy data at 1000ms inetervals
+    for (var i = 0; i < dancer1RawDataDummy.length; i++) {
+      await Dancer1RawDataModel.insertMany(dancer1RawDataDummy[i]);
+      await Dancer2RawDataModel.insertMany(dancer2RawDataDummy[i]);
+      await Dancer3RawDataModel.insertMany(dancer3RawDataDummy[i]);
+      await Dancer1ProcessedDataModel.insertMany(dancer1ProcessedDataDummy[i]);
+      await Dancer2ProcessedDataModel.insertMany(dancer2ProcessedDataDummy[i]);
+      await Dancer3ProcessedDataModel.insertMany(dancer3ProcessedDataDummy[i]);
+      // console.log(`Insert Raw and Processed Data ${i}`);
+      await timer(delay);
+      for (var j = 0; j < div; j++) {
+        await CoachDataModel.insertMany(coachDataDummy[div * i + j]);
+        // console.log(`Insert Coach Data ${div * i + j}`);
+        await timer(delay / 1.5);
+      }
+    }
     console.log(" MongoDB: Dummy data imported");
 
     process.exit();
