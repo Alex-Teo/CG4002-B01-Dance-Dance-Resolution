@@ -5,8 +5,16 @@ import Stream from "../components/Stream";
 import ScreenHeader from "../components/ScreenHeader";
 
 import { useState, useEffect } from "react";
+import { socketIOClient, io } from "socket.io-client";
 
 const Dashboard = () => {
+  const [response, setResponse] = useState("");
+  useEffect(() => {
+    const socket = io("http://localhost:5000");
+    socket.on("connect", () => {
+      console.log(`Client connected with socket.io id: ${socket.id}`);
+    });
+  }, []);
   return (
     <div className="dashboardWrapper">
       <ScreenHeader

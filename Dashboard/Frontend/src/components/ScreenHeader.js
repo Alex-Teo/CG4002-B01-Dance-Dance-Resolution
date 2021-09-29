@@ -17,7 +17,6 @@ function ScreenHeader({ screenTitle, screenDesc }) {
   function refreshClock() {
     setDateTime(new Date());
     var dateArray = String(currentDateTime).split(" ");
-    console.log(dateArray);
     setDay(dateArray[0]);
     setTime(dateArray[4]);
     setDate(dateArray[2] + " " + dateArray[1] + " " + dateArray[3]);
