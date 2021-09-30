@@ -4,7 +4,14 @@ import { Card } from "react-bootstrap";
 import { IoIosBody } from "react-icons/io";
 import { IoChatbubbleOutline } from "react-icons/io5";
 
-function CoachCard({ currentDance, currentPosition, feedback }) {
+function CoachCard({
+  currentDance,
+  actualPositions,
+  feedback,
+  dancer1Flag,
+  dancer2Flag,
+  dancer3Flag,
+}) {
   return (
     <div>
       <Card id="coachCard">
@@ -66,9 +73,9 @@ function CoachCard({ currentDance, currentPosition, feedback }) {
               <div>
                 <div className="valueHeader">Position</div>
                 <div className="value" id="posValue">
-                  <div>{currentPosition[0]}</div>
-                  <div>{currentPosition[1]}</div>
-                  <div>{currentPosition[2]}</div>
+                  <div>{actualPositions[0]}</div>
+                  <div>{actualPositions[1]}</div>
+                  <div>{actualPositions[2]}</div>
                 </div>
               </div>
             </div>
@@ -77,12 +84,18 @@ function CoachCard({ currentDance, currentPosition, feedback }) {
               <div>
                 <div className="valueHeader">Feedback</div>
                 <div className="value" id="feedbackWrapper">
-                  <div className="feedbackValue">Dancer 1</div>
-                  <div>{feedback[0]}</div>
-                  <div className="feedbackValue">Dancer 2</div>
-                  <div>{feedback[1]}</div>
-                  <div className="feedbackValue">Dancer 3</div>
-                  <div>{feedback[2]}</div>
+                  <div className="feedbackHeader">Dancer 1</div>
+                  <div className="feedbackValue">
+                    {dancer1Flag ? "Good Job!" : feedback[0]}
+                  </div>
+                  <div className="feedbackHeader">Dancer 2</div>
+                  <div className="feedbackValue">
+                    {dancer2Flag ? "Good Job!" : feedback[1]}
+                  </div>
+                  <div className="feedbackHeader">Dancer 3</div>
+                  <div className="feedbackValue">
+                    {dancer3Flag ? "Good Job!" : feedback[2]}
+                  </div>
                 </div>
               </div>
             </div>

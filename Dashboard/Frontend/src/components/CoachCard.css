@@ -71,7 +71,12 @@
   flex-direction: column;
 }
 
-.feedbackValue {
+.feedbackHeader {
   font-weight: 300;
   padding-top: 10px;
+  font-size: 20px;
+}
+
+.feedbackValue {
+  font-size: 20px;
 }

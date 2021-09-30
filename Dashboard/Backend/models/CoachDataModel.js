@@ -6,7 +6,6 @@ const coachDataSchema = mongoose.Schema({
   actualPositions: {
     type: String,
     required: true,
-    default: Date.now(),
     trim: true,
   },
   dancer1Feedback: { type: String, required: true, trim: true },

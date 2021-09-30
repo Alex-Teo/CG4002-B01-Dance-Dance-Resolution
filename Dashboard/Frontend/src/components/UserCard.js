@@ -3,17 +3,31 @@ import { Card } from "react-bootstrap";
 import { IoIosBody } from "react-icons/io";
 import { CgStopwatch } from "react-icons/cg";
 
-function UserCard({ dancerId, currentDance, delay, feedback }) {
+function UserCard({
+  dancerId,
+  currentDance,
+  currentPos,
+  delay,
+  danceFlag,
+  posFlag,
+}) {
   return (
     <Card>
       <Card.Body>
-        <Card.Title className="cardTitle">{dancerId}</Card.Title>
+        <Card.Title className="cardTitle">
+          {dancerId} <br />
+          <div className={posFlag ? "cardTitle_correct" : "cardTitle_wrong"}>
+            (Pos: {currentPos})
+          </div>
+        </Card.Title>
         <Card.Text>
           <div className="miniCard">
             <IoIosBody className="bodyIcon" />
             <div>
               <div className="valueHeader">Your Dance</div>
-              <div className="value">{currentDance}</div>
+              <div className={danceFlag ? "value_correct" : "value_wrong"}>
+                {currentDance}
+              </div>
             </div>
           </div>
           <div className="miniCard">

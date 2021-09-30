@@ -1,55 +1,9 @@
 import { ResponsiveStream } from "@nivo/stream";
 
-function Stream() {
+function Stream({ currentEmgData }) {
   return (
     <ResponsiveStream
-      data={[
-        {
-          Dancer1: 97,
-          Dancer2: 120,
-          Dancer3: 23,
-        },
-        {
-          Dancer1: 34,
-          Dancer2: 103,
-          Dancer3: 45,
-        },
-        {
-          Dancer1: 80,
-          Dancer2: 133,
-          Dancer3: 52,
-        },
-        {
-          Dancer1: 174,
-          Dancer2: 87,
-          Dancer3: 167,
-        },
-        {
-          Dancer1: 145,
-          Dancer2: 173,
-          Dancer3: 189,
-        },
-        {
-          Dancer1: 77,
-          Dancer2: 166,
-          Dancer3: 74,
-        },
-        {
-          Dancer1: 191,
-          Dancer2: 74,
-          Dancer3: 130,
-        },
-        {
-          Dancer1: 48,
-          Dancer2: 178,
-          Dancer3: 33,
-        },
-        {
-          Dancer1: 54,
-          Dancer2: 20,
-          Dancer3: 198,
-        },
-      ]}
+      data={currentEmgData}
       keys={["Dancer1", "Dancer2", "Dancer3"]}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       axisTop={null}
