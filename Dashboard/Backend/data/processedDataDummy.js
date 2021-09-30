@@ -20,12 +20,12 @@ for (var i = 0; i < 100; i++) {
   const actualDance = dances[Math.floor(Math.random() * dances.length)];
   const actualPositions =
     positions[Math.floor(Math.random() * positions.length)];
+  const predictedPos = positions[Math.floor(Math.random() * positions.length)];
 
   for (var id = 0; id < 3; id++) {
     const userID = id;
     const predictedDance = dances[Math.floor(Math.random() * dances.length)];
-    const predictedPos =
-      positions[Math.floor(Math.random() * positions.length)];
+
     const syncDelay = Math.random().toPrecision(1);
 
     coachDataDummy.push({
@@ -62,6 +62,7 @@ for (var i = 0; i < 100; i++) {
         syncDelay: syncDelay,
       });
     }
+    // console.log(predictedPos.split(" "));
   }
 }
 

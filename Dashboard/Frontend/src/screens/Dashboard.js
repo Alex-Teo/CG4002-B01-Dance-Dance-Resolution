@@ -103,38 +103,51 @@ const Dashboard = () => {
     socket.on("newDancer1RawData", (dancer1RawData) => {
       setCurrentDancer1RawData(dancer1RawData);
 
-      if (currentEmgData.length > 20) {
-        currentEmgData.shift();
+      var emg = currentEmgData;
+
+      if (emg.length > 20) {
+        emg.shift();
       }
-      currentEmgData.push({
+      emg.push({
         Dancer1: Number(currentDancer1RawData["emg"]),
-        Dancer2: currentEmgData[currentEmgData.length - 1]["Dancer2"],
-        Dancer3: currentEmgData[currentEmgData.length - 1]["Dancer3"],
+        Dancer2: emg[emg.length - 1]["Dancer2"],
+        Dancer3: emg[emg.length - 1]["Dancer3"],
       });
+
+      setCurrentEmgData(emg);
     });
     socket.on("newDancer2RawData", (dancer2RawData) => {
       setCurrentDancer2RawData(dancer2RawData);
-      if (currentEmgData.length > 20) {
-        currentEmgData.shift();
+
+      var emg = currentEmgData;
+
+      if (emg.length > 20) {
+        emg.shift();
       }
-      currentEmgData.push({
-        Dancer1: currentEmgData[currentEmgData.length - 1]["Dancer1"],
+      emg.push({
+        Dancer1: emg[emg.length - 1]["Dancer1"],
         Dancer2: Number(currentDancer2RawData["emg"]),
-        Dancer3: currentEmgData[currentEmgData.length - 1]["Dancer3"],
+        Dancer3: emg[emg.length - 1]["Dancer3"],
       });
+
+      setCurrentEmgData(emg);
     });
     socket.on("newDancer3RawData", (dancer3RawData) => {
       setCurrentDancer3RawData(dancer3RawData);
-      if (currentEmgData.length > 20) {
-        currentEmgData.shift();
+
+      var emg = currentEmgData;
+
+      if (emg.length > 20) {
+        emg.shift();
       }
-      currentEmgData.push({
-        Dancer1: currentEmgData[currentEmgData.length - 1]["Dancer1"],
-        Dancer2: currentEmgData[currentEmgData.length - 1]["Dancer2"],
+      emg.push({
+        Dancer1: emg[emg.length - 1]["Dancer1"],
+        Dancer2: emg[emg.length - 1]["Dancer2"],
         Dancer3: Number(currentDancer3RawData["emg"]),
       });
 
-      console.log(currentEmgData);
+      setCurrentEmgData(emg);
+      // console.log(emg);
     });
 
     // Sockets for processed data
