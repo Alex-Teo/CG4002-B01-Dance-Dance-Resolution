@@ -5,7 +5,6 @@ Check the IMU you use before dancing and use the code below to replace the code 
 Chest
 
 1.
-
 //offsets for set chest_1
 #define AXO -290
 #define AYO 350
@@ -14,6 +13,14 @@ Chest
 #define GYO -92
 #define GZO 135
 
+2.
+//offsets for set chest_2
+#define AXO 870
+#define AYO 0
+#define AZO 1885
+#define GXO -260
+#define GYO 125
+#define GZO 10
 
 
 ========================================================================================
@@ -21,7 +28,6 @@ Chest
 Hand
 
 1.
-
 //offsets for set hand_1
 #define AXO 0
 #define AYO -740
@@ -29,3 +35,12 @@ Hand
 #define GXO -370
 #define GYO 0
 #define GZO -130
+
+2.
+//offsets for set hand_2
+#define AXO -400
+#define AYO 0
+#define AZO 0
+#define GXO 210
+#define GYO 80
+#define GZO -300
