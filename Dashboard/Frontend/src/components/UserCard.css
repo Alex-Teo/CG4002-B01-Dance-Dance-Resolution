@@ -9,14 +9,14 @@
   font-size: 40px;
 }
 
-.cardTitle_correct {
+.cardTitleCorrect {
   text-align: center;
   font-weight: 300;
   font-size: 30px;
   color: green;
 }
 
-.cardTitle_wrong {
+.cardTitleWrong {
   text-align: center;
   font-weight: 300;
   font-size: 30px;
@@ -66,13 +66,13 @@
   font-weight: 400;
 }
 
-.value_correct {
+.valueCorrect {
   font-size: 30px;
   font-weight: 400;
   color: green;
 }
 
-.value_wrong {
+.valueWrong {
   font-size: 30px;
   font-weight: 400;
   color: red;

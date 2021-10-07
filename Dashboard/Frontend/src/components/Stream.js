@@ -1,9 +1,9 @@
 import { ResponsiveStream } from "@nivo/stream";
 
-function Stream({ currentEmgData }) {
+function Stream({ data }) {
   return (
     <ResponsiveStream
-      data={currentEmgData}
+      data={data}
       keys={["Dancer1", "Dancer2", "Dancer3"]}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       axisTop={null}

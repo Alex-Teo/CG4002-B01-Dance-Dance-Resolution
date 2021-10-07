@@ -31,15 +31,9 @@ io.on("connection", (socket) => {
 
 // ---------------- MongoDB Setup ---------------- //
 // Imports for data and model
+const rawDataDummy = require("./data/rawDataDummy");
 const {
-  dancer1RawDataDummy,
-  dancer2RawDataDummy,
-  dancer3RawDataDummy,
-} = require("./data/rawDataDummy");
-const {
-  dancer1ProcessedDataDummy,
-  dancer2ProcessedDataDummy,
-  dancer3ProcessedDataDummy,
+  processedDataDummy,
   coachDataDummy,
 } = require("./data/processedDataDummy");
 
@@ -51,8 +45,8 @@ const CoachDataModel = require("./models/CoachDataModel");
 const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
-    let div = coachDataDummy.length / dancer1RawDataDummy.length;
-    let delay = 10000;
+    div = processedDataDummy.length / coachDataDummy.length;
+    let delay = 1000;
 
     // Clear exisiting collections
     await RawDataModel.deleteMany({});
@@ -60,14 +54,10 @@ const importData = async () => {
     await CoachDataModel.deleteMany({});
 
     // Add in dummy data at 1000ms intervals
-    for (var i = 0; i < dancer1RawDataDummy.length; i++) {
-      await Dancer1RawDataModel.insertMany(dancer1RawDataDummy[i]);
-      await Dancer2RawDataModel.insertMany(dancer2RawDataDummy[i]);
-      await Dancer3RawDataModel.insertMany(dancer3RawDataDummy[i]);
-      await Dancer1ProcessedDataModel.insertMany(dancer1ProcessedDataDummy[i]);
-      await Dancer2ProcessedDataModel.insertMany(dancer2ProcessedDataDummy[i]);
-      await Dancer3ProcessedDataModel.insertMany(dancer3ProcessedDataDummy[i]);
-      await CoachDataModel.insertMany(coachDataDummy[div * i]);
+    for (var i = 0; i < coachDataDummy.length; i++) {
+      await RawDataModel.insertMany(rawDataDummy[i]);
+      await ProcessedDataModel.insertMany(processedDataDummy[i * div]);
+      await CoachDataModel.insertMany(coachDataDummy[i]);
       await timer(delay);
     }
     console.log(" MongoDB: Dummy data imported");
@@ -105,7 +95,7 @@ connection.once("open", async () => {
   console.log(" MongoDB: Creating fresh collections");
 
   // Setup change streams
-  const RawDataStream = connection.collection("1_raw_datas").watch();
+  const RawDataStream = connection.collection("raw_datas").watch();
   const ProcessedDataStream = connection.collection("processed_datas").watch();
   const coachDataStream = connection.collection("coach_datas").watch();
   console.log(" MongoDB (Change Streams): Watching collections as streams");
@@ -114,10 +104,10 @@ connection.once("open", async () => {
 
   //Sockets for coach data
   coachDataStream.on("change", (change) => {
+    // console.log("New coach data");
     switch (change.operationType) {
       case "insert":
         const coachData = {
-          timestamp: change.fullDocument.timestamp,
           actualDance: change.fullDocument.actualDance,
           actualPositions: change.fullDocument.actualPositions,
           dancer1Feedback: change.fullDocument.dancer1Feedback,
@@ -130,11 +120,11 @@ connection.once("open", async () => {
 
   // Sockets for raw data
   RawDataStream.on("change", (change) => {
+    // console.log("New raw data");
     switch (change.operationType) {
       case "insert":
-        const dancer1RawData = {
+        const RawData = {
           userID: change.fullDocument.userID,
-          timestamp: change.fullDocument.timestamp,
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
           aZ: change.fullDocument.aZ,
@@ -143,17 +133,16 @@ connection.once("open", async () => {
           gZ: change.fullDocument.gZ,
           emg: change.fullDocument.emg,
         };
-        io.emit("newRawData", dancer1RawData);
+        io.emit("newRawData", RawData);
     }
   });
 
   // Sockets for processed data
   ProcessedDataStream.on("change", (change) => {
+    // console.log("New processed data");
     switch (change.operationType) {
       case "insert":
         const ProcessedData = {
-          userID: change.fullDocument.userID,
-          timestamp: change.fullDocument.timestamp,
           predictedDance: change.fullDocument.predictedDance,
           predictedPos: change.fullDocument.predictedPos,
           syncDelay: change.fullDocument.syncDelay,
@@ -164,7 +153,7 @@ connection.once("open", async () => {
   });
 
   // Import dummy data
-  // importData();
+  importData();
 });
 
 // ---------------- Routing (old) ---------------- //

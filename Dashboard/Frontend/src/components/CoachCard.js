@@ -8,9 +8,8 @@ function CoachCard({
   currentDance,
   actualPositions,
   feedback,
-  dancer1Flag,
-  dancer2Flag,
-  dancer3Flag,
+  dancerDance,
+  dancerPos,
 }) {
   return (
     <div>
@@ -85,17 +84,11 @@ function CoachCard({
                 <div className="valueHeader">Feedback</div>
                 <div className="value" id="feedbackWrapper">
                   <div className="feedbackHeader">Dancer 1</div>
-                  <div className="feedbackValue">
-                    {dancer1Flag ? "Good Job!" : feedback[0]}
-                  </div>
+                  <div className="feedbackValue">Good Job!</div>
                   <div className="feedbackHeader">Dancer 2</div>
-                  <div className="feedbackValue">
-                    {dancer2Flag ? "Good Job!" : feedback[1]}
-                  </div>
+                  <div className="feedbackValue">Good Job!</div>
                   <div className="feedbackHeader">Dancer 3</div>
-                  <div className="feedbackValue">
-                    {dancer3Flag ? "Good Job!" : feedback[2]}
-                  </div>
+                  <div className="feedbackValue">Good Job!</div>
                 </div>
               </div>
             </div>

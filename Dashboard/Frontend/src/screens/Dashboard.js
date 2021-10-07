@@ -11,50 +11,12 @@ const Dashboard = () => {
   // ---------------- useState ---------------- //
   // useState for coach data
   const [currentCoachData, setCurrentCoachData] = useState({
-    timestamp: Date.now(),
     actualDance: " ",
-    actualPositions: " ",
-    dancer1Feedback: " ",
-    dancer2Feedback: " ",
-    dancer3Feedback: " ",
+    actualPositions: [],
   });
 
-  // useState for raw data
-  const [currentDancer1RawData, setCurrentDancer1RawData] = useState({
-    userID: " ",
-    timestamp: Date.now(),
-    aX: " ",
-    aY: " ",
-    aZ: " ",
-    gX: " ",
-    gY: " ",
-    gZ: " ",
-    emg: " ",
-  });
-  const [currentDancer2RawData, setCurrentDancer2RawData] = useState({
-    userID: " ",
-    timestamp: Date.now(),
-    aX: " ",
-    aY: " ",
-    aZ: " ",
-    gX: " ",
-    gY: " ",
-    gZ: " ",
-    emg: " ",
-  });
-  const [currentDancer3RawData, setCurrentDancer3RawData] = useState({
-    userID: " ",
-    timestamp: Date.now(),
-    aX: " ",
-    aY: " ",
-    aZ: " ",
-    gX: " ",
-    gY: " ",
-    gZ: " ",
-    emg: " ",
-  });
-
-  const [currentEmgData, setCurrentEmgData] = useState([
+  //useState for emgArray
+  const [emgArray, setEmgArray] = useState([
     {
       Dancer1: 0,
       Dancer2: 0,
@@ -63,25 +25,11 @@ const Dashboard = () => {
   ]);
 
   // useState for processed data
-  const [dancer1ProcessedData, setCurrentDancer1ProcessedData] = useState({
-    userID: " ",
-    timestamp: Date.now(),
+  const [currentProcessedData, setCurrentProcessedData] = useState({
     predictedDance: " ",
-    predictedPos: " ",
-    syncDelay: " ",
-  });
-  const [dancer2ProcessedData, setCurrentDancer2ProcessedData] = useState({
-    userID: " ",
-    timestamp: Date.now(),
-    predictedDance: " ",
-    predictedPos: " ",
-    syncDelay: " ",
-  });
-  const [dancer3ProcessedData, setCurrentDancer3ProcessedData] = useState({
-    userID: " ",
-    timestamp: Date.now(),
-    predictedDance: " ",
-    predictedPos: " ",
+    dancer1PredictedPos: " ",
+    dancer2PredictedPos: " ",
+    dancer3PredictedPos: " ",
     syncDelay: " ",
   });
 
@@ -94,55 +42,60 @@ const Dashboard = () => {
       console.log(`Client connected with socket.io ID: ${socket.id}`);
     });
 
-    // Updating the list storing emg data
-    const updateEmgStream = (dancer, data) => {
-      //TODO: Update EMG stream input
-      while (data.length > 20) {
-        data.shift();
-      }
-      switch (dancer) {
-        case "dancer1":
-          data.push({
-            Dancer1: Number(currentDancer1RawData["emg"]),
-            Dancer2: data[data.length - 1]["Dancer2"],
-            Dancer3: data[data.length - 1]["Dancer3"],
-          });
-        // console.log(data);
-
-        case "dancer2":
-          data.push({
-            Dancer1: data[data.length - 1]["Dancer1"],
-            Dancer2: Number(currentDancer2RawData["emg"]),
-            Dancer3: data[data.length - 1]["Dancer3"],
-          });
-        // console.log(data);
-
-        case "dancer3":
-          data.push({
-            Dancer1: data[data.length - 1]["Dancer1"],
-            Dancer2: data[data.length - 1]["Dancer2"],
-            Dancer3: Number(currentDancer3RawData["emg"]),
-          });
-          console.log(data);
-      }
-      return data;
-    };
-
     // Sockets for coach data
     socket.on("newCoachData", (coachData) => {
-      setCurrentCoachData(coachData);
+      setCurrentCoachData({
+        actualDance: coachData["actualDance"],
+        actualPositions: coachData["actualPositions"].split(" | "),
+      });
     });
 
     // Sockets for raw data
-    socket.on("newRawData", (dancer1RawData) => {
-      setCurrentDancer1RawData(dancer1RawData); //TODO: Split processed data by userID
-      var emg = currentEmgData;
-      setCurrentEmgData(updateEmgStream("dancer1", emg));
+    socket.on("newRawData", (RawData) => {
+      var currUserID = RawData["userID"];
+      var currentEmgData = emgArray;
+      if (currentEmgData.length > 20) currentEmgData.pop();
+      var dancer1Emg = 0;
+      var dancer2Emg = 0;
+      var dancer3Emg = 0;
+
+      switch (currUserID) {
+        case "0":
+          dancer1Emg = Number(RawData["emg"]);
+          dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
+          dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
+          break;
+        case "1":
+          dancer2Emg = Number(RawData["emg"]);
+          dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
+          dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
+          break;
+        case "2":
+          dancer3Emg = Number(RawData["emg"]);
+          dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
+          dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
+          break;
+        default:
+          dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
+          dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
+          dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
+      }
+
+      setEmgArray((emgArray) => [
+        ...emgArray,
+        { Dancer1: dancer1Emg, Dancer2: dancer2Emg, Dancer3: dancer3Emg },
+      ]);
     });
 
     // Sockets for processed data
-    socket.on("newProcessedData", (dancer1ProcessedData) => {
-      setCurrentDancer1ProcessedData(dancer1ProcessedData); //TODO: Split processed data by userID
+    socket.on("newProcessedData", (ProcessedData) => {
+      setCurrentProcessedData({
+        predictedDance: ProcessedData["predictedDance"], // dance
+        dancer1PredictedPos: ProcessedData["predictedPos"].split(" | ")[0], // pos1 | pos2 | pos3
+        dancer2PredictedPos: ProcessedData["predictedPos"].split(" | ")[1], // pos1 | pos2 | pos3
+        dancer3PredictedPos: ProcessedData["predictedPos"].split(" | ")[2], // pos1 | pos2 | pos3
+        syncDelay: ProcessedData["syncDelay"], // sync
+      });
     });
   }, []);
 
@@ -157,91 +110,49 @@ const Dashboard = () => {
         <div className="users">
           <UserCard
             dancerId="Dancer 1"
-            delay={dancer1ProcessedData.syncDelay}
-            currentDance={dancer1ProcessedData.predictedDance}
-            currentPos={dancer1ProcessedData.predictedPos}
-            danceFlag={
-              dancer1ProcessedData.predictedDance ===
-              currentCoachData.actualDance
-                ? 1
-                : 0
-            }
-            posFlag={
-              currentCoachData.actualPositions.split(" ")[0] ===
-              dancer1ProcessedData.predictedPos
-                ? 1
-                : 0
-            }
+            delay={currentProcessedData.syncDelay}
+            currentDance={currentProcessedData.predictedDance}
+            currentPos={currentProcessedData.dancer1PredictedPos}
+            coachDance={currentCoachData.actualDance}
+            coachPos={currentCoachData.actualPositions}
           />
           <UserCard
             dancerId="Dancer 2"
-            delay={dancer2ProcessedData.syncDelay}
-            currentDance={dancer2ProcessedData.predictedDance}
-            currentPos={dancer2ProcessedData.predictedPos}
-            danceFlag={
-              dancer2ProcessedData.predictedDance ===
-              currentCoachData.actualDance
-                ? 1
-                : 0
-            }
-            posFlag={
-              currentCoachData.actualPositions.split(" ")[1] ===
-              dancer2ProcessedData.predictedPos
-                ? 1
-                : 0
-            }
+            delay={currentProcessedData.syncDelay}
+            currentDance={currentProcessedData.predictedDance}
+            currentPos={currentProcessedData.dancer2PredictedPos}
+            coachDance={currentCoachData.actualDance}
+            coachPos={currentCoachData.actualPositions}
           />
           <UserCard
             dancerId="Dancer 3"
-            delay={dancer3ProcessedData.syncDelay}
-            currentDance={dancer3ProcessedData.predictedDance}
-            currentPos={dancer3ProcessedData.predictedPos}
-            danceFlag={
-              dancer3ProcessedData.predictedDance ===
-              currentCoachData.actualDance
-                ? 1
-                : 0
-            }
-            posFlag={
-              currentCoachData.actualPositions.split(" ")[2] ===
-              dancer3ProcessedData.predictedPos
-                ? 1
-                : 0
-            }
+            delay={currentProcessedData.syncDelay}
+            currentDance={currentProcessedData.predictedDance}
+            currentPos={currentProcessedData.dancer3PredictedPos}
+            coachDance={currentCoachData.actualDance}
+            coachPos={currentCoachData.actualPositions}
           />
           <div className="graph">
             <div className="fatigue">Overall Fatigue</div>
-            <Stream currentEmgData={currentEmgData} />
+            <Stream data={emgArray.slice(-21)} />
           </div>
         </div>
 
         <div className="coach">
           <CoachCard
             currentDance={currentCoachData.actualDance}
-            actualPositions={currentCoachData.actualPositions.split(" ")}
+            actualPositions={currentCoachData.actualPositions}
             feedback={[
               currentCoachData.dancer1Feedback,
               currentCoachData.dancer2Feedback,
               currentCoachData.dancer3Feedback,
             ]}
-            dancer1Flag={
-              dancer1ProcessedData.predictedDance ===
-              currentCoachData.actualDance
-                ? 1
-                : 0
-            }
-            dancer2Flag={
-              dancer2ProcessedData.predictedDance ===
-              currentCoachData.actualDance
-                ? 1
-                : 0
-            }
-            dancer3Flag={
-              dancer3ProcessedData.predictedDance ===
-              currentCoachData.actualDance
-                ? 1
-                : 0
-            }
+            dancerDance={currentProcessedData.predictedDance}
+            dancerPos={[
+              currentProcessedData.dancer1PredictedPos,
+              currentProcessedData.dancer2PredictedPos,
+              currentProcessedData.dancer3PredictedPos,
+            ]}
           />
         </div>
       </div>
