@@ -42,16 +42,9 @@ const {
   dancer3ProcessedDataDummy,
   coachDataDummy,
 } = require("./data/processedDataDummy");
-const {
-  Dancer1RawDataModel,
-  Dancer2RawDataModel,
-  Dancer3RawDataModel,
-} = require("./models/RawDataModel");
-const {
-  Dancer1ProcessedDataModel,
-  Dancer2ProcessedDataModel,
-  Dancer3ProcessedDataModel,
-} = require("./models/ProcessedDataModel");
+
+const RawDataModel = require("./models/RawDataModel");
+const ProcessedDataModel = require("./models/ProcessedDataModel");
 const CoachDataModel = require("./models/CoachDataModel");
 
 // Fxn importData() used for testing -> importing of dummy data
@@ -62,13 +55,9 @@ const importData = async () => {
     let delay = 10000;
 
     // Clear exisiting collections
-    await Dancer1RawDataModel.deleteMany({});
-    await Dancer2RawDataModel.deleteMany({});
-    await Dancer3RawDataModel.deleteMany({});
-    await Dancer2ProcessedDataModel.deleteMany({});
-    await Dancer1ProcessedDataModel.deleteMany({});
-    await Dancer3ProcessedDataModel.deleteMany({});
-    await Dancer3ProcessedDataModel.deleteMany({});
+    await RawDataModel.deleteMany({});
+    await ProcessedDataModel.deleteMany({});
+    await CoachDataModel.deleteMany({});
 
     // Add in dummy data at 1000ms intervals
     for (var i = 0; i < dancer1RawDataDummy.length; i++) {
@@ -78,7 +67,6 @@ const importData = async () => {
       await Dancer1ProcessedDataModel.insertMany(dancer1ProcessedDataDummy[i]);
       await Dancer2ProcessedDataModel.insertMany(dancer2ProcessedDataDummy[i]);
       await Dancer3ProcessedDataModel.insertMany(dancer3ProcessedDataDummy[i]);
-      // console.log(`Insert Raw and Processed Data ${i}`);
       await CoachDataModel.insertMany(coachDataDummy[div * i]);
       await timer(delay);
     }
@@ -106,43 +94,19 @@ connection.on(
 connection.once("open", async () => {
   console.log("MongoDB: Connected");
 
-  await connection.dropCollection("dancer_1_processed_datas");
-  await connection.dropCollection("dancer_2_processed_datas");
-  await connection.dropCollection("dancer_3_processed_datas");
-  await connection.dropCollection("dancer_1_raw_datas");
-  await connection.dropCollection("dancer_2_raw_datas");
-  await connection.dropCollection("dancer_3_raw_datas");
+  await connection.dropCollection("processed_datas");
+  await connection.dropCollection("raw_datas");
   await connection.dropCollection("coach_datas");
   console.log(" MongoDB: Deleted old collections");
 
-  await connection.createCollection("dancer_1_processed_datas");
-  await connection.createCollection("dancer_2_processed_datas");
-  await connection.createCollection("dancer_3_processed_datas");
-  await connection.createCollection("dancer_1_raw_datas");
-  await connection.createCollection("dancer_2_raw_datas");
-  await connection.createCollection("dancer_3_raw_datas");
+  await connection.createCollection("processed_datas");
+  await connection.createCollection("raw_datas");
   await connection.createCollection("coach_datas");
   console.log(" MongoDB: Creating fresh collections");
 
   // Setup change streams
-  const dancer1RawDataStream = connection
-    .collection("dancer_1_raw_datas")
-    .watch();
-  const dancer2RawDataStream = connection
-    .collection("dancer_2_raw_datas")
-    .watch();
-  const dancer3RawDataStream = connection
-    .collection("dancer_3_raw_datas")
-    .watch();
-  const dancer1ProcessedDataStream = connection
-    .collection("dancer_1_processed_datas")
-    .watch();
-  const dancer2ProcessedDataStream = connection
-    .collection("dancer_2_processed_datas")
-    .watch();
-  const dancer3ProcessedDataStream = connection
-    .collection("dancer_3_processed_datas")
-    .watch();
+  const RawDataStream = connection.collection("1_raw_datas").watch();
+  const ProcessedDataStream = connection.collection("processed_datas").watch();
   const coachDataStream = connection.collection("coach_datas").watch();
   console.log(" MongoDB (Change Streams): Watching collections as streams");
 
@@ -165,7 +129,7 @@ connection.once("open", async () => {
   });
 
   // Sockets for raw data
-  dancer1RawDataStream.on("change", (change) => {
+  RawDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
         const dancer1RawData = {
@@ -179,49 +143,15 @@ connection.once("open", async () => {
           gZ: change.fullDocument.gZ,
           emg: change.fullDocument.emg,
         };
-        io.emit("newDancer1RawData", dancer1RawData);
-    }
-  });
-  dancer2RawDataStream.on("change", (change) => {
-    switch (change.operationType) {
-      case "insert":
-        const dancer2RawData = {
-          userID: change.fullDocument.userID,
-          timestamp: change.fullDocument.timestamp,
-          aX: change.fullDocument.aX,
-          aY: change.fullDocument.aY,
-          aZ: change.fullDocument.aZ,
-          gX: change.fullDocument.gX,
-          gY: change.fullDocument.gY,
-          gZ: change.fullDocument.gZ,
-          emg: change.fullDocument.emg,
-        };
-        io.emit("newDancer2RawData", dancer2RawData);
-    }
-  });
-  dancer3RawDataStream.on("change", (change) => {
-    switch (change.operationType) {
-      case "insert":
-        const dancer3RawData = {
-          userID: change.fullDocument.userID,
-          timestamp: change.fullDocument.timestamp,
-          aX: change.fullDocument.aX,
-          aY: change.fullDocument.aY,
-          aZ: change.fullDocument.aZ,
-          gX: change.fullDocument.gX,
-          gY: change.fullDocument.gY,
-          gZ: change.fullDocument.gZ,
-          emg: change.fullDocument.emg,
-        };
-        io.emit("newDancer3RawData", dancer3RawData);
+        io.emit("newRawData", dancer1RawData);
     }
   });
 
   // Sockets for processed data
-  dancer1ProcessedDataStream.on("change", (change) => {
+  ProcessedDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
-        const dancer1ProcessedData = {
+        const ProcessedData = {
           userID: change.fullDocument.userID,
           timestamp: change.fullDocument.timestamp,
           predictedDance: change.fullDocument.predictedDance,
@@ -229,39 +159,12 @@ connection.once("open", async () => {
           syncDelay: change.fullDocument.syncDelay,
         };
 
-        io.emit("newDancer1ProcessedData", dancer1ProcessedData);
-    }
-  });
-  dancer2ProcessedDataStream.on("change", (change) => {
-    switch (change.operationType) {
-      case "insert":
-        const dancer2ProcessedData = {
-          userID: change.fullDocument.userID,
-          timestamp: change.fullDocument.timestamp,
-          predictedDance: change.fullDocument.predictedDance,
-          predictedPos: change.fullDocument.predictedPos,
-          syncDelay: change.fullDocument.syncDelay,
-        };
-
-        io.emit("newDancer2ProcessedData", dancer2ProcessedData);
-    }
-  });
-  dancer3ProcessedDataStream.on("change", (change) => {
-    switch (change.operationType) {
-      case "insert":
-        const dancer3ProcessedData = {
-          userID: change.fullDocument.userID,
-          timestamp: change.fullDocument.timestamp,
-          predictedDance: change.fullDocument.predictedDance,
-          predictedPos: change.fullDocument.predictedPos,
-          syncDelay: change.fullDocument.syncDelay,
-        };
-        io.emit("newDancer3ProcessedData", dancer3ProcessedData);
+        io.emit("newProcessedData", ProcessedData);
     }
   });
 
   // Import dummy data
-  importData();
+  // importData();
 });
 
 // ---------------- Routing (old) ---------------- //

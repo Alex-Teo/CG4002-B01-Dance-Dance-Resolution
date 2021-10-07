@@ -94,14 +94,10 @@ const Dashboard = () => {
       console.log(`Client connected with socket.io ID: ${socket.id}`);
     });
 
-    // Sockets for coach data
-    socket.on("newCoachData", (coachData) => {
-      setCurrentCoachData(coachData);
-    });
-
     // Updating the list storing emg data
     const updateEmgStream = (dancer, data) => {
-      if (data.length > 20) {
+      //TODO: Update EMG stream input
+      while (data.length > 20) {
         data.shift();
       }
       switch (dancer) {
@@ -111,52 +107,42 @@ const Dashboard = () => {
             Dancer2: data[data.length - 1]["Dancer2"],
             Dancer3: data[data.length - 1]["Dancer3"],
           });
-          return data;
+        // console.log(data);
+
         case "dancer2":
           data.push({
             Dancer1: data[data.length - 1]["Dancer1"],
             Dancer2: Number(currentDancer2RawData["emg"]),
             Dancer3: data[data.length - 1]["Dancer3"],
           });
-          return data;
+        // console.log(data);
+
         case "dancer3":
           data.push({
             Dancer1: data[data.length - 1]["Dancer1"],
             Dancer2: data[data.length - 1]["Dancer2"],
             Dancer3: Number(currentDancer3RawData["emg"]),
           });
-          return data;
+          console.log(data);
       }
+      return data;
     };
 
+    // Sockets for coach data
+    socket.on("newCoachData", (coachData) => {
+      setCurrentCoachData(coachData);
+    });
+
     // Sockets for raw data
-    socket.on("newDancer1RawData", (dancer1RawData) => {
-      setCurrentDancer1RawData(dancer1RawData);
+    socket.on("newRawData", (dancer1RawData) => {
+      setCurrentDancer1RawData(dancer1RawData); //TODO: Split processed data by userID
       var emg = currentEmgData;
       setCurrentEmgData(updateEmgStream("dancer1", emg));
     });
-    socket.on("newDancer2RawData", (dancer2RawData) => {
-      setCurrentDancer2RawData(dancer2RawData);
-      var emg = currentEmgData;
-      setCurrentEmgData(updateEmgStream("dancer2", emg));
-    });
-    socket.on("newDancer3RawData", (dancer3RawData) => {
-      setCurrentDancer3RawData(dancer3RawData);
-      var emg = currentEmgData;
-      setCurrentEmgData(updateEmgStream("dancer2", emg));
-    });
 
     // Sockets for processed data
-    socket.on("newDancer1ProcessedData", (dancer1ProcessedData) => {
-      setCurrentDancer1ProcessedData(dancer1ProcessedData);
-    });
-
-    socket.on("newDancer2ProcessedData", (dancer2ProcessedData) => {
-      setCurrentDancer2ProcessedData(dancer2ProcessedData);
-    });
-
-    socket.on("newDancer3ProcessedData", (dancer3ProcessedData) => {
-      setCurrentDancer3ProcessedData(dancer3ProcessedData);
+    socket.on("newProcessedData", (dancer1ProcessedData) => {
+      setCurrentDancer1ProcessedData(dancer1ProcessedData); //TODO: Split processed data by userID
     });
   }, []);
 
