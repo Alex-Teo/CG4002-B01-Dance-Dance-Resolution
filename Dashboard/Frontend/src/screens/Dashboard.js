@@ -15,40 +15,6 @@ const Dashboard = () => {
     actualPositions: [],
   });
 
-  //useState for emgArray
-  const [emgArray, setEmgArray] = useState([
-    {
-      Dancer1: 0,
-      Dancer2: 0,
-      Dancer3: 0,
-    },
-  ]);
-
-  //useState for emgArray
-  const [gyro1Array, setgyro1Array] = useState([
-    {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-  ]);
-
-  const [gyro2Array, setgyro2Array] = useState([
-    {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-  ]);
-
-  const [gyro3Array, setgyro3Array] = useState([
-    {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-  ]);
-
   // useState for processed data
   const [currentProcessedData, setCurrentProcessedData] = useState({
     predictedDance: " ",
@@ -57,7 +23,6 @@ const Dashboard = () => {
     dancer3PredictedPos: " ",
     syncDelay: " ",
   });
-
   // ---------------- Sockets ---------------- //
   useEffect(() => {
     const socket = io.connect("http://localhost:5000");
@@ -68,84 +33,18 @@ const Dashboard = () => {
     });
 
     // Sockets for coach data
+    // {actualDance:string, actualPositions:array}
     socket.on("newCoachData", (coachData) => {
-      setCurrentCoachData({
-        actualDance: coachData["actualDance"],
-        actualPositions: coachData["actualPositions"].split(" | "),
-      });
+      setCurrentCoachData(coachData);
     });
 
-    // Sockets for raw data
-    socket.on("newRawData", (RawData) => {
-      var currUserID = RawData["userID"];
-      var currentEmgData = emgArray;
-      if (currentEmgData.length > 20) currentEmgData.pop();
+    // TODO: Sockets for raw data
+    // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
 
-      var dancer1Emg,
-        dancer2Emg,
-        dancer3Emg,
-        gX1,
-        gY1,
-        gZ1,
-        gX2,
-        gY2,
-        gZ2,
-        gX3,
-        gY3,
-        gZ3 = 0;
+    // TODO: Socket for Emg data
+    // {d1Emg:num, d2Emg:num, d3Emg:num}
 
-      switch (currUserID) {
-        case "0":
-          dancer1Emg = Number(RawData["emg"]);
-          dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
-          dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
-          gX1 = Number(RawData["gX"]);
-          gY1 = Number(RawData["gY"]);
-          gZ1 = Number(RawData["gZ"]);
-          break;
-        case "1":
-          dancer2Emg = Number(RawData["emg"]);
-          dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
-          dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
-          gX2 = Number(RawData["gX"]);
-          gY2 = Number(RawData["gY"]);
-          gZ1 = Number(RawData["gZ"]);
-          break;
-        case "2":
-          dancer3Emg = Number(RawData["emg"]);
-          dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
-          dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
-          gX3 = Number(RawData["gX"]);
-          gY3 = Number(RawData["gY"]);
-          gZ3 = Number(RawData["gZ"]);
-          break;
-        default:
-          dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
-          dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
-          dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
-      }
-
-      setEmgArray((emgArray) => [
-        ...emgArray,
-        { Dancer1: dancer1Emg, Dancer2: dancer2Emg, Dancer3: dancer3Emg },
-      ]);
-      setgyro1Array((gyro1Array) => [
-        ...gyro1Array,
-        { x: gX1, y: gY1, z: gZ1 },
-      ]);
-
-      setgyro2Array((gyro2Array) => [
-        ...gyro2Array,
-        { x: gX2, y: gY2, z: gZ2 },
-      ]);
-
-      setgyro3Array((gyro3Array) => [
-        ...gyro3Array,
-        { x: gX3, y: gY3, z: gZ3 },
-      ]);
-    });
-
-    // Sockets for processed data
+    // TODO: Sockets for processed data
     socket.on("newProcessedData", (ProcessedData) => {
       setCurrentProcessedData({
         predictedDance: ProcessedData["predictedDance"], // dance
