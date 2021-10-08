@@ -1,7 +1,7 @@
 import "./Dashboard.css";
 import UserCard from "../components/UserCard";
 import CoachCard from "../components/CoachCard";
-import Stream from "../components/Stream";
+import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
 
 import { useEffect, useState } from "react";
@@ -133,8 +133,7 @@ const Dashboard = () => {
             coachPos={currentCoachData.actualPositions}
           />
           <div className="graph">
-            <div className="fatigue">Overall Fatigue</div>
-            <Stream data={emgArray.slice(-21)} />
+            <Analytics emgData={emgArray.slice(-21)} />
           </div>
         </div>
 

@@ -1,0 +1,15 @@
+.analyticsWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: space-evenly;
+  align-items: center;
+  text-align: center;
+  height: 400px;
+}
+
+#dropdown {
+  color: black;
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+}

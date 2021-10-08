@@ -1,6 +1,8 @@
+import "./Stream.css";
 import { ResponsiveStream } from "@nivo/stream";
 
 function Stream({ data }) {
+  console.log("Stream");
   return (
     <ResponsiveStream
       data={data}
