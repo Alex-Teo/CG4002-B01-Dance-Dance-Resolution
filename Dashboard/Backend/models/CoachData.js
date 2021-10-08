@@ -9,6 +9,6 @@ const coachDataSchema = mongoose.Schema({
   },
 });
 
-const CoachDataModel = mongoose.model("coach_data", coachDataSchema);
+const CoachData = mongoose.model("coach_data", coachDataSchema);
 
-module.exports = CoachDataModel;
+module.exports = CoachData;

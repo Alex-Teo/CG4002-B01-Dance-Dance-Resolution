@@ -6,9 +6,6 @@ const processedDataSchema = mongoose.Schema({
   syncDelay: { type: String, required: true, trim: true }, // delay
 });
 
-const ProcessedDataModel = mongoose.model(
-  "processed_data",
-  processedDataSchema
-);
+const ProcessedData = mongoose.model("processed_data", processedDataSchema);
 
-module.exports = ProcessedDataModel;
+module.exports = ProcessedData;

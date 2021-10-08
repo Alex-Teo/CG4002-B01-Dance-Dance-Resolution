@@ -24,6 +24,31 @@ const Dashboard = () => {
     },
   ]);
 
+  //useState for emgArray
+  const [gyro1Array, setgyro1Array] = useState([
+    {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+  ]);
+
+  const [gyro2Array, setgyro2Array] = useState([
+    {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+  ]);
+
+  const [gyro3Array, setgyro3Array] = useState([
+    {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+  ]);
+
   // useState for processed data
   const [currentProcessedData, setCurrentProcessedData] = useState({
     predictedDance: " ",
@@ -55,25 +80,44 @@ const Dashboard = () => {
       var currUserID = RawData["userID"];
       var currentEmgData = emgArray;
       if (currentEmgData.length > 20) currentEmgData.pop();
-      var dancer1Emg = 0;
-      var dancer2Emg = 0;
-      var dancer3Emg = 0;
+
+      var dancer1Emg,
+        dancer2Emg,
+        dancer3Emg,
+        gX1,
+        gY1,
+        gZ1,
+        gX2,
+        gY2,
+        gZ2,
+        gX3,
+        gY3,
+        gZ3 = 0;
 
       switch (currUserID) {
         case "0":
           dancer1Emg = Number(RawData["emg"]);
           dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
           dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
+          gX1 = Number(RawData["gX"]);
+          gY1 = Number(RawData["gY"]);
+          gZ1 = Number(RawData["gZ"]);
           break;
         case "1":
           dancer2Emg = Number(RawData["emg"]);
           dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
           dancer3Emg = Number(currentEmgData.at(-1)["Dancer3"]);
+          gX2 = Number(RawData["gX"]);
+          gY2 = Number(RawData["gY"]);
+          gZ1 = Number(RawData["gZ"]);
           break;
         case "2":
           dancer3Emg = Number(RawData["emg"]);
           dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
           dancer2Emg = Number(currentEmgData.at(-1)["Dancer2"]);
+          gX3 = Number(RawData["gX"]);
+          gY3 = Number(RawData["gY"]);
+          gZ3 = Number(RawData["gZ"]);
           break;
         default:
           dancer1Emg = Number(currentEmgData.at(-1)["Dancer1"]);
@@ -84,6 +128,20 @@ const Dashboard = () => {
       setEmgArray((emgArray) => [
         ...emgArray,
         { Dancer1: dancer1Emg, Dancer2: dancer2Emg, Dancer3: dancer3Emg },
+      ]);
+      setgyro1Array((gyro1Array) => [
+        ...gyro1Array,
+        { x: gX1, y: gY1, z: gZ1 },
+      ]);
+
+      setgyro2Array((gyro2Array) => [
+        ...gyro2Array,
+        { x: gX2, y: gY2, z: gZ2 },
+      ]);
+
+      setgyro3Array((gyro3Array) => [
+        ...gyro3Array,
+        { x: gX3, y: gY3, z: gZ3 },
       ]);
     });
 
@@ -133,7 +191,12 @@ const Dashboard = () => {
             coachPos={currentCoachData.actualPositions}
           />
           <div className="graph">
-            <Analytics emgData={emgArray.slice(-21)} />
+            <Analytics
+              emgData={emgArray.slice(-21)}
+              gyro1Data={gyro1Array.slice(-21)}
+              gyro2Data={gyro2Array.slice(-21)}
+              gyro3Data={gyro3Array.slice(-21)}
+            />
           </div>
         </div>
 

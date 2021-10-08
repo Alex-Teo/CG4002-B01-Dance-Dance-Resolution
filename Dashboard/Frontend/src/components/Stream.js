@@ -1,12 +1,10 @@
-import "./Stream.css";
 import { ResponsiveStream } from "@nivo/stream";
 
-function Stream({ data }) {
-  console.log("Stream");
+function Stream({ data, keys }) {
   return (
     <ResponsiveStream
       data={data}
-      keys={["Dancer1", "Dancer2", "Dancer3"]}
+      keys={keys}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       axisTop={null}
       axisRight={null}

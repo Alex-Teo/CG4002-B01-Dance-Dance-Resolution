@@ -30,44 +30,6 @@ io.on("connection", (socket) => {
 });
 
 // ---------------- MongoDB Setup ---------------- //
-// Imports for data and model
-const rawDataDummy = require("./data/rawDataDummy");
-const {
-  processedDataDummy,
-  coachDataDummy,
-} = require("./data/processedDataDummy");
-
-const RawDataModel = require("./models/RawDataModel");
-const ProcessedDataModel = require("./models/ProcessedDataModel");
-const CoachDataModel = require("./models/CoachDataModel");
-
-// Fxn importData() used for testing -> importing of dummy data
-const importData = async () => {
-  try {
-    const timer = (ms) => new Promise((res) => setTimeout(res, ms));
-    div = processedDataDummy.length / coachDataDummy.length;
-    let delay = 1000;
-
-    // Clear exisiting collections
-    await RawDataModel.deleteMany({});
-    await ProcessedDataModel.deleteMany({});
-    await CoachDataModel.deleteMany({});
-
-    // Add in dummy data at 1000ms intervals
-    for (var i = 0; i < coachDataDummy.length; i++) {
-      await RawDataModel.insertMany(rawDataDummy[i]);
-      await ProcessedDataModel.insertMany(processedDataDummy[i * div]);
-      await CoachDataModel.insertMany(coachDataDummy[i]);
-      await timer(delay);
-    }
-    console.log(" MongoDB: Dummy data imported");
-
-    process.exit();
-  } catch (error) {
-    console.error(" MongoDB: Error with data import", error);
-    process.exit(1);
-  }
-};
 
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, {
@@ -84,13 +46,25 @@ connection.on(
 connection.once("open", async () => {
   console.log("MongoDB: Connected");
 
+  await connection.dropCollection("d1_raw_hand_datas");
+  await connection.dropCollection("d2_raw_hand_datas");
+  await connection.dropCollection("d3_raw_hand_datas");
+  await connection.dropCollection("d1_raw_chest_datas");
+  await connection.dropCollection("d2_raw_chest_datas");
+  await connection.dropCollection("d3_raw_chest_datas");
+  await connection.dropCollection("emg_datas");
   await connection.dropCollection("processed_datas");
-  await connection.dropCollection("raw_datas");
   await connection.dropCollection("coach_datas");
   console.log(" MongoDB: Deleted old collections");
 
+  await connection.createCollection("d1_raw_hand_datas");
+  await connection.createCollection("d2_raw_hand_datas");
+  await connection.createCollection("d3_raw_hand_datas");
+  await connection.createCollection("d1_raw_chest_datas");
+  await connection.createCollection("d2_raw_chest_datas");
+  await connection.createCollection("d3_raw_chest_datas");
+  await connection.createCollection("emg_datas");
   await connection.createCollection("processed_datas");
-  await connection.createCollection("raw_datas");
   await connection.createCollection("coach_datas");
   console.log(" MongoDB: Creating fresh collections");
 
@@ -151,17 +125,6 @@ connection.once("open", async () => {
         io.emit("newProcessedData", ProcessedData);
     }
   });
-
-  // Import dummy data
-  importData();
 });
 
-// ---------------- Routing (old) ---------------- //
-// const rawDataRoute = require("./routes/rawDataRoute");
-// const processedDataRoute = require("./routes/processedDataRoute");
-
-// app.use("/rawData", rawDataRoute);
-// app.use("/processedData", processedDataRoute);
-
-// ---------------- Server Start ---------------- //
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
