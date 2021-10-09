@@ -8,63 +8,22 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const Dashboard = () => {
+  // FIXME: Sockets are correctly receiving data from server, but setState not working
   // ---------------- useState ---------------- //
 
   // Use state for raw data
   // Array of objects
-  const [emgArray, setEmgArray] = useState([
-    {
-      d1Emg: 0,
-      d2Emg: 0,
-      d3Emg: 0,
-    },
-  ]);
+  const [emgArray, setEmgArray] = useState([]);
 
   // Array of objects - acc
-  const [d1HandAccArray, setD1HandAccArray] = useState([
-    {
-      aX: 0,
-      aY: 0,
-      aZ: 0,
-    },
-  ]);
-  const [d2HandAccArray, setD2HandAccArray] = useState([
-    {
-      aX: 0,
-      aY: 0,
-      aZ: 0,
-    },
-  ]);
-  const [d3HandAccArray, setD3HandAccArray] = useState([
-    {
-      aX: 0,
-      aY: 0,
-      aZ: 0,
-    },
-  ]);
+  const [d1HandAccArray, setD1HandAccArray] = useState([]);
+  const [d2HandAccArray, setD2HandAccArray] = useState([]);
+  const [d3HandAccArray, setD3HandAccArray] = useState([]);
 
   // Array of objects - gyro
-  const [d1HandGyroArray, setD1HandGyroArray] = useState([
-    {
-      gX: 0,
-      gY: 0,
-      gZ: 0,
-    },
-  ]);
-  const [d2HandGyroArray, setD2HandGyroArray] = useState([
-    {
-      gX: 0,
-      gY: 0,
-      gZ: 0,
-    },
-  ]);
-  const [d3HandGyroArray, setD3HandGyroArray] = useState([
-    {
-      gX: 0,
-      gY: 0,
-      gZ: 0,
-    },
-  ]);
+  const [d1HandGyroArray, setD1HandGyroArray] = useState([]);
+  const [d2HandGyroArray, setD2HandGyroArray] = useState([]);
+  const [d3HandGyroArray, setD3HandGyroArray] = useState([]);
 
   // useState for coach data
   const [currentCoachData, setCurrentCoachData] = useState({
@@ -75,11 +34,10 @@ const Dashboard = () => {
   // useState for processed data
   const [currentProcessedData, setCurrentProcessedData] = useState({
     predictedDance: " ",
-    dancer1PredictedPos: " ",
-    dancer2PredictedPos: " ",
-    dancer3PredictedPos: " ",
-    syncDelay: " ",
+    predictedPos: [],
+    syncDelay: 0,
   });
+  var data = 0;
   // ---------------- Sockets ---------------- //
   useEffect(() => {
     const socket = io.connect("http://localhost:5000");
@@ -95,24 +53,25 @@ const Dashboard = () => {
       setCurrentCoachData(coachData);
       // console.log("coach", currentCoachData);
     });
-
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
-      setD1HandAccArray([...d1HandAccArray, FinalData[acc]]);
-      setD1HandGyroArray([...d1HandGyroArray, FinalData[gyro]]);
+      setD1HandAccArray([...d1HandAccArray, FinalData.acc]);
+      setD1HandGyroArray([...d1HandGyroArray, FinalData.gyro]);
+      console.log(`Data Group ${data}`);
+      data += 1;
       console.log("d1", d1HandAccArray, d1HandGyroArray);
     });
 
     socket.on("newD2HandData", (FinalData) => {
-      setD2HandAccArray([...d2HandAccArray, FinalData[acc]]);
-      setD2HandGyroArray([...d2HandGyroArray, FinalData[gyro]]);
+      setD2HandAccArray([...d2HandAccArray, FinalData.acc]);
+      setD2HandGyroArray([...d2HandGyroArray, FinalData.gyro]);
       console.log("d2", d2HandAccArray, d2HandGyroArray);
     });
 
     socket.on("newD3HandData", (FinalData) => {
-      setD3HandAccArray([...d3HandAccArray, FinalData[acc]]);
-      setD3HandGyroArray([...d3HandGyroArray, FinalData[gyro]]);
+      setD3HandAccArray([...d3HandAccArray, FinalData.acc]);
+      setD3HandGyroArray([...d3HandGyroArray, FinalData.gyro]);
       console.log("d3", d3HandAccArray, d3HandGyroArray);
     });
 
@@ -127,8 +86,9 @@ const Dashboard = () => {
     // {predictedDance:string, predictedPos:array}
     socket.on("newProcessedData", (ProcessedData) => {
       setCurrentProcessedData(ProcessedData);
+      console.log("processed1", ProcessedData);
+      console.log("processed2", currentProcessedData);
     });
-    console.log("processed", currentProcessedData);
   }, []);
 
   return (

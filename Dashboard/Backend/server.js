@@ -49,9 +49,9 @@ connection.once("open", async () => {
   await connection.dropCollection("d1_raw_hand_datas");
   await connection.dropCollection("d2_raw_hand_datas");
   await connection.dropCollection("d3_raw_hand_datas");
-  await connection.dropCollection("d1_raw_chest_datas");
-  await connection.dropCollection("d2_raw_chest_datas");
-  await connection.dropCollection("d3_raw_chest_datas");
+  // await connection.dropCollection("d1_raw_chest_datas");
+  // await connection.dropCollection("d2_raw_chest_datas");
+  // await connection.dropCollection("d3_raw_chest_datas");
   await connection.dropCollection("emg_datas");
   await connection.dropCollection("processed_datas");
   await connection.dropCollection("coach_datas");
@@ -60,9 +60,9 @@ connection.once("open", async () => {
   await connection.createCollection("d1_raw_hand_datas");
   await connection.createCollection("d2_raw_hand_datas");
   await connection.createCollection("d3_raw_hand_datas");
-  await connection.createCollection("d1_raw_chest_datas");
-  await connection.createCollection("d2_raw_chest_datas");
-  await connection.createCollection("d3_raw_chest_datas");
+  // await connection.createCollection("d1_raw_chest_datas");
+  // await connection.createCollection("d2_raw_chest_datas");
+  // await connection.createCollection("d3_raw_chest_datas");
   await connection.createCollection("emg_datas");
   await connection.createCollection("processed_datas");
   await connection.createCollection("coach_datas");
@@ -296,7 +296,7 @@ connection.once("open", async () => {
           predictedDance: change.fullDocument.predictedDance,
           predictedPos: change.fullDocument.predictedPos
             .split(" | ")
-            .map((i) => Number(i)),
+            .map(Number),
           syncDelay: Number(change.fullDocument.syncDelay),
         };
 
