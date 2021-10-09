@@ -43,31 +43,30 @@ connection.on(
 connection.once("open", async () => {
   console.log("MongoDB: Connected");
 
-  await connection.dropCollection("d1_raw_hand_datas");
-  await connection.dropCollection("d2_raw_hand_datas");
-  await connection.dropCollection("d3_raw_hand_datas");
-  await connection.dropCollection("d1_raw_chest_datas");
-  await connection.dropCollection("d2_raw_chest_datas");
-  await connection.dropCollection("d3_raw_chest_datas");
-  await connection.dropCollection("emg_datas");
-  await connection.dropCollection("processed_datas");
-  await connection.dropCollection("coach_datas");
-  console.log(" MongoDB: Deleted old collections");
+  // await connection.dropCollection("d1_raw_hand_datas");
+  // await connection.dropCollection("d2_raw_hand_datas");
+  // await connection.dropCollection("d3_raw_hand_datas");
+  // await connection.dropCollection("d1_raw_chest_datas");
+  // await connection.dropCollection("d2_raw_chest_datas");
+  // await connection.dropCollection("d3_raw_chest_datas");
+  // await connection.dropCollection("emg_datas");
+  // await connection.dropCollection("processed_datas");
+  // await connection.dropCollection("coach_datas");
+  // console.log(" MongoDB: Deleted old collections");
 
-  await connection.createCollection("d1_raw_hand_datas");
-  await connection.createCollection("d2_raw_hand_datas");
-  await connection.createCollection("d3_raw_hand_datas");
-  await connection.createCollection("d1_raw_chest_datas");
-  await connection.createCollection("d2_raw_chest_datas");
-  await connection.createCollection("d3_raw_chest_datas");
-  await connection.createCollection("emg_datas");
-  await connection.createCollection("processed_datas");
-  await connection.createCollection("coach_datas");
-  console.log(" MongoDB: Creating fresh collections");
+  // await connection.createCollection("d1_raw_hand_datas");
+  // await connection.createCollection("d2_raw_hand_datas");
+  // await connection.createCollection("d3_raw_hand_datas");
+  // await connection.createCollection("d1_raw_chest_datas");
+  // await connection.createCollection("d2_raw_chest_datas");
+  // await connection.createCollection("d3_raw_chest_datas");
+  // await connection.createCollection("emg_datas");
+  // await connection.createCollection("processed_datas");
+  // await connection.createCollection("coach_datas");
+  // console.log(" MongoDB: Creating fresh collections");
 
   console.log(" MongoDB: Importing dummy data...");
   importData();
-  console.log(" MongoDB: Dummy data imported!");
 });
 
 // Fxn importData() used for testing -> importing of dummy data
@@ -75,7 +74,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     div = processedDataDummy.length / coachDataDummy.length;
-    let delay = 0;
+    let delay = 50; //20hz
 
     // Clear exisiting collections
     await D1RawHandData.deleteMany({});
@@ -88,17 +87,17 @@ const importData = async () => {
     await ProcessedData.deleteMany({});
     await CoachData.deleteMany({});
 
-    // Add in dummy data at 1000ms intervals
+    // Add in dummy data w delay
     for (var i = 0; i < coachDataDummy.length; i++) {
       await D1RawHandData.insertMany(d1RawHandDataDummy[i]);
       await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
       await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
-      await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
-      await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
-      await D3RawChestData.insertMany(d3RawChestDataDummy[i]);
+      // await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
+      // await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
+      // await D3RawChestData.insertMany(d3RawChestDataDummy[i]);
       await EmgData.insertMany(emgDataDummy[i]);
-      await ProcessedData.insertMany(processedDataDummy[i * div]);
-      await CoachData.insertMany(coachDataDummy[i]);
+      await ProcessedData.insertMany(processedDataDummy[i]);
+      // await CoachData.insertMany(coachDataDummy[i]);
       await timer(delay);
     }
 

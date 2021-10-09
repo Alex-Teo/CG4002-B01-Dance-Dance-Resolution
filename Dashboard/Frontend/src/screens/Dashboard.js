@@ -9,6 +9,63 @@ import { io } from "socket.io-client";
 
 const Dashboard = () => {
   // ---------------- useState ---------------- //
+
+  // Use state for raw data
+  // Array of objects
+  const [emgArray, setEmgArray] = useState([
+    {
+      d1Emg: 0,
+      d2Emg: 0,
+      d3Emg: 0,
+    },
+  ]);
+
+  // Array of objects - acc
+  const [d1HandAccArray, setD1HandAccArray] = useState([
+    {
+      aX: 0,
+      aY: 0,
+      aZ: 0,
+    },
+  ]);
+  const [d2HandAccArray, setD2HandAccArray] = useState([
+    {
+      aX: 0,
+      aY: 0,
+      aZ: 0,
+    },
+  ]);
+  const [d3HandAccArray, setD3HandAccArray] = useState([
+    {
+      aX: 0,
+      aY: 0,
+      aZ: 0,
+    },
+  ]);
+
+  // Array of objects - gyro
+  const [d1HandGyroArray, setD1HandGyroArray] = useState([
+    {
+      gX: 0,
+      gY: 0,
+      gZ: 0,
+    },
+  ]);
+  const [d2HandGyroArray, setD2HandGyroArray] = useState([
+    {
+      gX: 0,
+      gY: 0,
+      gZ: 0,
+    },
+  ]);
+  const [d3HandGyroArray, setD3HandGyroArray] = useState([
+    {
+      gX: 0,
+      gY: 0,
+      gZ: 0,
+    },
+  ]);
+
   // useState for coach data
   const [currentCoachData, setCurrentCoachData] = useState({
     actualDance: " ",
@@ -38,27 +95,82 @@ const Dashboard = () => {
       setCurrentCoachData(coachData);
     });
 
-    // TODO: Sockets for raw data
+    // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
+    socket.on("newD1HandData", (FinalData) => {
+      setD1HandAccArray([
+        ...d1HandAccArray,
+        {
+          aX: FinalData.aX,
+          aY: FinalData.aY,
+          aZ: FinalData.aZ,
+        },
+      ]);
 
-    // TODO: Socket for Emg data
+      setD1HandGyroArray([
+        ...d1HandGyroArray,
+        {
+          gX: FinalData.gX,
+          gY: FinalData.gY,
+          gZ: FinalData.gZ,
+        },
+      ]);
+    });
+
+    socket.on("newD2HandData", (FinalData) => {
+      setD2HandAccArray([
+        ...d2HandAccArray,
+        {
+          aX: FinalData.aX,
+          aY: FinalData.aY,
+          aZ: FinalData.aZ,
+        },
+      ]);
+      setD2HandGyroArray([
+        ...d2HandGyroArray,
+        {
+          gX: FinalData.gX,
+          gY: FinalData.gY,
+          gZ: FinalData.gZ,
+        },
+      ]);
+    });
+
+    socket.on("newD3HandData", (FinalData) => {
+      setD3HandAccArray([
+        ...d3HandAccArray,
+        {
+          aX: FinalData.aX,
+          aY: FinalData.aY,
+          aZ: FinalData.aZ,
+        },
+      ]);
+      setD3HandGyroArray([
+        ...d3HandGyroArray,
+        {
+          gX: FinalData.gX,
+          gY: FinalData.gY,
+          gZ: FinalData.gZ,
+        },
+      ]);
+    });
+
+    // Socket for Emg data
     // {d1Emg:num, d2Emg:num, d3Emg:num}
+    socket.on("newEmgData", (FinalData) => {
+      setEmgArray([...emgArray, FinalData]);
+    });
 
-    // TODO: Sockets for processed data
+    // Sockets for processed data
+    // {predictedDance:string, predictedPos:array}
     socket.on("newProcessedData", (ProcessedData) => {
-      setCurrentProcessedData({
-        predictedDance: ProcessedData["predictedDance"], // dance
-        dancer1PredictedPos: ProcessedData["predictedPos"].split(" | ")[0], // pos1 | pos2 | pos3
-        dancer2PredictedPos: ProcessedData["predictedPos"].split(" | ")[1], // pos1 | pos2 | pos3
-        dancer3PredictedPos: ProcessedData["predictedPos"].split(" | ")[2], // pos1 | pos2 | pos3
-        syncDelay: ProcessedData["syncDelay"], // sync
-      });
+      setCurrentProcessedData(ProcessedData);
     });
   }, []);
 
   return (
     <div className="dashboardWrapper">
-      <ScreenHeader
+      {/* <ScreenHeader
         screenTitle="Dashboard"
         screenDesc="A closer look at your performance"
       />
@@ -90,12 +202,7 @@ const Dashboard = () => {
             coachPos={currentCoachData.actualPositions}
           />
           <div className="graph">
-            <Analytics
-              emgData={emgArray.slice(-21)}
-              gyro1Data={gyro1Array.slice(-21)}
-              gyro2Data={gyro2Array.slice(-21)}
-              gyro3Data={gyro3Array.slice(-21)}
-            />
+            <Analytics />
           </div>
         </div>
 
@@ -116,7 +223,7 @@ const Dashboard = () => {
             ]}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

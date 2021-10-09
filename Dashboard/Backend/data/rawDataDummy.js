@@ -19,7 +19,7 @@ function generateData(id, tag) {
   };
 }
 
-for (var i = 0; i < 100; i++) {
+for (var i = 0; i < 10000; i++) {
   for (var id = 0; id < 3; id++) {
     switch (id) {
       case 0:

@@ -1,7 +1,7 @@
 const processedDataDummy = [];
 const coachDataDummy = [];
 
-for (var i = 0; i < 100; i++) {
+for (var i = 0; i < 10000; i++) {
   const dances = [
     "Window360",
     "Cowboy",

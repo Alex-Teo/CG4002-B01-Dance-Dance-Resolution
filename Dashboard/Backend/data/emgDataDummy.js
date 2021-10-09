@@ -1,6 +1,6 @@
 const emgDataDummy = [];
 
-for (var i = 0; i < 100; i++) {
+for (var i = 0; i < 10000; i++) {
   emgDataDummy.push({
     d1Emg: Math.random().toPrecision(4),
     d2Emg: Math.random().toPrecision(4),

@@ -90,9 +90,13 @@ connection.once("open", async () => {
       case "insert":
         const coachData = {
           actualDance: change.fullDocument.actualDance,
-          actualPositions: change.fullDocument.actualPositions.split(" | "),
+          actualPositions: change.fullDocument.actualPositions
+            .split(" | ")
+            .map((i) => Number(i)),
         };
+
         io.emit("newCoachData", coachData);
+        console.log("Server emit coachData");
     }
   });
 
@@ -143,6 +147,7 @@ connection.once("open", async () => {
 
           io.emit("newD1HandData", FinalData);
           tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
+          console.log(`Server emit d1data ${a}`);
         }
 
         a += 1;
@@ -173,7 +178,7 @@ connection.once("open", async () => {
         tempD2gZ += Number(RawData.gZ);
 
         // Send ave data at a specified freq
-        if (a % sampling == 0) {
+        if (b % sampling == 0) {
           tempD2aX = tempD2aX / sampling;
           tempD2aY = tempD2aY / sampling;
           tempD2aZ = tempD2aZ / sampling;
@@ -192,6 +197,7 @@ connection.once("open", async () => {
 
           io.emit("newD2HandData", FinalData);
           tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
+          console.log(`Server emit d2data ${b}`);
         }
 
         b += 1;
@@ -222,7 +228,7 @@ connection.once("open", async () => {
         tempD3gZ += Number(RawData.gZ);
 
         // Send ave data at a specified freq
-        if (a % sampling == 0) {
+        if (c % sampling == 0) {
           tempD3aX = tempD3aX / sampling;
           tempD3aY = tempD3aY / sampling;
           tempD3aZ = tempD3aZ / sampling;
@@ -239,8 +245,9 @@ connection.once("open", async () => {
             gZ: tempD1gZ,
           };
 
-          io.emit("newD1HandData", FinalData);
-          tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
+          io.emit("newD3HandData", FinalData);
+          tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
+          console.log(`Server emit d3data ${c}`);
         }
 
         c += 1;
@@ -267,7 +274,7 @@ connection.once("open", async () => {
         tempD2Emg += Number(EmgData.d3Emg);
 
         // Send ave data at a specified freq
-        if (a % sampling == 0) {
+        if (d % sampling == 0) {
           tempD1Emg = tempD1Emg / sampling;
           tempD2Emg = tempD2Emg / sampling;
           tempD3Emg = tempD3Emg / sampling;
@@ -277,23 +284,31 @@ connection.once("open", async () => {
             d2Emg: tempD2Emg,
             d3Emg: tempD3Emg,
           };
+
+          io.emit("newEmgData", FinalData);
+          tempD1Emg = tempD2Emg = tempD3Emg = 0;
+          console.log(`Server emit emgdata ${d}`);
         }
 
-        io.emit("newEmgData", FinalData);
+        d += 1;
     }
   });
 
-  // TODO: Sockets for processed data
+  // Sockets for processed data
+  // {predictedDance:string, predictedPos:array}
   ProcessedDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
         const ProcessedData = {
           predictedDance: change.fullDocument.predictedDance,
-          predictedPos: change.fullDocument.predictedPos,
-          syncDelay: change.fullDocument.syncDelay,
+          predictedPos: change.fullDocument.predictedPos
+            .split(" | ")
+            .map((i) => Number(i)),
+          syncDelay: Number(change.fullDocument.syncDelay),
         };
 
         io.emit("newProcessedData", ProcessedData);
+        console.log("Server emit processeddata");
     }
   });
 });
