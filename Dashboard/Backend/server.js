@@ -96,7 +96,8 @@ connection.once("open", async () => {
         };
 
         io.emit("newCoachData", coachData);
-        console.log("Server emit coachData");
+      // console.log("Server emit coachData");
+      // console.log("coachdata", coachData);
     }
   });
 
@@ -137,17 +138,14 @@ connection.once("open", async () => {
           tempD1gZ = tempD1gZ / sampling;
 
           const FinalData = {
-            aX: tempD1aX,
-            aY: tempD1aY,
-            aZ: tempD1aZ,
-            gX: tempD1gX,
-            gY: tempD1gY,
-            gZ: tempD1gZ,
+            acc: { aX: tempD1aX, aY: tempD1aY, aZ: tempD1aZ },
+            gyro: { gX: tempD1gX, gY: tempD1gY, gZ: tempD1gZ },
           };
 
           io.emit("newD1HandData", FinalData);
           tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
-          console.log(`Server emit d1data ${a}`);
+          // console.log(`Server emit d1data ${a}`);
+          // console.log("D1", FinalData);
         }
 
         a += 1;
@@ -187,17 +185,14 @@ connection.once("open", async () => {
           tempD2gZ = tempD2gZ / sampling;
 
           const FinalData = {
-            aX: tempD2aX,
-            aY: tempD2aY,
-            aZ: tempD2aZ,
-            gX: tempD2gX,
-            gY: tempD2gY,
-            gZ: tempD2gZ,
+            acc: { aX: tempD2aX, aY: tempD2aY, aZ: tempD2aZ },
+            gyro: { gX: tempD2gX, gY: tempD2gY, gZ: tempD2gZ },
           };
 
           io.emit("newD2HandData", FinalData);
           tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
-          console.log(`Server emit d2data ${b}`);
+          // console.log(`Server emit d2data ${b}`);
+          // console.log("D2", FinalData);
         }
 
         b += 1;
@@ -237,17 +232,14 @@ connection.once("open", async () => {
           tempD3gZ = tempD3gZ / sampling;
 
           const FinalData = {
-            aX: tempD1aX,
-            aY: tempD1aY,
-            aZ: tempD1aZ,
-            gX: tempD1gX,
-            gY: tempD1gY,
-            gZ: tempD1gZ,
+            acc: { aX: tempD3aX, aY: tempD3aY, aZ: tempD3aZ },
+            gyro: { gX: tempD3gX, gY: tempD3gY, gZ: tempD3gZ },
           };
 
           io.emit("newD3HandData", FinalData);
           tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
-          console.log(`Server emit d3data ${c}`);
+          // console.log(`Server emit d3data ${c}`);
+          // console.log("D3", FinalData);
         }
 
         c += 1;
@@ -287,7 +279,8 @@ connection.once("open", async () => {
 
           io.emit("newEmgData", FinalData);
           tempD1Emg = tempD2Emg = tempD3Emg = 0;
-          console.log(`Server emit emgdata ${d}`);
+          // console.log(`Server emit emgdata ${d}`);
+          // console.log("emg", FinalData);
         }
 
         d += 1;
@@ -308,7 +301,8 @@ connection.once("open", async () => {
         };
 
         io.emit("newProcessedData", ProcessedData);
-        console.log("Server emit processeddata");
+      // console.log("Server emit processeddata");
+      // console.log("Processed", ProcessedData);
     }
   });
 });
