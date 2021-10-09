@@ -93,72 +93,34 @@ const Dashboard = () => {
     // {actualDance:string, actualPositions:array}
     socket.on("newCoachData", (coachData) => {
       setCurrentCoachData(coachData);
+      // console.log("coach", currentCoachData);
     });
 
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
-      setD1HandAccArray([
-        ...d1HandAccArray,
-        {
-          aX: FinalData.aX,
-          aY: FinalData.aY,
-          aZ: FinalData.aZ,
-        },
-      ]);
-
-      setD1HandGyroArray([
-        ...d1HandGyroArray,
-        {
-          gX: FinalData.gX,
-          gY: FinalData.gY,
-          gZ: FinalData.gZ,
-        },
-      ]);
+      setD1HandAccArray([...d1HandAccArray, FinalData[acc]]);
+      setD1HandGyroArray([...d1HandGyroArray, FinalData[gyro]]);
+      console.log("d1", d1HandAccArray, d1HandGyroArray);
     });
 
     socket.on("newD2HandData", (FinalData) => {
-      setD2HandAccArray([
-        ...d2HandAccArray,
-        {
-          aX: FinalData.aX,
-          aY: FinalData.aY,
-          aZ: FinalData.aZ,
-        },
-      ]);
-      setD2HandGyroArray([
-        ...d2HandGyroArray,
-        {
-          gX: FinalData.gX,
-          gY: FinalData.gY,
-          gZ: FinalData.gZ,
-        },
-      ]);
+      setD2HandAccArray([...d2HandAccArray, FinalData[acc]]);
+      setD2HandGyroArray([...d2HandGyroArray, FinalData[gyro]]);
+      console.log("d2", d2HandAccArray, d2HandGyroArray);
     });
 
     socket.on("newD3HandData", (FinalData) => {
-      setD3HandAccArray([
-        ...d3HandAccArray,
-        {
-          aX: FinalData.aX,
-          aY: FinalData.aY,
-          aZ: FinalData.aZ,
-        },
-      ]);
-      setD3HandGyroArray([
-        ...d3HandGyroArray,
-        {
-          gX: FinalData.gX,
-          gY: FinalData.gY,
-          gZ: FinalData.gZ,
-        },
-      ]);
+      setD3HandAccArray([...d3HandAccArray, FinalData[acc]]);
+      setD3HandGyroArray([...d3HandGyroArray, FinalData[gyro]]);
+      console.log("d3", d3HandAccArray, d3HandGyroArray);
     });
 
     // Socket for Emg data
     // {d1Emg:num, d2Emg:num, d3Emg:num}
     socket.on("newEmgData", (FinalData) => {
       setEmgArray([...emgArray, FinalData]);
+      console.log("emg", emgArray);
     });
 
     // Sockets for processed data
@@ -166,6 +128,7 @@ const Dashboard = () => {
     socket.on("newProcessedData", (ProcessedData) => {
       setCurrentProcessedData(ProcessedData);
     });
+    console.log("processed", currentProcessedData);
   }, []);
 
   return (

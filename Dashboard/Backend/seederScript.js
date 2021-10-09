@@ -74,7 +74,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     div = processedDataDummy.length / coachDataDummy.length;
-    let delay = 50; //20hz
+    let delay = 100; //20hz -> 50
 
     // Clear exisiting collections
     await D1RawHandData.deleteMany({});
