@@ -24,12 +24,12 @@ Chest
 
 3.
 //offsets for set chest_3
-#define AXO 820
-#define AYO -295
-#define AZO -1620
-#define GXO -2405
-#define GYO -3180
-#define GZO -30
+#define AXO -290
+#define AYO 350
+#define AZO -1160
+#define GXO -495
+#define GYO -92
+#define GZO 135
 
 ========================================================================================
 
@@ -37,27 +37,27 @@ Hand
 
 1.
 //offsets for set hand_1
-#define AXO 0
-#define AYO -740
-#define AZO 0
-#define GXO -370
-#define GYO 0
-#define GZO -130
+#define AXO -290
+#define AYO 350
+#define AZO -1160
+#define GXO -495
+#define GYO -92
+#define GZO 135
 
 2.
 //offsets for set hand_2
-#define AXO -400
-#define AYO 0
-#define AZO 0
-#define GXO 210
-#define GYO 80
-#define GZO -300
-
-3.
-//offsets for set hand_3
 #define AXO 0
 #define AYO 490
 #define AZO -3300
 #define GXO 230
 #define GYO -510
 #define GZO 240
+
+3.
+//offsets for set hand_3
+#define AXO 0
+#define AYO -740
+#define AZO 0
+#define GXO -370
+#define GYO 0
+#define GZO -130
