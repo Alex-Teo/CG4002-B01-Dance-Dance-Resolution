@@ -13,3 +13,7 @@
   border: none;
   font-size: 25px;
 }
+
+.dropdown-item {
+  cursor: pointer;
+}

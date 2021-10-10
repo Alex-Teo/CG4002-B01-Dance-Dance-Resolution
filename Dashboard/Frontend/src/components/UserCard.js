@@ -15,8 +15,8 @@ function UserCard({
     <Card>
       <Card.Body>
         <Card.Title className="cardTitle">
-          {dancerId} <br />
-          <div className="cardTitleCorrect">(Pos: {currentPos})</div>
+          {dancerId}
+          {/* <div className="cardTitleCorrect">(Pos: {currentPos})</div> */}
         </Card.Title>
         <Card.Text>
           <div className="miniCard">
