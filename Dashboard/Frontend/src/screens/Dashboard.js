@@ -27,11 +27,38 @@ const Dashboard = () => {
   ]);
 
   // Array of objects - acc
-  const [d1HandAcc, setD1HandAcc] = useState({
-    aX: 0,
-    aY: 0,
-    aZ: 0,
-  });
+  const [d1HandAcc, setD1HandAcc] = useState([
+    {
+      id: "AccX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: Math.floor(Date.now() / 1000),
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "AccY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: Math.floor(Date.now() / 1000),
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "AccZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: Math.floor(Date.now() / 1000),
+          y: 0,
+        },
+      ],
+    },
+  ]);
   const [d2HandAcc, setD2HandAcc] = useState({
     aX: 0,
     aY: 0,
@@ -88,7 +115,13 @@ const Dashboard = () => {
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
-      setD1HandAcc(FinalData.acc);
+      let tempD1HandAcc = d1HandAcc;
+      let time = Math.floor(Date.now() / 1000);
+      tempD1HandAcc[0].data.push({ x: time, y: FinalData.acc.aX });
+      tempD1HandAcc[1].data.push({ x: time, y: FinalData.acc.aY });
+      tempD1HandAcc[2].data.push({ x: time, y: FinalData.acc.aZ });
+      setD1HandAcc(tempD1HandAcc);
+      // setD1HandAcc(FinalData.acc);
       setD1HandGyro(FinalData.gyro);
       // console.log(`Data Group ${data}`);
       // data += 1;

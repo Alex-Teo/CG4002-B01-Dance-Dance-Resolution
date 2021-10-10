@@ -2,7 +2,8 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./Analytics.css";
 import Stream from "./Stream";
-import LineGraph from "./LineGraph";
+import Line from "./Line";
+
 import { useEffect, useState } from "react";
 
 function Analytics({
@@ -31,10 +32,10 @@ function Analytics({
 
   const renderGraph = (choice) => {
     switch (choice) {
-      // case "EMG":
-      //   return <Stream data={emgArray} />;
+      case "EMG":
+        return <Stream data={emgArray} />;
       case "Accelerometer 1":
-        return <LineGraph data={d1HandAcc} />;
+        return <Line data={d1HandAcc} />;
     }
   };
 
