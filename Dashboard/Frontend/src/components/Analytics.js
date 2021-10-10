@@ -16,13 +16,13 @@ function Analytics({
   emgArray,
 }) {
   const dropdownItems = [
-    "EMG",
+    // "EMG",
     "Gyroscope 1",
     "Accelerometer 1",
-    "Gyroscope 2",
-    "Accelerometer 2",
-    "Gyroscope 3",
-    "Accelerometer 3",
+    // "Gyroscope 2",
+    // "Accelerometer 2",
+    // "Gyroscope 3",
+    // "Accelerometer 3",
   ];
   const [title, setTitle] = useState("Accelerometer 1");
 
@@ -35,7 +35,9 @@ function Analytics({
       case "EMG":
         return <Stream data={emgArray} />;
       case "Accelerometer 1":
-        return <Line data={d1HandAcc} />;
+        return <Line data={d1HandAcc} axis={"Accelerometer"} />;
+      case "Gyroscope 1":
+        return <Line data={d1HandGyro} axis={"Gyroscope"} />;
     }
   };
 

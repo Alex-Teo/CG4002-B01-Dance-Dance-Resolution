@@ -79,7 +79,7 @@ connection.once("open", async () => {
 
   // ---------------- Emit on Change ---------------- //
 
-  const sampling = 10;
+  const sampling = 20;
   var a, b, c, d, e;
   a = b = c = d = e = 0;
 

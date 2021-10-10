@@ -33,7 +33,7 @@ const Dashboard = () => {
       color: "hsl(91, 70%, 50%)",
       data: [
         {
-          x: Math.floor(Date.now() / 1000),
+          x: 0,
           y: 0,
         },
       ],
@@ -43,7 +43,7 @@ const Dashboard = () => {
       color: "hsl(10, 20%, 50%)",
       data: [
         {
-          x: Math.floor(Date.now() / 1000),
+          x: 0,
           y: 0,
         },
       ],
@@ -53,7 +53,7 @@ const Dashboard = () => {
       color: "hsl(60, 70%, 90%)",
       data: [
         {
-          x: Math.floor(Date.now() / 1000),
+          x: 0,
           y: 0,
         },
       ],
@@ -71,11 +71,38 @@ const Dashboard = () => {
   });
 
   // Array of objects - gyro
-  const [d1HandGyro, setD1HandGyro] = useState({
-    gX: 0,
-    gY: 0,
-    gZ: 0,
-  });
+  const [d1HandGyro, setD1HandGyro] = useState([
+    {
+      id: "GyroX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "GyroY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "GyroZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
   const [d2HandGyro, setD2HandGyro] = useState({
     gX: 0,
     gY: 0,
@@ -111,18 +138,34 @@ const Dashboard = () => {
       setCoachData(coachData);
       // console.log("coach", currentCoachData);
     });
-
+    var d1Time = 1;
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
       let tempD1HandAcc = d1HandAcc;
-      let time = Math.floor(Date.now() / 1000);
-      tempD1HandAcc[0].data.push({ x: time, y: FinalData.acc.aX });
-      tempD1HandAcc[1].data.push({ x: time, y: FinalData.acc.aY });
-      tempD1HandAcc[2].data.push({ x: time, y: FinalData.acc.aZ });
+      let tempD1HandGyro = d1HandGyro;
+
+      if (tempD1HandAcc[0].data.length > 10) {
+        tempD1HandAcc[0].data.shift();
+        tempD1HandAcc[1].data.shift();
+        tempD1HandAcc[2].data.shift();
+      }
+      if (tempD1HandGyro[0].data.length > 10) {
+        tempD1HandGyro[0].data.shift();
+        tempD1HandGyro[1].data.shift();
+        tempD1HandGyro[2].data.shift();
+      }
+      tempD1HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+      tempD1HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+      tempD1HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+
+      tempD1HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+      tempD1HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+      tempD1HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+
+      d1Time += 1;
       setD1HandAcc(tempD1HandAcc);
-      // setD1HandAcc(FinalData.acc);
-      setD1HandGyro(FinalData.gyro);
+      setD1HandGyro(tempD1HandGyro);
       // console.log(`Data Group ${data}`);
       // data += 1;
       // console.log("d1", d1HandAcc, d1HandGyro);

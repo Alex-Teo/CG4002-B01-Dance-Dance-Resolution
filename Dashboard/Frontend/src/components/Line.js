@@ -1,6 +1,6 @@
 import { ResponsiveLine } from "@nivo/line";
 
-function Line({ data }) {
+function Line({ data, axis }) {
   return (
     <ResponsiveLine
       data={data}
@@ -21,7 +21,7 @@ function Line({ data }) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "transportation",
+        legend: "Time",
         legendOffset: 36,
         legendPosition: "middle",
       }}
@@ -30,7 +30,7 @@ function Line({ data }) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "count",
+        legend: axis,
         legendOffset: -40,
         legendPosition: "middle",
       }}
