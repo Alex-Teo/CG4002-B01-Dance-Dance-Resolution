@@ -5,9 +5,16 @@ import Stream from "./Stream";
 import Line from "./Line";
 import { useEffect, useState } from "react";
 
-function Analytics({ emgData, gyro1Data, gyro2Data, gyro3Data }) {
-  const [title, setTitle] = useState("Fatigue");
-  const [dropdownItems, setDropdownItems] = useState([
+function Analytics({
+  d1HandAccArray,
+  d2HandAccArray,
+  d3HandAccArray,
+  d1HandGyroArray,
+  d2HandGyroArray,
+  d3HandGyroArray,
+  emgArray,
+}) {
+  const dropdownItems = [
     "Fatigue",
     "Gyroscope 1",
     "Accelerometer 1",
@@ -15,7 +22,8 @@ function Analytics({ emgData, gyro1Data, gyro2Data, gyro3Data }) {
     "Accelerometer 2",
     "Gyroscope 3",
     "Accelerometer 3",
-  ]);
+  ];
+  const [title, setTitle] = useState("Fatigue");
 
   const handleChange = (item) => {
     setTitle(item);
@@ -24,15 +32,8 @@ function Analytics({ emgData, gyro1Data, gyro2Data, gyro3Data }) {
   const renderGraph = (choice) => {
     switch (choice) {
       case "Fatigue":
-        return (
-          <Stream data={emgData} keys={["Dancer1", "Dancer2", "Dancer3"]} />
-        );
-      case "Gyroscope 1":
-        return <Stream data={gyro1Data} keys={["x", "y", "z"]} />;
-      case "Gyroscope 2":
-        return <Stream data={gyro2Data} keys={["x", "y", "z"]} />;
-      case "Gyroscope 3":
-        return <Stream data={gyro3Data} keys={["x", "y", "z"]} />;
+        console.log("emg2", emgArray);
+        return <Stream data={emgArray} />;
     }
   };
 

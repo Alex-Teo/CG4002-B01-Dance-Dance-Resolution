@@ -138,8 +138,16 @@ connection.once("open", async () => {
           tempD1gZ = tempD1gZ / sampling;
 
           const FinalData = {
-            acc: { aX: tempD1aX, aY: tempD1aY, aZ: tempD1aZ },
-            gyro: { gX: tempD1gX, gY: tempD1gY, gZ: tempD1gZ },
+            acc: {
+              aX: tempD1aX.toFixed(2),
+              aY: tempD1aY.toFixed(2),
+              aZ: tempD1aZ.toFixed(2),
+            },
+            gyro: {
+              gX: tempD1gX.toFixed(2),
+              gY: tempD1gY.toFixed(2),
+              gZ: tempD1gZ.toFixed(2),
+            },
           };
 
           io.emit("newD1HandData", FinalData);
@@ -185,8 +193,16 @@ connection.once("open", async () => {
           tempD2gZ = tempD2gZ / sampling;
 
           const FinalData = {
-            acc: { aX: tempD2aX, aY: tempD2aY, aZ: tempD2aZ },
-            gyro: { gX: tempD2gX, gY: tempD2gY, gZ: tempD2gZ },
+            acc: {
+              aX: tempD2aX.toFixed(2),
+              aY: tempD2aY.toFixed(2),
+              aZ: tempD2aZ.toFixed(2),
+            },
+            gyro: {
+              gX: tempD2gX.toFixed(2),
+              gY: tempD2gY.toFixed(2),
+              gZ: tempD2gZ.toFixed(2),
+            },
           };
 
           io.emit("newD2HandData", FinalData);
@@ -232,8 +248,16 @@ connection.once("open", async () => {
           tempD3gZ = tempD3gZ / sampling;
 
           const FinalData = {
-            acc: { aX: tempD3aX, aY: tempD3aY, aZ: tempD3aZ },
-            gyro: { gX: tempD3gX, gY: tempD3gY, gZ: tempD3gZ },
+            acc: {
+              aX: tempD3aX.toFixed(2),
+              aY: tempD3aY.toFixed(2),
+              aZ: tempD3aZ.toFixed(2),
+            },
+            gyro: {
+              gX: tempD3gX.toFixed(2),
+              gY: tempD3gY.toFixed(2),
+              gZ: tempD3gZ.toFixed(2),
+            },
           };
 
           io.emit("newD3HandData", FinalData);
@@ -255,15 +279,15 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         const EmgData = {
-          d1Emg: change.fullDocument.d1Emg,
-          d2Emg: change.fullDocument.d2Emg,
-          d3Emg: change.fullDocument.d3Emg,
+          d1Emg: Number(change.fullDocument.d1Emg),
+          d2Emg: Number(change.fullDocument.d2Emg),
+          d3Emg: Number(change.fullDocument.d3Emg),
         };
 
         // Get cumulative in a sample
         tempD1Emg += Number(EmgData.d1Emg);
         tempD2Emg += Number(EmgData.d2Emg);
-        tempD2Emg += Number(EmgData.d3Emg);
+        tempD3Emg += Number(EmgData.d3Emg);
 
         // Send ave data at a specified freq
         if (d % sampling == 0) {
@@ -272,9 +296,9 @@ connection.once("open", async () => {
           tempD3Emg = tempD3Emg / sampling;
 
           const FinalData = {
-            d1Emg: tempD1Emg,
-            d2Emg: tempD2Emg,
-            d3Emg: tempD3Emg,
+            d1Emg: tempD1Emg.toFixed(2),
+            d2Emg: tempD2Emg.toFixed(2),
+            d3Emg: tempD3Emg.toFixed(2),
           };
 
           io.emit("newEmgData", FinalData);

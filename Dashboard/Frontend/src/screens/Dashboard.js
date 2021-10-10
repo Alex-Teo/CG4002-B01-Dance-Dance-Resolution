@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const Dashboard = () => {
-  // FIXME: Sockets are correctly receiving data from server, but setState not working
   // ---------------- useState ---------------- //
 
   // useState for coach data
@@ -95,7 +94,7 @@ const Dashboard = () => {
     // {actualDance:string, actualPositions:array}
     socket.on("newCoachData", (coachData) => {
       setCurrentCoachData(coachData);
-      console.log("coach", currentCoachData);
+      // console.log("coach", currentCoachData);
     });
 
     // Sockets for raw data
@@ -107,8 +106,8 @@ const Dashboard = () => {
       gyroArray.push(FinalData.gyro);
       setD1HandAccArray(accArray);
       setD1HandGyroArray(gyroArray);
-      console.log(`Data Group ${data}`);
-      data += 1;
+      // console.log(`Data Group ${data}`);
+      // data += 1;
       // console.log("d1", d1HandAccArray, d1HandGyroArray);
     });
 
@@ -137,15 +136,15 @@ const Dashboard = () => {
     socket.on("newEmgData", (FinalData) => {
       let newArray = emgArray;
       newArray.push(FinalData);
-      setEmgArray([...emgArray, newArray]);
-      // console.log("emg", emgArray);
+      setEmgArray(newArray);
+      // console.log("emg1", emgArray);
     });
 
     // Sockets for processed data
     // {predictedDance:string, predictedPos:array, syncDelay:number}
     socket.on("newProcessedData", (ProcessedData) => {
       setCurrentProcessedData(ProcessedData);
-      console.log("processed", currentProcessedData);
+      // console.log("processed", currentProcessedData);
     });
   }, []);
 
@@ -182,7 +181,17 @@ const Dashboard = () => {
             coachDance={currentCoachData.actualDance}
             coachPos={currentCoachData.actualPositions}
           />
-          <div className="graph">{/* <Analytics /> */}</div>
+          <div className="graph">
+            <Analytics
+              d1HandAccArray={d1HandAccArray.slice(-20)}
+              d2HandAccArray={d2HandAccArray.slice(-20)}
+              d3HandAccArray={d3HandAccArray.slice(-20)}
+              d1HandGyroArray={d1HandGyroArray.slice(-20)}
+              d2HandGyroArray={d2HandGyroArray.slice(-20)}
+              d3HandGyroArray={d3HandGyroArray.slice(-20)}
+              emgArray={emgArray.slice(-20)}
+            />
+          </div>
         </div>
 
         <div className="coach">
