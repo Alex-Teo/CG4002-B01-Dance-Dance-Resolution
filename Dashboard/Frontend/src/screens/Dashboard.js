@@ -217,18 +217,22 @@ const Dashboard = () => {
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
-          <UserCard
+          <UserCard //TODO: Replce with real values after week 9
             dancerId="Dancer 2"
-            syncDelay={processedData.syncDelay}
-            currentDance={processedData.predictedDance}
+            // syncDelay={processedData.syncDelay}
+            // currentDance={processedData.predictedDance}
+            syncDelay={"-"}
+            currentDance={"Inactive"}
             currentPos={processedData.predictedPos.indexOf(2)}
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
-          <UserCard
+          <UserCard //TODO: Replce with real values after week 9
             dancerId="Dancer 3"
-            syncDelay={processedData.syncDelay}
-            currentDance={processedData.predictedDance}
+            // syncDelay={processedData.syncDelay}
+            // currentDance={processedData.predictedDance}
+            syncDelay={"-"}
+            currentDance={"Inactive"}
             currentPos={processedData.predictedPos.indexOf(3)}
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}

@@ -69,11 +69,17 @@
 .valueCorrect {
   font-size: 30px;
   font-weight: 400;
-  color: green;
+  color: black;
 }
 
 .valueWrong {
   font-size: 30px;
   font-weight: 400;
   color: red;
+}
+
+.btn.focus,
+.btn:focus {
+  outline: 0;
+  box-shadow: 0;
 }
