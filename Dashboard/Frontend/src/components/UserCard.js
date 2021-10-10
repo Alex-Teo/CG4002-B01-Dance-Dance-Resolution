@@ -5,9 +5,9 @@ import { CgStopwatch } from "react-icons/cg";
 
 function UserCard({
   dancerId,
+  syncDelay,
   currentDance,
   currentPos,
-  delay,
   coachDance,
   coachPos,
 }) {
@@ -30,7 +30,7 @@ function UserCard({
             <CgStopwatch className="stopwatchIcon" />
             <div>
               <div className="valueHeader">Delay</div>
-              <div className="value">{delay}</div>
+              <div className="value">{syncDelay}</div>
             </div>
           </div>
         </Card.Text>

@@ -13,8 +13,8 @@ const Dashboard = () => {
 
   // useState for coach data
   const [currentCoachData, setCurrentCoachData] = useState({
-    actualDance: " ",
-    actualPositions: [],
+    actualDance: "No Coach",
+    actualPositions: [1, 2, 3],
   });
 
   // Use state for raw data
@@ -79,6 +79,7 @@ const Dashboard = () => {
     predictedPos: [1, 2, 3],
     syncDelay: 0,
   });
+
   var data = 0;
 
   // ---------------- Sockets ---------------- //
@@ -94,7 +95,7 @@ const Dashboard = () => {
     // {actualDance:string, actualPositions:array}
     socket.on("newCoachData", (coachData) => {
       setCurrentCoachData(coachData);
-      // console.log("coach", currentCoachData);
+      console.log("coach", currentCoachData);
     });
 
     // Sockets for raw data
@@ -143,20 +144,14 @@ const Dashboard = () => {
     // Sockets for processed data
     // {predictedDance:string, predictedPos:array, syncDelay:number}
     socket.on("newProcessedData", (ProcessedData) => {
-      setCurrentProcessedData({
-        ...currentProcessedData,
-        predictedDance: ProcessedData.predictedDance,
-        predictedPos: ProcessedData.predictedPos,
-        syncDelay: ProcessedData.syncDelay,
-      });
-
-      console.log("processed2", currentProcessedData);
+      setCurrentProcessedData(ProcessedData);
+      console.log("processed", currentProcessedData);
     });
   }, []);
 
   return (
     <div className="dashboardWrapper">
-      {/* <ScreenHeader
+      <ScreenHeader
         screenTitle="Dashboard"
         screenDesc="A closer look at your performance"
       />
@@ -165,51 +160,40 @@ const Dashboard = () => {
         <div className="users">
           <UserCard
             dancerId="Dancer 1"
-            delay={currentProcessedData.syncDelay}
+            syncDelay={currentProcessedData.syncDelay}
             currentDance={currentProcessedData.predictedDance}
-            currentPos={currentProcessedData.dancer1PredictedPos}
+            currentPos={currentProcessedData.predictedPos.indexOf(1)}
             coachDance={currentCoachData.actualDance}
             coachPos={currentCoachData.actualPositions}
           />
           <UserCard
             dancerId="Dancer 2"
-            delay={currentProcessedData.syncDelay}
+            syncDelay={currentProcessedData.syncDelay}
             currentDance={currentProcessedData.predictedDance}
-            currentPos={currentProcessedData.dancer2PredictedPos}
+            currentPos={currentProcessedData.predictedPos.indexOf(2)}
             coachDance={currentCoachData.actualDance}
             coachPos={currentCoachData.actualPositions}
           />
           <UserCard
             dancerId="Dancer 3"
-            delay={currentProcessedData.syncDelay}
+            syncDelay={currentProcessedData.syncDelay}
             currentDance={currentProcessedData.predictedDance}
-            currentPos={currentProcessedData.dancer3PredictedPos}
+            currentPos={currentProcessedData.predictedPos.indexOf(3)}
             coachDance={currentCoachData.actualDance}
             coachPos={currentCoachData.actualPositions}
           />
-          <div className="graph">
-            <Analytics />
-          </div>
+          <div className="graph">{/* <Analytics /> */}</div>
         </div>
 
         <div className="coach">
           <CoachCard
             currentDance={currentCoachData.actualDance}
             actualPositions={currentCoachData.actualPositions}
-            feedback={[
-              currentCoachData.dancer1Feedback,
-              currentCoachData.dancer2Feedback,
-              currentCoachData.dancer3Feedback,
-            ]}
             dancerDance={currentProcessedData.predictedDance}
-            dancerPos={[
-              currentProcessedData.dancer1PredictedPos,
-              currentProcessedData.dancer2PredictedPos,
-              currentProcessedData.dancer3PredictedPos,
-            ]}
+            dancerPos={currentProcessedData.predictedPos}
           />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

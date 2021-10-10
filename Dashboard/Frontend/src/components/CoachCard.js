@@ -4,13 +4,7 @@ import { Card } from "react-bootstrap";
 import { IoIosBody } from "react-icons/io";
 import { IoChatbubbleOutline } from "react-icons/io5";
 
-function CoachCard({
-  currentDance,
-  actualPositions,
-  feedback,
-  dancerDance,
-  dancerPos,
-}) {
+function CoachCard({ currentDance, actualPositions, dancerDance, dancerPos }) {
   return (
     <div>
       <Card id="coachCard">
@@ -84,11 +78,11 @@ function CoachCard({
                 <div className="valueHeader">Feedback</div>
                 <div className="value" id="feedbackWrapper">
                   <div className="feedbackHeader">Dancer 1</div>
-                  <div className="feedbackValue">Good Job!</div>
+                  <div className="feedbackValue">No Feedback</div>
                   <div className="feedbackHeader">Dancer 2</div>
-                  <div className="feedbackValue">Good Job!</div>
+                  <div className="feedbackValue">No Feedback</div>
                   <div className="feedbackHeader">Dancer 3</div>
-                  <div className="feedbackValue">Good Job!</div>
+                  <div className="feedbackValue">No Feedback</div>
                 </div>
               </div>
             </div>

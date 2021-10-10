@@ -301,8 +301,8 @@ connection.once("open", async () => {
         };
 
         io.emit("newProcessedData", ProcessedData);
-        console.log("Server emit processeddata");
-        console.log("Processed", ProcessedData);
+      // console.log("Server emit processeddata");
+      // console.log("Processed", ProcessedData);
     }
   });
 });
