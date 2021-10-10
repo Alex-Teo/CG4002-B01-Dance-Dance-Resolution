@@ -11,7 +11,7 @@ const Dashboard = () => {
   // ---------------- useState ---------------- //
 
   // useState for coach data
-  const [currentCoachData, setCurrentCoachData] = useState({
+  const [coachData, setCoachData] = useState({
     actualDance: "No Coach",
     actualPositions: [1, 2, 3],
   });
@@ -27,53 +27,41 @@ const Dashboard = () => {
   ]);
 
   // Array of objects - acc
-  const [d1HandAccArray, setD1HandAccArray] = useState([
-    {
-      aX: 0,
-      aY: 0,
-      aZ: 0,
-    },
-  ]);
-  const [d2HandAccArray, setD2HandAccArray] = useState([
-    {
-      aX: 0,
-      aY: 0,
-      aZ: 0,
-    },
-  ]);
-  const [d3HandAccArray, setD3HandAccArray] = useState([
-    {
-      aX: 0,
-      aY: 0,
-      aZ: 0,
-    },
-  ]);
+  const [d1HandAcc, setD1HandAcc] = useState({
+    aX: 0,
+    aY: 0,
+    aZ: 0,
+  });
+  const [d2HandAcc, setD2HandAcc] = useState({
+    aX: 0,
+    aY: 0,
+    aZ: 0,
+  });
+  const [d3HandAcc, setD3HandAcc] = useState({
+    aX: 0,
+    aY: 0,
+    aZ: 0,
+  });
 
   // Array of objects - gyro
-  const [d1HandGyroArray, setD1HandGyroArray] = useState([
-    {
-      gX: 0,
-      gY: 0,
-      gZ: 0,
-    },
-  ]);
-  const [d2HandGyroArray, setD2HandGyroArray] = useState([
-    {
-      gX: 0,
-      gY: 0,
-      gZ: 0,
-    },
-  ]);
-  const [d3HandGyroArray, setD3HandGyroArray] = useState([
-    {
-      gX: 0,
-      gY: 0,
-      gZ: 0,
-    },
-  ]);
+  const [d1HandGyro, setD1HandGyro] = useState({
+    gX: 0,
+    gY: 0,
+    gZ: 0,
+  });
+  const [d2HandGyro, setD2HandGyro] = useState({
+    gX: 0,
+    gY: 0,
+    gZ: 0,
+  });
+  const [d3HandGyro, setD3HandGyro] = useState({
+    gX: 0,
+    gY: 0,
+    gZ: 0,
+  });
 
   //useState for processed data
-  const [currentProcessedData, setCurrentProcessedData] = useState({
+  const [processedData, setProcessedData] = useState({
     predictedDance: "Not Dancing",
     predictedPos: [1, 2, 3],
     syncDelay: 0,
@@ -93,42 +81,30 @@ const Dashboard = () => {
     // Sockets for coach data
     // {actualDance:string, actualPositions:array}
     socket.on("newCoachData", (coachData) => {
-      setCurrentCoachData(coachData);
+      setCoachData(coachData);
       // console.log("coach", currentCoachData);
     });
 
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
-      let accArray = d1HandAccArray;
-      let gyroArray = d1HandGyroArray;
-      accArray.push(FinalData.acc);
-      gyroArray.push(FinalData.gyro);
-      setD1HandAccArray(accArray);
-      setD1HandGyroArray(gyroArray);
+      setD1HandAcc(FinalData.acc);
+      setD1HandGyro(FinalData.gyro);
       // console.log(`Data Group ${data}`);
       // data += 1;
-      // console.log("d1", d1HandAccArray, d1HandGyroArray);
+      // console.log("d1", d1HandAcc, d1HandGyro);
     });
 
     socket.on("newD2HandData", (FinalData) => {
-      let accArray = d2HandAccArray;
-      let gyroArray = d2HandGyroArray;
-      accArray.push(FinalData.acc);
-      gyroArray.push(FinalData.gyro);
-      setD2HandAccArray(accArray);
-      setD2HandGyroArray(gyroArray);
-      // console.log("d2", d2HandAccArray, d2HandGyroArray);
+      setD2HandAcc(FinalData.acc);
+      setD2HandGyro(FinalData.gyro);
+      // console.log("d2", d2HandAcc, d2HandGyro);
     });
 
     socket.on("newD3HandData", (FinalData) => {
-      let accArray = d3HandAccArray;
-      let gyroArray = d3HandGyroArray;
-      accArray.push(FinalData.acc);
-      gyroArray.push(FinalData.gyro);
-      setD3HandAccArray(accArray);
-      setD3HandGyroArray(gyroArray);
-      // console.log("d3", d3HandAccArray, d3HandGyroArray);
+      setD3HandAcc(FinalData.acc);
+      setD2HandGyro(FinalData.gyro);
+      // console.log("d3", d3HandAcc, d3HandGyro);
     });
 
     // Socket for Emg data
@@ -143,8 +119,8 @@ const Dashboard = () => {
     // Sockets for processed data
     // {predictedDance:string, predictedPos:array, syncDelay:number}
     socket.on("newProcessedData", (ProcessedData) => {
-      setCurrentProcessedData(ProcessedData);
-      // console.log("processed", currentProcessedData);
+      setProcessedData(ProcessedData);
+      // console.log("processed", processedData);
     });
   }, []);
 
@@ -159,36 +135,36 @@ const Dashboard = () => {
         <div className="users">
           <UserCard
             dancerId="Dancer 1"
-            syncDelay={currentProcessedData.syncDelay}
-            currentDance={currentProcessedData.predictedDance}
-            currentPos={currentProcessedData.predictedPos.indexOf(1)}
-            coachDance={currentCoachData.actualDance}
-            coachPos={currentCoachData.actualPositions}
+            syncDelay={processedData.syncDelay}
+            currentDance={processedData.predictedDance}
+            currentPos={processedData.predictedPos.indexOf(1)}
+            coachDance={coachData.actualDance}
+            coachPos={coachData.actualPositions}
           />
           <UserCard
             dancerId="Dancer 2"
-            syncDelay={currentProcessedData.syncDelay}
-            currentDance={currentProcessedData.predictedDance}
-            currentPos={currentProcessedData.predictedPos.indexOf(2)}
-            coachDance={currentCoachData.actualDance}
-            coachPos={currentCoachData.actualPositions}
+            syncDelay={processedData.syncDelay}
+            currentDance={processedData.predictedDance}
+            currentPos={processedData.predictedPos.indexOf(2)}
+            coachDance={coachData.actualDance}
+            coachPos={coachData.actualPositions}
           />
           <UserCard
             dancerId="Dancer 3"
-            syncDelay={currentProcessedData.syncDelay}
-            currentDance={currentProcessedData.predictedDance}
-            currentPos={currentProcessedData.predictedPos.indexOf(3)}
-            coachDance={currentCoachData.actualDance}
-            coachPos={currentCoachData.actualPositions}
+            syncDelay={processedData.syncDelay}
+            currentDance={processedData.predictedDance}
+            currentPos={processedData.predictedPos.indexOf(3)}
+            coachDance={coachData.actualDance}
+            coachPos={coachData.actualPositions}
           />
           <div className="graph">
             <Analytics
-              d1HandAccArray={d1HandAccArray.slice(-20)}
-              d2HandAccArray={d2HandAccArray.slice(-20)}
-              d3HandAccArray={d3HandAccArray.slice(-20)}
-              d1HandGyroArray={d1HandGyroArray.slice(-20)}
-              d2HandGyroArray={d2HandGyroArray.slice(-20)}
-              d3HandGyroArray={d3HandGyroArray.slice(-20)}
+              d1HandAcc={d1HandAcc}
+              d2HandAcc={d2HandAcc}
+              d3HandAcc={d3HandAcc}
+              d1HandGyro={d1HandGyro}
+              d2HandGyro={d2HandGyro}
+              d3HandGyro={d3HandGyro}
               emgArray={emgArray.slice(-20)}
             />
           </div>
@@ -196,10 +172,10 @@ const Dashboard = () => {
 
         <div className="coach">
           <CoachCard
-            currentDance={currentCoachData.actualDance}
-            actualPositions={currentCoachData.actualPositions}
-            dancerDance={currentProcessedData.predictedDance}
-            dancerPos={currentProcessedData.predictedPos}
+            currentDance={coachData.actualDance}
+            actualPositions={coachData.actualPositions}
+            dancerDance={processedData.predictedDance}
+            dancerPos={processedData.predictedPos}
           />
         </div>
       </div>

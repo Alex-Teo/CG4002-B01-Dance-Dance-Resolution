@@ -2,16 +2,16 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import "./Analytics.css";
 import Stream from "./Stream";
-import Line from "./Line";
+import LineGraph from "./LineGraph";
 import { useEffect, useState } from "react";
 
 function Analytics({
-  d1HandAccArray,
-  d2HandAccArray,
-  d3HandAccArray,
-  d1HandGyroArray,
-  d2HandGyroArray,
-  d3HandGyroArray,
+  d1HandAcc,
+  d2HandAcc,
+  d3HandAcc,
+  d1HandGyro,
+  d2HandGyro,
+  d3HandGyro,
   emgArray,
 }) {
   const dropdownItems = [
@@ -31,10 +31,10 @@ function Analytics({
 
   const renderGraph = (choice) => {
     switch (choice) {
-      case "EMG":
-        return <Stream data={emgArray} />;
+      // case "EMG":
+      //   return <Stream data={emgArray} />;
       case "Accelerometer 1":
-        return <Stream data={emgArray} />;
+        return <LineGraph data={d1HandAcc} />;
     }
   };
 
