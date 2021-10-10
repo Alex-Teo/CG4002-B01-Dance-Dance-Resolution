@@ -15,7 +15,7 @@ function Analytics({
   emgArray,
 }) {
   const dropdownItems = [
-    "Fatigue",
+    "EMG",
     "Gyroscope 1",
     "Accelerometer 1",
     "Gyroscope 2",
@@ -23,7 +23,7 @@ function Analytics({
     "Gyroscope 3",
     "Accelerometer 3",
   ];
-  const [title, setTitle] = useState("Fatigue");
+  const [title, setTitle] = useState("Accelerometer 1");
 
   const handleChange = (item) => {
     setTitle(item);
@@ -31,8 +31,9 @@ function Analytics({
 
   const renderGraph = (choice) => {
     switch (choice) {
-      case "Fatigue":
-        console.log("emg2", emgArray);
+      case "EMG":
+        return <Stream data={emgArray} />;
+      case "Accelerometer 1":
         return <Stream data={emgArray} />;
     }
   };
