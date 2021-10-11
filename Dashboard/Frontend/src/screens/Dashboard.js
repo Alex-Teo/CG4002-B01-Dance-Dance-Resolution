@@ -474,7 +474,7 @@ const Dashboard = () => {
             dancerId="Dancer 2"
             // syncDelay={processedData.syncDelay}
             // currentDance={processedData.predictedDance}
-            syncDelay={"-"}
+            syncDelay={0}
             currentDance={"Inactive"}
             currentPos={processedData.predictedPos.indexOf(2)}
             coachDance={coachData.actualDance}
@@ -484,7 +484,7 @@ const Dashboard = () => {
             dancerId="Dancer 3"
             // syncDelay={processedData.syncDelay}
             // currentDance={processedData.predictedDance}
-            syncDelay={"-"}
+            syncDelay={0}
             currentDance={"Inactive"}
             currentPos={processedData.predictedPos.indexOf(3)}
             coachDance={coachData.actualDance}
