@@ -38,6 +38,11 @@ HAND_MOVING = False
 DATA_LIST_1 = []
 DATA_LIST_2 = []
 
+# header_IMU = ["Beetle Number", "Gyro-X", "Gyro-Y", "Gyro-Z", "Acc-X", "Acc-Y", "Acc-Z", "Dance Move"]
+# with open('dab_chest.csv','w',newline='') as f:
+#     writer = csv.writer(f)
+#     writer.writerow(header_IMU)
+
 class MyDelegate(btle.DefaultDelegate):
     def __init__(self,addr):
         btle.DefaultDelegate.__init__(self)
@@ -46,9 +51,7 @@ class MyDelegate(btle.DefaultDelegate):
     
     def handleNotification(self,cHandle,fragment):
         packet_size = len(fragment)
-        # print("Packet Size: " + str(packet_size))
-        # print(fragment)
-        
+
         # Handshake not completed
         if not HANDSHAKE_BOOL_DICT[self.beetle_addr]:
             if packet_size == 1:
@@ -80,18 +83,14 @@ class MyDelegate(btle.DefaultDelegate):
                 print("Data Assembling Begin")
                 
                 existing_fragmented_data = BUFFER_DICT[self.beetle_addr]
-                # print("Existing Buffer Data: ")
-                # print(existing_fragmented_data)
+
                 # No data fragments currently present
                 if existing_fragmented_data == b'': 
                     existing_fragmented_data = fragment
                     fragmented_data_length = len(existing_fragmented_data)
-                    # print("Fragmented Data: ")
-                    # print(existing_fragmented_data)
                 
                 else:
-                    # print("Fragmented Data: ")
-                    # print(fragment)
+
                     existing_fragmented_data += fragment
                     fragmented_data_length = len(existing_fragmented_data)
 
@@ -102,10 +101,7 @@ class MyDelegate(btle.DefaultDelegate):
                     BUFFER_DICT[self.beetle_addr] = b''
 
                     print("Data Assembling Completed. Assembled Data: ")
-                    # print(fragment)
-                    # print("")
-                    # print("")
-                    # print("")
+
                     # Send for data reading directly since it is a complete packet
                     self.handleData(fragment)
 
@@ -114,10 +110,6 @@ class MyDelegate(btle.DefaultDelegate):
                     fragment = existing_fragmented_data[0:20]
                     
                     print("Data Assembling Completed. Assembled Data: ")
-                    # print(fragment)
-                    # print("")
-                    # print("")
-                    # print("")
 
                     # Store rest of fragment into buffer dictionary
                     BUFFER_DICT[self.beetle_addr] = existing_fragmented_data[20:]
@@ -125,10 +117,7 @@ class MyDelegate(btle.DefaultDelegate):
                     self.handleData(fragment)
                     
                 else:
-                    # print("Buffer not full.")
-                    # print("")
-                    # print("")
-                    # print("")
+
                     BUFFER_DICT[self.beetle_addr] += fragment
         
     def handleData(self,fragment):
@@ -179,25 +168,28 @@ class MyDelegate(btle.DefaultDelegate):
                 # Dont detect to see if chest is moving, just record data
                 if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
                     row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
-                    
+                    DATA_LIST_2.append(row_data)
+                    print("Beetle %s: " % beetle_num + str(len(DATA_LIST_2)))
+                    if len(DATA_LIST_2) == 100:
+                        with open('test_chest.csv','a',newline='') as f:
+                            writer = csv.writer(f)
+                            writer.writerows(DATA_LIST_2)                 
+                        DATA_LIST_2.clear()
                 
-                # Collect data only if beetle is detected to be moving
+                # Collect data only if hand beetle is detected to be moving
                 if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
                     if HAND_MOVING:
                         row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
+                        DATA_LIST_1.append(row_data)
+                        print("Beetle %s: " % beetle_num + str(len(DATA_LIST_1)))
+                        if len(DATA_LIST_1) == 100:
+                            with open('test_hand.csv','a',newline='') as f:
+                                writer = csv.writer(f)
+                                writer.writerows(DATA_LIST_1)                            
+                            DATA_LIST_1.clear()
             
                 else:
                     pass
-
-                # print("Packet Type: " + str(packet_type))
-                # print("Accx: " + str(accx))
-                # print("Accy: " + str(accy))
-                # print("Accz: " + str(accz))
-                # print("Gyrox: " + str(gyrox))
-                # print("Gyroy: " + str(gyroy))
-                # print("Gyroz: " + str(gyroz))  
-                # print("Timestamp: " + str(timestamp))
-                # Send Data to Ultra96
             else:
                 print("Checksum Incorrect")
                 # Ignore Data
@@ -258,13 +250,11 @@ def calcDataChecksum(data_packet,arduino_checksum):
     try:
         data_check = data_packet[0:len(data_packet)-1]
         checksum = ord(data_check[0]) 
-        # print("Arduino checksum: " + str(arduino_checksum))
         for i in range(1,len(data_check)):
             if type(data_check[i]) == bytes:
                 checksum ^= ord(data_check[i])
             else: 
                 checksum ^= data_check[i] 
-        # print("calculated checksum: " + str(checksum))
         if (checksum == arduino_checksum):
             return True
         else:
@@ -283,6 +273,7 @@ class myThread(threading.Thread):
         try:
             idle_count = 0
             if (HANDSHAKE_BOOL_DICT[self.beetle.addr]):
+                # Start receiving data only when both hand and chest beetle handshake have been completed
                 while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
                 or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
                 or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
@@ -337,7 +328,6 @@ def initHandshake(beetle, characteristics):
 
                 HANDSHAKE_BOOL_DICT[beetle.addr] = True
                 print("Handshake sequence completed. Laptop is successfully connected to Beetle %s" % (BEETLE_DICT[beetle.addr]))
-                # myThread(beetle,characteristics).run()
                 return True
             handshake_attempts += 1
 
