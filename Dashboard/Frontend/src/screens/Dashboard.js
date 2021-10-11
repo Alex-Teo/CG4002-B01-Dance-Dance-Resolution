@@ -460,7 +460,7 @@ const Dashboard = () => {
         screenDesc="A closer look at your performance"
       />
 
-      <div className="analytics">
+      <div className="cardWrapper">
         <div className="users">
           <UserCard
             dancerId="Dancer 1"

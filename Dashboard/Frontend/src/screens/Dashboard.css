@@ -26,13 +26,13 @@ h2 {
   padding-top: -10px;
 }
 
-.analytics {
+.cardWrapper {
   display: grid;
   grid-template-columns: 3fr 1fr;
   justify-items: space-evenly;
   align-items: center;
   height: calc(100vh - 100px);
-  padding: 0 30px 50px 30px;
+  padding: 0 50px 50px 50px;
 }
 
 .users {
