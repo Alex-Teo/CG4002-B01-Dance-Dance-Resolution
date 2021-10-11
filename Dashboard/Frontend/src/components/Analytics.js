@@ -24,8 +24,8 @@ function Analytics({
     "Dancer 2 Accelerometer",
     "Dancer 2 Gyroscope",
 
-    // "Dancer 3 Accelerometer",
-    // "Dancer 3 Gyroscope",
+    "Dancer 3 Accelerometer",
+    "Dancer 3 Gyroscope",
   ];
   const [title, setTitle] = useState("Dancer 1 Accelerometer");
 
@@ -45,10 +45,10 @@ function Analytics({
         return <Line data={d2HandAcc} axis={"Accelerometer"} />;
       case "Dancer 2 Gyroscope":
         return <Line data={d2HandGyro} axis={"Gyroscope"} />;
-      // case "Dancer 3 Accelerometer":
-      //   return <Line data={d3HandAcc} axis={"Accelerometer"} />;
-      // case "Dancer 3 Gyroscope":
-      //   return <Line data={d3HandGyro} axis={"Gyroscope"} />;
+      case "Dancer 3 Accelerometer":
+        return <Line data={d3HandAcc} axis={"Accelerometer"} />;
+      case "Dancer 3 Gyroscope":
+        return <Line data={d3HandGyro} axis={"Gyroscope"} />;
     }
   };
 

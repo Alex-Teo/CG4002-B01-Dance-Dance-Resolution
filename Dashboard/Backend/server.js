@@ -71,7 +71,7 @@ connection.once("open", async () => {
   // Setup change streams
   const D1HandDataStream = connection.collection("d1_raw_hand_datas").watch();
   const D2HandDataStream = connection.collection("d2_raw_hand_datas").watch();
-  // const D3HandDataStream = connection.collection("d3_raw_hand_datas").watch();
+  const D3HandDataStream = connection.collection("d3_raw_hand_datas").watch();
   // const EmgDataStream = connection.collection("emg_datas").watch();
   const ProcessedDataStream = connection.collection("processed_datas").watch();
   // const coachDataStream = connection.collection("coach_datas").watch();
@@ -219,57 +219,57 @@ connection.once("open", async () => {
   let tempD3aX, tempD3aY, tempD3aZ, tempD3gX, tempD3gY, tempD3gZ;
   tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
 
-  // D3HandDataStream.on("change", (change) => {
-  //   switch (change.operationType) {
-  //     case "insert":
-  //       const RawData = {
-  //         aX: change.fullDocument.aX,
-  //         aY: change.fullDocument.aY,
-  //         aZ: change.fullDocument.aZ,
-  //         gX: change.fullDocument.gX,
-  //         gY: change.fullDocument.gY,
-  //         gZ: change.fullDocument.gZ,
-  //       };
+  D3HandDataStream.on("change", (change) => {
+    switch (change.operationType) {
+      case "insert":
+        const RawData = {
+          aX: change.fullDocument.aX,
+          aY: change.fullDocument.aY,
+          aZ: change.fullDocument.aZ,
+          gX: change.fullDocument.gX,
+          gY: change.fullDocument.gY,
+          gZ: change.fullDocument.gZ,
+        };
 
-  //       // Get cumulative in a sample
-  //       tempD3aX += Number(RawData.aX);
-  //       tempD3aY += Number(RawData.aY);
-  //       tempD3aZ += Number(RawData.aZ);
-  //       tempD3gX += Number(RawData.gX);
-  //       tempD3gY += Number(RawData.gY);
-  //       tempD3gZ += Number(RawData.gZ);
+        // Get cumulative in a sample
+        tempD3aX += Number(RawData.aX);
+        tempD3aY += Number(RawData.aY);
+        tempD3aZ += Number(RawData.aZ);
+        tempD3gX += Number(RawData.gX);
+        tempD3gY += Number(RawData.gY);
+        tempD3gZ += Number(RawData.gZ);
 
-  //       // Send ave data at a specified freq
-  //       if (c % sampling == 0) {
-  //         tempD3aX = tempD3aX / sampling;
-  //         tempD3aY = tempD3aY / sampling;
-  //         tempD3aZ = tempD3aZ / sampling;
-  //         tempD3gX = tempD3gX / sampling;
-  //         tempD3gY = tempD3gY / sampling;
-  //         tempD3gZ = tempD3gZ / sampling;
+        // Send ave data at a specified freq
+        if (c % sampling == 0) {
+          tempD3aX = tempD3aX / sampling;
+          tempD3aY = tempD3aY / sampling;
+          tempD3aZ = tempD3aZ / sampling;
+          tempD3gX = tempD3gX / sampling;
+          tempD3gY = tempD3gY / sampling;
+          tempD3gZ = tempD3gZ / sampling;
 
-  //         const FinalData = {
-  //           acc: {
-  //             aX: tempD3aX.toFixed(2),
-  //             aY: tempD3aY.toFixed(2),
-  //             aZ: tempD3aZ.toFixed(2),
-  //           },
-  //           gyro: {
-  //             gX: tempD3gX.toFixed(2),
-  //             gY: tempD3gY.toFixed(2),
-  //             gZ: tempD3gZ.toFixed(2),
-  //           },
-  //         };
+          const FinalData = {
+            acc: {
+              aX: tempD3aX.toFixed(2),
+              aY: tempD3aY.toFixed(2),
+              aZ: tempD3aZ.toFixed(2),
+            },
+            gyro: {
+              gX: tempD3gX.toFixed(2),
+              gY: tempD3gY.toFixed(2),
+              gZ: tempD3gZ.toFixed(2),
+            },
+          };
 
-  //         io.emit("newD3HandData", FinalData);
-  //         tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
-  //         // console.log(`Server emit d3data ${c}`);
-  //         // console.log("D3", FinalData);
-  //       }
+          io.emit("newD3HandData", FinalData);
+          tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
+          // console.log(`Server emit d3data ${c}`);
+          // console.log("D3", FinalData);
+        }
 
-  //       c += 1;
-  //   }
-  // });
+        c += 1;
+    }
+  });
 
   let tempD1Emg, tempD2Emg, tempD3Emg;
   tempD1Emg = tempD2Emg = tempD3Emg = 0;

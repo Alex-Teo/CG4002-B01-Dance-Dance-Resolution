@@ -252,7 +252,7 @@ const Dashboard = () => {
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
-          <UserCard //TODO: Replce with real values after week 9
+          <UserCard //TODO: Replace with real values after week 9
             dancerId="Dancer 2"
             // syncDelay={processedData.syncDelay}
             // currentDance={processedData.predictedDance}
@@ -262,7 +262,7 @@ const Dashboard = () => {
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
-          <UserCard //TODO: Replce with real values after week 9
+          <UserCard //TODO: Replace with real values after week 9
             dancerId="Dancer 3"
             // syncDelay={processedData.syncDelay}
             // currentDance={processedData.predictedDance}

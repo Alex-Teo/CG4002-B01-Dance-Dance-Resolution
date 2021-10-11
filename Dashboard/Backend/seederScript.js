@@ -92,7 +92,7 @@ const importData = async () => {
       await ProcessedData.insertMany(processedDataDummy[i]);
       await D1RawHandData.insertMany(d1RawHandDataDummy[i]);
       await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
-      // await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
+      await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
       // await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
       // await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
       // await D3RawChestData.insertMany(d3RawChestDataDummy[i]);
