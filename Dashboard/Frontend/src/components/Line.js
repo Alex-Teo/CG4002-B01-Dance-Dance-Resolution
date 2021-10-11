@@ -14,7 +14,7 @@ function Line({ data, axis }) {
         reverse: false,
       }}
       yFormat=" >-.2f"
-      // curve="natural"
+      curve="natural"
       // enableArea="true"
       // areaOpacity="0.75"
       // enableSlices={false}
