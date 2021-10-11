@@ -9,71 +9,6 @@ import { io } from "socket.io-client";
 
 const Dashboard = () => {
   // ---------------- Constants ---------------- //
-  const initialAccDataset = [
-    {
-      id: "AccX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "AccY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "AccZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ];
-
-  const initialGyroDataset = [
-    {
-      id: "GyroX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "GyroY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "GyroZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ];
 
   // ---------------- useState ---------------- //
 
@@ -94,14 +29,200 @@ const Dashboard = () => {
   ]);
 
   // Array of objects - acc
-  const [d1HandAcc, setD1HandAcc] = useState(initialAccDataset);
-  const [d2HandAcc, setD2HandAcc] = useState(initialAccDataset);
-  const [d3HandAcc, setD3HandAcc] = useState(initialAccDataset);
+  const [d1HandAcc, setD1HandAcc] = useState([
+    {
+      id: "D1 AccX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 AccY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 AccZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
+  const [d2HandAcc, setD2HandAcc] = useState([
+    {
+      id: "D2 AccX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D2 AccY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D2 AccZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
+  const [d3HandAcc, setD3HandAcc] = useState([
+    {
+      id: "D3 AccX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D3 AccY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D3 AccZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
 
   // Array of objects - gyro
-  const [d1HandGyro, setD1HandGyro] = useState(initialGyroDataset);
-  const [d2HandGyro, setD2HandGyro] = useState(initialGyroDataset);
-  const [d3HandGyro, setD3HandGyro] = useState(initialGyroDataset);
+  const [d1HandGyro, setD1HandGyro] = useState([
+    {
+      id: "D1 GyroX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 GyroY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 GyroZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
+  const [d2HandGyro, setD2HandGyro] = useState([
+    {
+      id: "D2 GyroX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D2 GyroY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D2 GyroZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
+  const [d3HandGyro, setD3HandGyro] = useState([
+    {
+      id: "D3 GyroX",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D3 GyroY",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D3 GyroZ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
 
   //useState for processed data
   const [processedData, setProcessedData] = useState({

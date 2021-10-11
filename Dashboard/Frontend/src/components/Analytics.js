@@ -38,10 +38,12 @@ function Analytics({
       // case "EMG":
       //   return <Stream data={emgArray} />;
       case "Dancer 1 Accelerometer":
+        console.log("d1", d1HandAcc);
         return <Line data={d1HandAcc} axis={"Accelerometer"} />;
       case "Dancer 1 Gyroscope":
         return <Line data={d1HandGyro} axis={"Gyroscope"} />;
       case "Dancer 2 Accelerometer":
+        console.log("d2", d1HandAcc);
         return <Line data={d2HandAcc} axis={"Accelerometer"} />;
       case "Dancer 2 Gyroscope":
         return <Line data={d2HandGyro} axis={"Gyroscope"} />;
