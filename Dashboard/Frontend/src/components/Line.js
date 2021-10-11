@@ -14,6 +14,10 @@ function Line({ data, axis }) {
         reverse: false,
       }}
       yFormat=" >-.2f"
+      // curve="natural"
+      // enableArea="true"
+      // areaOpacity="0.75"
+      // enableSlices={false}
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -21,7 +25,7 @@ function Line({ data, axis }) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Time",
+        legend: "Sample No.",
         legendOffset: 36,
         legendPosition: "middle",
       }}
@@ -34,7 +38,7 @@ function Line({ data, axis }) {
         legendOffset: -40,
         legendPosition: "middle",
       }}
-      pointSize={10}
+      pointSize={9}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
       pointBorderColor={{ from: "serieColor" }}

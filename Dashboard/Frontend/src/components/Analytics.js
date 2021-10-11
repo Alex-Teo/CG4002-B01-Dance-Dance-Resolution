@@ -16,15 +16,18 @@ function Analytics({
   emgArray,
 }) {
   const dropdownItems = [
-    // "EMG",
-    "Gyroscope 1",
-    "Accelerometer 1",
-    // "Gyroscope 2",
-    // "Accelerometer 2",
-    // "Gyroscope 3",
-    // "Accelerometer 3",
+    "EMG",
+
+    "Dancer 1 Accelerometer",
+    "Dancer 1 Gyroscope",
+
+    // "Dancer 2 Accelerometer",
+    // "Dancer 2 Gyroscope",
+
+    // "Dancer 3 Accelerometer",
+    // "Dancer 3 Gyroscope",
   ];
-  const [title, setTitle] = useState("Accelerometer 1");
+  const [title, setTitle] = useState("Dancer 1 Accelerometer");
 
   const handleChange = (item) => {
     setTitle(item);
@@ -34,10 +37,18 @@ function Analytics({
     switch (choice) {
       case "EMG":
         return <Stream data={emgArray} />;
-      case "Accelerometer 1":
+      case "Dancer 1 Accelerometer":
         return <Line data={d1HandAcc} axis={"Accelerometer"} />;
-      case "Gyroscope 1":
+      case "Dancer 1 Gyroscope":
         return <Line data={d1HandGyro} axis={"Gyroscope"} />;
+      case "Dancer 2 Accelerometer":
+        return <Line data={d2HandAcc} axis={"Accelerometer"} />;
+      case "Dancer 2 Gyroscope":
+        return <Line data={d2HandGyro} axis={"Gyroscope"} />;
+      case "Dancer 3 Accelerometer":
+        return <Line data={d3HandAcc} axis={"Accelerometer"} />;
+      case "Dancer 3 Gyroscope":
+        return <Line data={d3HandGyro} axis={"Gyroscope"} />;
     }
   };
 

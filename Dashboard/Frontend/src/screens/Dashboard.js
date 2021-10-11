@@ -8,26 +8,8 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const Dashboard = () => {
-  // ---------------- useState ---------------- //
-
-  // useState for coach data
-  const [coachData, setCoachData] = useState({
-    actualDance: "No Coach",
-    actualPositions: [1, 2, 3],
-  });
-
-  // Use state for raw data
-  // Array of objects
-  const [emgArray, setEmgArray] = useState([
-    {
-      d1Emg: 0,
-      d2Emg: 0,
-      d3Emg: 0,
-    },
-  ]);
-
-  // Array of objects - acc
-  const [d1HandAcc, setD1HandAcc] = useState([
+  // ---------------- Constants ---------------- //
+  const initialAccDataset = [
     {
       id: "AccX",
       color: "hsl(91, 70%, 50%)",
@@ -58,20 +40,9 @@ const Dashboard = () => {
         },
       ],
     },
-  ]);
-  const [d2HandAcc, setD2HandAcc] = useState({
-    aX: 0,
-    aY: 0,
-    aZ: 0,
-  });
-  const [d3HandAcc, setD3HandAcc] = useState({
-    aX: 0,
-    aY: 0,
-    aZ: 0,
-  });
+  ];
 
-  // Array of objects - gyro
-  const [d1HandGyro, setD1HandGyro] = useState([
+  const initialGyroDataset = [
     {
       id: "GyroX",
       color: "hsl(91, 70%, 50%)",
@@ -102,17 +73,35 @@ const Dashboard = () => {
         },
       ],
     },
+  ];
+
+  // ---------------- useState ---------------- //
+
+  // useState for coach data
+  const [coachData, setCoachData] = useState({
+    actualDance: "No Coach",
+    actualPositions: [1, 2, 3],
+  });
+
+  // Use state for raw data
+  // Array of objects
+  const [emgArray, setEmgArray] = useState([
+    {
+      d1Emg: 0,
+      d2Emg: 0,
+      d3Emg: 0,
+    },
   ]);
-  const [d2HandGyro, setD2HandGyro] = useState({
-    gX: 0,
-    gY: 0,
-    gZ: 0,
-  });
-  const [d3HandGyro, setD3HandGyro] = useState({
-    gX: 0,
-    gY: 0,
-    gZ: 0,
-  });
+
+  // Array of objects - acc
+  const [d1HandAcc, setD1HandAcc] = useState(initialAccDataset);
+  const [d2HandAcc, setD2HandAcc] = useState(initialAccDataset);
+  const [d3HandAcc, setD3HandAcc] = useState(initialAccDataset);
+
+  // Array of objects - gyro
+  const [d1HandGyro, setD1HandGyro] = useState(initialGyroDataset);
+  const [d2HandGyro, setD2HandGyro] = useState(initialGyroDataset);
+  const [d3HandGyro, setD3HandGyro] = useState(initialGyroDataset);
 
   //useState for processed data
   const [processedData, setProcessedData] = useState({
@@ -121,7 +110,7 @@ const Dashboard = () => {
     syncDelay: 0,
   });
 
-  var data = 0;
+  // var data = 0;
 
   // ---------------- Sockets ---------------- //
   useEffect(() => {
@@ -139,6 +128,8 @@ const Dashboard = () => {
       // console.log("coach", currentCoachData);
     });
     var d1Time = 1;
+    var d2Time = 1;
+    var d3Time = 1;
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
@@ -172,14 +163,58 @@ const Dashboard = () => {
     });
 
     socket.on("newD2HandData", (FinalData) => {
-      setD2HandAcc(FinalData.acc);
-      setD2HandGyro(FinalData.gyro);
+      let tempD2HandAcc = d2HandAcc;
+      let tempD2HandGyro = d2HandGyro;
+
+      if (tempD2HandAcc[0].data.length > 10) {
+        tempD2HandAcc[0].data.shift();
+        tempD2HandAcc[1].data.shift();
+        tempD2HandAcc[2].data.shift();
+      }
+      if (tempD2HandGyro[0].data.length > 10) {
+        tempD2HandGyro[0].data.shift();
+        tempD2HandGyro[1].data.shift();
+        tempD2HandGyro[2].data.shift();
+      }
+      tempD2HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+      tempD2HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+      tempD2HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+
+      tempD2HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+      tempD2HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+      tempD2HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+
+      d2Time += 1;
+      setD2HandAcc(tempD2HandAcc);
+      setD2HandGyro(tempD2HandGyro);
       // console.log("d2", d2HandAcc, d2HandGyro);
     });
 
     socket.on("newD3HandData", (FinalData) => {
-      setD3HandAcc(FinalData.acc);
-      setD2HandGyro(FinalData.gyro);
+      let tempD3HandAcc = d3HandAcc;
+      let tempD3HandGyro = d3HandGyro;
+
+      if (tempD3HandAcc[0].data.length > 10) {
+        tempD3HandAcc[0].data.shift();
+        tempD3HandAcc[1].data.shift();
+        tempD3HandAcc[2].data.shift();
+      }
+      if (tempD3HandGyro[0].data.length > 10) {
+        tempD3HandGyro[0].data.shift();
+        tempD3HandGyro[1].data.shift();
+        tempD3HandGyro[2].data.shift();
+      }
+      tempD3HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+      tempD3HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+      tempD3HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+
+      tempD3HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+      tempD3HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+      tempD3HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+
+      d3Time += 1;
+      setD3HandAcc(tempD3HandAcc);
+      setD3HandGyro(tempD3HandGyro);
       // console.log("d3", d3HandAcc, d3HandGyro);
     });
 
@@ -238,6 +273,7 @@ const Dashboard = () => {
             coachPos={coachData.actualPositions}
           />
           <div className="graph">
+            {/* {JSON.stringify(d1HandAcc)} */}
             <Analytics
               d1HandAcc={d1HandAcc}
               d2HandAcc={d2HandAcc}
