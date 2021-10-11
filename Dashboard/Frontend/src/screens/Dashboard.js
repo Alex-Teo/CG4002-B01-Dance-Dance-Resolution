@@ -283,61 +283,61 @@ const Dashboard = () => {
       // console.log("d1", d1HandAcc, d1HandGyro);
     });
 
-    // socket.on("newD2HandData", (FinalData) => {
-    //   let tempD2HandAcc = d2HandAcc;
-    //   let tempD2HandGyro = d2HandGyro;
+    socket.on("newD2HandData", (FinalData) => {
+      let tempD2HandAcc = d2HandAcc;
+      let tempD2HandGyro = d2HandGyro;
 
-    //   if (tempD2HandAcc[0].data.length > 10) {
-    //     tempD2HandAcc[0].data.shift();
-    //     tempD2HandAcc[1].data.shift();
-    //     tempD2HandAcc[2].data.shift();
-    //   }
-    //   if (tempD2HandGyro[0].data.length > 10) {
-    //     tempD2HandGyro[0].data.shift();
-    //     tempD2HandGyro[1].data.shift();
-    //     tempD2HandGyro[2].data.shift();
-    //   }
-    //   tempD2HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-    //   tempD2HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-    //   tempD2HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+      if (tempD2HandAcc[0].data.length > 10) {
+        tempD2HandAcc[0].data.shift();
+        tempD2HandAcc[1].data.shift();
+        tempD2HandAcc[2].data.shift();
+      }
+      if (tempD2HandGyro[0].data.length > 10) {
+        tempD2HandGyro[0].data.shift();
+        tempD2HandGyro[1].data.shift();
+        tempD2HandGyro[2].data.shift();
+      }
+      tempD2HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+      tempD2HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+      tempD2HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
 
-    //   tempD2HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-    //   tempD2HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-    //   tempD2HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+      tempD2HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+      tempD2HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+      tempD2HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
 
-    //   d2Time += 1;
-    //   setD2HandAcc(tempD2HandAcc);
-    //   setD2HandGyro(tempD2HandGyro);
-    //   // console.log("d2", d2HandAcc, d2HandGyro);
-    // });
+      d2Time += 1;
+      setD2HandAcc(tempD2HandAcc);
+      setD2HandGyro(tempD2HandGyro);
+      // console.log("d2", d2HandAcc, d2HandGyro);
+    });
 
-    // socket.on("newD3HandData", (FinalData) => {
-    //   let tempD3HandAcc = d3HandAcc;
-    //   let tempD3HandGyro = d3HandGyro;
+    socket.on("newD3HandData", (FinalData) => {
+      let tempD3HandAcc = d3HandAcc;
+      let tempD3HandGyro = d3HandGyro;
 
-    //   if (tempD3HandAcc[0].data.length > 10) {
-    //     tempD3HandAcc[0].data.shift();
-    //     tempD3HandAcc[1].data.shift();
-    //     tempD3HandAcc[2].data.shift();
-    //   }
-    //   if (tempD3HandGyro[0].data.length > 10) {
-    //     tempD3HandGyro[0].data.shift();
-    //     tempD3HandGyro[1].data.shift();
-    //     tempD3HandGyro[2].data.shift();
-    //   }
-    //   tempD3HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-    //   tempD3HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-    //   tempD3HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+      if (tempD3HandAcc[0].data.length > 10) {
+        tempD3HandAcc[0].data.shift();
+        tempD3HandAcc[1].data.shift();
+        tempD3HandAcc[2].data.shift();
+      }
+      if (tempD3HandGyro[0].data.length > 10) {
+        tempD3HandGyro[0].data.shift();
+        tempD3HandGyro[1].data.shift();
+        tempD3HandGyro[2].data.shift();
+      }
+      tempD3HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+      tempD3HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+      tempD3HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
 
-    //   tempD3HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-    //   tempD3HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-    //   tempD3HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+      tempD3HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+      tempD3HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+      tempD3HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
 
-    //   d3Time += 1;
-    //   setD3HandAcc(tempD3HandAcc);
-    //   setD3HandGyro(tempD3HandGyro);
-    //   // console.log("d3", d3HandAcc, d3HandGyro);
-    // });
+      d3Time += 1;
+      setD3HandAcc(tempD3HandAcc);
+      setD3HandGyro(tempD3HandGyro);
+      // console.log("d3", d3HandAcc, d3HandGyro);
+    });
 
     // Socket for Emg data
     // {d1Emg:num, d2Emg:num, d3Emg:num}
