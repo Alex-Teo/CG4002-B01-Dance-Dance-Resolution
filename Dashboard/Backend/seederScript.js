@@ -69,6 +69,7 @@ connection.once("open", async () => {
   importData();
 });
 
+// FIXME: To add in relevant collections after week 9
 // Fxn importData() used for testing -> importing of dummy data
 const importData = async () => {
   try {
@@ -77,23 +78,23 @@ const importData = async () => {
     let delay = 100; //20hz -> 50
 
     // Clear exisiting collections
-    await D1RawHandData.deleteMany({});
-    await D2RawHandData.deleteMany({});
-    await D3RawHandData.deleteMany({});
-    await D1RawChestData.deleteMany({});
-    await D2RawChestData.deleteMany({});
-    await D3RawChestData.deleteMany({});
-    await EmgData.deleteMany({});
     await ProcessedData.deleteMany({});
-    await CoachData.deleteMany({});
+    await D1RawHandData.deleteMany({});
+    // await D2RawHandData.deleteMany({});
+    // await D3RawHandData.deleteMany({});
+    await D1RawChestData.deleteMany({});
+    // await D2RawChestData.deleteMany({});
+    // await D3RawChestData.deleteMany({});
+    // await EmgData.deleteMany({});
+    // await CoachData.deleteMany({});
 
     // Add in dummy data w delay
     for (var i = 0; i < coachDataDummy.length; i++) {
       await ProcessedData.insertMany(processedDataDummy[i]);
       await D1RawHandData.insertMany(d1RawHandDataDummy[i]);
-      await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
-      await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
-      // await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
+      // await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
+      // await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
+      await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
       // await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
       // await D3RawChestData.insertMany(d3RawChestDataDummy[i]);
       // await EmgData.insertMany(emgDataDummy[i]);

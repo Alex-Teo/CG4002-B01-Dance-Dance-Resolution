@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 const Dashboard = () => {
-  // ---------------- Constants ---------------- //
-
   // ---------------- useState ---------------- //
 
   // useState for coach data
@@ -18,7 +16,7 @@ const Dashboard = () => {
     actualPositions: [1, 2, 3],
   });
 
-  // Use state for raw data
+  // Use state for hand IMU
   // Array of objects
   const [emgArray, setEmgArray] = useState([
     {
@@ -31,7 +29,7 @@ const Dashboard = () => {
   // Array of objects - acc
   const [d1HandAcc, setD1HandAcc] = useState([
     {
-      id: "D1 AccX",
+      id: "D1 Hand AccX",
       color: "hsl(91, 70%, 50%)",
       data: [
         {
@@ -41,7 +39,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 AccY",
+      id: "D1 Hand AccY",
       color: "hsl(10, 20%, 50%)",
       data: [
         {
@@ -51,7 +49,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 AccZ",
+      id: "D1 Hand AccZ",
       color: "hsl(60, 70%, 90%)",
       data: [
         {
@@ -129,7 +127,7 @@ const Dashboard = () => {
   // Array of objects - gyro
   const [d1HandGyro, setD1HandGyro] = useState([
     {
-      id: "D1 GyroX",
+      id: "D1 Hand GyroX",
       color: "hsl(91, 70%, 50%)",
       data: [
         {
@@ -139,7 +137,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 GyroY",
+      id: "D1 Hand GyroY",
       color: "hsl(10, 20%, 50%)",
       data: [
         {
@@ -149,7 +147,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 GyroZ",
+      id: "D1 Hand GyroZ",
       color: "hsl(60, 70%, 90%)",
       data: [
         {
@@ -224,6 +222,74 @@ const Dashboard = () => {
     },
   ]);
 
+  // FIXME: To add in relevant collections after week 9
+  //Use state for chest IMU
+  const [d1ChestAcc, setD1ChestAcc] = useState([
+    {
+      id: "D1 Chest AccX ",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 Chest AccY ",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 Chest AccZ ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
+
+  const [d1ChestGyro, setD1ChestGyro] = useState([
+    {
+      id: "D1 Chest GyroX ",
+      color: "hsl(91, 70%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 Chest GyroY ",
+      color: "hsl(10, 20%, 50%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+    {
+      id: "D1 Chest GyroZ ",
+      color: "hsl(60, 70%, 90%)",
+      data: [
+        {
+          x: 0,
+          y: 0,
+        },
+      ],
+    },
+  ]);
+
   //useState for processed data
   const [processedData, setProcessedData] = useState({
     predictedDance: "Inactive",
@@ -234,6 +300,7 @@ const Dashboard = () => {
   // var data = 0;
 
   // ---------------- Sockets ---------------- //
+  // FIXME: To add in relevant collections after week 9
   useEffect(() => {
     const socket = io.connect("http://localhost:5000");
 
@@ -251,6 +318,7 @@ const Dashboard = () => {
     var d1Time = 1;
     var d2Time = 1;
     var d3Time = 1;
+    var d4Time = 1;
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("newD1HandData", (FinalData) => {
@@ -283,70 +351,99 @@ const Dashboard = () => {
       // console.log("d1", d1HandAcc, d1HandGyro);
     });
 
-    socket.on("newD2HandData", (FinalData) => {
-      let tempD2HandAcc = d2HandAcc;
-      let tempD2HandGyro = d2HandGyro;
+    // socket.on("newD2HandData", (FinalData) => {
+    //   let tempD2HandAcc = d2HandAcc;
+    //   let tempD2HandGyro = d2HandGyro;
 
-      if (tempD2HandAcc[0].data.length > 10) {
-        tempD2HandAcc[0].data.shift();
-        tempD2HandAcc[1].data.shift();
-        tempD2HandAcc[2].data.shift();
+    //   if (tempD2HandAcc[0].data.length > 10) {
+    //     tempD2HandAcc[0].data.shift();
+    //     tempD2HandAcc[1].data.shift();
+    //     tempD2HandAcc[2].data.shift();
+    //   }
+    //   if (tempD2HandGyro[0].data.length > 10) {
+    //     tempD2HandGyro[0].data.shift();
+    //     tempD2HandGyro[1].data.shift();
+    //     tempD2HandGyro[2].data.shift();
+    //   }
+    //   tempD2HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+    //   tempD2HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+    //   tempD2HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+
+    //   tempD2HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+    //   tempD2HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+    //   tempD2HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+
+    //   d2Time += 1;
+    //   setD2HandAcc(tempD2HandAcc);
+    //   setD2HandGyro(tempD2HandGyro);
+    //   // console.log("d2", d2HandAcc, d2HandGyro);
+    // });
+
+    // socket.on("newD3HandData", (FinalData) => {
+    //   let tempD3HandAcc = d3HandAcc;
+    //   let tempD3HandGyro = d3HandGyro;
+
+    //   if (tempD3HandAcc[0].data.length > 10) {
+    //     tempD3HandAcc[0].data.shift();
+    //     tempD3HandAcc[1].data.shift();
+    //     tempD3HandAcc[2].data.shift();
+    //   }
+    //   if (tempD3HandGyro[0].data.length > 10) {
+    //     tempD3HandGyro[0].data.shift();
+    //     tempD3HandGyro[1].data.shift();
+    //     tempD3HandGyro[2].data.shift();
+    //   }
+    //   tempD3HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+    //   tempD3HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+    //   tempD3HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+
+    //   tempD3HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+    //   tempD3HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+    //   tempD3HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+
+    //   d3Time += 1;
+    //   setD3HandAcc(tempD3HandAcc);
+    //   setD3HandGyro(tempD3HandGyro);
+    //   // console.log("d3", d3HandAcc, d3HandGyro);
+    // });
+
+    socket.on("newD1ChestData", (FinalData) => {
+      let tempD1ChestAcc = d1ChestAcc;
+      let tempD1ChestGyro = d1ChestGyro;
+
+      if (tempD1ChestAcc[0].data.length > 10) {
+        tempD1ChestAcc[0].data.shift();
+        tempD1ChestAcc[1].data.shift();
+        tempD1ChestAcc[2].data.shift();
       }
-      if (tempD2HandGyro[0].data.length > 10) {
-        tempD2HandGyro[0].data.shift();
-        tempD2HandGyro[1].data.shift();
-        tempD2HandGyro[2].data.shift();
+      if (tempD1ChestGyro[0].data.length > 10) {
+        tempD1ChestGyro[0].data.shift();
+        tempD1ChestGyro[1].data.shift();
+        tempD1ChestGyro[2].data.shift();
       }
-      tempD2HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-      tempD2HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-      tempD2HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+      tempD1ChestAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+      tempD1ChestAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+      tempD1ChestAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
 
-      tempD2HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-      tempD2HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-      tempD2HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+      tempD1ChestGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+      tempD1ChestGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+      tempD1ChestGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
 
-      d2Time += 1;
-      setD2HandAcc(tempD2HandAcc);
-      setD2HandGyro(tempD2HandGyro);
-      // console.log("d2", d2HandAcc, d2HandGyro);
-    });
-
-    socket.on("newD3HandData", (FinalData) => {
-      let tempD3HandAcc = d3HandAcc;
-      let tempD3HandGyro = d3HandGyro;
-
-      if (tempD3HandAcc[0].data.length > 10) {
-        tempD3HandAcc[0].data.shift();
-        tempD3HandAcc[1].data.shift();
-        tempD3HandAcc[2].data.shift();
-      }
-      if (tempD3HandGyro[0].data.length > 10) {
-        tempD3HandGyro[0].data.shift();
-        tempD3HandGyro[1].data.shift();
-        tempD3HandGyro[2].data.shift();
-      }
-      tempD3HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-      tempD3HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-      tempD3HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
-
-      tempD3HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-      tempD3HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-      tempD3HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
-
-      d3Time += 1;
-      setD3HandAcc(tempD3HandAcc);
-      setD3HandGyro(tempD3HandGyro);
+      d4Time += 1;
+      console.log(tempD1ChestAcc);
+      setD1ChestAcc(tempD1ChestAcc);
+      setD1ChestGyro(tempD1ChestGyro);
       // console.log("d3", d3HandAcc, d3HandGyro);
     });
 
     // Socket for Emg data
     // {d1Emg:num, d2Emg:num, d3Emg:num}
-    socket.on("newEmgData", (FinalData) => {
-      let newArray = emgArray;
-      newArray.push(FinalData);
-      setEmgArray(newArray);
-      // console.log("emg1", emgArray);
-    });
+    // socket.on("newEmgData", (FinalData) => {
+    //   let newArray = emgArray;
+    //   newArray.push(FinalData);
+    //   setEmgArray(newArray);
+    //   // console.log("emg1", emgArray);
+    // });
 
     // Sockets for processed data
     // {predictedDance:string, predictedPos:array, syncDelay:number}
@@ -403,6 +500,8 @@ const Dashboard = () => {
               d2HandGyro={d2HandGyro}
               d3HandGyro={d3HandGyro}
               emgArray={emgArray.slice(-20)}
+              d1ChestAcc={d1ChestAcc}
+              d1ChestGyro={d1ChestGyro}
             />
           </div>
         </div>

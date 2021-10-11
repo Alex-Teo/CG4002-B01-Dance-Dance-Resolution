@@ -42,47 +42,51 @@ connection.on(
   console.error.bind(console, "MongoDB: Connection error: ")
 );
 
+// FIXME: To add in relevant collections after week 9
 // Reset MongoDB Collections
 connection.once("open", async () => {
   console.log("MongoDB: Connected");
 
   await connection.dropCollection("d1_raw_hand_datas");
-  await connection.dropCollection("d2_raw_hand_datas");
-  await connection.dropCollection("d3_raw_hand_datas");
-  // await connection.dropCollection("d1_raw_chest_datas");
+  // await connection.dropCollection("d2_raw_hand_datas");
+  // await connection.dropCollection("d3_raw_hand_datas");
+  await connection.dropCollection("d1_raw_chest_datas");
   // await connection.dropCollection("d2_raw_chest_datas");
   // await connection.dropCollection("d3_raw_chest_datas");
-  await connection.dropCollection("emg_datas");
+  // await connection.dropCollection("emg_datas");
   await connection.dropCollection("processed_datas");
-  await connection.dropCollection("coach_datas");
+  // await connection.dropCollection("coach_datas");
   console.log(" MongoDB: Deleted old collections");
 
   await connection.createCollection("d1_raw_hand_datas");
-  await connection.createCollection("d2_raw_hand_datas");
-  await connection.createCollection("d3_raw_hand_datas");
-  // await connection.createCollection("d1_raw_chest_datas");
+  // await connection.createCollection("d2_raw_hand_datas");
+  // await connection.createCollection("d3_raw_hand_datas");
+  await connection.createCollection("d1_raw_chest_datas");
   // await connection.createCollection("d2_raw_chest_datas");
   // await connection.createCollection("d3_raw_chest_datas");
-  await connection.createCollection("emg_datas");
+  // await connection.createCollection("emg_datas");
   await connection.createCollection("processed_datas");
-  await connection.createCollection("coach_datas");
+  // await connection.createCollection("coach_datas");
   console.log(" MongoDB: Creating fresh collections");
 
   // Setup change streams
   const D1HandDataStream = connection.collection("d1_raw_hand_datas").watch();
-  const D2HandDataStream = connection.collection("d2_raw_hand_datas").watch();
-  const D3HandDataStream = connection.collection("d3_raw_hand_datas").watch();
+  // const D2HandDataStream = connection.collection("d2_raw_hand_datas").watch();
+  // const D3HandDataStream = connection.collection("d3_raw_hand_datas").watch();
   // const EmgDataStream = connection.collection("emg_datas").watch();
+  const D1ChestDataStream = connection.collection("d1_raw_chest_datas").watch();
+  // const D2ChestDataStream = connection.collection("d2_raw_chest_datas").watch();
+  // const D3ChestDataStream = connection.collection("d3_raw_chest_datas").watch();
   const ProcessedDataStream = connection.collection("processed_datas").watch();
   // const coachDataStream = connection.collection("coach_datas").watch();
   console.log(" MongoDB (Change Streams): Watching collections as streams");
 
   // ---------------- Emit on Change ---------------- //
-
+  // FIXME: To add in relevant collections after week 9
   const sampling = 10;
   const samplingProcessed = 1;
-  var a, b, c, d, e;
-  a = b = c = d = e = 0;
+  var a, b, c, d, e, f;
+  a = b = c = d = e = f = 0;
 
   //Sockets for coach data  {actualDance:string, actualPositions:array}
   // coachDataStream.on("change", (change) => {
@@ -164,62 +168,117 @@ connection.once("open", async () => {
   let tempD2aX, tempD2aY, tempD2aZ, tempD2gX, tempD2gY, tempD2gZ;
   tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
 
-  D2HandDataStream.on("change", (change) => {
-    switch (change.operationType) {
-      case "insert":
-        const RawData = {
-          aX: change.fullDocument.aX,
-          aY: change.fullDocument.aY,
-          aZ: change.fullDocument.aZ,
-          gX: change.fullDocument.gX,
-          gY: change.fullDocument.gY,
-          gZ: change.fullDocument.gZ,
-        };
+  // D2HandDataStream.on("change", (change) => {
+  //   switch (change.operationType) {
+  //     case "insert":
+  //       const RawData = {
+  //         aX: change.fullDocument.aX,
+  //         aY: change.fullDocument.aY,
+  //         aZ: change.fullDocument.aZ,
+  //         gX: change.fullDocument.gX,
+  //         gY: change.fullDocument.gY,
+  //         gZ: change.fullDocument.gZ,
+  //       };
 
-        // Get cumulative in a sample
-        tempD2aX += Number(RawData.aX);
-        tempD2aY += Number(RawData.aY);
-        tempD2aZ += Number(RawData.aZ);
-        tempD2gX += Number(RawData.gX);
-        tempD2gY += Number(RawData.gY);
-        tempD2gZ += Number(RawData.gZ);
+  //       // Get cumulative in a sample
+  //       tempD2aX += Number(RawData.aX);
+  //       tempD2aY += Number(RawData.aY);
+  //       tempD2aZ += Number(RawData.aZ);
+  //       tempD2gX += Number(RawData.gX);
+  //       tempD2gY += Number(RawData.gY);
+  //       tempD2gZ += Number(RawData.gZ);
 
-        // Send ave data at a specified freq
-        if (b % sampling == 0) {
-          tempD2aX = tempD2aX / sampling;
-          tempD2aY = tempD2aY / sampling;
-          tempD2aZ = tempD2aZ / sampling;
-          tempD2gX = tempD2gX / sampling;
-          tempD2gY = tempD2gY / sampling;
-          tempD2gZ = tempD2gZ / sampling;
+  //       // Send ave data at a specified freq
+  //       if (b % sampling == 0) {
+  //         tempD2aX = tempD2aX / sampling;
+  //         tempD2aY = tempD2aY / sampling;
+  //         tempD2aZ = tempD2aZ / sampling;
+  //         tempD2gX = tempD2gX / sampling;
+  //         tempD2gY = tempD2gY / sampling;
+  //         tempD2gZ = tempD2gZ / sampling;
 
-          const FinalData = {
-            acc: {
-              aX: tempD2aX.toFixed(2),
-              aY: tempD2aY.toFixed(2),
-              aZ: tempD2aZ.toFixed(2),
-            },
-            gyro: {
-              gX: tempD2gX.toFixed(2),
-              gY: tempD2gY.toFixed(2),
-              gZ: tempD2gZ.toFixed(2),
-            },
-          };
+  //         const FinalData = {
+  //           acc: {
+  //             aX: tempD2aX.toFixed(2),
+  //             aY: tempD2aY.toFixed(2),
+  //             aZ: tempD2aZ.toFixed(2),
+  //           },
+  //           gyro: {
+  //             gX: tempD2gX.toFixed(2),
+  //             gY: tempD2gY.toFixed(2),
+  //             gZ: tempD2gZ.toFixed(2),
+  //           },
+  //         };
 
-          io.emit("newD2HandData", FinalData);
-          tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
-          // console.log(`Server emit d2data ${b}`);
-          // console.log("D2", FinalData);
-        }
+  //         io.emit("newD2HandData", FinalData);
+  //         tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
+  //         // console.log(`Server emit d2data ${b}`);
+  //         // console.log("D2", FinalData);
+  //       }
 
-        b += 1;
-    }
-  });
+  //       b += 1;
+  //   }
+  // });
 
   let tempD3aX, tempD3aY, tempD3aZ, tempD3gX, tempD3gY, tempD3gZ;
   tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
 
-  D3HandDataStream.on("change", (change) => {
+  // D3HandDataStream.on("change", (change) => {
+  //   switch (change.operationType) {
+  //     case "insert":
+  //       const RawData = {
+  //         aX: change.fullDocument.aX,
+  //         aY: change.fullDocument.aY,
+  //         aZ: change.fullDocument.aZ,
+  //         gX: change.fullDocument.gX,
+  //         gY: change.fullDocument.gY,
+  //         gZ: change.fullDocument.gZ,
+  //       };
+
+  //       // Get cumulative in a sample
+  //       tempD3aX += Number(RawData.aX);
+  //       tempD3aY += Number(RawData.aY);
+  //       tempD3aZ += Number(RawData.aZ);
+  //       tempD3gX += Number(RawData.gX);
+  //       tempD3gY += Number(RawData.gY);
+  //       tempD3gZ += Number(RawData.gZ);
+
+  //       // Send ave data at a specified freq
+  //       if (c % sampling == 0) {
+  //         tempD3aX = tempD3aX / sampling;
+  //         tempD3aY = tempD3aY / sampling;
+  //         tempD3aZ = tempD3aZ / sampling;
+  //         tempD3gX = tempD3gX / sampling;
+  //         tempD3gY = tempD3gY / sampling;
+  //         tempD3gZ = tempD3gZ / sampling;
+
+  //         const FinalData = {
+  //           acc: {
+  //             aX: tempD3aX.toFixed(2),
+  //             aY: tempD3aY.toFixed(2),
+  //             aZ: tempD3aZ.toFixed(2),
+  //           },
+  //           gyro: {
+  //             gX: tempD3gX.toFixed(2),
+  //             gY: tempD3gY.toFixed(2),
+  //             gZ: tempD3gZ.toFixed(2),
+  //           },
+  //         };
+
+  //         io.emit("newD3HandData", FinalData);
+  //         tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
+  //         // console.log(`Server emit d3data ${c}`);
+  //         // console.log("D3", FinalData);
+  //       }
+
+  //       c += 1;
+  //   }
+  // });
+
+  let chestaX, chestaY, chestaZ, chestgX, chestgY, chestgZ;
+  chestaX = chestaY = chestaZ = chestgX = chestgY = chestgZ = 0;
+
+  D1ChestDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
         const RawData = {
@@ -232,42 +291,41 @@ connection.once("open", async () => {
         };
 
         // Get cumulative in a sample
-        tempD3aX += Number(RawData.aX);
-        tempD3aY += Number(RawData.aY);
-        tempD3aZ += Number(RawData.aZ);
-        tempD3gX += Number(RawData.gX);
-        tempD3gY += Number(RawData.gY);
-        tempD3gZ += Number(RawData.gZ);
+        chestaX += Number(RawData.aX);
+        chestaY += Number(RawData.aY);
+        chestaZ += Number(RawData.aZ);
+        chestgX += Number(RawData.gX);
+        chestgY += Number(RawData.gY);
+        chestgZ += Number(RawData.gZ);
 
         // Send ave data at a specified freq
-        if (c % sampling == 0) {
-          tempD3aX = tempD3aX / sampling;
-          tempD3aY = tempD3aY / sampling;
-          tempD3aZ = tempD3aZ / sampling;
-          tempD3gX = tempD3gX / sampling;
-          tempD3gY = tempD3gY / sampling;
-          tempD3gZ = tempD3gZ / sampling;
+        if (f % sampling == 0) {
+          chestaX = chestaX / sampling;
+          chestaY = chestaY / sampling;
+          chestaZ = chestaZ / sampling;
+          chestgX = chestgX / sampling;
+          chestgY = chestgY / sampling;
+          chestgZ = chestgZ / sampling;
 
           const FinalData = {
             acc: {
-              aX: tempD3aX.toFixed(2),
-              aY: tempD3aY.toFixed(2),
-              aZ: tempD3aZ.toFixed(2),
+              aX: chestaX.toFixed(2),
+              aY: chestaY.toFixed(2),
+              aZ: chestaZ.toFixed(2),
             },
             gyro: {
-              gX: tempD3gX.toFixed(2),
-              gY: tempD3gY.toFixed(2),
-              gZ: tempD3gZ.toFixed(2),
+              gX: chestgX.toFixed(2),
+              gY: chestgY.toFixed(2),
+              gZ: chestgZ.toFixed(2),
             },
           };
 
-          io.emit("newD3HandData", FinalData);
-          tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
-          // console.log(`Server emit d3data ${c}`);
-          // console.log("D3", FinalData);
+          io.emit("newD1ChestData", FinalData);
+
+          chestaX = chestaY = chestaY = chestgX = chestgY = chestgZ = 0;
         }
 
-        c += 1;
+        f += 1;
     }
   });
 
