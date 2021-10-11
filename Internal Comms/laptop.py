@@ -3,32 +3,40 @@ from bluepy.btle import Scanner, DefaultDelegate, BTLEDisconnectError
 from time import sleep
 import struct
 import threading
-import numpy as np
+import csv
 
 ACK = 'A'
 HELLO = 'H'
 RESET = 'R'
 
-BEETLE_ADDR_1 = "b0:b1:13:2d:b5:48"
-BEETLE_ADDR_2 = "b0:b1:13:2d:d6:75"
-BEETLE_ADDR_3 = "b0:b1:13:2d:b6:2a"
+BEETLE_ADDR_1 = "b0:b1:13:2d:b6:21" # SET 1 CHEST
+BEETLE_ADDR_2 = "b0:b1:13:2d:b5:48" # SET 1 HAND
+BEETLE_ADDR_3 = "b0:b1:13:2d:d6:75" # SET 2 CHEST
+BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND
+BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST
+BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
+
 
 SERIVCE_ID = "0000dfb0-0000-1000-8000-00805f9b34fb"
 
-BUFFER_DICT = {BEETLE_ADDR_1: b"", BEETLE_ADDR_2: b"", BEETLE_ADDR_3: b""}
+BUFFER_DICT = {BEETLE_ADDR_1: b"", BEETLE_ADDR_2: b"", BEETLE_ADDR_3: b"", BEETLE_ADDR_4: b"", BEETLE_ADDR_5: b"", BEETLE_ADDR_6: b""}
 
 
-BEETLE_ALL = [BEETLE_ADDR_1, BEETLE_ADDR_2, BEETLE_ADDR_3]
-BEETLE_DICT = {BEETLE_ADDR_1: 1, BEETLE_ADDR_2: 2, BEETLE_ADDR_3: 3}
-BEETLE_FOUND_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False}
+BEETLE_ALL = [BEETLE_ADDR_1, BEETLE_ADDR_2, BEETLE_ADDR_3, BEETLE_ADDR_4, BEETLE_ADDR_5, BEETLE_ADDR_6]
+BEETLE_DICT = {BEETLE_ADDR_1: 1, BEETLE_ADDR_2: 2, BEETLE_ADDR_3: 3, BEETLE_ADDR_4: 4, BEETLE_ADDR_5: 5, BEETLE_ADDR_6: 6}
+BEETLE_FOUND_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False, BEETLE_ADDR_4: False, BEETLE_ADDR_5: False, BEETLE_ADDR_6: False}
 
-ACK_BOOL_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False}
-HANDSHAKE_BOOL_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False}
-RECONNECT_BEETLE_DICT = {BEETLE_ADDR_1: 0, BEETLE_ADDR_2: 0, BEETLE_ADDR_3: 0}
+ACK_BOOL_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False, BEETLE_ADDR_4: False, BEETLE_ADDR_5: False, BEETLE_ADDR_6: False}
+HANDSHAKE_BOOL_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False, BEETLE_ADDR_4: False, BEETLE_ADDR_5: False, BEETLE_ADDR_6: False}
 
-START_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False}
+START_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False, BEETLE_ADDR_4: False, BEETLE_ADDR_5: False, BEETLE_ADDR_6: False}
 
 PACKET_DICT = {b'E': "EMG Packet", b'I': "IMU Packet", b'T': "Time Packet"}
+
+HAND_MOVING = False
+
+DATA_LIST_1 = []
+DATA_LIST_2 = []
 
 class MyDelegate(btle.DefaultDelegate):
     def __init__(self,addr):
@@ -38,8 +46,8 @@ class MyDelegate(btle.DefaultDelegate):
     
     def handleNotification(self,cHandle,fragment):
         packet_size = len(fragment)
-        print("Packet Size: " + str(packet_size))
-        print(fragment)
+        # print("Packet Size: " + str(packet_size))
+        # print(fragment)
         
         # Handshake not completed
         if not HANDSHAKE_BOOL_DICT[self.beetle_addr]:
@@ -52,7 +60,7 @@ class MyDelegate(btle.DefaultDelegate):
 
             # Ignore packet
             else:
-                print("Complete handshake process first before sending data.")    
+                pass    
         
         # Handshake has already been completed
         else:
@@ -72,18 +80,18 @@ class MyDelegate(btle.DefaultDelegate):
                 print("Data Assembling Begin")
                 
                 existing_fragmented_data = BUFFER_DICT[self.beetle_addr]
-                print("Existing Buffer Data: ")
-                print(existing_fragmented_data)
+                # print("Existing Buffer Data: ")
+                # print(existing_fragmented_data)
                 # No data fragments currently present
                 if existing_fragmented_data == b'': 
                     existing_fragmented_data = fragment
                     fragmented_data_length = len(existing_fragmented_data)
-                    print("Fragmented Data: ")
-                    print(existing_fragmented_data)
+                    # print("Fragmented Data: ")
+                    # print(existing_fragmented_data)
                 
                 else:
-                    print("Fragmented Data: ")
-                    print(fragment)
+                    # print("Fragmented Data: ")
+                    # print(fragment)
                     existing_fragmented_data += fragment
                     fragmented_data_length = len(existing_fragmented_data)
 
@@ -94,10 +102,10 @@ class MyDelegate(btle.DefaultDelegate):
                     BUFFER_DICT[self.beetle_addr] = b''
 
                     print("Data Assembling Completed. Assembled Data: ")
-                    print(fragment)
-                    print("")
-                    print("")
-                    print("")
+                    # print(fragment)
+                    # print("")
+                    # print("")
+                    # print("")
                     # Send for data reading directly since it is a complete packet
                     self.handleData(fragment)
 
@@ -106,10 +114,10 @@ class MyDelegate(btle.DefaultDelegate):
                     fragment = existing_fragmented_data[0:20]
                     
                     print("Data Assembling Completed. Assembled Data: ")
-                    print(fragment)
-                    print("")
-                    print("")
-                    print("")
+                    # print(fragment)
+                    # print("")
+                    # print("")
+                    # print("")
 
                     # Store rest of fragment into buffer dictionary
                     BUFFER_DICT[self.beetle_addr] = existing_fragmented_data[20:]
@@ -117,46 +125,78 @@ class MyDelegate(btle.DefaultDelegate):
                     self.handleData(fragment)
                     
                 else:
-                    print("Buffer not full.")
-                    print("")
-                    print("")
-                    print("")
+                    # print("Buffer not full.")
+                    # print("")
+                    # print("")
+                    # print("")
                     BUFFER_DICT[self.beetle_addr] += fragment
         
     def handleData(self,fragment):
         # IMU Packet
         if fragment[0] == 73:
-            packet = struct.unpack('<chhhhhhBBBBch', fragment)
-            
+            packet = struct.unpack('<cchhhhhhBBBBh', fragment)
+
             # Obtain timestamp packet
-            # print(packet)
-            big_endian_packet = struct.unpack('>chhhhhhLch', fragment)
-            unsigned_long = np.uint32
-            timestamp = big_endian_packet[7]
+            big_endian_packet = struct.unpack('>cchhhhhhLh', fragment)
+            timestamp = big_endian_packet[8]
             
             arduino_checksum = packet[-1]
             checkSumState = calcDataChecksum(packet,arduino_checksum)
             if (checkSumState):
-                print("Checksum Correct")
-                print("Data from: Beetle " + str(BEETLE_DICT[self.beetle_addr]))
+                # print("Checksum Correct")
+                beetle_num = BEETLE_DICT[self.beetle_addr]
+                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                    beetle_pos = "Chest"
+                else:
+                    beetle_pos = "Hand"
+
+                # print("Data from: Beetle " + str(beetle_num))
                 packet_type = PACKET_DICT[packet[0]]
-                accx = packet[1]
-                accy = packet[2]
-                accz = packet[3]
-                gyrox = packet[4]
-                gyroy = packet[5]
-                gyroz = packet[6]
-                print("Packet Type: " + str(packet_type))
-                print("Accx: " + str(accx))
-                print("Accy: " + str(accy))
-                print("Accz: " + str(accz))
-                print("Gyrox: " + str(gyrox))
-                print("Gyroy: " + str(gyroy))
-                print("Gyroz: " + str(gyroz))  
-                print("Timestamp: " + str(timestamp))
-                print("")
-                print("")
-                print("")
+                accx = packet[2]
+                accy = packet[3]
+                accz = packet[4]
+                gyrox = packet[5]
+                gyroy = packet[6]
+                gyroz = packet[7]
+                moving = packet[1]
+                if (moving == b'Y' and beetle_pos == "Hand"):
+                    moving_status = "Hand Moving"
+                    HAND_MOVING = True
+                elif (moving == b'N' and beetle_pos == "Hand"):
+                    moving_status = "Hand Not Moving"
+                    HAND_MOVING = False
+                elif (moving == b'N' and beetle_pos == "Chest"):
+                    moving_status = "Chest Not Moving"
+                elif (moving == b'Y' and beetle_pos == "Chest"):
+                    moving_status = "Chest Moving"
+
+                # To be changed between dab/mermaid/jamesbond
+                dance_move = "testing"
+
+
+                print(f"{beetle_pos} Beetle Moving Status: " + str(moving_status))
+
+                # Dont detect to see if chest is moving, just record data
+                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                    row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
+                    
+                
+                # Collect data only if beetle is detected to be moving
+                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                    if HAND_MOVING:
+                        row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
+            
+                else:
+                    pass
+
+                # print("Packet Type: " + str(packet_type))
+                # print("Accx: " + str(accx))
+                # print("Accy: " + str(accy))
+                # print("Accz: " + str(accz))
+                # print("Gyrox: " + str(gyrox))
+                # print("Gyroy: " + str(gyroy))
+                # print("Gyroz: " + str(gyroz))  
+                # print("Timestamp: " + str(timestamp))
                 # Send Data to Ultra96
             else:
                 print("Checksum Incorrect")
@@ -168,7 +208,6 @@ class MyDelegate(btle.DefaultDelegate):
             packet = struct.unpack('<cBBBBlllch', fragment)
             
             big_endian_packet = struct.unpack('>cLlllch', fragment)
-            unsigned_long = np.uint32
             timestamp = big_endian_packet[1]
 
             arduino_checksum = packet[-1]
@@ -190,7 +229,6 @@ class MyDelegate(btle.DefaultDelegate):
             packet = struct.unpack('<chhhBBBBlhch', fragment)
             
             big_endian_packet = struct.unpack('>chhhLlhch', fragment)
-            unsigned_long = np.uint32
             timestamp = big_endian_packet[4]
 
             arduino_checksum = packet[-1]
@@ -216,19 +254,17 @@ class MyDelegate(btle.DefaultDelegate):
         else: 
             return
 
-
-
 def calcDataChecksum(data_packet,arduino_checksum):
     try:
         data_check = data_packet[0:len(data_packet)-1]
         checksum = ord(data_check[0]) 
-        print("Arduino checksum: " + str(arduino_checksum))
+        # print("Arduino checksum: " + str(arduino_checksum))
         for i in range(1,len(data_check)):
             if type(data_check[i]) == bytes:
                 checksum ^= ord(data_check[i])
             else: 
                 checksum ^= data_check[i] 
-        print("calculated checksum: " + str(checksum))
+        # print("calculated checksum: " + str(checksum))
         if (checksum == arduino_checksum):
             return True
         else:
@@ -237,119 +273,128 @@ def calcDataChecksum(data_packet,arduino_checksum):
     except ValueError:
         return False
 
-class ScanDelegate(DefaultDelegate):
-    def __init__(self):
-        DefaultDelegate.__init__(self)
-
-    def handleDiscovery(self, dev, isNewDev, isNewData):
-            if dev.addr in BEETLE_DICT.keys():
-                if not BEETLE_FOUND_DICT[dev.addr]:
-                    BEETLE_FOUND_DICT[dev.addr] = True
-                    print("Beetle %s found!" % (BEETLE_DICT[dev.addr]))
-
 class myThread(threading.Thread):
-    def __init__(self,beetle):
+    def __init__(self,beetle,characteristics):
         threading.Thread.__init__(self)
         self.beetle = beetle
-        self.service = beetle.getServiceByUUID(SERIVCE_ID)
-        self.characteristics = self.service.getCharacteristics()[0]
+        self.characteristics = characteristics
 
     def run(self):
         try:
-            self.beetle.setDelegate(MyDelegate(self.beetle.addr))
-            RECONNECT_BEETLE_DICT[self.beetle.addr] = 0
-            HANDSHAKE_BOOL_DICT[self.beetle.addr] = self.initHandshake()
+            idle_count = 0
             if (HANDSHAKE_BOOL_DICT[self.beetle.addr]):
-                self.receiveData()
-            else:
-                self.beetle._stopHelper()
-                self.beetle.disconnect()
-                self.reconnectBeetle()
-
-        except Exception as e:
-            print(str(e) + " Error in Beetle %s at run: " % (BEETLE_DICT[self.beetle.addr]))
-            HANDSHAKE_BOOL_DICT[self.beetle.addr] = False
-            self.reconnectBeetle()
-        
-
-    
-    #RECONNECT FUNCTION
-    def reconnectBeetle(self):
-        # HANDSHAKE_BOOL_DICT[self.beetle.addr] = False
-        sleep(3)
-        try: 
-            RECONNECT_BEETLE_DICT[self.beetle.addr] += 1
-            print("RECONNECT ATTEMPT %i: Reconnecting to Beetle %s" % (RECONNECT_BEETLE_DICT[self.beetle.addr], BEETLE_DICT[self.beetle.addr]))
-            self.beetle.connect(self.beetle.addr)
-            sleep(3.0)
-            print("RECONNECT ATTEMPT %i: Reconnected to Beetle %s" % (RECONNECT_BEETLE_DICT[self.beetle.addr], BEETLE_DICT[self.beetle.addr]))
-            self.run()
-        except Exception as e:
-            print(str(e) + " Error in Beetle %s at reconnectBeetle: " % (BEETLE_DICT[self.beetle.addr]))
-            print("RECONNECT ATTEMPT %i: Failed to reconnect to Beetle %s. Reattempt to reconnect to Beetle %s" % (RECONNECT_BEETLE_DICT[self.beetle.addr], BEETLE_DICT[self.beetle.addr], BEETLE_DICT[self.beetle.addr]))
-            RECONNECT_BEETLE_DICT[self.beetle.addr] += 1
-            self.reconnectBeetle()
-
-    def receiveData(self):
-        print("Receiving data..")
-        idle_count = 0
-        try:
-            while True:
-                try:
+                while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
+                or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
+                or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
+                    continue
+                print("Receiving data...")
+                while True:
                     if self.beetle.waitForNotifications(2.0):
                         continue
-                    else:
-                        idle_count += 1
-                        if (idle_count == 1):
-                            print("Beetle %s disconnected." % (BEETLE_DICT[self.beetle.addr]))
-                        print("Idle count: " + str(idle_count))
-                        if idle_count > 1: # To be adjusted
-                            idle_count = 0
-                            self.beetle._stopHelper()
-                            self.beetle.disconnect()
-                            self.reconnectBeetle()
-                except Exception as e:
-                    print(str(e) + " Error in Beetle %s at receiveData: " % (BEETLE_DICT[self.beetle.addr]))
-                    self.beetle._stopHelper()
-                    self.beetle.disconnect()
-                    self.reconnectBeetle()
-        except BTLEDisconnectError:
-            print("BTLEDDisconnect Error in Beetle %s at receiveData, attempting to reconnect" % (BEETLE_DICT[self.beetle.addr]))
-            self.reconnectBeetle()
+                    idle_count += 1
+                    print(f"idle count: {idle_count}")
+                    if idle_count == 3:
+                        break
+                print("Error in Beetle %s: %s" % (BEETLE_DICT[self.beetle.addr]))
+                reconnectBeetle(self.beetle)
+                self.reset()                
+                initHandshake(self.beetle,self.characteristics)
+                print("HANDSHAKE COMPLETED AT RUN")
+                self.run()
 
-
-    def initHandshake(self):
-        print("Initializing Handshake Sequence with Beetle %s" % (BEETLE_DICT[self.beetle.addr]))
+        except Exception as e:
+            print("Error in Beetle %s: %s" % (BEETLE_DICT[self.beetle.addr], e))
+            reconnectBeetle(self.beetle)
+            self.reset()
+            initHandshake(self.beetle,self.characteristics)
+            print("HANDSHAKE COMPLETED AT RUN")
+            self.run()
         
-        print("Resetting Device")
+    def reset(self):
+        print("Resetting Beetle %s" % (BEETLE_DICT[self.beetle.addr]))
         self.characteristics.write(bytes(RESET,'utf-8'), withResponse = False)
 
-        ACK_BOOL_DICT[self.beetle.addr] = False
+    
+def initHandshake(beetle, characteristics):
+    print("Initializing Handshake Sequence with Beetle %s" % (BEETLE_DICT[beetle.addr]))
+    
+    print("Resetting Device")
+    characteristics.write(bytes(RESET,'utf-8'), withResponse = False)
+
+    ACK_BOOL_DICT[beetle.addr] = False
+
+    sleep(1.0)
+    
+    handshake_attempts = 1
+    try: 
+        while (handshake_attempts <= 3 and not HANDSHAKE_BOOL_DICT[beetle.addr]):
+            characteristics.write(bytes(HELLO,'utf-8'), withResponse = False)
+            print("HANDSHAKE ATTEMPT %i: HELLO packet sent to Beetle %s" % (handshake_attempts, BEETLE_DICT[beetle.addr]))
+
+            if (beetle.waitForNotifications(3.0) and (ACK_BOOL_DICT[beetle.addr] == True)):
+                characteristics.write(bytes(ACK,'utf-8'),withResponse = False)
+                print("HANDSHAKE ATTEMPT %i: ACK packet sent to Beetle %s" % (handshake_attempts, BEETLE_DICT[beetle.addr]))
+
+                HANDSHAKE_BOOL_DICT[beetle.addr] = True
+                print("Handshake sequence completed. Laptop is successfully connected to Beetle %s" % (BEETLE_DICT[beetle.addr]))
+                # myThread(beetle,characteristics).run()
+                return True
+            handshake_attempts += 1
+
+        if handshake_attempts > 3:
+            HANDSHAKE_BOOL_DICT[beetle.addr] = False
+            print("Handshake sequence with Beetle %s failed. Reattempting handshake..." % (BEETLE_DICT[beetle.addr]))
+            # return False
+            initHandshake(beetle,characteristics)
+    
+    except Exception as e:
+            print(str(e) + " Error handshaking with Beetle %s" % (BEETLE_DICT[beetle.addr]))
+            reconnectBeetle(beetle)
+            initHandshake(beetle,characteristics)
+
+#RECONNECT FUNCTION
+def reconnectBeetle(beetle):
+    HANDSHAKE_BOOL_DICT[beetle.addr] = False
+    beetle._stopHelper()
+    beetle.disconnect()
+    sleep(2.0)
+    try: 
+        print("Reconnecting to Beetle %s" % (BEETLE_DICT[beetle.addr]))
+        beetle.connect(beetle.addr)
+        sleep(1.0)
+        beetle.withDelegate(MyDelegate(beetle.addr))
+        print("Reconnected to Beetle %s" % (BEETLE_DICT[beetle.addr]))
         
-        handshake_attempts = 1
-        try: 
-            while (handshake_attempts <= 3 and not HANDSHAKE_BOOL_DICT[self.beetle.addr]):
-                self.characteristics.write(bytes(HELLO,'utf-8'), withResponse = False)
-                print("HANDSHAKE ATTEMPT %i: HELLO packet sent to Beetle %s" % (handshake_attempts, BEETLE_DICT[self.beetle.addr]))
+    except Exception as e:
+        print(str(e) + " Error reconnecting to Beetle %s" % (BEETLE_DICT[beetle.addr]))
+        reconnectBeetle(beetle)
 
-                if (beetle.waitForNotifications(3.0) and (ACK_BOOL_DICT[self.beetle.addr] == True)):
-                    self.characteristics.write(bytes(ACK,'utf-8'),withResponse = False)
-                    print("HANDSHAKE ATTEMPT %i: ACK packet sent to Beetle %s" % (handshake_attempts, BEETLE_DICT[self.beetle.addr]))
+class ScanDelegate(DefaultDelegate):
+    def __init__(self):
+        DefaultDelegate.__init__(self)
 
-                    HANDSHAKE_BOOL_DICT[self.beetle.addr] = True
-                    print("Handshake sequence completed. Laptop is successfully connected to Beetle %s" % (BEETLE_DICT[self.beetle.addr]))
-                    return True
-                handshake_attempts += 1
+    def handleDiscovery(self, dev, isNewDev, isNewData):
+        if dev.addr in BEETLE_DICT.keys():
+            if not BEETLE_FOUND_DICT[dev.addr]:
+                BEETLE_FOUND_DICT[dev.addr] = True
+                print("Beetle %s found!" % (BEETLE_DICT[dev.addr]))
 
-            if handshake_attempts > 3:
-                HANDSHAKE_BOOL_DICT[self.beetle.addr] = False
-                print("Handshake sequence with Beetle %s failed" % (BEETLE_DICT[self.beetle.addr]))
-                return False
-        except Exception as e:
-            print(str(e) + " Error in Beetle %s at Handshake: " % (BEETLE_DICT[self.beetle.addr]))
-            self.beetle._stopHelper()
-            self.beetle.disconnect()
-            self.reconnectBeetle()
+def establish_connection(addr):
+    try:
+        beetle = btle.Peripheral(addr)
+        print("Established peripheral connection with Beetle %s" % (BEETLE_DICT[discovered.addr]))
+        service = beetle.getServiceByUUID(SERIVCE_ID)
+        characteristics = service.getCharacteristics()[0]
+        beetle.setDelegate(MyDelegate(beetle.addr))
+        handshake_status = initHandshake(beetle,characteristics)
+        while handshake_status == False:
+            initHandshake(beetle,characteristics)
+        myThread(beetle,characteristics).start()
+    except Exception as e:
+        print("Error encountered while establish peripheral connection: %s" % e)
+        print("Reattempting to establish connection with Beetle %s" % (BEETLE_DICT[discovered.addr]))
+        sleep(1.0)
+        establish_connection(addr)
 
 class ScanDelegate(DefaultDelegate):
     def __init__(self):
@@ -360,8 +405,6 @@ class ScanDelegate(DefaultDelegate):
                 if not BEETLE_FOUND_DICT[dev.addr]:
                     BEETLE_FOUND_DICT[dev.addr] = True
                     print("Beetle %s found!" % (BEETLE_DICT[dev.addr]))
-
-    
 
 if __name__ == '__main__':
     scanner = Scanner().withDelegate(ScanDelegate())
@@ -370,13 +413,4 @@ if __name__ == '__main__':
     for discovered in devices:
         if discovered.addr in BEETLE_ALL:
             print("Establishing connection with Beetle %s" % (BEETLE_DICT[discovered.addr]))
-            try:
-                beetle = btle.Peripheral(discovered.addr)
-                print("Established peripheral connection with Beetle %s" % (BEETLE_DICT[discovered.addr]))
-                myThread(beetle).start()
-            except Exception as e:
-                print(e)
-                print("Reattempting to establish connection with Beetle %s" % (BEETLE_DICT[discovered.addr]))
-                sleep(1)
-                beetle = btle.Peripheral(discovered.addr)
-                myThread(beetle).start()
+            beetle = establish_connection(discovered.addr)
