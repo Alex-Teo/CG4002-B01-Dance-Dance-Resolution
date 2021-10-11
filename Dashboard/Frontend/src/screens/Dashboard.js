@@ -105,9 +105,9 @@ const Dashboard = () => {
 
   //useState for processed data
   const [processedData, setProcessedData] = useState({
-    predictedDance: "Not Dancing",
+    predictedDance: "Inactive",
     predictedPos: [1, 2, 3],
-    syncDelay: 0,
+    syncDelay: "-",
   });
 
   // var data = 0;
