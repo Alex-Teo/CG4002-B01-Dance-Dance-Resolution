@@ -16,13 +16,13 @@ function Analytics({
   emgArray,
 }) {
   const dropdownItems = [
-    "EMG",
+    // "EMG",
 
     "Dancer 1 Accelerometer",
     "Dancer 1 Gyroscope",
 
-    // "Dancer 2 Accelerometer",
-    // "Dancer 2 Gyroscope",
+    "Dancer 2 Accelerometer",
+    "Dancer 2 Gyroscope",
 
     // "Dancer 3 Accelerometer",
     // "Dancer 3 Gyroscope",
@@ -35,8 +35,8 @@ function Analytics({
 
   const renderGraph = (choice) => {
     switch (choice) {
-      case "EMG":
-        return <Stream data={emgArray} />;
+      // case "EMG":
+      //   return <Stream data={emgArray} />;
       case "Dancer 1 Accelerometer":
         return <Line data={d1HandAcc} axis={"Accelerometer"} />;
       case "Dancer 1 Gyroscope":
@@ -45,10 +45,10 @@ function Analytics({
         return <Line data={d2HandAcc} axis={"Accelerometer"} />;
       case "Dancer 2 Gyroscope":
         return <Line data={d2HandGyro} axis={"Gyroscope"} />;
-      case "Dancer 3 Accelerometer":
-        return <Line data={d3HandAcc} axis={"Accelerometer"} />;
-      case "Dancer 3 Gyroscope":
-        return <Line data={d3HandGyro} axis={"Gyroscope"} />;
+      // case "Dancer 3 Accelerometer":
+      //   return <Line data={d3HandAcc} axis={"Accelerometer"} />;
+      // case "Dancer 3 Gyroscope":
+      //   return <Line data={d3HandGyro} axis={"Gyroscope"} />;
     }
   };
 
