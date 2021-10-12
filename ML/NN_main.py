@@ -200,10 +200,10 @@ class ML:
 
 
 
-mlclass = ML()
-data = pd.read_csv("C:/Users/Jess/Documents/CG4002/Training_Data/dab_hand.csv")
-for idx,row in data.iterrows():
+#mlclass = ML()
+#data = pd.read_csv("C:/Users/Jess/Documents/CG4002/Training_Data/dab_hand.csv")
+#for idx,row in data.iterrows():
     
-    mlclass.write_data(0, row[1:7].tolist())
-    print(mlclass.predict_single_row(config.MODEL_PATH))
+#    mlclass.write_data(0, row[1:7].tolist())   1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
+#    print(mlclass.predict_single_row(config.MODEL_PATH))
      
