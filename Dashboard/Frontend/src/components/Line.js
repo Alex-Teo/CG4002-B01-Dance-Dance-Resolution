@@ -38,7 +38,7 @@ function Line({ data, axis }) {
         legendOffset: -40,
         legendPosition: "middle",
       }}
-      pointSize={9}
+      pointSize={4}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
       pointBorderColor={{ from: "serieColor" }}

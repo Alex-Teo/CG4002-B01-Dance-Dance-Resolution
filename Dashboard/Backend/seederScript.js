@@ -82,7 +82,7 @@ const importData = async () => {
     await D1RawHandData.deleteMany({});
     // await D2RawHandData.deleteMany({});
     // await D3RawHandData.deleteMany({});
-    await D1RawChestData.deleteMany({});
+    // await D1RawChestData.deleteMany({});
     // await D2RawChestData.deleteMany({});
     // await D3RawChestData.deleteMany({});
     // await EmgData.deleteMany({});
@@ -94,7 +94,7 @@ const importData = async () => {
       await D1RawHandData.insertMany(d1RawHandDataDummy[i]);
       // await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
       // await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
-      await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
+      // await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
       // await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
       // await D3RawChestData.insertMany(d3RawChestDataDummy[i]);
       // await EmgData.insertMany(emgDataDummy[i]);
