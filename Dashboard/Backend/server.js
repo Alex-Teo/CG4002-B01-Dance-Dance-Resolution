@@ -50,7 +50,7 @@ connection.once("open", async () => {
   await connection.dropCollection("d1_raw_hand_datas");
   // await connection.dropCollection("d2_raw_hand_datas");
   // await connection.dropCollection("d3_raw_hand_datas");
-  await connection.dropCollection("d1_raw_chest_datas");
+  // await connection.dropCollection("d1_raw_chest_datas");
   // await connection.dropCollection("d2_raw_chest_datas");
   // await connection.dropCollection("d3_raw_chest_datas");
   // await connection.dropCollection("emg_datas");
@@ -61,7 +61,7 @@ connection.once("open", async () => {
   await connection.createCollection("d1_raw_hand_datas");
   // await connection.createCollection("d2_raw_hand_datas");
   // await connection.createCollection("d3_raw_hand_datas");
-  await connection.createCollection("d1_raw_chest_datas");
+  // await connection.createCollection("d1_raw_chest_datas");
   // await connection.createCollection("d2_raw_chest_datas");
   // await connection.createCollection("d3_raw_chest_datas");
   // await connection.createCollection("emg_datas");
@@ -74,7 +74,7 @@ connection.once("open", async () => {
   // const D2HandDataStream = connection.collection("d2_raw_hand_datas").watch();
   // const D3HandDataStream = connection.collection("d3_raw_hand_datas").watch();
   // const EmgDataStream = connection.collection("emg_datas").watch();
-  const D1ChestDataStream = connection.collection("d1_raw_chest_datas").watch();
+  // const D1ChestDataStream = connection.collection("d1_raw_chest_datas").watch();
   // const D2ChestDataStream = connection.collection("d2_raw_chest_datas").watch();
   // const D3ChestDataStream = connection.collection("d3_raw_chest_datas").watch();
   const ProcessedDataStream = connection.collection("processed_datas").watch();
@@ -83,7 +83,7 @@ connection.once("open", async () => {
 
   // ---------------- Emit on Change ---------------- //
   // FIXME: To add in relevant collections after week 9
-  const sampling = 10;
+  const sampling = 1;
   const samplingProcessed = 1;
   var a, b, c, d, e, f;
   a = b = c = d = e = f = 0;
@@ -278,56 +278,56 @@ connection.once("open", async () => {
   let chestaX, chestaY, chestaZ, chestgX, chestgY, chestgZ;
   chestaX = chestaY = chestaZ = chestgX = chestgY = chestgZ = 0;
 
-  D1ChestDataStream.on("change", (change) => {
-    switch (change.operationType) {
-      case "insert":
-        const RawData = {
-          aX: change.fullDocument.aX,
-          aY: change.fullDocument.aY,
-          aZ: change.fullDocument.aZ,
-          gX: change.fullDocument.gX,
-          gY: change.fullDocument.gY,
-          gZ: change.fullDocument.gZ,
-        };
+  // D1ChestDataStream.on("change", (change) => {
+  //   switch (change.operationType) {
+  //     case "insert":
+  //       const RawData = {
+  //         aX: change.fullDocument.aX,
+  //         aY: change.fullDocument.aY,
+  //         aZ: change.fullDocument.aZ,
+  //         gX: change.fullDocument.gX,
+  //         gY: change.fullDocument.gY,
+  //         gZ: change.fullDocument.gZ,
+  //       };
 
-        // Get cumulative in a sample
-        chestaX += Number(RawData.aX);
-        chestaY += Number(RawData.aY);
-        chestaZ += Number(RawData.aZ);
-        chestgX += Number(RawData.gX);
-        chestgY += Number(RawData.gY);
-        chestgZ += Number(RawData.gZ);
+  //       // Get cumulative in a sample
+  //       chestaX += Number(RawData.aX);
+  //       chestaY += Number(RawData.aY);
+  //       chestaZ += Number(RawData.aZ);
+  //       chestgX += Number(RawData.gX);
+  //       chestgY += Number(RawData.gY);
+  //       chestgZ += Number(RawData.gZ);
 
-        // Send ave data at a specified freq
-        if (f % sampling == 0) {
-          chestaX = chestaX / sampling;
-          chestaY = chestaY / sampling;
-          chestaZ = chestaZ / sampling;
-          chestgX = chestgX / sampling;
-          chestgY = chestgY / sampling;
-          chestgZ = chestgZ / sampling;
+  //       // Send ave data at a specified freq
+  //       if (f % sampling == 0) {
+  //         chestaX = chestaX / sampling;
+  //         chestaY = chestaY / sampling;
+  //         chestaZ = chestaZ / sampling;
+  //         chestgX = chestgX / sampling;
+  //         chestgY = chestgY / sampling;
+  //         chestgZ = chestgZ / sampling;
 
-          const FinalData = {
-            acc: {
-              aX: chestaX.toFixed(2),
-              aY: chestaY.toFixed(2),
-              aZ: chestaZ.toFixed(2),
-            },
-            gyro: {
-              gX: chestgX.toFixed(2),
-              gY: chestgY.toFixed(2),
-              gZ: chestgZ.toFixed(2),
-            },
-          };
+  //         const FinalData = {
+  //           acc: {
+  //             aX: chestaX.toFixed(2),
+  //             aY: chestaY.toFixed(2),
+  //             aZ: chestaZ.toFixed(2),
+  //           },
+  //           gyro: {
+  //             gX: chestgX.toFixed(2),
+  //             gY: chestgY.toFixed(2),
+  //             gZ: chestgZ.toFixed(2),
+  //           },
+  //         };
 
-          io.emit("newD1ChestData", FinalData);
+  //         io.emit("newD1ChestData", FinalData);
 
-          chestaX = chestaY = chestaY = chestgX = chestgY = chestgZ = 0;
-        }
+  //         chestaX = chestaY = chestaY = chestgX = chestgY = chestgZ = 0;
+  //       }
 
-        f += 1;
-    }
-  });
+  //       f += 1;
+  //   }
+  // });
 
   let tempD1Emg, tempD2Emg, tempD3Emg;
   tempD1Emg = tempD2Emg = tempD3Emg = 0;

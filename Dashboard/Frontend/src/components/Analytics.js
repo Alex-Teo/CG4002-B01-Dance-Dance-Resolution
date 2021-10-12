@@ -21,8 +21,8 @@ function Analytics({
   const dropdownItems = [
     // "EMG",
 
-    "Dancer Chest Accelerometer",
-    "Dancer Chest Gyroscope",
+    // "Dancer Chest Accelerometer",
+    // "Dancer Chest Gyroscope",
 
     // "Dancer 2 Accelerometer",
     // "Dancer 2 Gyroscope",
@@ -43,10 +43,10 @@ function Analytics({
     switch (choice) {
       // case "EMG":
       //   return <Stream data={emgArray} />;
-      case "Dancer Chest Accelerometer":
-        return <Line data={d1ChestAcc} axis={"Accelerometer"} />;
-      case "Dancer Chest Gyroscope":
-        return <Line data={d1ChestGyro} axis={"Gyroscope"} />;
+      // case "Dancer Chest Accelerometer":
+      //   return <Line data={d1ChestAcc} axis={"Accelerometer"} />;
+      // case "Dancer Chest Gyroscope":
+      //   return <Line data={d1ChestGyro} axis={"Gyroscope"} />;
       // case "Dancer 2 Accelerometer":
       //   return <Line data={d2HandAcc} axis={"Accelerometer"} />;
       // case "Dancer 2 Gyroscope":

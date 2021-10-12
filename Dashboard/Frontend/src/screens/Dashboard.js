@@ -407,34 +407,34 @@ const Dashboard = () => {
     //   // console.log("d3", d3HandAcc, d3HandGyro);
     // });
 
-    socket.on("newD1ChestData", (FinalData) => {
-      let tempD1ChestAcc = d1ChestAcc;
-      let tempD1ChestGyro = d1ChestGyro;
+    // socket.on("newD1ChestData", (FinalData) => {
+    //   let tempD1ChestAcc = d1ChestAcc;
+    //   let tempD1ChestGyro = d1ChestGyro;
 
-      if (tempD1ChestAcc[0].data.length > 10) {
-        tempD1ChestAcc[0].data.shift();
-        tempD1ChestAcc[1].data.shift();
-        tempD1ChestAcc[2].data.shift();
-      }
-      if (tempD1ChestGyro[0].data.length > 10) {
-        tempD1ChestGyro[0].data.shift();
-        tempD1ChestGyro[1].data.shift();
-        tempD1ChestGyro[2].data.shift();
-      }
-      tempD1ChestAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-      tempD1ChestAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-      tempD1ChestAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+    //   if (tempD1ChestAcc[0].data.length > 10) {
+    //     tempD1ChestAcc[0].data.shift();
+    //     tempD1ChestAcc[1].data.shift();
+    //     tempD1ChestAcc[2].data.shift();
+    //   }
+    //   if (tempD1ChestGyro[0].data.length > 10) {
+    //     tempD1ChestGyro[0].data.shift();
+    //     tempD1ChestGyro[1].data.shift();
+    //     tempD1ChestGyro[2].data.shift();
+    //   }
+    //   tempD1ChestAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
+    //   tempD1ChestAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
+    //   tempD1ChestAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
 
-      tempD1ChestGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-      tempD1ChestGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-      tempD1ChestGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+    //   tempD1ChestGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
+    //   tempD1ChestGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
+    //   tempD1ChestGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
 
-      d4Time += 1;
-      console.log(tempD1ChestAcc);
-      setD1ChestAcc(tempD1ChestAcc);
-      setD1ChestGyro(tempD1ChestGyro);
-      // console.log("d3", d3HandAcc, d3HandGyro);
-    });
+    //   d4Time += 1;
+    //   console.log(tempD1ChestAcc);
+    //   setD1ChestAcc(tempD1ChestAcc);
+    //   setD1ChestGyro(tempD1ChestGyro);
+    // console.log("d3", d3HandAcc, d3HandGyro);
+    // });
 
     // Socket for Emg data
     // {d1Emg:num, d2Emg:num, d3Emg:num}
