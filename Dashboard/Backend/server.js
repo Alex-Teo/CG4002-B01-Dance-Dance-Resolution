@@ -377,18 +377,25 @@ connection.once("open", async () => {
       case "insert":
         const ProcessedData = {
           predictedDance: change.fullDocument.predictedDance,
-          predictedPos: change.fullDocument.predictedPos
-            .split(" | ")
-            .map(Number),
-          syncDelay: Number(change.fullDocument.syncDelay),
+          // predictedPos: change.fullDocument.predictedPos
+          //   .split(" | ")
+          //   .map(Number),
+          // syncDelay: Number(change.fullDocument.syncDelay),
         };
         if (e % samplingProcessed == 0) {
           io.emit("newProcessedData", ProcessedData);
           e = 0;
         }
         e += 1;
-      // console.log("Server emit processeddata");
-      // console.log("Processed", ProcessedData);
+        // console.log("Server emit processeddata");
+        var today = new Date();
+        var time =
+          today.getHours() +
+          ":" +
+          today.getMinutes() +
+          ":" +
+          today.getSeconds();
+        console.log(time, ProcessedData);
     }
   });
 });

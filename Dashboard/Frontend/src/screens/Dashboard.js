@@ -464,9 +464,9 @@ const Dashboard = () => {
         <div className="users">
           <UserCard
             dancerId="Dancer 1"
-            syncDelay={processedData.syncDelay}
+            syncDelay={0}
             currentDance={processedData.predictedDance}
-            currentPos={processedData.predictedPos.indexOf(1)}
+            // currentPos={processedData.predictedPos.indexOf(1)}
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
@@ -476,7 +476,7 @@ const Dashboard = () => {
             // currentDance={processedData.predictedDance}
             syncDelay={0}
             currentDance={"Inactive"}
-            currentPos={processedData.predictedPos.indexOf(2)}
+            // currentPos={processedData.predictedPos.indexOf(2)}
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
@@ -486,7 +486,7 @@ const Dashboard = () => {
             // currentDance={processedData.predictedDance}
             syncDelay={0}
             currentDance={"Inactive"}
-            currentPos={processedData.predictedPos.indexOf(3)}
+            // currentPos={processedData.predictedPos.indexOf(3)}
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />

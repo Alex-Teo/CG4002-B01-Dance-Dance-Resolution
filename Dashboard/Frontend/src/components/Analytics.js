@@ -38,6 +38,10 @@ function Analytics({
     setTitle(item);
   };
 
+  useEffect(() => {
+    setTitle(title);
+  });
+
   // FIXME: To add in relevant collections after week 9
   const renderGraph = (choice) => {
     switch (choice) {
