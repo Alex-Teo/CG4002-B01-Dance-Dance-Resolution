@@ -59,7 +59,7 @@ logging.basicConfig(
     format="[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s",
     handlers=handlers,
 )
-logger = logging.getLogger("ultra96")
+logger = logging.getLogger("laptop")
 
 
 class MyDelegate(btle.DefaultDelegate):
@@ -168,9 +168,9 @@ class MyDelegate(btle.DefaultDelegate):
                 # print("Checksum Correct")
                 beetle_num = BEETLE_DICT[self.beetle_addr]
                 if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
-                    beetle_pos = "Chest"
+                    beetle_pos = 1 #"Chest"
                 else:
-                    beetle_pos = "Hand"
+                    beetle_pos = 0 #"Hand"
 
                 # print("Data from: Beetle " + str(beetle_num))
                 data_type = PACKET_DICT[packet[0]]
@@ -181,25 +181,19 @@ class MyDelegate(btle.DefaultDelegate):
                 gyroy = packet[6]
                 gyroz = packet[7]
                 moving = packet[1]
-                if (moving == b'Y' and beetle_pos == "Hand"):
+                if (moving == b'Y' and beetle_pos == 0):
                     moving_status = "Hand Moving"
                     HAND_MOVING = True
-                elif (moving == b'N' and beetle_pos == "Hand"):
+                elif (moving == b'N' and beetle_pos == 0):
                     moving_status = "Hand Not Moving"
                     HAND_MOVING = False
-                elif (moving == b'N' and beetle_pos == "Chest"):
+                elif (moving == b'N' and beetle_pos == 1):
                     moving_status = "Chest Not Moving"
-                elif (moving == b'Y' and beetle_pos == "Chest"):
+                elif (moving == b'Y' and beetle_pos == 1):
                     moving_status = "Chest Moving"
 
-                logger.info(f"{beetle_pos} Beetle Moving Status: " + str(moving_status))
-                # print(type(accx))
-                # print(type(accy))
-                # print(type(accz))
-                # print(type(gyrox))
-                # print(type(gyroy))
-                # print(type(gyroz))
-
+                logger.info(f"{BEETLE_TYPE[self.beetle_addr]} Beetle Moving Status: " + str(moving_status))
+    
                 # Dont detect to see if chest is moving, just record data
                 if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
                     try:
@@ -325,10 +319,10 @@ class myThread(threading.Thread):
             try:
                 idle_count = 0
                 if (HANDSHAKE_BOOL_DICT[self.beetle.addr]):
-                    while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
-                    or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
-                    or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
-                        continue
+                    # while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
+                    # or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
+                    # or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
+                    #     continue
                     logger.info(f"Receiving data from {BEETLE_TYPE[self.beetle.addr]} Beetle...")
                     while True:
                         if self.beetle.waitForNotifications(2.0):
