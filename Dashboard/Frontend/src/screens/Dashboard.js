@@ -348,13 +348,13 @@ const Dashboard = () => {
         tempD2HandGyro[1].data.shift();
         tempD2HandGyro[2].data.shift();
       }
-      tempD2HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-      tempD2HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-      tempD2HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+      tempD2HandAcc[0].data.push({ x: d2Time, y: FinalData.acc.aX });
+      tempD2HandAcc[1].data.push({ x: d2Time, y: FinalData.acc.aY });
+      tempD2HandAcc[2].data.push({ x: d2Time, y: FinalData.acc.aZ });
 
-      tempD2HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-      tempD2HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-      tempD2HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+      tempD2HandGyro[0].data.push({ x: d2Time, y: FinalData.gyro.gX });
+      tempD2HandGyro[1].data.push({ x: d2Time, y: FinalData.gyro.gY });
+      tempD2HandGyro[2].data.push({ x: d2Time, y: FinalData.gyro.gZ });
 
       d2Time += 1;
       setD2HandAcc(tempD2HandAcc);
@@ -376,13 +376,13 @@ const Dashboard = () => {
         tempD3HandGyro[1].data.shift();
         tempD3HandGyro[2].data.shift();
       }
-      tempD3HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-      tempD3HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-      tempD3HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+      tempD3HandAcc[0].data.push({ x: d3Time, y: FinalData.acc.aX });
+      tempD3HandAcc[1].data.push({ x: d3Time, y: FinalData.acc.aY });
+      tempD3HandAcc[2].data.push({ x: d3Time, y: FinalData.acc.aZ });
 
-      tempD3HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-      tempD3HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-      tempD3HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+      tempD3HandGyro[0].data.push({ x: d3Time, y: FinalData.gyro.gX });
+      tempD3HandGyro[1].data.push({ x: d3Time, y: FinalData.gyro.gY });
+      tempD3HandGyro[2].data.push({ x: d3Time, y: FinalData.gyro.gZ });
 
       d3Time += 1;
       setD3HandAcc(tempD3HandAcc);
@@ -439,7 +439,7 @@ const Dashboard = () => {
     //   setD1ChestGyro(tempD1ChestGyro);
     // console.log("d3", d3HandAcc, d3HandGyro);
     // });
-  }, []);
+  });
 
   return (
     <div className="dashboardWrapper">
@@ -448,8 +448,8 @@ const Dashboard = () => {
         screenDesc="A closer look at your performance"
       />
 
-      <div className="cardWrapper">
-        <div className="users">
+      <div className="info_wrapper">
+        <div className="users_wrapper">
           <UserCard
             dancerId="Dancer 1"
             syncDelay={processedData.syncDelay}
@@ -474,7 +474,7 @@ const Dashboard = () => {
             coachDance={coachData.actualDance}
             coachPos={coachData.actualPositions}
           />
-          <div className="graph">
+          <div className="graph_wrapper">
             <Analytics
               d1HandAcc={d1HandAcc}
               d2HandAcc={d2HandAcc}
@@ -487,7 +487,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="coach">
+        <div className="coach_wrapper">
           <CoachCard
             currentDance={coachData.actualDance}
             actualPositions={coachData.actualPositions}
