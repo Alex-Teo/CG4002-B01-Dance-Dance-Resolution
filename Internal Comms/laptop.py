@@ -48,6 +48,11 @@ DATA_LIST_2 = []
 
 SEND_BUFFER = []
 
+try:
+    os.mkdir('logs')
+except FileExistsError:
+    pass
+
 #logging setup
 filehandler = logging.FileHandler(
     filename=f'logs/laptop_{time.strftime("%H%M%S-%Y%m%d")}.log'
