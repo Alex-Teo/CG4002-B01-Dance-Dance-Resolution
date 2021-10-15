@@ -34,6 +34,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 const connection = mongoose.connection;
 connection.on(
   "error",
@@ -42,29 +43,6 @@ connection.on(
 
 connection.once("open", async () => {
   console.log("MongoDB: Connected");
-
-  // await connection.dropCollection("d1_raw_hand_datas");
-  // await connection.dropCollection("d2_raw_hand_datas");
-  // await connection.dropCollection("d3_raw_hand_datas");
-  // await connection.dropCollection("d1_raw_chest_datas");
-  // await connection.dropCollection("d2_raw_chest_datas");
-  // await connection.dropCollection("d3_raw_chest_datas");
-  // await connection.dropCollection("emg_datas");
-  // await connection.dropCollection("processed_datas");
-  // await connection.dropCollection("coach_datas");
-  // console.log(" MongoDB: Deleted old collections");
-
-  // await connection.createCollection("d1_raw_hand_datas");
-  // await connection.createCollection("d2_raw_hand_datas");
-  // await connection.createCollection("d3_raw_hand_datas");
-  // await connection.createCollection("d1_raw_chest_datas");
-  // await connection.createCollection("d2_raw_chest_datas");
-  // await connection.createCollection("d3_raw_chest_datas");
-  // await connection.createCollection("emg_datas");
-  // await connection.createCollection("processed_datas");
-  // await connection.createCollection("coach_datas");
-  // console.log(" MongoDB: Creating fresh collections");
-
   console.log(" MongoDB: Importing dummy data...");
   importData();
 });
@@ -78,27 +56,29 @@ const importData = async () => {
     let delay = 100; //20hz -> 50
 
     // Clear exisiting collections
-    await ProcessedData.deleteMany({});
+
     await D1RawHandData.deleteMany({});
-    // await D2RawHandData.deleteMany({});
-    // await D3RawHandData.deleteMany({});
+    await D2RawHandData.deleteMany({});
+    await D3RawHandData.deleteMany({});
+    await ProcessedData.deleteMany({});
+    await EmgData.deleteMany({});
+    await CoachData.deleteMany({});
     // await D1RawChestData.deleteMany({});
     // await D2RawChestData.deleteMany({});
     // await D3RawChestData.deleteMany({});
-    // await EmgData.deleteMany({});
-    // await CoachData.deleteMany({});
 
     // Add in dummy data w delay
     for (var i = 0; i < coachDataDummy.length; i++) {
-      await ProcessedData.insertMany(processedDataDummy[i]);
       await D1RawHandData.insertMany(d1RawHandDataDummy[i]);
-      // await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
-      // await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
+      await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
+      await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
+      await EmgData.insertMany(emgDataDummy[i]);
+      await ProcessedData.insertMany(processedDataDummy[i]);
+      await CoachData.insertMany(coachDataDummy[i]);
       // await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
       // await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
       // await D3RawChestData.insertMany(d3RawChestDataDummy[i]);
-      // await EmgData.insertMany(emgDataDummy[i]);
-      // await CoachData.insertMany(coachDataDummy[i]);
+
       await timer(delay);
     }
 

@@ -1,8 +1,3 @@
-.dashboardWrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
 h1 {
   font-size: 40px;
   font-weight: 800;
@@ -14,19 +9,12 @@ h2 {
   line-height: 20%;
 }
 
-.timestamp {
-  justify-self: right;
-  text-align: center;
-  line-height: 20%;
-  width: 250px;
+.dashboardWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
-.timestamp h2 {
-  line-height: 70%;
-  padding-top: -10px;
-}
-
-.cardWrapper {
+.info_wrapper {
   display: grid;
   grid-template-columns: 3fr 1fr;
   justify-items: space-evenly;
@@ -35,17 +23,18 @@ h2 {
   padding: 0 50px 50px 50px;
 }
 
-.users {
+.users_wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 20px;
 }
 
-.graph {
+.graph_wrapper {
   grid-column: 1/4;
   height: 300px;
 }
-.fatigue {
+
+.coach_wrapper {
   text-align: center;
   font-weight: 600;
   font-size: 40px;

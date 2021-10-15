@@ -14,25 +14,21 @@ function Analytics({
   d2HandGyro,
   d3HandGyro,
   emgArray,
-  d1ChestAcc,
-  d1ChestGyro,
 }) {
-  // FIXME: To add in relevant collections after week 9
   const dropdownItems = [
-    // "EMG",
+    "EMG",
 
-    // "Dancer Chest Accelerometer",
-    // "Dancer Chest Gyroscope",
+    "Dancer 1 Accelerometer",
+    "Dancer 1 Gyroscope",
 
-    // "Dancer 2 Accelerometer",
-    // "Dancer 2 Gyroscope",
+    "Dancer 2 Accelerometer",
+    "Dancer 2 Gyroscope",
 
-    // "Dancer 3 Accelerometer",
-    // "Dancer 3 Gyroscope",
-    "Dancer Hand Accelerometer",
-    "Dancer Hand Gyroscope",
+    "Dancer 3 Accelerometer",
+    "Dancer 3 Gyroscope",
   ];
-  const [title, setTitle] = useState("Dancer Hand Accelerometer");
+
+  const [title, setTitle] = useState("Dancer 1 Accelerometer");
 
   const handleChange = (item) => {
     setTitle(item);
@@ -42,27 +38,22 @@ function Analytics({
     setTitle(title);
   });
 
-  // FIXME: To add in relevant collections after week 9
   const renderGraph = (choice) => {
     switch (choice) {
-      // case "EMG":
-      //   return <Stream data={emgArray} />;
-      // case "Dancer Chest Accelerometer":
-      //   return <Line data={d1ChestAcc} axis={"Accelerometer"} />;
-      // case "Dancer Chest Gyroscope":
-      //   return <Line data={d1ChestGyro} axis={"Gyroscope"} />;
-      // case "Dancer 2 Accelerometer":
-      //   return <Line data={d2HandAcc} axis={"Accelerometer"} />;
-      // case "Dancer 2 Gyroscope":
-      //   return <Line data={d2HandGyro} axis={"Gyroscope"} />;
-      // case "Dancer 3 Accelerometer":
-      //   return <Line data={d3HandAcc} axis={"Accelerometer"} />;
-      // case "Dancer 3 Gyroscope":
-      //   return <Line data={d3HandGyro} axis={"Gyroscope"} />;
-      case "Dancer Hand Accelerometer":
+      case "EMG":
+        return <Stream data={emgArray} />;
+      case "Dancer 1 Accelerometer":
         return <Line data={d1HandAcc} axis={"Accelerometer"} />;
-      case "Dancer Hand Gyroscope":
+      case "Dancer 1 Gyroscope":
         return <Line data={d1HandGyro} axis={"Gyroscope"} />;
+      case "Dancer 2 Accelerometer":
+        return <Line data={d2HandAcc} axis={"Accelerometer"} />;
+      case "Dancer 2 Gyroscope":
+        return <Line data={d2HandGyro} axis={"Gyroscope"} />;
+      case "Dancer 3 Accelerometer":
+        return <Line data={d3HandAcc} axis={"Accelerometer"} />;
+      case "Dancer 3 Gyroscope":
+        return <Line data={d3HandGyro} axis={"Gyroscope"} />;
     }
   };
 
