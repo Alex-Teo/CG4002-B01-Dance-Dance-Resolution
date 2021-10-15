@@ -450,13 +450,15 @@ class ScanDelegate(DefaultDelegate):
                     BEETLE_FOUND_DICT[dev.addr] = True
                     logger.info(f"Beetle {BEETLE_DICT[dev.addr]} found!")
 
-
-
-if __name__ == '__main__':
+def main():
     scanner = Scanner().withDelegate(ScanDelegate())
     devices = scanner.scan(3.0)
 
     for discovered in devices:
         if discovered.addr in BEETLE_ALL:
             logger.info(f"Establishing connection with Beetle {BEETLE_DICT[discovered.addr]}")
-            beetle = establish_connection(discovered.addr)
+            establish_connection(discovered.addr)
+
+
+if __name__ == '__main__':
+    main()
