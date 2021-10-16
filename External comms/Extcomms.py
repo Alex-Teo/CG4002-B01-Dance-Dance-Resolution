@@ -13,8 +13,7 @@ from queue import Queue
 from scipy import stats
 import pymongo
 from pymongo import MongoClient
-#import pika
-import config
+import ML.config as config
 
 
 from twisted.internet import reactor  #with twisted library, handles everything including multiple connections
@@ -22,7 +21,7 @@ from twisted.internet.protocol import Factory
 from twisted.protocols.basic import LineReceiver
 
 from eval_client import ACTIONS, Client
-from NN import ML
+from ML.NN_main import ML
 
 IP_ADDRESS = os.environ["IP_ADDRESS"]
 EVAL_PORT = int(os.environ["EVAL_PORT"])
@@ -42,6 +41,14 @@ logging.basicConfig(
     handlers=handlers,
 )
 logger = logging.getLogger("ultra96")
+
+client = MongoClient(
+
+    "mongodb://172.31.23.100:2717/data"
+)
+
+db = client
+data = db.data
 
 
 
@@ -102,7 +109,7 @@ class LaptopSide(LineReceiver):
             (
                 dancer_id,
                 data_type,
-                #float(yaw),    #angle for these 3
+                #float(yaw),    #angle for these 3  keep here for now, can delete later
                 #float(pitch),
                 #float(roll),
                 gyrox,
@@ -118,9 +125,6 @@ class LaptopSide(LineReceiver):
             # appends data for each dancer to window
             dancer_id = int(dancer_id)    #add time stamp here, then - incoming data
             gyrox, gyroy, gyroz, accx, accy, accz, lapt_time= (
-                #float(yaw),
-                #float(pitch),
-                #float(roll),
                 float(gyrox),
                 float(gyroy),
                 float(gyroz),
@@ -138,59 +142,50 @@ class LaptopSide(LineReceiver):
             print("Dancer ", dancer_id, data_type, gyrox, gyroy, gyroz, accx, accy, accz, emg, self.persistent_data.counter)  
 
             data_type = int(data_type)
-#
-            #client = MongoClient(
-#
-#
-            #    "mongodb+srv://b01:b01@dashboard.jc4ln.mongodb.net/data_dummy?retryWrites=true&w=majority"
-            #)
-#
-            #db = client
-            #data = db.data
-#
-            #raw_data = {
-            #    "userID": dancer_id,
-            #    "ax": accx,
-            #    "ay": accy,
-            #    "az": accz,
-            #    "gx": gyrox,
-            #    "gy": gyroy,
-            #    "gz": gyroz,
-            #    "emg": emg,
-            #}
-#
-            #if dancer_id == 1:
-            #    if data_type == 0:
-            #        data.d1_raw_hand_datas.insert(raw_data)
-            #    ##elif data_type == 1:
-            #    ##    data.d1_raw_chest_datas(raw_data)
-            #elif dancer_id == 2:
-            #    if data_type == 0:
-            #        data.d2_raw_hand_datas.insert(raw_data)
-            #    #elif data_type == 1:
-            #    #    data.d2_raw_chest_datas.insert(raw_data)
-            #elif dancer_id == 3:
-            #    if data_type == 0:
-            #        data.d3_raw_hand_datas.insert(raw_data)
-            #    #elif data_type == 1:
-            #    #    data.d3_raw_chest_datas.insert(raw_data)
 
 
-            #data_dummy.trial_test.insert(raw_data)
+            raw_data = {
+                "userID": str(dancer_id),
+                "aX": str(accx),
+                "aY": str(accy),
+                "aZ": str(accz),
+                "gX": str(gyrox),
+                "gY": str(gyroy),
+                "gZ": str(gyroz),
+                "emg": str(emg),
+            }
+
+            if dancer_id == 1:
+                if data_type == 0:
+                    data.d1_raw_hand_datas.insert(raw_data)
+                ##elif data_type == 1:
+                ##    data.d1_raw_chest_datas(raw_data)
+            elif dancer_id == 2:
+                if data_type == 0:
+                    data.d2_raw_hand_datas.insert(raw_data)
+                #elif data_type == 1:
+                #    data.d2_raw_chest_datas.insert(raw_data)
+            elif dancer_id == 3:
+                if data_type == 0:
+                    data.d3_raw_hand_datas.insert(raw_data)
+                #elif data_type == 1:
+                #    data.d3_raw_chest_datas.insert(raw_data)
+
+
 
 
             if self.skipInitialReadings(dancer_id, data_type): #throw away initial data, akin to scale zeroing
                 return
             
-            if self.persistent_data.is_idle:     #movement start flag
-                if self.persistent_data.counter % 100 == 0:
-                    print("idling")
-                if abs(gyrox) >= 1 or abs(gyroz) >= 1:   #both originally 50, 1 for dummy testing purposes
-                    self.persistent_data.init_counter -= 1
-                    if self.persistent_data.init_counter == 0:
-                        self.persistent_data.is_idle = False
-                        print("starting")
-                return
+            #if self.persistent_data.is_idle:     #movement start flag        can just leave here for now, can delete later see how
+            #    if self.persistent_data.counter % 100 == 0:
+            #        print("idling")
+            #    if abs(gyrox) >= 1 or abs(gyroz) >= 1:   #both originally 50, 1 for dummy testing purposes
+            #        self.persistent_data.init_counter -= 1
+            #        if self.persistent_data.init_counter == 0:
+            #            self.persistent_data.is_idle = False
+            #            print("starting")
+            #    return
             if data_type == 0:
                 self.persistent_data.mlclass.write_data(
                     dancer_id,
@@ -249,11 +244,8 @@ class LaptopFactory(Factory):
 
 def format_results(dance_moves): #, positions, pos, sync_delay):
     #new_positions = dancemoves.swap_positions(positions, pos)
-    #sync_delay = (random.random() if sync_delay == -1 else sync_delay) * 1000
-    #accuracy = random.randrange(60, 100) / 100
-    eval_results = f"{dance_moves}"
-    dashboard_results = f"{dance_moves}"
-    #eval_results = f"{new_positions[0]} {new_positions[1]} {new_positions[2]}|{dance_move}|{sync_delay}|"
+    eval_results = f"1 2 3|{dance_move}|1.2|"
+    dashboard_results = {"predictedDance": dance_moves}  #will update later depending on how you set schema amir
     #dashboard_results = f"{positions[0]} {positions[1]} {positions[2]}|{dance_move}|{new_positions[0]} {new_positions[1]} {new_positions[2]}|{sync_delay}|{accuracy}"
 
     return eval_results, dashboard_results
@@ -263,27 +255,17 @@ def format_results(dance_moves): #, positions, pos, sync_delay):
 if __name__ == "__main__":
     #logger.info("Started server on port %d" % DANCE_PORT)
 
-    # setup dashboard queue
-    #if IS_DASHBOARD:  #send to backend system, run website on the computer
-    #    #CLOUDAMQP_URL = "amqps://yjxagmuu:9i_-oo9VNSh5w4DtBxOlB6KLLOMLWlgj@mustang.rmq.cloudamqp.com/yjxagmuu"
-    #    params = pika.URLParameters(CLOUDAMQP_URL)
-    #    params.socket_timeout = 5
-    #    connection = pika.BlockingConnection(params)
-    #    channel = connection.channel()
-    #    channel.queue_declare(queue="results")
 
     
-    
-
-
-    
-    mqueue = Queue() #to communicate with thread
+    #mqueue = Queue() #to communicate with thread
     try:
         reactor.listenTCP(8000, LaptopFactory())
         thread = threading.Thread(target=reactor.run, args=(False,))
         thread.start()
 
-        input("Press any input to start evaluation server")
+        mqueue = Queue() #to communicate with thread
+
+        input("Press any input to start evaluation server")  #press enter
 
         group_id = "B01"
         secret_key = "1234123412341234"
@@ -291,23 +273,27 @@ if __name__ == "__main__":
         my_client.send_message("1 2 3" + "|" + "start" + "|" + "1.5" + "|")
         #logger.info(f"received positions: {positions}")
         counter = 1
-        #client = MongoClient(
-#
-        #        "mongodb+srv://b01:b01@dashboard.jc4ln.mongodb.net/data_dummy?retryWrites=true&w=majority"
-        #    )
-#
-        #db = client
-        #data = db.data
-
+        
+        start_time = time.time()
         while True:
-            while not mqueue.empty():  #get data, do formating, send data to client server for evaluation
-                dance_moves = mqueue.get()
+            current_time = time.time()
+            if (current_time - start_time >=0.3) and not mqueue.empty():  #get data, do formating, send data to client server for evaluation
+                #dance_moves = mqueue.get()
+                #dance_move = stats.mode(dance_moves)[0][0]
+                temp_move = list(mqueue.queue)
+                dance_movefake = stats.mode(temp_move)[0][0]
+                dashboard_results = {"predictedDance" : dance_movefake}
+                data.processed_datas.insert(dashboard_results)
+                start_time = current_time
+
+            if mqueue.qsize() >= 10:   #should we lower a bit see how?
+                dance_moves = list(mqueue.queue)
                 dance_move = stats.mode(dance_moves)[0][0]
 
-                if counter == 33:
-                    dance_move = "logout"
-                elif counter < 33 and dance_move == "logout":
-                    dance_move = random.choice(ACTIONS)
+                #if counter == 33:    #next update or so need to settle logout move
+                #    dance_move = "logout"
+                #elif counter < 33 and dance_move == "logout":
+                #    dance_move = random.choice(ACTIONS)
 
                 logger.info(f"predictions: {(dance_move)}")
                 eval_results, dashboard_results = format_results(
@@ -317,7 +303,7 @@ if __name__ == "__main__":
                 logger.info(f"eval_results: {eval_results}")
                 logger.info(f"dashboard_results: {dashboard_results}")
 
-                #data.processed_datas.insert(dashboard_results)
+                data.processed_datas.insert(dashboard_results)
 
                 my_client.send_message(eval_results)
                 positions = my_client.receive_dancer_position()
@@ -327,7 +313,9 @@ if __name__ == "__main__":
 
         
 
+    #except Exception as e:  for testing
     except KeyboardInterrupt:
+        logger.info(e)
         thread.join()
         print("Terminating")
 
