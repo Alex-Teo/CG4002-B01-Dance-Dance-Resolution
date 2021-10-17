@@ -7,18 +7,18 @@ import { IoChatbubbleOutline } from "react-icons/io5";
 function CoachCard({ currentDance, actualPositions, dancerDance, dancerPos }) {
   return (
     <div>
-      <Card id="coachCard">
+      <Card className="coach_card_wrapper">
         <Card.Body>
-          <Card.Title className="cardTitle">Coach</Card.Title>
+          <Card.Title className="card_title">Coach</Card.Title>
           <Card.Text>
-            <div className="miniCard">
+            <div className="sub_card">
               <IoIosBody className="bodyIcon" />
               <div>
-                <div className="valueHeader">Coach's Dance</div>
+                <div className="value_title">Coach's Dance</div>
                 <div className="value">{currentDance}</div>
               </div>
             </div>
-            <div className="miniCard">
+            <div className="sub_card">
               <svg
                 className="positionIcon"
                 id="icons_Q2"
@@ -64,7 +64,7 @@ function CoachCard({ currentDance, actualPositions, dancerDance, dancerPos }) {
                 </g>
               </svg>
               <div>
-                <div className="valueHeader">Position</div>
+                <div className="value_title">Position</div>
                 <div className="value" id="posValue">
                   <div>{actualPositions[0]}</div>
                   <div>{actualPositions[1]}</div>
@@ -75,14 +75,14 @@ function CoachCard({ currentDance, actualPositions, dancerDance, dancerPos }) {
             <div className="miniCard">
               <IoChatbubbleOutline className="feedbackIcon" />
               <div>
-                <div className="valueHeader">Feedback</div>
-                <div className="value" id="feedbackWrapper">
-                  <div className="feedbackHeader">Dancer 1</div>
-                  <div className="feedbackValue">No Feedback</div>
-                  <div className="feedbackHeader">Dancer 2</div>
-                  <div className="feedbackValue">No Feedback</div>
-                  <div className="feedbackHeader">Dancer 3</div>
-                  <div className="feedbackValue">No Feedback</div>
+                <div className="value_title">Feedback</div>
+                <div className="value" id="feedback_wrapper">
+                  <div className="feedback_header">Dancer 1</div>
+                  <div className="feedback_value">No Feedback</div>
+                  <div className="feedback_header">Dancer 2</div>
+                  <div className="feedback_value">No Feedback</div>
+                  <div className="feedback_header">Dancer 3</div>
+                  <div className="feedback_value">No Feedback</div>
                 </div>
               </div>
             </div>
