@@ -6,4 +6,4 @@ NOTE:
 Do state the dancer id before executing the laptop code.
 
 
-e.g. DANCER_ID=1 python3 laptop.py
+e.g. sudo DANCER_ID=1 python3 laptop.py
