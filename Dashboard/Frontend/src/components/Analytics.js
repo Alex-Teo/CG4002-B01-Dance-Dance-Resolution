@@ -28,7 +28,7 @@ function Analytics({
     "Dancer 3 Gyroscope",
   ];
 
-  const [title, setTitle] = useState("Dancer 1 Accelerometer");
+  const [title, setTitle] = useState("EMG");
 
   const handleChange = (item) => {
     setTitle(item);

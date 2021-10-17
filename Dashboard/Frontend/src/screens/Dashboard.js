@@ -4,7 +4,7 @@ import CoachCard from "../components/CoachCard";
 import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 const Dashboard = () => {
@@ -17,9 +17,9 @@ const Dashboard = () => {
 
   const [emgArray, setEmgArray] = useState([
     {
-      d1Emg: 0,
-      d2Emg: 0,
-      d3Emg: 0,
+      D1_EMG: 0,
+      D2_EMG: 0,
+      D3_EMG: 0,
     },
   ]);
 
@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   const [d1HandAcc, setD1HandAcc] = useState([
     {
-      id: "D1 Hand AccX",
+      id: "D1 AccX",
       color: "hsl(91, 70%, 50%)",
       data: [
         {
@@ -41,7 +41,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 Hand AccY",
+      id: "D1 AccY",
       color: "hsl(10, 20%, 50%)",
       data: [
         {
@@ -51,7 +51,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 Hand AccZ",
+      id: "D1 AccZ",
       color: "hsl(60, 70%, 90%)",
       data: [
         {
@@ -128,7 +128,7 @@ const Dashboard = () => {
 
   const [d1HandGyro, setD1HandGyro] = useState([
     {
-      id: "D1 Hand GyroX",
+      id: "D1 GyroX",
       color: "hsl(91, 70%, 50%)",
       data: [
         {
@@ -138,7 +138,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 Hand GyroY",
+      id: "D1 GyroY",
       color: "hsl(10, 20%, 50%)",
       data: [
         {
@@ -148,7 +148,7 @@ const Dashboard = () => {
       ],
     },
     {
-      id: "D1 Hand GyroZ",
+      id: "D1 GyroZ",
       color: "hsl(60, 70%, 90%)",
       data: [
         {
@@ -291,7 +291,6 @@ const Dashboard = () => {
   // ]);
 
   // ---------------- Sockets ---------------- //
-
   useEffect(() => {
     var d1Time = 1;
     var d2Time = 1;
@@ -439,41 +438,42 @@ const Dashboard = () => {
     //   setD1ChestGyro(tempD1ChestGyro);
     // console.log("d3", d3HandAcc, d3HandGyro);
     // });
-  });
-
+  }, []);
   return (
-    <div className="dashboardWrapper">
+    <div className="dashboard_wrapper">
       <ScreenHeader
         screenTitle="Dashboard"
         screenDesc="A closer look at your performance"
       />
 
-      <div className="info_wrapper">
-        <div className="users_wrapper">
-          <UserCard
-            dancerId="Dancer 1"
-            syncDelay={processedData.syncDelay}
-            currentDance={processedData.predictedDance}
-            currentPos={processedData.predictedPos.indexOf(1)}
-            coachDance={coachData.actualDance}
-            coachPos={coachData.actualPositions}
-          />
-          <UserCard
-            dancerId="Dancer 2"
-            syncDelay={processedData.syncDelay}
-            currentDance={processedData.predictedDance}
-            currentPos={processedData.predictedPos.indexOf(2)}
-            coachDance={coachData.actualDance}
-            coachPos={coachData.actualPositions}
-          />
-          <UserCard
-            dancerId="Dancer 3"
-            syncDelay={processedData.syncDelay}
-            currentDance={processedData.predictedDance}
-            currentPos={processedData.predictedPos.indexOf(3)}
-            coachDance={coachData.actualDance}
-            coachPos={coachData.actualPositions}
-          />
+      <div className="sub_dashboard_wrapper">
+        <div className="info_wrapper">
+          <div className="users_wrapper">
+            <UserCard
+              dancerId="Dancer 1"
+              syncDelay={processedData.syncDelay}
+              currentDance={processedData.predictedDance}
+              currentPos={processedData.predictedPos.indexOf(1)}
+              coachDance={coachData.actualDance}
+              coachPos={coachData.actualPositions}
+            />
+            <UserCard
+              dancerId="Dancer 2"
+              syncDelay={processedData.syncDelay}
+              currentDance={processedData.predictedDance}
+              currentPos={processedData.predictedPos.indexOf(2)}
+              coachDance={coachData.actualDance}
+              coachPos={coachData.actualPositions}
+            />
+            <UserCard
+              dancerId="Dancer 3"
+              syncDelay={processedData.syncDelay}
+              currentDance={processedData.predictedDance}
+              currentPos={processedData.predictedPos.indexOf(3)}
+              coachDance={coachData.actualDance}
+              coachPos={coachData.actualPositions}
+            />
+          </div>
           <div className="graph_wrapper">
             <Analytics
               d1HandAcc={d1HandAcc}

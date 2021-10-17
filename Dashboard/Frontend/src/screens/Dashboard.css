@@ -9,12 +9,12 @@ h2 {
   line-height: 20%;
 }
 
-.dashboardWrapper {
+.dashboard_wrapper {
   display: grid;
   grid-template-columns: 1fr;
 }
 
-.info_wrapper {
+.sub_dashboard_wrapper {
   display: grid;
   grid-template-columns: 3fr 1fr;
   justify-items: space-evenly;
@@ -23,14 +23,18 @@ h2 {
   padding: 0 50px 50px 50px;
 }
 
-.users_wrapper {
+.info_wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.users_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
 .graph_wrapper {
-  grid-column: 1/4;
   height: 300px;
 }
 
