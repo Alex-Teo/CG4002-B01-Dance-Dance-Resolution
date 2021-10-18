@@ -448,26 +448,26 @@ const Dashboard = () => {
         <div className="info_wrapper">
           <div className="users_wrapper">
             <UserCard
-              dancerId="Dancer 1"
+              dancerId="Trainee 1"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance}
-              currentPos={processedData.predictedPos.indexOf(1)}
+              currentPos={processedData.predictedPos.indexOf(1) + 1}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
             />
             <UserCard
-              dancerId="Dancer 2"
+              dancerId="Trainee 2"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance}
-              currentPos={processedData.predictedPos.indexOf(2)}
+              currentPos={processedData.predictedPos.indexOf(2) + 1}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
             />
             <UserCard
-              dancerId="Dancer 3"
+              dancerId="Trainee 3"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance}
-              currentPos={processedData.predictedPos.indexOf(3)}
+              currentPos={processedData.predictedPos.indexOf(3) + 1}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
             />

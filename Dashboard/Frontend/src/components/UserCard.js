@@ -12,11 +12,11 @@ function UserCard({
   coachPos,
 }) {
   return (
-    <Card>
+    <Card className="trainee_card">
       <Card.Body>
         <Card.Title className="cardTitle">
           {dancerId}
-          {/* <div className="cardTitleCorrect">(Pos: {currentPos})</div> */}
+          <div className="position_label">{currentPos}</div>
         </Card.Title>
         <Card.Text>
           <div className="miniCard">
