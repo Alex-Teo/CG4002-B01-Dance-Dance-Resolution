@@ -17,9 +17,7 @@ const Dashboard = () => {
 
   const [emgArray, setEmgArray] = useState([
     {
-      D1_EMG: 0,
-      D2_EMG: 0,
-      D3_EMG: 0,
+      emgMean: 0,
     },
   ]);
 
@@ -390,7 +388,7 @@ const Dashboard = () => {
     });
 
     // Socket for Emg data
-    // {d1Emg:num, d2Emg:num, d3Emg:num}
+    // {emgMean:num}
     socket.on("newEmgData", (FinalData) => {
       let newArray = emgArray;
       newArray.push(FinalData);

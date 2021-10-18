@@ -4,7 +4,7 @@ function Stream({ data }) {
   return (
     <ResponsiveStream
       data={data}
-      keys={["d1Emg", "d2Emg", "d3Emg"]}
+      keys={["emgMean"]}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       axisTop={null}
       axisRight={null}

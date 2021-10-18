@@ -98,8 +98,7 @@ connection.once("open", async () => {
   var tempD3aX, tempD3aY, tempD3aZ, tempD3gX, tempD3gY, tempD3gZ;
   tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
 
-  var tempD1Emg, tempD2Emg, tempD3Emg;
-  tempD1Emg = tempD2Emg = tempD3Emg = 0;
+  var tempEmgMean = 0;
 
   // Sockets for raw data
   // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
@@ -251,34 +250,26 @@ connection.once("open", async () => {
   });
 
   // Socket for emg data
-  // {d1Emg:num, d2Emg:num, d3Emg:num}
+  // {emgMean:num}
   EmgDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
         const EmgData = {
-          d1Emg: Number(change.fullDocument.d1Emg),
-          d2Emg: Number(change.fullDocument.d2Emg),
-          d3Emg: Number(change.fullDocument.d3Emg),
+          emgMean: Number(change.fullDocument.emgMean),
         };
 
         // Get cumulative in a sample
-        tempD1Emg += Number(EmgData.d1Emg);
-        tempD2Emg += Number(EmgData.d2Emg);
-        tempD3Emg += Number(EmgData.d3Emg);
+        tempEmgMean += Number(EmgData.emgMean);
 
         // Send ave data at a specified freq
         if (counter_4 % samplingRaw == 0) {
-          tempD1Emg = tempD1Emg / samplingRaw;
-          tempD2Emg = tempD2Emg / samplingRaw;
-          tempD3Emg = tempD3Emg / samplingRaw;
+          tempEmgMean = tempEmgMean / samplingRaw;
 
           const FinalData = {
-            d1Emg: tempD1Emg.toFixed(2),
-            d2Emg: tempD2Emg.toFixed(2),
-            d3Emg: tempD3Emg.toFixed(2),
+            emgMean: Number(tempEmgMean.toFixed(2)),
           };
           io.emit("newEmgData", FinalData);
-          tempD1Emg = tempD2Emg = tempD3Emg = 0;
+          tempEmgMean = 0;
           // console.log("emg", FinalData);
         }
 
