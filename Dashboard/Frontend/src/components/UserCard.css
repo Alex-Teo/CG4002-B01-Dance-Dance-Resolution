@@ -88,7 +88,7 @@
 .position_label {
   position: absolute;
   text-align: center;
-  background-color: rgba(52, 77, 160, 1);
+  background-color: rgba(52, 77, 160, 0.8);
   color: white;
   height: 50px;
   width: 50px;
@@ -96,4 +96,7 @@
   transform: translateY(-80px) translateX(220px);
   font-weight: 800;
   font-size: 40px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+    0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
+  border: dashed black 2px;
 }
