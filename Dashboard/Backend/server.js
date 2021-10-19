@@ -3,6 +3,7 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
+const { start } = require("repl");
 
 // ---------------- Server Setup ---------------- //
 const app = express();
@@ -100,11 +101,39 @@ connection.once("open", async () => {
 
   var tempEmgMean = 0;
 
+  var overallEmgData = [];
+  var overallDancer1Data = [];
+  var overallDancer2Data = [];
+  var overallDancer3Data = [];
+
+  startFlag = 1;
+  startMs = new Date();
+  startDate = "";
+  startTime = "";
+
   // Sockets for raw data
   // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
   D1HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
+        if (startFlag) {
+          var startMs = new Date();
+          var startDate =
+            startMs.getFullYear() +
+            "-" +
+            (startMs.getMonth() + 1) +
+            "-" +
+            startMs.getDate();
+          startTime =
+            startMs.getHours() +
+            ":" +
+            startMs.getMinutes() +
+            ":" +
+            startMs.getSeconds();
+          startFlag = 0;
+          console.log(startTime);
+        }
+
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -144,6 +173,7 @@ connection.once("open", async () => {
             },
           };
           io.emit("newD1HandData", FinalData);
+          overallDancer1Data.push(FinalData);
           tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
           // console.log("D1", FinalData);
         }
@@ -193,6 +223,7 @@ connection.once("open", async () => {
             },
           };
           io.emit("newD2HandData", FinalData);
+          overallDancer2Data.push(FinalData);
           tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
           // console.log("D2", FinalData);
         }
@@ -242,6 +273,7 @@ connection.once("open", async () => {
             },
           };
           io.emit("newD3HandData", FinalData);
+          overallDancer3Data.push(FinalData);
           tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
           // console.log("D3", FinalData);
         }
@@ -269,6 +301,7 @@ connection.once("open", async () => {
             emgMean: Number(tempEmgMean.toFixed(2)),
           };
           io.emit("newEmgData", FinalData);
+          overallEmgData.push(FinalData);
           tempEmgMean = 0;
           // console.log("emg", FinalData);
         }
@@ -282,6 +315,23 @@ connection.once("open", async () => {
   ProcessedDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
+        // TODO: implement logout once session is over
+        if (change.fullDocument.predictedDance === "Logout") {
+          var endMs = new Date();
+          var duration = (endMs.getTime() - startMs.getTime()) / 1000;
+          const historyObj = {
+            date: startDate.toString(),
+            time: startTime.toString(),
+            duration: duration,
+            overallEmgData: overallEmgData,
+            overallDancer1Data: overallDancer1Data,
+            overallDancer2Data: overallDancer2Data,
+            overallDancer3Data: overallDancer3Data,
+          };
+          connection.collection("history").insertOne(historyObj);
+          console.log("New entry in history collection");
+        }
+
         const ProcessedData = {
           predictedDance: change.fullDocument.predictedDance,
           predictedPos: change.fullDocument.predictedPos
@@ -293,6 +343,7 @@ connection.once("open", async () => {
           io.emit("newProcessedData", ProcessedData);
         }
         counter_5 += 1;
+        console.log(counter_5);
     }
   });
 

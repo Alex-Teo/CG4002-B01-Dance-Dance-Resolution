@@ -36,11 +36,19 @@ for (var i = 0; i < 10000; i++) {
     const predictedDance = dances[Math.floor(Math.random() * dances.length)];
     const syncDelay = Math.random().toPrecision(1);
 
-    processedDataDummy.push({
-      predictedDance: predictedDance,
-      predictedPos: predictedPos,
-      syncDelay: syncDelay,
-    });
+    if (i === 100 && id === 0) {
+      processedDataDummy.push({
+        predictedDance: "Logout",
+        predictedPos: predictedPos,
+        syncDelay: syncDelay,
+      });
+    } else {
+      processedDataDummy.push({
+        predictedDance: predictedDance,
+        predictedPos: predictedPos,
+        syncDelay: syncDelay,
+      });
+    }
   }
 }
 
