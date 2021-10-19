@@ -3,7 +3,6 @@ require("dotenv").config();
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-const { start } = require("repl");
 
 // ---------------- Server Setup ---------------- //
 const app = express();
@@ -118,7 +117,7 @@ connection.once("open", async () => {
       case "insert":
         if (startFlag) {
           var startMs = new Date();
-          var startDate =
+          startDate =
             startMs.getFullYear() +
             "-" +
             (startMs.getMonth() + 1) +
@@ -312,7 +311,7 @@ connection.once("open", async () => {
           const historyObj = {
             date: startDate.toString(),
             time: startTime.toString(),
-            duration: duration,
+            duration: duration.toString(),
             overallEmgData: overallEmgData,
             overallDancer1Data: overallDancer1Data,
             overallDancer2Data: overallDancer2Data,
@@ -354,5 +353,15 @@ connection.once("open", async () => {
     }
   });
 });
+
+// ---------------- HTTP Requests ---------------- //
+const historyRoute = require("./routes/historyRoute");
+app.use("/api/history", historyRoute);
+
+const processedDataRoute = require("./routes/processedDataRoute");
+app.use("/api/processeddata", processedDataRoute);
+
+const rawDataRoute = require("./routes/rawDataRoute");
+app.use("/api/rawdata", rawDataRoute);
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

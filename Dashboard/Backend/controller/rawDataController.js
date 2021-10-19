@@ -1,8 +1,8 @@
-const RawDataModel = require("../models/RawDataModel");
+const { D1RawHandData } = require("../models/RawData");
 
 const getRawData = async (req, res) => {
   try {
-    const rawData = await RawDataModel.find({});
+    const rawData = await D1RawHandData.find({});
     res.json(rawData);
   } catch (error) {
     res.status(400).json({ message: error.message });
