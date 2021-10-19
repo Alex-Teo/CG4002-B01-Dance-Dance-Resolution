@@ -47,7 +47,6 @@ connection.once("open", async () => {
   importData();
 });
 
-// FIXME: To add in relevant collections after week 9
 // Fxn importData() used for testing -> importing of dummy data
 const importData = async () => {
   try {

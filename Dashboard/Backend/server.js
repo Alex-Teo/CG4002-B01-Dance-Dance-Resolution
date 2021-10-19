@@ -317,7 +317,7 @@ connection.once("open", async () => {
             overallDancer2Data: overallDancer2Data,
             overallDancer3Data: overallDancer3Data,
           };
-          connection.collection("history").insertOne(historyObj);
+          connection.collection("history_datas").insertOne(historyObj);
           io.emit("logoutDetected");
           console.log("New entry in history collection");
         }
