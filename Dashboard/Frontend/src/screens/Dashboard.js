@@ -5,10 +5,17 @@ import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
 
 import { useEffect, useRef, useState } from "react";
+import Button from "react-bootstrap/Button";
 import { io } from "socket.io-client";
 
 const Dashboard = () => {
   // ---------------- useState ---------------- //
+
+  const [displayLogout, setDisplayLogout] = useState(false);
+
+  const toggleDisplayLogout = () => {
+    setDisplayLogout(!displayLogout);
+  };
 
   const [coachData, setCoachData] = useState({
     actualDance: "No Coach",
@@ -408,6 +415,10 @@ const Dashboard = () => {
       // console.log("coach", currentCoachData);
     });
 
+    socket.on("logoutDetected", () => {
+      toggleDisplayLogout();
+    });
+
     // socket.on("newD1ChestData", (FinalData) => {
     //   let tempD1ChestAcc = d1ChestAcc;
     //   let tempD1ChestGyro = d1ChestGyro;
@@ -443,6 +454,25 @@ const Dashboard = () => {
         screenTitle="Dashboard"
         screenDesc="A closer look at your performance"
       />
+      <div className={displayLogout ? "logout_bg" : "logout_bg_hidden"}></div>
+      <div className={displayLogout ? "logout_prompt" : "logout_prompt_hidden"}>
+        <div className="logout_msg">
+          We have detected a logout dance move!
+          <div className="sub_msg">Would you like to end the session?</div>
+        </div>
+        <div className="logout_options">
+          <Button
+            className="option_btn"
+            variant="outline-secondary"
+            onClick={() => toggleDisplayLogout()}
+          >
+            Continue Dancing
+          </Button>{" "}
+          <Button className="option_btn" variant="danger">
+            End Session
+          </Button>{" "}
+        </div>
+      </div>
 
       <div className="sub_dashboard_wrapper">
         <div className="info_wrapper">
