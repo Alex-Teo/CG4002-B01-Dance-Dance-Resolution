@@ -1,0 +1,4 @@
+.history_wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+}
