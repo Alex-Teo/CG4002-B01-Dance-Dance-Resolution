@@ -12,7 +12,7 @@ function WelcomeScreen() {
           size="lg"
           href="/dashboard"
         >
-          Start Dancing
+          Let's Dance
         </Button>{" "}
       </div>
     </div>
