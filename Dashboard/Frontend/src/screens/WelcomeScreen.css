@@ -1,0 +1,45 @@
+.welcome_wrapper {
+  position: absolute;
+  top: 45vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.welcome_text {
+  font-size: 150px;
+  font-weight: 200;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.start_dancing_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  animation-delay: 2s;
+  animation: fadein 2s;
+  height: 80px;
+}
+
+.start_dancing_button {
+  background-color: black;
+  height: 80px;
+  border-radius: 20px;
+  transition: 0.3s;
+  padding-top: calc(0.3 * 80px);
+}
+
+.start_dancing_button:hover {
+  background-color: black;
+  transform: scale(1.2);
+}
