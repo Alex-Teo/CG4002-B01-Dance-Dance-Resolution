@@ -161,16 +161,13 @@ connection.once("open", async () => {
           tempD1gZ = tempD1gZ / samplingRaw;
 
           const FinalData = {
-            acc: {
-              aX: tempD1aX.toFixed(2),
-              aY: tempD1aY.toFixed(2),
-              aZ: tempD1aZ.toFixed(2),
-            },
-            gyro: {
-              gX: tempD1gX.toFixed(2),
-              gY: tempD1gY.toFixed(2),
-              gZ: tempD1gZ.toFixed(2),
-            },
+            aX: tempD1aX.toFixed(2),
+            aY: tempD1aY.toFixed(2),
+            aZ: tempD1aZ.toFixed(2),
+
+            gX: tempD1gX.toFixed(2),
+            gY: tempD1gY.toFixed(2),
+            gZ: tempD1gZ.toFixed(2),
           };
           io.emit("newD1HandData", FinalData);
           overallDancer1Data.push(FinalData);
@@ -211,16 +208,13 @@ connection.once("open", async () => {
           tempD2gZ = tempD2gZ / samplingRaw;
 
           const FinalData = {
-            acc: {
-              aX: tempD2aX.toFixed(2),
-              aY: tempD2aY.toFixed(2),
-              aZ: tempD2aZ.toFixed(2),
-            },
-            gyro: {
-              gX: tempD2gX.toFixed(2),
-              gY: tempD2gY.toFixed(2),
-              gZ: tempD2gZ.toFixed(2),
-            },
+            aX: tempD2aX.toFixed(2),
+            aY: tempD2aY.toFixed(2),
+            aZ: tempD2aZ.toFixed(2),
+
+            gX: tempD2gX.toFixed(2),
+            gY: tempD2gY.toFixed(2),
+            gZ: tempD2gZ.toFixed(2),
           };
           io.emit("newD2HandData", FinalData);
           overallDancer2Data.push(FinalData);
@@ -261,16 +255,12 @@ connection.once("open", async () => {
           tempD3gZ = tempD3gZ / samplingRaw;
 
           const FinalData = {
-            acc: {
-              aX: tempD3aX.toFixed(2),
-              aY: tempD3aY.toFixed(2),
-              aZ: tempD3aZ.toFixed(2),
-            },
-            gyro: {
-              gX: tempD3gX.toFixed(2),
-              gY: tempD3gY.toFixed(2),
-              gZ: tempD3gZ.toFixed(2),
-            },
+            aX: tempD3aX.toFixed(2),
+            aY: tempD3aY.toFixed(2),
+            aZ: tempD3aZ.toFixed(2),
+            gX: tempD3gX.toFixed(2),
+            gY: tempD3gY.toFixed(2),
+            gZ: tempD3gZ.toFixed(2),
           };
           io.emit("newD3HandData", FinalData);
           overallDancer3Data.push(FinalData);

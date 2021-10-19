@@ -315,13 +315,13 @@ const Dashboard = () => {
         tempD1HandGyro[1].data.shift();
         tempD1HandGyro[2].data.shift();
       }
-      tempD1HandAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-      tempD1HandAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-      tempD1HandAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
+      tempD1HandAcc[0].data.push({ x: d1Time, y: FinalData.aX });
+      tempD1HandAcc[1].data.push({ x: d1Time, y: FinalData.aY });
+      tempD1HandAcc[2].data.push({ x: d1Time, y: FinalData.aZ });
 
-      tempD1HandGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-      tempD1HandGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-      tempD1HandGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
+      tempD1HandGyro[0].data.push({ x: d1Time, y: FinalData.gX });
+      tempD1HandGyro[1].data.push({ x: d1Time, y: FinalData.gY });
+      tempD1HandGyro[2].data.push({ x: d1Time, y: FinalData.gZ });
 
       d1Time += 1;
       setD1HandAcc(tempD1HandAcc);
@@ -345,13 +345,13 @@ const Dashboard = () => {
         tempD2HandGyro[1].data.shift();
         tempD2HandGyro[2].data.shift();
       }
-      tempD2HandAcc[0].data.push({ x: d2Time, y: FinalData.acc.aX });
-      tempD2HandAcc[1].data.push({ x: d2Time, y: FinalData.acc.aY });
-      tempD2HandAcc[2].data.push({ x: d2Time, y: FinalData.acc.aZ });
+      tempD2HandAcc[0].data.push({ x: d2Time, y: FinalData.aX });
+      tempD2HandAcc[1].data.push({ x: d2Time, y: FinalData.aY });
+      tempD2HandAcc[2].data.push({ x: d2Time, y: FinalData.aZ });
 
-      tempD2HandGyro[0].data.push({ x: d2Time, y: FinalData.gyro.gX });
-      tempD2HandGyro[1].data.push({ x: d2Time, y: FinalData.gyro.gY });
-      tempD2HandGyro[2].data.push({ x: d2Time, y: FinalData.gyro.gZ });
+      tempD2HandGyro[0].data.push({ x: d2Time, y: FinalData.gX });
+      tempD2HandGyro[1].data.push({ x: d2Time, y: FinalData.gY });
+      tempD2HandGyro[2].data.push({ x: d2Time, y: FinalData.gZ });
 
       d2Time += 1;
       setD2HandAcc(tempD2HandAcc);
@@ -373,13 +373,13 @@ const Dashboard = () => {
         tempD3HandGyro[1].data.shift();
         tempD3HandGyro[2].data.shift();
       }
-      tempD3HandAcc[0].data.push({ x: d3Time, y: FinalData.acc.aX });
-      tempD3HandAcc[1].data.push({ x: d3Time, y: FinalData.acc.aY });
-      tempD3HandAcc[2].data.push({ x: d3Time, y: FinalData.acc.aZ });
+      tempD3HandAcc[0].data.push({ x: d3Time, y: FinalData.aX });
+      tempD3HandAcc[1].data.push({ x: d3Time, y: FinalData.aY });
+      tempD3HandAcc[2].data.push({ x: d3Time, y: FinalData.aZ });
 
-      tempD3HandGyro[0].data.push({ x: d3Time, y: FinalData.gyro.gX });
-      tempD3HandGyro[1].data.push({ x: d3Time, y: FinalData.gyro.gY });
-      tempD3HandGyro[2].data.push({ x: d3Time, y: FinalData.gyro.gZ });
+      tempD3HandGyro[0].data.push({ x: d3Time, y: FinalData.gX });
+      tempD3HandGyro[1].data.push({ x: d3Time, y: FinalData.gY });
+      tempD3HandGyro[2].data.push({ x: d3Time, y: FinalData.gZ });
 
       d3Time += 1;
       setD3HandAcc(tempD3HandAcc);
