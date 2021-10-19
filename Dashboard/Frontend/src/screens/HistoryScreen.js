@@ -2,7 +2,7 @@ import "./History.css";
 
 import ScreenHeader from "../components/ScreenHeader";
 
-function History() {
+function HistoryScreen() {
   return (
     <div>
       <ScreenHeader
@@ -13,4 +13,4 @@ function History() {
   );
 }
 
-export default History;
+export default HistoryScreen;

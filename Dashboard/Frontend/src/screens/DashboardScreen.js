@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { io } from "socket.io-client";
 
-const Dashboard = () => {
+const DashboardScreen = () => {
   // ---------------- useState ---------------- //
 
   const [displayLogout, setDisplayLogout] = useState(false);
@@ -528,4 +528,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardScreen;

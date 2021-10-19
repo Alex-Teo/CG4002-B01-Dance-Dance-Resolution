@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Screens
 import Sidebar from "./components/Sidebar";
-import History from "./screens/History";
-import Dashboard from "./screens/Dashboard";
+import DashboardScreen from "./screens/DashboardScreen";
+import HistoryScreen from "./screens/HistoryScreen";
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
         <Sidebar />
         <div className="pageContainer">
           <Switch>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/history" component={History} />
+            <Route path="/dashboard" component={DashboardScreen} />
+            <Route path="/history" component={HistoryScreen} />
           </Switch>
         </div>
       </Router>
