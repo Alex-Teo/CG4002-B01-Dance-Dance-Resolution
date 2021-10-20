@@ -330,16 +330,24 @@ class myThread(threading.Thread):
                     #     continue
                     logger.info(f"Receiving data from {BEETLE_TYPE[self.beetle.addr]} Beetle...")
                     while True:
-                        if self.beetle.waitForNotifications(2.0):
-                            if len(SEND_BUFFER) == 3:
-                                compiled_data = "".join(SEND_BUFFER)
-                                sock.sendall(compiled_data.encode())
-                                SEND_BUFFER = []
-                            continue
-                        idle_count += 1
-                        logger.info(f"idle count: {idle_count}")
-                        if idle_count == 3:
-                            break
+                        try:
+                            if self.beetle.waitForNotifications(2.0):
+                                if len(SEND_BUFFER) == 3:
+                                    compiled_data = "".join(SEND_BUFFER)
+                                    sock.sendall(compiled_data.encode())
+                                    SEND_BUFFER = []
+                                continue
+                            idle_count += 1
+                            logger.info(f"idle count: {idle_count}")
+                            if idle_count == 3:
+                                break
+                        except BTLEDisconnectError:
+                            logger.error(f"BTLEDisconnect Error in Beetle {BEETLE_DICT[self.beetle.addr]}")
+                            reconnectBeetle(self.beetle)
+                            self.reset()
+                            initHandshake(self.beetle,self.characteristics)
+                            sock.close()
+                            self.run()
                     logger.error(f"Error in Beetle {BEETLE_DICT[self.beetle.addr]}")
                     reconnectBeetle(self.beetle)
                     self.reset()                
