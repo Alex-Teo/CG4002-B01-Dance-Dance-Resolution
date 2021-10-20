@@ -82,9 +82,13 @@ void setup() {
 }
 
 void loop() {
-//  processAccelData();
-//  processGyroData();
-//  Serial.println(moving);
+//  current_time = millis();
+//  if (current_time - previous_dpacket_time > DATA_THRESHOLD) {
+//    processAccelData(); //pre-processing for accel data
+//    processGyroData(); //pre-processing for gyro data
+//    previous_dpacket_time = current_time;
+//    Serial.println(moving);
+//  }
 //}
   if (Serial.available() > 0) {
     byte cmd = Serial.read();
@@ -101,7 +105,6 @@ void loop() {
         break;
     }
   }
-
 
   if (handshake_completed) {
     current_time = millis();
@@ -211,9 +214,8 @@ void processAccelData() {
         moving_count += 1;
         idling_count = 0;
 
-
         // Detect state of motion as moving
-        if (moving_count >= 5) {
+        if (moving_count >= 8) {
           moving = true;
           idling = false;
 //          Serial.print("moving! ");
@@ -225,7 +227,7 @@ void processAccelData() {
 //        Serial.println(idling_count);
       }
       // Detect state of motion as idling
-      if (idling_count >= 10) {
+      if (idling_count >= 6) {
         idling = true;
         moving = false;
         moving_count = 0;
@@ -250,13 +252,6 @@ void processAccelData() {
     scaledgForceX = (round(gForceX * 100.0));
     scaledgForceY = (round(gForceY * 100.0));
     scaledgForceZ = (round(gForceZ * 100.0));
-
-//    Serial.print("processed AccelX value:");
-//    Serial.println(gForceX);
-//    Serial.print("processed AccelY value:");
-//    Serial.println(gForceY);
-//    Serial.print("processed AccelZ value:");
-//    Serial.println(gForceZ);
   } else { //process the dancing data
     gForceX = (accelX - AXO) / 16384.0; 
     gForceY = (accelY - AYO) / 16384.0; 
@@ -264,13 +259,6 @@ void processAccelData() {
     scaledgForceX = (round(gForceX * 100.0));
     scaledgForceY = (round(gForceY * 100.0));
     scaledgForceZ = (round(gForceZ * 100.0));
-
-//    Serial.print("processed AccelX value:");
-//    Serial.println(gForceX);
-//    Serial.print("processed AccelY value:");
-//    Serial.println(gForceY);
-//    Serial.print("processed AccelZ value:");
-//    Serial.println(gForceZ);
   }
   
 }
@@ -298,13 +286,6 @@ void processGyroData() {
     scaledRotX = (round(rotX * 100.0));
     scaledRotY = (round(rotY * 100.0));
     scaledRotZ = (round(rotZ * 100.0));
-
-//    Serial.print("processed GyroX value:");
-//    Serial.println(rotX);
-//    Serial.print("processed GyroY value:");
-//    Serial.println(rotY);
-//    Serial.print("processed GyroZ value:");
-//    Serial.println(rotZ); 
   } else {
     //process the dancing data
     rotX = (gyroX - GXO) / 131.0; 
@@ -313,13 +294,5 @@ void processGyroData() {
     scaledRotX = (round(rotX * 100.0));
     scaledRotY = (round(rotY * 100.0));
     scaledRotZ = (round(rotZ * 100.0));
-
-//    Serial.print("processed GyroX value:");
-//    Serial.println(rotX);
-//    Serial.print("processed GyroY value:");
-//    Serial.println(rotY);
-//    Serial.print("processed GyroZ value:");
-//    Serial.println(rotZ);
   }
-  
 }
