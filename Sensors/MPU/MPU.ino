@@ -3,6 +3,12 @@
 #include "MPU6050.h"
 #include <math.h>
 #include <string.h>
+#include <EEPROM.h>
+
+//for offset
+const int SERIAL_NUMBER_ADDRESS = 1023;
+byte serialNo;
+int ID;
 
 //addresses according to datasheet
 #define I2C_ADDR 0x68 //I2C address of MPU
@@ -12,14 +18,6 @@
 #define ACCEL_OUT 0x3B //Starting register for accel readings
 #define GYRO_OUT 0x43 //Starting address for gyro readings 
 
-//offsets for set chest_1
-#define AXO -290
-#define AYO 350
-#define AZO -1160
-#define GXO -495
-#define GYO -92
-#define GZO 135
-
 MPU6050 mpu;
 
 #define SAMPLES 5
@@ -28,26 +26,42 @@ float preAX = 0;
 float preAY = 0;
 float preAZ = 16384;
 
-int count = 0;
+int aCount = 0;
+int gCount = 0;
 long accelXDiff[SAMPLES];
 long accelYDiff[SAMPLES];
 long accelZDiff[SAMPLES];
 long accelXDiffSum = 0;
 long accelYDiffSum = 0;
 long accelZDiffSum = 0;
-boolean moving = false;
+long gyroXSum = 0;
+long gyroYSum = 0;
+long gyroZSum = 0;
+float gyroXAvg = 0;
+float gyroYAvg = 0;
+float gyroZAvg = 0;
+boolean dancing = false;
 
 //store raw data of accel and gyro
-long accelX, accelY, accelZ;  
-long gyroX, gyroY, gyroZ;
+int accelX, accelY, accelZ;  
+int gyroX, gyroY, gyroZ;
 
 //calculate accel and gyro in g and degree units
 float gForceX, gForceY, gForceZ;
 float rotX, rotY, rotZ;
 
+//detect positions from 3 dancers
+bool positionDetected = false;
+bool startDancingAfterShift = false;
+int lMoveCnt = 0;
+int rMoveCnt = 0;
+unsigned long tPosition;
+
 void setup() {
   Serial.begin(115200);
   Wire.begin(); //initialise I2C comm
+  serialNo = EEPROM.read(SERIAL_NUMBER_ADDRESS);
+  ID = int(serialNo);
   setupMPU();
 }
 
@@ -55,6 +69,7 @@ void loop() {
 //  initHandshake(); 
   processAccelData(); //pre-processing for accel data
   processGyroData(); //pre-processing for gyro data
+  detectPosition();
   delay(200);
 }
 
@@ -81,8 +96,48 @@ void setupMPU() {
   Wire.write(GYRO_CONFIG); 
   Wire.write(0x00000000); //Set gyro full scale to +/- 250deg/sec
   Wire.endTransmission();
+
+  setOffsetValues();
 }
-  
+
+void setOffsetValues() {
+  if (ID == 2) { //set1 hand
+    mpu.setXAccelOffset(-1088);
+    mpu.setYAccelOffset(1678);
+    mpu.setZAccelOffset(1593);
+
+    mpu.setXGyroOffset(-82);
+    mpu.setYGyroOffset(-18);
+    mpu.setZGyroOffset(68);
+  } else if (ID == 4) { //set2 hand
+    mpu.setXAccelOffset(-2970);
+    mpu.setYAccelOffset(3988);
+    mpu.setZAccelOffset(1568);
+
+    mpu.setXGyroOffset(57);
+    mpu.setYGyroOffset(121);
+    mpu.setZGyroOffset(-64);
+  } else if (ID == 6) { //set3 hand
+    mpu.setXAccelOffset(1244);
+    mpu.setYAccelOffset(79);
+    mpu.setZAccelOffset(849);
+
+    mpu.setXGyroOffset(110);
+    mpu.setYGyroOffset(138);
+    mpu.setZGyroOffset(33);
+  }
+}
+
+void clearGyroSum() {
+  gyroXSum = 0;
+  gyroYSum = 0;
+  gyroZSum = 0;
+  gyroXAvg = 0;
+  gyroYAvg = 0;
+  gyroZAvg = 0;
+  gCount = 0;
+}
+
 //retrieving accel raw data
 void processAccelData() {
   Wire.beginTransmission(I2C_ADDR); //I2C address
@@ -91,70 +146,55 @@ void processAccelData() {
   Wire.requestFrom(I2C_ADDR,6);  //Request 6 (3B - 40) accel registers
 
   while(Wire.available() < 6); 
-  //2 registers are read and stored in the same variable. 
-  //accelX is a long variable which can save 2 bytes. 
-  //Wire.read() reads 1 byte each time. 
-  accelX = Wire.read()<<8 | Wire.read();  //Store first two bytes.
-  accelY = Wire.read()<<8 | Wire.read();  //Store middle two bytes
-  accelZ = Wire.read()<<8 | Wire.read();  //Store last two bytes
-
+  mpu.getAcceleration(&accelX, &accelY, &accelZ);
+  
   //noise removal
-  if (abs(accelX - AXO) < 24576 && abs(accelY - AYO) < 24576 && abs(accelZ - AZO) < 24576) {
-    accelXDiff[count] = accelX - preAX;
-    accelYDiff[count] = accelY - preAY;
-    accelZDiff[count] = accelZ - preAZ;
+  if (abs(accelX) < 24576 && abs(accelY) < 24576 && abs(accelZ) < 24576) {
+    accelXDiff[aCount] = accelX - preAX;
+    accelYDiff[aCount] = accelY - preAY;
+    accelZDiff[aCount] = accelZ - preAZ;
     preAX = accelX;
     preAY = accelY;
     preAZ = accelZ;
-    count += 1;
+    
+    aCount += 1;
 
     //thresholding
-    if (count >= 5) {
+    if (aCount >= 5) {
       for (int i = 0; i < SAMPLES; i++) {
         accelXDiffSum += abs(accelXDiff[i]);
         accelYDiffSum += abs(accelYDiff[i]);
         accelZDiffSum += abs(accelZDiff[i]);
       }
-      if (accelXDiffSum >= 5000 || accelYDiffSum >= 5000 || accelZDiffSum >= 5000) {
-        moving = true;
-        Serial.println("moving!");
+      
+      if (accelXDiffSum >= 10000 || accelYDiffSum >= 10000 || accelZDiffSum >= 10000) {
+        dancing = true;
+        Serial.println("dancing!");
+        Serial.print("gyroYAvg value: ");
+        Serial.println(gyroYAvg);
       } else {
-        moving = false;
-        Serial.println("stop moving!");
+        dancing = false;
+        Serial.println("not dancing!");
       }
-      count = 0;
+      aCount = 0;
       accelXDiffSum = 0;
       accelYDiffSum = 0;
       accelZDiffSum = 0;
     }
   }
 
-  //process the moving data
-  if (moving) {
+  //process the dancing data
+  if (dancing) {
     //process Accel Data
     //convert data to g. LSB per g = 16384.0 from the datasheet.
     //MPU6050 has the range of +-2g.
-    gForceX = (accelX - AXO) / 16384.0; 
-    gForceY = (accelY - AYO) / 16384.0; 
-    gForceZ = (accelZ - AZO) / 16384.0;
-
-//    Serial.print("processed AccelX value:");
-//    Serial.println(gForceX);
-//    Serial.print("processed AccelY value:");
-//    Serial.println(gForceY);
-//    Serial.print("processed AccelZ value:");
-//    Serial.println(gForceZ);
-  } else { //process the dancing data
-    gForceX = (accelX - AXO) / 16384.0; 
-    gForceY = (accelY - AYO) / 16384.0; 
-    gForceZ = (accelZ - AZO) / 16384.0;
-
-    Serial.print("processed AccelX value:");
-    Serial.println(gForceX);
-    Serial.print("processed AccelY value:");
-    Serial.println(gForceY);
-    Serial.print("processed AccelZ value:");
-    Serial.println(gForceZ);
+    gForceX = accelX / 16384.0; 
+    gForceY = accelY / 16384.0; 
+    gForceZ = accelZ / 16384.0;
+  } else { //process the walking/stop data
+    gForceX = accelX / 16384.0; 
+    gForceY = accelY / 16384.0; 
+    gForceZ = accelZ / 16384.0;
   }
   
 }
@@ -166,38 +206,93 @@ void processGyroData() {
   Wire.requestFrom(I2C_ADDR,6);  //Request 6 (43 - 48) gyro registers 
 
   while(Wire.available() < 6);
-  gyroX = Wire.read()<<8 | Wire.read();  //Store first two bytes.
-  gyroY = Wire.read()<<8 | Wire.read();  //Store middle two bytes 
-  gyroZ = Wire.read()<<8 | Wire.read();  //Store last two bytes 
+  mpu.getRotation(&gyroX, &gyroY, &gyroZ);
 
-  //process the moving data
-  if (moving && abs(gyroX - GXO) < 27852 && abs(gyroY - GYO) < 27852 && abs(gyroZ - GZO) < 27852) {
+  //process the walking/stop data
+  if (!dancing) {
+    gyroXSum += gyroX;
+    gyroYSum += gyroY;
+    gyroZSum += gyroZ;
+
+    gCount += 1;
+
+    gyroXAvg = gyroXSum / (gCount * 1.0);
+    gyroYAvg = gyroYSum / (gCount * 1.0);
+    gyroZAvg = gyroZSum / (gCount * 1.0);
+    
     //process Gyro Data
     //convert data to degrees. 
     //LSB per degrees per second = 131.0 according to the datasheet.
     //range is 250 deg/s from datasheet.
-    rotX = (gyroX - GXO) / 131.0; 
-    rotY = (gyroY - GYO) / 131.0; 
-    rotZ = (gyroZ - GZO) / 131.0;
+    rotX = gyroX / 131.0; 
+    rotY = gyroY / 131.0; 
+    rotZ = gyroZ / 131.0;
 
-//    Serial.print("processed GyroX value:");
-//    Serial.println(rotX);
-//    Serial.print("processed GyroY value:");
-//    Serial.println(rotY);
-//    Serial.print("processed GyroZ value:");
-//    Serial.println(rotZ); 
   } else {
     //process the dancing data
-    rotX = (gyroX - GXO) / 131.0; 
-    rotY = (gyroY - GYO) / 131.0; 
-    rotZ = (gyroZ - GZO) / 131.0;
+    rotX = gyroX / 131.0; 
+    rotY = gyroY / 131.0; 
+    rotZ = gyroZ / 131.0;
 
-    Serial.print("processed GyroX value:");
-    Serial.println(rotX);
-    Serial.print("processed GyroY value:");
-    Serial.println(rotY);
-    Serial.print("processed GyroZ value:");
-    Serial.println(rotZ); 
   }
-  
+}
+
+void detectPosition() {
+    if (!dancing) {
+      //alreagy detect the new position
+      if (positionDetected) {
+        return;
+      }
+
+      Serial.print("gyroYAvg value: ");
+      Serial.println(gyroYAvg);
+      if (gyroYAvg > 1600) {
+        rMoveCnt += 1;
+      }
+      if (gyroYAvg < -1500) {
+        lMoveCnt += 1;
+      }
+
+      if (lMoveCnt > 5) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        positionDetected = true;
+        tPosition = millis();
+        //state = STATE_L;
+        Serial.println("Left Position!");
+
+        clearGyroSum();
+      }
+
+      if (rMoveCnt > 5) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        positionDetected = true;
+        tPosition = millis();
+        //state = STATE_R;
+        Serial.println("Right Position!");
+
+        clearGyroSum();
+      }
+
+      startDancingAfterShift = true;
+    } else { //dancing
+      if (startDancingAfterShift) {
+        positionDetected = false;
+        //update the previous state variable
+        //preState = State;
+        //state = STATE_S;
+        Serial.println("Stay!");
+
+        clearGyroSum();
+
+        startDancingAfterShift = false;
+
+        if (millis() - tPosition < 800) {
+          //preSTATE = STATE_S;
+        }
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+      }
+    }
 }
