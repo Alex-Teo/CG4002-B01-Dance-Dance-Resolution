@@ -16,7 +16,6 @@ BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND
 BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST
 BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
 
-
 SERIVCE_ID = "0000dfb0-0000-1000-8000-00805f9b34fb"
 
 BUFFER_DICT = {BEETLE_ADDR_1: b"", BEETLE_ADDR_2: b"", BEETLE_ADDR_3: b"", BEETLE_ADDR_4: b"", BEETLE_ADDR_5: b"", BEETLE_ADDR_6: b""}
@@ -38,7 +37,7 @@ HAND_MOVING = False
 DATA_LIST_1 = []
 DATA_LIST_2 = []
 
-MOVING_PACKET = 0
+# MOVING_PACKET = 0
 
 # header_IMU = ["Beetle Number", "Gyro-X", "Gyro-Y", "Gyro-Z", "Acc-X", "Acc-Y", "Acc-Z", "Dance Move"]
 # with open('dab_chest.csv','w',newline='') as f:
@@ -123,7 +122,7 @@ class MyDelegate(btle.DefaultDelegate):
                     BUFFER_DICT[self.beetle_addr] += fragment
         
     def handleData(self,fragment):
-        global MOVING_PACKET
+        # global MOVING_PACKET
         # IMU Packet
         if fragment[0] == 73:
             packet = struct.unpack('<cchhhhhhBBBBh', fragment)
@@ -153,12 +152,12 @@ class MyDelegate(btle.DefaultDelegate):
                 moving = packet[1]
                 if (moving == b'Y' and beetle_pos == "Hand"):
                     moving_status = "Hand Moving"
-                    MOVING_PACKET = 1
-                    # HAND_MOVING = True
+                    # MOVING_PACKET = 1
+                    HAND_MOVING = True
                 elif (moving == b'N' and beetle_pos == "Hand"):
                     moving_status = "Hand Not Moving"
-                    MOVING_PACKET = 0
-                    # HAND_MOVING = False
+                    # MOVING_PACKET = 0
+                    HAND_MOVING = False
                 elif (moving == b'N' and beetle_pos == "Chest"):
                     moving_status = "Chest Not Moving"
                 elif (moving == b'Y' and beetle_pos == "Chest"):
@@ -169,14 +168,14 @@ class MyDelegate(btle.DefaultDelegate):
                 #################### CHANGE TO DANCEMOVE: DAB/JAMESBOND/MERMAID ################################
                 #################################################################################################
                 #################################################################################################
-                dance_move = "testing"
+                dance_move = "mermaid"
 
 
                 print(f"{beetle_pos} Beetle Moving Status: " + str(moving_status))
 
                 # Dont detect to see if chest is moving, just record data
                 if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
-                    row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move, MOVING_PACKET]
+                    row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
                     DATA_LIST_2.append(row_data)
                     print("Beetle %s: " % beetle_num + str(len(DATA_LIST_2)))
                     if len(DATA_LIST_2) == 100:
@@ -195,21 +194,21 @@ class MyDelegate(btle.DefaultDelegate):
                 
                 # Collect data only if hand beetle is detected to be moving
                 if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
-                    # if HAND_MOVING:
-                    row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move, MOVING_PACKET]
-                    DATA_LIST_1.append(row_data)
-                    print("Beetle %s: " % beetle_num + str(len(DATA_LIST_1)))
-                    if len(DATA_LIST_1) == 100:
+                    if HAND_MOVING:
+                        row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
+                        DATA_LIST_1.append(row_data)
+                        print("Beetle %s: " % beetle_num + str(len(DATA_LIST_1)))
+                        if len(DATA_LIST_1) == 100:
 
-                        #################################################################################################
-                        #################################################################################################
-                        #################### CHANGE TO DANCEMOVE: dab_hand/jamesbond_hand/mermaid_hand ##################
-                        #################################################################################################
-                        #################################################################################################    
-                        with open('test_hand.csv','a',newline='') as f:
-                            writer = csv.writer(f)
-                            writer.writerows(DATA_LIST_1)                            
-                        DATA_LIST_1.clear()
+                            #################################################################################################
+                            #################################################################################################
+                            #################### CHANGE TO DANCEMOVE: dab_hand/jamesbond_hand/mermaid_hand ##################
+                            #################################################################################################
+                            #################################################################################################    
+                            with open('mermaid_hand.csv','a',newline='') as f:
+                                writer = csv.writer(f)
+                                writer.writerows(DATA_LIST_1)                            
+                            DATA_LIST_1.clear()
             
                 else:
                     pass
@@ -249,10 +248,10 @@ class myThread(threading.Thread):
             if (HANDSHAKE_BOOL_DICT[self.beetle.addr]):
                 # Start receiving data only when both hand and chest beetle handshake have been completed
 
-                while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
-                or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
-                or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
-                    continue
+                # while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
+                # or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
+                # or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
+                    # continue
 
                 print("Receiving data...")
                 while True:
