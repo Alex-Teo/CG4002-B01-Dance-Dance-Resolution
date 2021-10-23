@@ -23,7 +23,9 @@ MPU6050 mpu;
 #define SAMPLES 5
 #define EMG_SAMPLES 35 //No. of sample in the window period
 #define DATA_THRESHOLD 50
-#define POSITION_THRESHOLD 1000
+#define POSITION_THRESHOLD 100
+
+unsigned long start;
 
 float preAX = 0;
 float preAY = 0;
@@ -48,6 +50,17 @@ float gyroYAvg = 0;
 float gyroZAvg = 0;
 bool dancing = false;
 bool idling = true;
+
+//Turning
+long gyroXSumT = 0;
+long gyroYSumT = 0;
+long gyroZSumT = 0;
+long gyroXAvgT = 0;
+long gyroYAvgT = 0;
+long gyroZAvgT = 0;
+int gCountT = 0;
+int gyroXT, gyroYT, gyroZT;
+bool firstClear;
 
 //emg data
 double totalValue = 0; 
@@ -119,11 +132,32 @@ void setup() {
 void loop() {
 //  current_time = millis();
 //  if (current_time - previous_dpacket_time > DATA_THRESHOLD) {
-////    processAccelData(); //pre-processing for accel data
-////    processGyroData(); //pre-processing for gyro data
+//    processAccelData(); //pre-processing for accel data
+//    processGyroData(); //pre-processing for gyro data
 ////    Serial.println(dancing);
-//    sendEMGData();
 //    previous_dpacket_time = current_time;
+//  }
+////  if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
+////    Serial.println(gyroYAvg);
+////  }
+//  if (!dancing) {
+//      if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
+//        processGyroDataTurning();
+//        detectPosition();
+//        previous_ppacket_time = current_time;
+//      }
+//    }
+//  if (positionDetected) {
+//    if (!positionDataSent) {
+//      Serial.print("New Position: ");
+//      Serial.println(newPosition);
+////        sendPositionData();
+//      positionDataSent = true;
+//    }
+//    if (dancing) {
+//      positionDetected = false;
+//      positionDataSent = false;
+//    }
 //  }
 //}
   if (Serial.available() > 0) {
@@ -152,6 +186,7 @@ void loop() {
     }
     // if (!dancing) {
     //   if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
+    //     processGyroDataTurning();
     //     detectPosition();
     //     previous_ppacket_time = current_time;
     //   }
@@ -335,6 +370,11 @@ void processAccelData() {
 //        Serial.print("idling ");
 //        Serial.println(idling_count);
       }
+
+      if (idling_count == 10) {
+        firstClear = true;
+      }
+
       // Detect state of motion as idling
       if (idling_count >= 10) {
         idling = true;
@@ -385,7 +425,6 @@ void processGyroData() {
     gyroXSum += gyroX;
     gyroYSum += gyroY;
     gyroZSum += gyroZ;
-
     gCount += 1;
 
     gyroXAvg = gyroXSum / (gCount * 1.0);
@@ -413,75 +452,79 @@ void processGyroData() {
   }
 }
 
+void processGyroDataTurning() {
+  Wire.beginTransmission(I2C_ADDR); //I2C address
+  Wire.write(GYRO_OUT); 
+  Wire.endTransmission();
+  Wire.requestFrom(I2C_ADDR,6);  //Request 6 (43 - 48) gyro registers 
+
+  while(Wire.available() < 6);
+  mpu.getRotation(&gyroXT, &gyroYT, &gyroZT);
+
+  //process the moving data
+  if (!dancing) {
+    gyroXSumT += gyroXT;
+    gyroYSumT += gyroYT;
+    gyroZSumT += gyroZT;
+
+    gCountT += 1;
+
+    gyroXAvgT = gyroXSumT / (gCountT * 1.0);
+    gyroYAvgT = gyroYSumT / (gCountT * 1.0);
+    gyroZAvgT = gyroZSumT / (gCountT * 1.0);
+  }
+}
+
 void clearGyroSum() {
-  gyroXSum = 0;
-  gyroYSum = 0;
-  gyroZSum = 0;
-  gyroXAvg = 0;
-  gyroYAvg = 0;
-  gyroZAvg = 0;
-  gCount = 0;
+  gyroXSumT = 0;
+  gyroYSumT = 0;
+  gyroZSumT = 0;
+  gyroXAvgT = 0;
+  gyroYAvgT = 0;
+  gyroZAvgT = 0;
+  gCountT = 0;
 }
 
 //Insert Detect Position Code
 void detectPosition() {
-    if (!dancing) {
-      //alreagy detect the new position
-      if (positionDetected) {
-        return;
-      }
+    //already detect the new position
+    if (positionDetected) {
+      return;
+    }
 
-      if (gyroYAvg > 1600) {
-        rMoveCnt += 1;
-      } else if (gyroYAvg < -1600) {
-        lMoveCnt += 1;
-      } else {
-        sMoveCnt += 1;
-      }
+    if (firstClear) {
+      clearGyroSum();
+      firstClear = false;
+    }
 
-      if (lMoveCnt > 5) {
-        lMoveCnt = 0;
-        rMoveCnt = 0;
-        sMoveCnt = 0;
-        positionDetected = true;
-        newPosition = 'L';
-        clearGyroSum();
-      } else if (rMoveCnt > 5) {
-        lMoveCnt = 0;
-        rMoveCnt = 0;
-        sMoveCnt = 0;
-        positionDetected = true;
-        newPosition = 'R';
-        clearGyroSum();
-      } else if (sMoveCnt > 5) {
-        lMoveCnt = 0;
-        rMoveCnt = 0;
-        sMoveCnt = 0;
-        positionDetected = true;
-        newPosition = 'S';
-        clearGyroSum();
-      }
-
+    if (gyroYAvgT > 1600) {
+      rMoveCnt += 1;
+    } else if (gyroYAvgT < -1600) {
+      lMoveCnt += 1;
+    } else {
+      sMoveCnt += 1;
+    }
+    
+    if (lMoveCnt > 15) {
+      lMoveCnt = 0;
+      rMoveCnt = 0;
+      sMoveCnt = 0;
+      positionDetected = true;
+      newPosition = 'L';
+      clearGyroSum();
+    } else if (rMoveCnt > 15) {
+      lMoveCnt = 0;
+      rMoveCnt = 0;
+      sMoveCnt = 0;
+      positionDetected = true;
+      newPosition = 'R';
+      clearGyroSum();
+    } else if (sMoveCnt > 60) {
+      lMoveCnt = 0;
+      rMoveCnt = 0;
+      sMoveCnt = 0;
+      positionDetected = true;
+      newPosition = 'S';
+      clearGyroSum();
     }
 }
-
-//    } else { //dancing
-//      if (startDancingAfterShift) {
-//        positionDetected = false;
-//        //update the previous state variable
-//        //preState = State;
-//        //state = STATE_S;
-//        Serial.println("Stay!");
-//
-//        clearGyroSum();
-//
-//        startDancingAfterShift = false;
-//
-//        if (millis() - tPosition < 800) {
-//          //preSTATE = STATE_S;
-//        }
-//        lMoveCnt = 0;
-//        rMoveCnt = 0;
-//      }
-//    }
-//}
