@@ -37,13 +37,6 @@ HAND_MOVING = False
 DATA_LIST_1 = []
 DATA_LIST_2 = []
 
-# MOVING_PACKET = 0
-
-# header_IMU = ["Beetle Number", "Gyro-X", "Gyro-Y", "Gyro-Z", "Acc-X", "Acc-Y", "Acc-Z", "Dance Move"]
-# with open('dab_chest.csv','w',newline='') as f:
-#     writer = csv.writer(f)
-#     writer.writerow(header_IMU)
-
 class MyDelegate(btle.DefaultDelegate):
     def __init__(self,addr):
         btle.DefaultDelegate.__init__(self)
@@ -122,14 +115,10 @@ class MyDelegate(btle.DefaultDelegate):
                     BUFFER_DICT[self.beetle_addr] += fragment
         
     def handleData(self,fragment):
-        # global MOVING_PACKET
+
         # IMU Packet
         if fragment[0] == 73:
-            packet = struct.unpack('<cchhhhhhBBBBh', fragment)
-
-            # Obtain timestamp packet
-            big_endian_packet = struct.unpack('>cchhhhhhLh', fragment)
-            timestamp = big_endian_packet[8]
+            packet = struct.unpack('<cchhhhhhhhh', fragment)
             
             arduino_checksum = packet[-1]
             checkSumState = calcDataChecksum(packet,arduino_checksum)
@@ -150,48 +139,27 @@ class MyDelegate(btle.DefaultDelegate):
                 gyroy = packet[6]
                 gyroz = packet[7]
                 moving = packet[1]
+
                 if (moving == b'Y' and beetle_pos == "Hand"):
                     moving_status = "Hand Moving"
-                    # MOVING_PACKET = 1
                     HAND_MOVING = True
                 elif (moving == b'N' and beetle_pos == "Hand"):
                     moving_status = "Hand Not Moving"
-                    # MOVING_PACKET = 0
                     HAND_MOVING = False
                 elif (moving == b'N' and beetle_pos == "Chest"):
                     moving_status = "Chest Not Moving"
                 elif (moving == b'Y' and beetle_pos == "Chest"):
                     moving_status = "Chest Moving"
 
+                print(f"{beetle_pos} Beetle Moving Status: " + str(moving_status))
+
                 #################################################################################################
                 #################################################################################################
                 #################### CHANGE TO DANCEMOVE: DAB/JAMESBOND/MERMAID ################################
                 #################################################################################################
                 #################################################################################################
-                dance_move = "mermaid"
+                dance_move = "test"
 
-
-                print(f"{beetle_pos} Beetle Moving Status: " + str(moving_status))
-
-                # Dont detect to see if chest is moving, just record data
-                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
-                    row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
-                    DATA_LIST_2.append(row_data)
-                    print("Beetle %s: " % beetle_num + str(len(DATA_LIST_2)))
-                    if len(DATA_LIST_2) == 100:
-
-
-                        #################################################################################################
-                        #################################################################################################
-                        #################### CHANGE TO DANCEMOVE: dab_chest/jamesbond_chest/mermaid_chest ###############
-                        #################################################################################################
-                        #################################################################################################    
-
-                        with open('test_chest.csv','a',newline='') as f:
-                            writer = csv.writer(f)
-                            writer.writerows(DATA_LIST_2)                 
-                        DATA_LIST_2.clear()
-                
                 # Collect data only if hand beetle is detected to be moving
                 if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
                     if HAND_MOVING:
@@ -205,17 +173,37 @@ class MyDelegate(btle.DefaultDelegate):
                             #################### CHANGE TO DANCEMOVE: dab_hand/jamesbond_hand/mermaid_hand ##################
                             #################################################################################################
                             #################################################################################################    
-                            with open('mermaid_hand.csv','a',newline='') as f:
+                            with open('test_hand.csv','a',newline='') as f:
                                 writer = csv.writer(f)
                                 writer.writerows(DATA_LIST_1)                            
                             DATA_LIST_1.clear()
             
                 else:
                     pass
+
+                # # Dont detect to see if chest is moving, just record data
+                # if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                #     row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
+                #     DATA_LIST_2.append(row_data)
+                #     print("Beetle %s: " % beetle_num + str(len(DATA_LIST_2)))
+                #     if len(DATA_LIST_2) == 100:
+
+
+                #         #################################################################################################
+                #         #################################################################################################
+                #         #################### CHANGE TO DANCEMOVE: dab_chest/jamesbond_chest/mermaid_chest ###############
+                #         #################################################################################################
+                #         #################################################################################################    
+
+                #         with open('test_chest.csv','a',newline='') as f:
+                #             writer = csv.writer(f)
+                #             writer.writerows(DATA_LIST_2)                 
+                #         DATA_LIST_2.clear()
+                
             else:
                 print("Checksum Incorrect")
                 # Ignore Data
-        
+
         else: 
             return
 
@@ -269,7 +257,7 @@ class myThread(threading.Thread):
                         initHandshake(self.beetle,self.characteristics)
                         print("HANDSHAKE COMPLETED AT RUN")
                         self.run()
-                print("Error in Beetle %s: %s" % (BEETLE_DICT[self.beetle.addr]))
+                print("Error in Beetle %s" % (BEETLE_DICT[self.beetle.addr]))
                 reconnectBeetle(self.beetle)
                 self.reset()                
                 initHandshake(self.beetle,self.characteristics)
