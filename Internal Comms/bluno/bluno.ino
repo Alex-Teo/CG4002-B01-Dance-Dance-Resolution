@@ -3,6 +3,12 @@
 #include "MPU6050.h"
 #include <math.h>
 #include <string.h>
+#include <EEPROM.h>
+
+//for offset
+const int SERIAL_NUMBER_ADDRESS = 1023;
+byte serialNo;
+int ID;
 
 //addresses according to datasheet
 #define I2C_ADDR 0x68 //I2C address of MPU
@@ -12,27 +18,21 @@
 #define ACCEL_OUT 0x3B //Starting register for accel readings
 #define GYRO_OUT 0x43 //Starting address for gyro readings 
 
-//offsets for set chest_1
-#define AXO -290
-#define AYO 350
-#define AZO -1160
-#define GXO -495
-#define GYO -92
-#define GZO 135
-
 MPU6050 mpu;
 
 #define SAMPLES 5
+#define EMG_SAMPLES 35 //No. of sample in the window period
 #define DATA_THRESHOLD 50
-#define TIME_THRESHOLD 10000
+#define POSITION_THRESHOLD 1000
 
 float preAX = 0;
 float preAY = 0;
 float preAZ = 16384;
 
-int moving_count = 0;
+int dancing_count = 0;
 int idling_count = 0;
-int count = 0;
+int aCount = 0;
+int gCount = 0;
 
 long accelXDiff[SAMPLES];
 long accelYDiff[SAMPLES];
@@ -40,12 +40,24 @@ long accelZDiff[SAMPLES];
 long accelXDiffSum = 0;
 long accelYDiffSum = 0;
 long accelZDiffSum = 0;
-bool moving = false;
+long gyroXSum = 0;
+long gyroYSum = 0;
+long gyroZSum = 0;
+float gyroXAvg = 0;
+float gyroYAvg = 0;
+float gyroZAvg = 0;
+bool dancing = false;
 bool idling = true;
 
+//emg data
+double totalValue = 0; 
+double squareValue = 0;
+float meanAmplitude = 0;
+int scaledMeanAmplitude = 0;
+
 //store raw data of accel and gyro
-long accelX, accelY, accelZ;  
-long gyroX, gyroY, gyroZ;
+int accelX, accelY, accelZ;  
+int gyroX, gyroY, gyroZ;
 
 //calculate accel and gyro in g and degree units
 float gForceX, gForceY, gForceZ;
@@ -55,10 +67,20 @@ float rotX, rotY, rotZ;
 int scaledgForceX, scaledgForceY, scaledgForceZ;
 int scaledRotX, scaledRotY, scaledRotZ;
 
+//detect positions from 3 dancers
+bool positionDetected = false;
+bool positionDataSent = false;
+bool startDancingAfterShift = false;
+int lMoveCnt = 0;
+int rMoveCnt = 0;
+int sMoveCnt = 0;
+char newPosition;
+
+
 bool handshake_completed = false;
 unsigned long current_time;
 unsigned long previous_dpacket_time = 0;
-unsigned long previous_tpacket_time = 0;
+unsigned long previous_ppacket_time = 0;
 
 void(* resetFunc) (void) = 0;
 
@@ -71,23 +93,37 @@ struct IMU_Packet {
   int gyrox;
   int gyroy;
   int gyroz;
-  byte timestamp[4];
+  int emg;
+  int padding;
   int checksum;
+};
+
+struct Position_Packet {
+  char type;
+  char newPosition;
+  long padding0;
+  long padding1;
+  long padding2;
+  int padding3;
+  long checksum;
 };
 
 void setup() {
   Serial.begin(115200);
   Wire.begin(); //initialise I2C comm
+  serialNo = EEPROM.read(SERIAL_NUMBER_ADDRESS);
+  ID = int(serialNo);
   setupMPU();
 }
 
 void loop() {
 //  current_time = millis();
 //  if (current_time - previous_dpacket_time > DATA_THRESHOLD) {
-//    processAccelData(); //pre-processing for accel data
-//    processGyroData(); //pre-processing for gyro data
+////    processAccelData(); //pre-processing for accel data
+////    processGyroData(); //pre-processing for gyro data
+////    Serial.println(dancing);
+//    sendEMGData();
 //    previous_dpacket_time = current_time;
-//    Serial.println(moving);
 //  }
 //}
   if (Serial.available() > 0) {
@@ -114,25 +150,37 @@ void loop() {
       sendIMUData();
       previous_dpacket_time = current_time;
     }
-//      sendEMGData(); // Only for the 1 beetle that is connected to the EMG sensor
+    if (!dancing) {
+      if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
+        detectPosition();
+        previous_ppacket_time = current_time;
+      }
+    }
+    if (positionDetected) {
+      if (!positionDataSent) {
+        sendPositionData();
+        positionDataSent = true;
+      }
+      if (dancing) {
+        positionDetected = false;
+        positionDataSent = false;
+      }
+    }
   }
 }
-//    if (current_time - previous_tpacket_time > TIME_THRESHOLD) {
-//      sendTimeData();
-//      previous_tpacket_time = current_time;
-//    }
-//  }
-//}
 
 int calcIMUChecksum(IMU_Packet packet) {
-  return packet.type ^ packet.moving ^ packet.accx ^ packet.accy ^ packet.accz ^ packet.gyrox ^ packet.gyroy ^ packet.gyroz ^ packet.timestamp[0] ^ packet.timestamp[1] ^ 
-         packet.timestamp[2] ^ packet.timestamp[3];
+  return packet.type ^ packet.moving ^ packet.accx ^ packet.accy ^ packet.accz ^ packet.gyrox ^ packet.gyroy ^ packet.gyroz ^ packet.emg ^ packet.padding;
+}
+
+long calcPositionChecksum(Position_Packet packet) {
+  return packet.type ^ packet.newPosition ^ packet.padding0 ^ packet.padding1 ^ packet.padding2 ^ packet.padding3;
 }
 
 void sendIMUData() {
   IMU_Packet ipacket;
   ipacket.type = 'I';
-  if (moving) {
+  if (dancing) {
     ipacket.moving = 'Y';
   } else {
     ipacket.moving = 'N';
@@ -143,21 +191,56 @@ void sendIMUData() {
   ipacket.gyrox = scaledRotX;
   ipacket.gyroy = scaledRotY;
   ipacket.gyroz = scaledRotZ;
-  unsigned long a_time = millis();
-  ipacket.timestamp[0] = a_time >> 24;
-  ipacket.timestamp[1] = a_time >> 16;  
-  ipacket.timestamp[2] = a_time >> 8;
-  ipacket.timestamp[3] = a_time;
+  ipacket.emg = calculateEMGData();
+  ipacket.padding = 0;
   ipacket.checksum = calcIMUChecksum(ipacket);
 
   Serial.write((uint8_t *)&ipacket, sizeof(ipacket));
 }
 
+void sendPositionData() {
+  Position_Packet ppacket;
+  ppacket.type = 'P';
+  ppacket.newPosition = newPosition;
+  ppacket.padding0 = 0;
+  ppacket.padding1 = 0;
+  ppacket.padding2 = 0;
+  ppacket.padding3 = 0;
+  ppacket.checksum = calcPositionChecksum(ppacket);
+
+  Serial.write((uint8_t *)&ppacket, sizeof(ppacket));
+}
+
+float calculateEMGData() {
+  if (ID == 6) {
+    totalValue = 0;
+    squareValue = 0;
+    meanAmplitude = 0;
+  
+    //35 samples with 1kHz frequency, tuned down to maintain data reading at 20 Hz
+    //35ms window period
+    for (int i = 0; i < EMG_SAMPLES; i++) {
+      float sensorValue = analogRead(A0); //read the analog value
+  //    Serial.print("Sensor Value: ");  Serial.println(sensorValue);
+      float convertedValue = (sensorValue / 1024.0) * 5; //convert into voltage range
+  //    Serial.print("Converted Value: ");  Serial.println(convertedValue);
+      
+      totalValue += convertedValue;
+      delay(1);
+    }
+    meanAmplitude = totalValue / (EMG_SAMPLES * 1.0);
+    scaledMeanAmplitude = round(meanAmplitude * 100.0);
+  } else {
+    scaledMeanAmplitude = 0;
+  }
+  return scaledMeanAmplitude;
+}
+
+
 //Set up registers to read data
 void setupMPU() {
   mpu.initialize();
   if (!mpu.testConnection()) {
-//    Serial.println(F("!MPU6050 connection failed"));
   }
   
   Wire.beginTransmission(I2C_ADDR); //I2C address of MPU according to datasheet
@@ -176,8 +259,38 @@ void setupMPU() {
   Wire.write(GYRO_CONFIG); 
   Wire.write(0x00000000); //Set gyro full scale to +/- 250deg/sec
   Wire.endTransmission();
+
+  setOffsetValues();
 }
-  
+
+void setOffsetValues() {
+  if (ID == 2) { //set1 hand
+    mpu.setXAccelOffset(-1088);
+    mpu.setYAccelOffset(1678);
+    mpu.setZAccelOffset(1593);
+
+    mpu.setXGyroOffset(-82);
+    mpu.setYGyroOffset(-18);
+    mpu.setZGyroOffset(68);
+  } else if (ID == 4) { //set2 hand
+    mpu.setXAccelOffset(-2970);
+    mpu.setYAccelOffset(3988);
+    mpu.setZAccelOffset(1568);
+
+    mpu.setXGyroOffset(57);
+    mpu.setYGyroOffset(121);
+    mpu.setZGyroOffset(-64);
+  } else if (ID == 6) { //set3 hand
+    mpu.setXAccelOffset(1244);
+    mpu.setYAccelOffset(79);
+    mpu.setZAccelOffset(849);
+
+    mpu.setXGyroOffset(110);
+    mpu.setYGyroOffset(138);
+    mpu.setZGyroOffset(33);
+  }
+}
+
 //retrieving accel raw data
 void processAccelData() {
   Wire.beginTransmission(I2C_ADDR); //I2C address
@@ -186,37 +299,33 @@ void processAccelData() {
   Wire.requestFrom(I2C_ADDR,6);  //Request 6 (3B - 40) accel registers
 
   while(Wire.available() < 6); 
-  //2 registers are read and stored in the same variable. 
-  //accelX is a long variable which can save 2 bytes. 
-  //Wire.read() reads 1 byte each time. 
-  accelX = Wire.read()<<8 | Wire.read();  //Store first two bytes.
-  accelY = Wire.read()<<8 | Wire.read();  //Store middle two bytes
-  accelZ = Wire.read()<<8 | Wire.read();  //Store last two bytes
+  
+  mpu.getAcceleration(&accelX, &accelY, &accelZ);
 
   //noise removal
-  if (abs(accelX - AXO) < 24576 && abs(accelY - AYO) < 24576 && abs(accelZ - AZO) < 24576) {
-    accelXDiff[count] = accelX - preAX;
-    accelYDiff[count] = accelY - preAY;
-    accelZDiff[count] = accelZ - preAZ;
+  if (abs(accelX) < 24576 && abs(accelY) < 24576 && abs(accelZ) < 24576) {
+    accelXDiff[aCount] = accelX - preAX;
+    accelYDiff[aCount] = accelY - preAY;
+    accelZDiff[aCount] = accelZ - preAZ;
     preAX = accelX;
     preAY = accelY;
     preAZ = accelZ;
-    count += 1;
+    aCount += 1;
 
     //thresholding
-    if (count >= 5) {
+    if (aCount >= 5) {
       for (int i = 0; i < SAMPLES; i++) {
         accelXDiffSum += abs(accelXDiff[i]);
         accelYDiffSum += abs(accelYDiff[i]);
         accelZDiffSum += abs(accelZDiff[i]);
       }
-      if (accelXDiffSum >= 5000 || accelYDiffSum >= 5000 || accelZDiffSum >= 5000) {
-        moving_count += 1;
+      if (accelXDiffSum >= 10000 || accelYDiffSum >= 10000 || accelZDiffSum >= 10000) {
+        dancing_count += 1;
         idling_count = 0;
 
         // Detect state of motion as moving
-        if (moving_count >= 8) {
-          moving = true;
+        if (dancing_count >= 10) {
+          dancing = true;
           idling = false;
 //          Serial.print("moving! ");
 //          Serial.println(moving_count);
@@ -227,14 +336,14 @@ void processAccelData() {
 //        Serial.println(idling_count);
       }
       // Detect state of motion as idling
-      if (idling_count >= 6) {
+      if (idling_count >= 10) {
         idling = true;
-        moving = false;
-        moving_count = 0;
+        dancing = false;
+        dancing_count = 0;
 //        Serial.print("stop moving! ");
       }
         
-      count = 0;
+      aCount = 0;
       accelXDiffSum = 0;
       accelYDiffSum = 0;
       accelZDiffSum = 0;
@@ -242,25 +351,24 @@ void processAccelData() {
   }
 
   //process the moving data
-  if (moving) {
+  if (dancing) {
     //process Accel Data
     //convert data to g. LSB per g = 16384.0 from the datasheet.
     //MPU6050 has the range of +-2g.
-    gForceX = (accelX - AXO) / 16384.0; 
-    gForceY = (accelY - AYO) / 16384.0; 
-    gForceZ = (accelZ - AZO) / 16384.0;
+    gForceX = accelX / 16384.0; 
+    gForceY = accelY / 16384.0; 
+    gForceZ = accelZ / 16384.0;
     scaledgForceX = (round(gForceX * 100.0));
     scaledgForceY = (round(gForceY * 100.0));
     scaledgForceZ = (round(gForceZ * 100.0));
-  } else { //process the dancing data
-    gForceX = (accelX - AXO) / 16384.0; 
-    gForceY = (accelY - AYO) / 16384.0; 
-    gForceZ = (accelZ - AZO) / 16384.0;
+  } else { //process the walking/stop data
+    gForceX = accelX / 16384.0; 
+    gForceY = accelY / 16384.0; 
+    gForceZ = accelZ / 16384.0;
     scaledgForceX = (round(gForceX * 100.0));
     scaledgForceY = (round(gForceY * 100.0));
-    scaledgForceZ = (round(gForceZ * 100.0));
+    scaledgForceZ = (round(gForceZ * 100.0));  
   }
-  
 }
 
 void processGyroData() {
@@ -270,29 +378,110 @@ void processGyroData() {
   Wire.requestFrom(I2C_ADDR,6);  //Request 6 (43 - 48) gyro registers 
 
   while(Wire.available() < 6);
-  gyroX = Wire.read()<<8 | Wire.read();  //Store first two bytes.
-  gyroY = Wire.read()<<8 | Wire.read();  //Store middle two bytes 
-  gyroZ = Wire.read()<<8 | Wire.read();  //Store last two bytes 
+  mpu.getRotation(&gyroX, &gyroY, &gyroZ);
 
   //process the moving data
-  if (moving && abs(gyroX - GXO) < 27852 && abs(gyroY - GYO) < 27852 && abs(gyroZ - GZO) < 27852) {
+  if (!dancing) {
+    gyroXSum += gyroX;
+    gyroYSum += gyroY;
+    gyroZSum += gyroZ;
+
+    gCount += 1;
+
+    gyroXAvg = gyroXSum / (gCount * 1.0);
+    gyroYAvg = gyroYSum / (gCount * 1.0);
+    gyroZAvg = gyroZSum / (gCount * 1.0);
+    
     //process Gyro Data
     //convert data to degrees. 
     //LSB per degrees per second = 131.0 according to the datasheet.
     //range is 250 deg/s from datasheet.
-    rotX = (gyroX - GXO) / 131.0; 
-    rotY = (gyroY - GYO) / 131.0; 
-    rotZ = (gyroZ - GZO) / 131.0;
+    rotX = gyroX / 131.0; 
+    rotY = gyroY / 131.0; 
+    rotZ = gyroZ / 131.0;
     scaledRotX = (round(rotX * 100.0));
     scaledRotY = (round(rotY * 100.0));
     scaledRotZ = (round(rotZ * 100.0));
   } else {
     //process the dancing data
-    rotX = (gyroX - GXO) / 131.0; 
-    rotY = (gyroY - GYO) / 131.0; 
-    rotZ = (gyroZ - GZO) / 131.0;
+    rotX = gyroX / 131.0; 
+    rotY = gyroY / 131.0; 
+    rotZ = gyroZ / 131.0;
     scaledRotX = (round(rotX * 100.0));
     scaledRotY = (round(rotY * 100.0));
     scaledRotZ = (round(rotZ * 100.0));
   }
 }
+
+void clearGyroSum() {
+  gyroXSum = 0;
+  gyroYSum = 0;
+  gyroZSum = 0;
+  gyroXAvg = 0;
+  gyroYAvg = 0;
+  gyroZAvg = 0;
+  gCount = 0;
+}
+
+//Insert Detect Position Code
+void detectPosition() {
+    if (!dancing) {
+      //alreagy detect the new position
+      if (positionDetected) {
+        return;
+      }
+
+      if (gyroYAvg > 1600) {
+        rMoveCnt += 1;
+      } else if (gyroYAvg < -1600) {
+        lMoveCnt += 1;
+      } else {
+        sMoveCnt += 1;
+      }
+
+      if (lMoveCnt > 5) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'L';
+        clearGyroSum();
+      } else if (rMoveCnt > 5) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'R';
+        clearGyroSum();
+      } else if (sMoveCnt > 5) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'S';
+        clearGyroSum();
+      }
+
+    }
+}
+
+//    } else { //dancing
+//      if (startDancingAfterShift) {
+//        positionDetected = false;
+//        //update the previous state variable
+//        //preState = State;
+//        //state = STATE_S;
+//        Serial.println("Stay!");
+//
+//        clearGyroSum();
+//
+//        startDancingAfterShift = false;
+//
+//        if (millis() - tPosition < 800) {
+//          //preSTATE = STATE_S;
+//        }
+//        lMoveCnt = 0;
+//        rMoveCnt = 0;
+//      }
+//    }
+//}
