@@ -7,3 +7,8 @@ Do state the dancer id before executing the laptop code.
 
 
 e.g. sudo DANCER_ID=1 python3 laptop.py
+
+
+Before uploading the code to the beetle, run this code in the terminal:
+
+sudo chmod a+rw /dev/ttyACM0
