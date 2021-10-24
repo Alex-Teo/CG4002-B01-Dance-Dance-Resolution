@@ -309,7 +309,7 @@ if __name__ == "__main__":
                 positions = my_client.receive_dancer_position()
                 positions = [int(position) for position in positions.split(" ")]
                 logger.info(f"received positions: {positions}")
-                counter += 1
+                mqueue.queue.clear()
 
         
 
