@@ -201,7 +201,6 @@ class MyDelegate(btle.DefaultDelegate):
                     if not START_MOVE and not START_MOVE_TIME:
                         START_MOVE = True
                         start_time = time.time()
-                        print(f"start time: {start_time}")
                         START_MOVE_TIME = True
 
 
@@ -237,7 +236,7 @@ class MyDelegate(btle.DefaultDelegate):
                         if START_MOVE and START_MOVE_TIME:
                             sync_delay_data = f"!{DANCER_ID},{start_time}\n"
                             SEND_BUFFER.append(sync_delay_data)
-                            print(f"Start time sent: {start_time}")
+                            logger.info(f"START TIME SENT: {start_time}")
                             START_MOVE_TIME = False
 
                         laptop_time = time.time() #clarify
@@ -268,15 +267,13 @@ class MyDelegate(btle.DefaultDelegate):
                     # print("Checksum Correct")
                     beetle_num = BEETLE_DICT[self.beetle_addr]
                     position = packet[1]
-                    print(position)
-
-                    logger.info(f"{BEETLE_TYPE[self.beetle_addr]} Beetle New Position: {position}")
 
                     # Collect data only if beetle is detected to be moving
                     if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
                         try:
                             position_data = f"${DANCER_ID},{position}\n"
                             SEND_BUFFER.append(position_data)
+                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {position}")
 
                         except Exception:
                             print(traceback.format_exc())      
