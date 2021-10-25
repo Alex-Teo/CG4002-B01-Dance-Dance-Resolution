@@ -6,7 +6,7 @@ Created on Mon Oct 11 13:34:07 2021
 """
 from scipy import stats
 import numpy as np
-import config
+import ML.config as config
 import pandas as pd
 
 def feature_eng(df):
