@@ -236,11 +236,19 @@ class MyDelegate(btle.DefaultDelegate):
                         if START_MOVE and START_MOVE_TIME:
                             sync_delay_data = f"!{DANCER_ID},{start_time}\n"
                             SEND_BUFFER.append(sync_delay_data)
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
                             logger.info(f"START TIME SENT: {start_time}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
                             START_MOVE_TIME = False
-
-                        laptop_time = time.time() #clarify
-                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{laptop_time},{moving_packet}\n"
+                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
                         SEND_BUFFER.append(final_data)
                         
                         # emg += 1
@@ -267,13 +275,29 @@ class MyDelegate(btle.DefaultDelegate):
                     # print("Checksum Correct")
                     beetle_num = BEETLE_DICT[self.beetle_addr]
                     position = packet[1]
+                    if position == b'S':
+                        position = "S"
+                    elif position == b'L':
+                        position = "L"
+                    elif position == b'R':
+                        position = "R"
 
                     # Collect data only if beetle is detected to be moving
                     if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
                         try:
                             position_data = f"${DANCER_ID},{position}\n"
                             SEND_BUFFER.append(position_data)
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
                             logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {position}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
 
                         except Exception:
                             print(traceback.format_exc())      
