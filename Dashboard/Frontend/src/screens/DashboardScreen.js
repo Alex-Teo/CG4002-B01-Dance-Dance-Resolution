@@ -34,6 +34,8 @@ const DashboardScreen = () => {
     syncDelay: 0,
   });
 
+  const [predictedPos, setPredictedPos] = useState([1, 2, 3]);
+
   const [d1HandAcc, setD1HandAcc] = useState([
     {
       id: "D1 AccX",
@@ -406,6 +408,7 @@ const DashboardScreen = () => {
     // {predictedDance:string, predictedPos:array, syncDelay:number}
     socket.on("newProcessedData", (ProcessedData) => {
       setProcessedData(ProcessedData);
+      setPredictedPos(ProcessedData.predictedPos);
       // console.log("processed", processedData);
     });
 
@@ -481,7 +484,7 @@ const DashboardScreen = () => {
               dancerId="Trainee 1"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance}
-              currentPos={processedData.predictedPos.indexOf(1) + 1}
+              currentPos={predictedPos.indexOf(1)}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
             />
@@ -489,7 +492,7 @@ const DashboardScreen = () => {
               dancerId="Trainee 2"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance}
-              currentPos={processedData.predictedPos.indexOf(2) + 1}
+              currentPos={predictedPos.indexOf(2)}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
             />
@@ -497,7 +500,7 @@ const DashboardScreen = () => {
               dancerId="Trainee 3"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance}
-              currentPos={processedData.predictedPos.indexOf(3) + 1}
+              currentPos={predictedPos.indexOf(3)}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
             />
