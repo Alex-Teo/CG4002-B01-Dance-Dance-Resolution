@@ -16,7 +16,6 @@ BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND
 BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST
 BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
 
-
 SERIVCE_ID = "0000dfb0-0000-1000-8000-00805f9b34fb"
 
 BUFFER_DICT = {BEETLE_ADDR_1: b"", BEETLE_ADDR_2: b"", BEETLE_ADDR_3: b"", BEETLE_ADDR_4: b"", BEETLE_ADDR_5: b"", BEETLE_ADDR_6: b""}
@@ -37,11 +36,6 @@ HAND_MOVING = False
 
 DATA_LIST_1 = []
 DATA_LIST_2 = []
-
-# header_IMU = ["Beetle Number", "Gyro-X", "Gyro-Y", "Gyro-Z", "Acc-X", "Acc-Y", "Acc-Z", "Dance Move"]
-# with open('dab_chest.csv','w',newline='') as f:
-#     writer = csv.writer(f)
-#     writer.writerow(header_IMU)
 
 class MyDelegate(btle.DefaultDelegate):
     def __init__(self,addr):
@@ -121,13 +115,10 @@ class MyDelegate(btle.DefaultDelegate):
                     BUFFER_DICT[self.beetle_addr] += fragment
         
     def handleData(self,fragment):
+
         # IMU Packet
         if fragment[0] == 73:
-            packet = struct.unpack('<cchhhhhhBBBBh', fragment)
-
-            # Obtain timestamp packet
-            big_endian_packet = struct.unpack('>cchhhhhhLh', fragment)
-            timestamp = big_endian_packet[8]
+            packet = struct.unpack('<cchhhhhhhhh', fragment)
             
             arduino_checksum = packet[-1]
             checkSumState = calcDataChecksum(packet,arduino_checksum)
@@ -148,6 +139,7 @@ class MyDelegate(btle.DefaultDelegate):
                 gyroy = packet[6]
                 gyroz = packet[7]
                 moving = packet[1]
+
                 if (moving == b'Y' and beetle_pos == "Hand"):
                     moving_status = "Hand Moving"
                     HAND_MOVING = True
@@ -159,23 +151,15 @@ class MyDelegate(btle.DefaultDelegate):
                 elif (moving == b'Y' and beetle_pos == "Chest"):
                     moving_status = "Chest Moving"
 
-                # To be changed between dab/mermaid/jamesbond
-                dance_move = "testing"
-
-
                 print(f"{beetle_pos} Beetle Moving Status: " + str(moving_status))
 
-                # Dont detect to see if chest is moving, just record data
-                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
-                    row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
-                    DATA_LIST_2.append(row_data)
-                    print("Beetle %s: " % beetle_num + str(len(DATA_LIST_2)))
-                    if len(DATA_LIST_2) == 100:
-                        with open('test_chest.csv','a',newline='') as f:
-                            writer = csv.writer(f)
-                            writer.writerows(DATA_LIST_2)                 
-                        DATA_LIST_2.clear()
-                
+                #################################################################################################
+                #################################################################################################
+                #################### CHANGE TO DANCEMOVE: DAB/JAMESBOND/MERMAID ################################
+                #################################################################################################
+                #################################################################################################
+                dance_move = "test"
+
                 # Collect data only if hand beetle is detected to be moving
                 if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
                     if HAND_MOVING:
@@ -183,6 +167,12 @@ class MyDelegate(btle.DefaultDelegate):
                         DATA_LIST_1.append(row_data)
                         print("Beetle %s: " % beetle_num + str(len(DATA_LIST_1)))
                         if len(DATA_LIST_1) == 100:
+
+                            #################################################################################################
+                            #################################################################################################
+                            #################### CHANGE TO DANCEMOVE: dab_hand/jamesbond_hand/mermaid_hand ##################
+                            #################################################################################################
+                            #################################################################################################    
                             with open('test_hand.csv','a',newline='') as f:
                                 writer = csv.writer(f)
                                 writer.writerows(DATA_LIST_1)                            
@@ -190,59 +180,30 @@ class MyDelegate(btle.DefaultDelegate):
             
                 else:
                     pass
+
+                # # Dont detect to see if chest is moving, just record data
+                # if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                #     row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
+                #     DATA_LIST_2.append(row_data)
+                #     print("Beetle %s: " % beetle_num + str(len(DATA_LIST_2)))
+                #     if len(DATA_LIST_2) == 100:
+
+
+                #         #################################################################################################
+                #         #################################################################################################
+                #         #################### CHANGE TO DANCEMOVE: dab_chest/jamesbond_chest/mermaid_chest ###############
+                #         #################################################################################################
+                #         #################################################################################################    
+
+                #         with open('test_chest.csv','a',newline='') as f:
+                #             writer = csv.writer(f)
+                #             writer.writerows(DATA_LIST_2)                 
+                #         DATA_LIST_2.clear()
+                
             else:
                 print("Checksum Incorrect")
                 # Ignore Data
 
-
-        # Time Packet
-        elif fragment[0] == 84:
-            packet = struct.unpack('<cBBBBlllch', fragment)
-            
-            big_endian_packet = struct.unpack('>cLlllch', fragment)
-            timestamp = big_endian_packet[1]
-
-            arduino_checksum = packet[-1]
-            checkSumState = calcDataChecksum(packet,arduino_checksum)
-            if (checkSumState):
-                print("Checksum Correct")
-                print("Data from: Beetle " + str(BEETLE_DICT[self.beetle_addr]))
-                packet_type = PACKET_DICT[packet[0]]
-                print("Packet Type: " + str(packet_type))
-                print("Timestamp: " + str(timestamp))
-                print("")
-                print("")
-                print("")
-            else:
-                print("Checksum Incorrect")
-
-        # EMG Packet
-        elif fragment[0] == 69:
-            packet = struct.unpack('<chhhBBBBlhch', fragment)
-            
-            big_endian_packet = struct.unpack('>chhhLlhch', fragment)
-            timestamp = big_endian_packet[4]
-
-            arduino_checksum = packet[-1]
-            checkSumState = calcDataChecksum(packet,arduino_checksum)
-            if (checkSumState):
-                print("Checksum Correct")
-                print("Data from: Beetle " + str(BEETLE_DICT[self.beetle_addr]))
-                packet_type = PACKET_DICT[packet[0]]
-                mean = packet[1]
-                rms = packet[2]
-                emax = packet[3]
-                print("Packet Pype: " + str(packet_type))
-                print("Mean: " + str(mean))
-                print("Rms: " + str(rms))
-                print("Max: " + str(emax))
-                print("Timestamp: " + str(timestamp))
-                print("")
-                print("")
-                print("")
-            else:
-                print("Checksum Incorrect")
-        
         else: 
             return
 
@@ -274,19 +235,29 @@ class myThread(threading.Thread):
             idle_count = 0
             if (HANDSHAKE_BOOL_DICT[self.beetle.addr]):
                 # Start receiving data only when both hand and chest beetle handshake have been completed
-                while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
-                or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
-                or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
-                    continue
+
+                # while not ((HANDSHAKE_BOOL_DICT[BEETLE_ADDR_1] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_2]) 
+                # or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_3] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_4]) 
+                # or (HANDSHAKE_BOOL_DICT[BEETLE_ADDR_5] and HANDSHAKE_BOOL_DICT[BEETLE_ADDR_6])):
+                    # continue
+
                 print("Receiving data...")
                 while True:
-                    if self.beetle.waitForNotifications(2.0):
-                        continue
-                    idle_count += 1
-                    print(f"idle count: {idle_count}")
-                    if idle_count == 3:
-                        break
-                print("Error in Beetle %s: %s" % (BEETLE_DICT[self.beetle.addr]))
+                    try: 
+                        if self.beetle.waitForNotifications(2.0):
+                            continue
+                        idle_count += 1
+                        print(f"idle count: {idle_count}")
+                        if idle_count == 3:
+                            break
+                    except BTLEDisconnectError:
+                        print("Disconnect Error in Beetle %s" % (BEETLE_DICT[self.beetle.addr]))
+                        reconnectBeetle(self.beetle)
+                        self.reset()
+                        initHandshake(self.beetle,self.characteristics)
+                        print("HANDSHAKE COMPLETED AT RUN")
+                        self.run()
+                print("Error in Beetle %s" % (BEETLE_DICT[self.beetle.addr]))
                 reconnectBeetle(self.beetle)
                 self.reset()                
                 initHandshake(self.beetle,self.characteristics)

@@ -1,63 +1,41 @@
 This document contains the offsets of each IMU
-Check the IMU you use before dancing and use the code below to replace the code on the top
+The MPU code will check the ID of the beetle and then set the offset for the IMU on that beetle set
 ========================================================================================
 
 Chest
 
-1.
-//offsets for set chest_1
-#define AXO -290
-#define AYO 350
-#define AZO -1160
-#define GXO -495
-#define GYO -92
-#define GZO 135
 
-2.
-//offsets for set chest_2
-#define AXO 870
-#define AYO 0
-#define AZO 1885
-#define GXO -260
-#define GYO 125
-#define GZO 10
-
-3.
-//offsets for set chest_3
-#define AXO -290
-#define AYO 350
-#define AZO -1160
-#define GXO -495
-#define GYO -92
-#define GZO 135
 
 ========================================================================================
 
 Hand
 
-1.
-//offsets for set hand_1
-#define AXO -290
-#define AYO 350
-#define AZO -1160
-#define GXO -495
-#define GYO -92
-#define GZO 135
+Set 1 (ID = 2)
 
-2.
-//offsets for set hand_2
-#define AXO 0
-#define AYO 490
-#define AZO -3300
-#define GXO 230
-#define GYO -510
-#define GZO 240
+AXO -1088
+AYO 1678
+AZO 1593
+GXO -82
+GYO -18
+GZO 68
 
-3.
-//offsets for set hand_3
-#define AXO 0
-#define AYO -740
-#define AZO 0
-#define GXO -370
-#define GYO 0
-#define GZO -130
+
+Set 2 (ID = 4)
+
+AXO -2970
+AYO 3988
+AZO 1568
+GXO 57
+GYO 121
+GZO -64
+
+
+
+Set 3 (ID = 6)
+
+AXO 1244
+AYO 79
+AZO 849
+GXO 110
+GYO 138
+GZO 33

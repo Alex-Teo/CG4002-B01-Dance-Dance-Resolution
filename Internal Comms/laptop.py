@@ -41,7 +41,9 @@ START_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False, 
 
 PACKET_DICT = {b'E': "EMG Packet", b'I': "IMU Packet", b'T': "Time Packet"}
 
-HAND_MOVING = False
+START_MOVE = False
+START_MOVE_TIME = False
+VERY_FIRST = True
 
 DATA_LIST_1 = []
 DATA_LIST_2 = []
@@ -159,20 +161,23 @@ class MyDelegate(btle.DefaultDelegate):
         
     def handleData(self,fragment):
         global SEND_BUFFER
+        global START_MOVE
+        global START_MOVE_TIME
+        global VERY_FIRST
+
         # IMU Packet
         if fragment[0] == 73:
-            packet = struct.unpack('<cchhhhhhBBBBh', fragment)
-
-            # Obtain timestamp packet
-            big_endian_packet = struct.unpack('>cchhhhhhLh', fragment)
-            timestamp = big_endian_packet[8]
+            # packet = struct.unpack('<cchhhhhhBBBBh', fragment)
+            packet = struct.unpack('<cchhhhhhhhh', fragment)
             
             arduino_checksum = packet[-1]
             checkSumState = calcDataChecksum(packet,arduino_checksum)
             if (checkSumState):
                 # print("Checksum Correct")
                 beetle_num = BEETLE_DICT[self.beetle_addr]
-                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                # if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                if (beetle_num == 1 or beetle_num == 3):
+
                     beetle_pos = 1 #"Chest"
                 else:
                     beetle_pos = 0 #"Hand"
@@ -185,111 +190,128 @@ class MyDelegate(btle.DefaultDelegate):
                 gyrox = packet[5]
                 gyroy = packet[6]
                 gyroz = packet[7]
+                emg = packet[8] / 100.0
                 moving = packet[1]
+
                 if (moving == b'Y' and beetle_pos == 0):
                     moving_status = "Hand Moving"
-                    HAND_MOVING = True
+                    moving_packet = 1
+                    VERY_FIRST = False
+
+                    if not START_MOVE and not START_MOVE_TIME:
+                        START_MOVE = True
+                        start_time = time.time()
+                        START_MOVE_TIME = True
+
+
                 elif (moving == b'N' and beetle_pos == 0):
                     moving_status = "Hand Not Moving"
-                    HAND_MOVING = False
+                    moving_packet = 0
+
+                    if START_MOVE:
+                        START_MOVE = False
+
                 elif (moving == b'N' and beetle_pos == 1):
                     moving_status = "Chest Not Moving"
                 elif (moving == b'Y' and beetle_pos == 1):
                     moving_status = "Chest Moving"
 
-                logger.info(f"{BEETLE_TYPE[self.beetle_addr]} Beetle Moving Status: " + str(moving_status))
+                # logger.info(f"{BEETLE_TYPE[self.beetle_addr]} Beetle Moving Status: " + str(moving_status))
+                logger.info(moving_status)
     
-                # Dont detect to see if chest is moving, just record data
-                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                # # Dont detect to see if chest is moving, just record data
+                # if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
+                #     try:
+                #         emg = 0
+                #         laptop_time = time.time() #clarify
+                #         final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{laptop_time}\n"
+                #         SEND_BUFFER.append(final_data)
+                #         # emg += 1
+                #     except Exception:
+                #         print(traceback.format_exc())
+
+                # Collect data only if beetle is detected to be moving
+                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
                     try:
-                        emg = 0
-                        laptop_time = time.time() #clarify
-                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{laptop_time}\n"
+                        if START_MOVE and START_MOVE_TIME:
+                            sync_delay_data = f"!{DANCER_ID},{start_time}\n"
+                            SEND_BUFFER.append(sync_delay_data)
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            logger.info(f"START TIME SENT: {start_time}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            START_MOVE_TIME = False
+                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
                         SEND_BUFFER.append(final_data)
+                        
                         # emg += 1
                     except Exception:
-                        print(traceback.format_exc())
-                # Collect data only if beetle is detected to be moving
-                elif (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
-                    if HAND_MOVING:
-                        try:
-                            emg = 0
-                            laptop_time = time.time() #clarify
-                            final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{laptop_time}\n"
-                            SEND_BUFFER.append(final_data)
-                            
-                            # emg += 1
-                        except Exception:
-                            print(traceback.format_exc())       
+                        print(traceback.format_exc())       
                 
                 else:
                     pass
-                # print("Packet Type: " + str(packet_type))
-                # print("Accx: " + str(accx))
-                # print("Accy: " + str(accy))
-                # print("Accz: " + str(accz))
-                # print("Gyrox: " + str(gyrox))
-                # print("Gyroy: " + str(gyroy))
-                # print("Gyroz: " + str(gyroz))  
-                # print("Timestamp: " + str(timestamp))
+
                 # Send Data to Ultra96
             else:
                 logger.error("Checksum Incorrect")
                 # Ignore Data
     
-    
+        # IMU Packet
+        elif fragment[0] == 80: 
+            if not VERY_FIRST:
 
+                packet = struct.unpack('<cclllhl', fragment)
+                
+                arduino_checksum = packet[-1]
+                checkSumState = calcDataChecksum(packet,arduino_checksum)
+                if (checkSumState):
+                    # print("Checksum Correct")
+                    beetle_num = BEETLE_DICT[self.beetle_addr]
+                    position = packet[1]
+                    if position == b'S':
+                        position = "S"
+                    elif position == b'L':
+                        position = "L"
+                    elif position == b'R':
+                        position = "R"
 
-        # # Time Packet
-        # elif fragment[0] == 84:
-        #     packet = struct.unpack('<cBBBBlllch', fragment)
-            
-        #     big_endian_packet = struct.unpack('>cLlllch', fragment)
-        #     timestamp = big_endian_packet[1]
+                    # Collect data only if beetle is detected to be moving
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                        try:
+                            position_data = f"${DANCER_ID},{position}\n"
+                            SEND_BUFFER.append(position_data)
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {position}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
 
-        #     arduino_checksum = packet[-1]
-        #     checkSumState = calcDataChecksum(packet,arduino_checksum)
-        #     if (checkSumState):
-        #         print("Checksum Correct")
-        #         print("Data from: Beetle " + str(BEETLE_DICT[self.beetle_addr]))
-        #         packet_type = PACKET_DICT[packet[0]]
-        #         print("Packet Type: " + str(packet_type))
-        #         print("Timestamp: " + str(timestamp))
-        #         print("")
-        #         print("")
-        #         print("")
-        #     else:
-        #         print("Checksum Incorrect")
+                        except Exception:
+                            print(traceback.format_exc())      
+                    
+                    else:
+                        pass
 
-        # # EMG Packet
-        # elif fragment[0] == 69:
-        #     packet = struct.unpack('<chhhBBBBlhch', fragment)
-            
-        #     big_endian_packet = struct.unpack('>chhhLlhch', fragment)
-        #     timestamp = big_endian_packet[4]
+                    # Send Data to Ultra96
+                else:
+                    logger.error("Checksum Incorrect")
+                    # Ignore Data
 
-        #     arduino_checksum = packet[-1]
-        #     checkSumState = calcDataChecksum(packet,arduino_checksum)
-        #     if (checkSumState):
-        #         print("Checksum Correct")
-        #         print("Data from: Beetle " + str(BEETLE_DICT[self.beetle_addr]))
-        #         packet_type = PACKET_DICT[packet[0]]
-        #         mean = packet[1]
-        #         rms = packet[2]
-        #         emax = packet[3]
-        #         print("Packet Pype: " + str(packet_type))
-        #         print("Mean: " + str(mean))
-        #         print("Rms: " + str(rms))
-        #         print("Max: " + str(emax))
-        #         print("Timestamp: " + str(timestamp))
-        #         print("")
-        #         print("")
-        #         print("")
-        #     else:
-        #         print("Checksum Incorrect")
-        
-        # else: 
-        #     return
+        else: 
+            return
 
 def calcDataChecksum(data_packet,arduino_checksum):
     try:
@@ -330,16 +352,24 @@ class myThread(threading.Thread):
                     #     continue
                     logger.info(f"Receiving data from {BEETLE_TYPE[self.beetle.addr]} Beetle...")
                     while True:
-                        if self.beetle.waitForNotifications(2.0):
-                            if len(SEND_BUFFER) == 3:
-                                compiled_data = "".join(SEND_BUFFER)
-                                sock.sendall(compiled_data.encode())
-                                SEND_BUFFER = []
-                            continue
-                        idle_count += 1
-                        logger.info(f"idle count: {idle_count}")
-                        if idle_count == 3:
-                            break
+                        try:
+                            if self.beetle.waitForNotifications(2.0):
+                                if len(SEND_BUFFER) == 3:
+                                    compiled_data = "".join(SEND_BUFFER)
+                                    sock.sendall(compiled_data.encode())
+                                    SEND_BUFFER = []
+                                continue
+                            idle_count += 1
+                            logger.info(f"idle count: {idle_count}")
+                            if idle_count == 3:
+                                break
+                        except BTLEDisconnectError:
+                            logger.error(f"BTLEDisconnect Error in Beetle {BEETLE_DICT[self.beetle.addr]}")
+                            reconnectBeetle(self.beetle)
+                            self.reset()
+                            initHandshake(self.beetle,self.characteristics)
+                            sock.close()
+                            self.run()
                     logger.error(f"Error in Beetle {BEETLE_DICT[self.beetle.addr]}")
                     reconnectBeetle(self.beetle)
                     self.reset()                
