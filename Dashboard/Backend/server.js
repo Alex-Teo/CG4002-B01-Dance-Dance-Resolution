@@ -323,7 +323,9 @@ connection.once("open", async () => {
         }
 
         const ProcessedData = {
-          predictedDance: change.fullDocument.predictedDance,
+          predictedDance1: change.fullDocument.predictedDance1,
+          predictedDance2: change.fullDocument.predictedDance2,
+          predictedDance3: change.fullDocument.predictedDance3,
           predictedPos: change.fullDocument.predictedPos
             .split(" | ")
             .map(Number),

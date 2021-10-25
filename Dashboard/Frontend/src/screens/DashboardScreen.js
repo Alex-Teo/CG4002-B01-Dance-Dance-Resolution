@@ -29,7 +29,9 @@ const DashboardScreen = () => {
   ]);
 
   const [processedData, setProcessedData] = useState({
-    predictedDance: "Inactive",
+    predictedDance1: "Inactive",
+    predictedDance2: "Inactive",
+    predictedDance3: "Inactive",
     predictedPos: [1, 2, 3],
     syncDelay: 0,
   });
@@ -483,7 +485,7 @@ const DashboardScreen = () => {
             <UserCard
               dancerId="Trainee 1"
               syncDelay={processedData.syncDelay}
-              currentDance={processedData.predictedDance}
+              currentDance={processedData.predictedDance1}
               currentPos={predictedPos.indexOf(1)}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
@@ -491,7 +493,7 @@ const DashboardScreen = () => {
             <UserCard
               dancerId="Trainee 2"
               syncDelay={processedData.syncDelay}
-              currentDance={processedData.predictedDance}
+              currentDance={processedData.predictedDance2}
               currentPos={predictedPos.indexOf(2)}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}
@@ -499,7 +501,7 @@ const DashboardScreen = () => {
             <UserCard
               dancerId="Trainee 3"
               syncDelay={processedData.syncDelay}
-              currentDance={processedData.predictedDance}
+              currentDance={processedData.predictedDance3}
               currentPos={predictedPos.indexOf(3)}
               coachDance={coachData.actualDance}
               coachPos={coachData.actualPositions}

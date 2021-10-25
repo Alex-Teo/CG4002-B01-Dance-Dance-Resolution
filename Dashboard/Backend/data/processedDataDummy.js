@@ -38,13 +38,17 @@ for (var i = 0; i < 10000; i++) {
 
     if (i === 100 && id === 0) {
       processedDataDummy.push({
-        predictedDance: "Logout",
+        predictedDance1: "Logout",
+        predictedDance2: "Logout",
+        predictedDance3: "Logout",
         predictedPos: predictedPos,
         syncDelay: syncDelay,
       });
     } else {
       processedDataDummy.push({
-        predictedDance: predictedDance,
+        predictedDance1: predictedDance,
+        predictedDance2: predictedDance,
+        predictedDance3: predictedDance,
         predictedPos: predictedPos,
         syncDelay: syncDelay,
       });
