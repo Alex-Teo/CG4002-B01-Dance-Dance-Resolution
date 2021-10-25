@@ -12,7 +12,7 @@ import numpy as np
 #sys.path.append('C:\\Users\\Jess\\Documents\\CG4002')
 #print(sys.path)
 
-import config
+import ML.config as config
 
 
 
@@ -31,6 +31,7 @@ def preprocess():
     df = pd.DataFrame()
     for file in os.listdir(config.TRAINING_FOLDER):
         if file.endswith("hand.csv"):
+            print(file)
             df1 = pd.read_csv(f'{config.TRAINING_FOLDER}/{file}')
             df1.drop(['Beetle'], axis=1, inplace=True)
             raw = []

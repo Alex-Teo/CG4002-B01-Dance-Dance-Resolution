@@ -6,7 +6,7 @@ Created on Mon Oct 11 20:18:49 2021
 """
 
 from torch import nn
-import config
+import ML.config as config
 
 
 class NNModel(nn.Module):

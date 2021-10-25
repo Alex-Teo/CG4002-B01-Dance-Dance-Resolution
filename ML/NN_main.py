@@ -8,12 +8,17 @@ from torch.utils.data import DataLoader
 from sklearn.metrics import accuracy_score
 from torch import nn
 from torch.utils.data import Dataset
-import config
-import data_preprocessing
-import fea_eng
-import scaling
-import NN_model
-        
+from scipy import stats
+'''
+import sys #add sys path to import config.py
+sys.path.append('C:\\Users\\Jess\\Documents\\CG4002\\CG4002-B01-Dance-Dance-Resolution')
+print(sys.path)
+'''
+import ML.config as config
+import ML.data_preprocessing as data_preprocessing
+import ML.fea_eng as fea_eng
+import ML.scaling as scaling
+import ML.NN_model as NN_model
 
 
 
@@ -158,6 +163,7 @@ class ML:
     
     def training(self):
         data_df = data_preprocessing.preprocess()
+        print(len(data_df))
         labels = data_df.pop('label')
         data_df = fea_eng.feature_eng(data_df)
         data_df['label'] = labels
@@ -167,30 +173,38 @@ class ML:
         train_dl, valid_dl = self.dataloader_split(train, 0.2)
         net = NN_model.NNModel()
         self.train_model(train_dl, valid_dl, net)
-        print(self.predict(test, config.MODEL_PATH))      
+        dataset = ActivityDataset(test)
+        test_dl = DataLoader(dataset)
+        model = self.load_model(config.MODEL_PATH)
+        acc = self.test_model(test_dl, model)
+        return acc
         
         
-    def predict_single_row(self, model_path):
+    def predict_single_row(self):
         if len(self.dance_data) == config.window_length:
             data_df = data_preprocessing.preprocess_single(self.dance_data)
             data_df = fea_eng.feature_eng(data_df)
             data_df, loaded_encoder = scaling.data_scaling(data_df, train_mode=False)
-            model = self.load_model(model_path)
+            model = self.load_model(config.MODEL_PATH)
             x = torch.from_numpy(data_df.astype('float32').to_numpy())
             prediction = model(x)
             _, predicted = prediction.max(1)
             predicted = loaded_encoder.inverse_transform(predicted.detach().numpy())
             self.reset_data()
             return predicted[0]
-        return None
 
+    def predict(self, prediction_list):
+        prediction = self.predict_single_row()
+        if prediction is not None:
+            prediction_list.append(prediction)
+        if len(prediction_list) == 5:
+            output_pred = stats.mode(prediction_list)[0][0]
+            return output_pred
+        else:
+            return None
+
+            
         
-    def predict(self, df, model_path):
-        dataset = ActivityDataset(df)
-        test_dl = DataLoader(dataset)
-        model = self.load_model(model_path)
-        acc = self.test_model(test_dl, model)
-        return acc
     
     def write_data(self, dancer_id, data):#todo implement dancer_id
         self.dance_data.append(data)
@@ -200,10 +214,40 @@ class ML:
 
 
 
-#mlclass = ML()
-#data = pd.read_csv("C:/Users/Jess/Documents/CG4002/Training_Data/dab_hand.csv")
-#for idx,row in data.iterrows():
-    
-#    mlclass.write_data(0, row[1:7].tolist())   1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
-#    print(mlclass.predict_single_row(config.MODEL_PATH))
-     
+dancer_1_mlclass = ML()
+dancer_2_mlclass = ML()
+dancer_3_mlclass = ML()
+
+dabdata = pd.read_csv("C:/Users/Jess/Documents/CG4002/CG4002-B01-Dance-Dance-Resolution/ML/Training_Data/jess_dab_hand.csv")
+mermaiddata = pd.read_csv("C:/Users/Jess/Documents/CG4002/CG4002-B01-Dance-Dance-Resolution/ML/Training_Data/jess_mermaid_hand.csv")
+jamesdata = pd.read_csv("C:/Users/Jess/Documents/CG4002/CG4002-B01-Dance-Dance-Resolution/ML/Training_Data/jess_jamesbond_hand.csv")
+
+dancer_1_prediction_list = []
+dancer_2_prediction_list = []
+dancer_3_prediction_list = []
+
+for idx, row in jamesdata.iterrows():
+    dancer_1_mlclass.write_data(0, row[1:7].tolist())   #1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
+    pred_1 = dancer_1_mlclass.predict(dancer_1_prediction_list)
+    if pred_1 is not None:
+        print(pred_1) #append pred_1 to mqueue
+        dancer_1_prediction_list = []
+        break
+for idx, row in mermaiddata.iterrows():
+    dancer_2_mlclass.write_data(0, row[1:7].tolist())   #1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
+    pred_2 = dancer_2_mlclass.predict(dancer_2_prediction_list)
+    if pred_2 is not None:
+        print(pred_2) 
+        dancer_2_prediction_list = []
+        break
+for idx, row in dabdata.iterrows():
+    dancer_3_mlclass.write_data(0, row[1:7].tolist())   #1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
+    pred_3 = dancer_3_mlclass.predict(dancer_3_prediction_list)
+    if pred_3 is not None:
+        print(pred_3)
+        dancer_3_prediction_list = []
+        break
+'''
+mlclass = ML()
+print(mlclass.training())
+'''
