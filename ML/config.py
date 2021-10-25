@@ -16,7 +16,8 @@ input_size = 78
 
 output_size = 3
 
-path = "C:/Users/Jess/Documents/CG4002"
+path = "C:/Users/Jess/Documents/CG4002/CG4002-B01-Dance-Dance-Resolution/ML"
+#path = "/home/xilinx/ML"
 
 TRAINING_FOLDER = os.path.join(path, "Training_Data")
 

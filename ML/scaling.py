@@ -9,7 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 import os
 import pickle
-import config
+import ML.config as config
 
 def data_scaling(df, train_mode):
     if train_mode: 
