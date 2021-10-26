@@ -248,8 +248,9 @@ class MyDelegate(btle.DefaultDelegate):
                             print("")
                             print("")
                             START_MOVE_TIME = False
-                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
-                        SEND_BUFFER.append(final_data)
+                        if moving_packet == 1:
+                            final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
+                            SEND_BUFFER.append(final_data)
                         
                         # emg += 1
                     except Exception:
@@ -354,7 +355,7 @@ class myThread(threading.Thread):
                     while True:
                         try:
                             if self.beetle.waitForNotifications(2.0):
-                                if len(SEND_BUFFER) == 3:
+                                if len(SEND_BUFFER) >= 3:
                                     compiled_data = "".join(SEND_BUFFER)
                                     sock.sendall(compiled_data.encode())
                                     SEND_BUFFER = []
