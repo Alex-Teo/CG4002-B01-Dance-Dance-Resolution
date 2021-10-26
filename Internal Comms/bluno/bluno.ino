@@ -184,23 +184,23 @@ void loop() {
       sendIMUData();
       previous_dpacket_time = current_time;
     }
-    // if (!dancing) {
-    //   if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
-    //     processGyroDataTurning();
-    //     detectPosition();
-    //     previous_ppacket_time = current_time;
-    //   }
-    // }
-    // if (positionDetected) {
-    //   if (!positionDataSent) {
-    //     sendPositionData();
-    //     positionDataSent = true;
-    //   }
-    //   if (dancing) {
-    //     positionDetected = false;
-    //     positionDataSent = false;
-    //   }
-    // }
+    if (!dancing) {
+      if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
+        processGyroDataTurning();
+        detectPosition();
+        previous_ppacket_time = current_time;
+      }
+    }
+    if (positionDetected) {
+      if (!positionDataSent) {
+        sendPositionData();
+        positionDataSent = true;
+      }
+      if (dancing) {
+        positionDetected = false;
+        positionDataSent = false;
+      }
+    }
   }
 }
 
