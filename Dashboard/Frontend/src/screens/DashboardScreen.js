@@ -483,7 +483,7 @@ const DashboardScreen = () => {
         <div className="info_wrapper">
           <div className="users_wrapper">
             <UserCard
-              dancerId="Trainee 1"
+              dancerId="Jess"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance1}
               currentPos={predictedPos.indexOf(1)}
@@ -491,7 +491,7 @@ const DashboardScreen = () => {
               coachPos={coachData.actualPositions}
             />
             <UserCard
-              dancerId="Trainee 2"
+              dancerId="Amir"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance2}
               currentPos={predictedPos.indexOf(2)}
@@ -499,7 +499,7 @@ const DashboardScreen = () => {
               coachPos={coachData.actualPositions}
             />
             <UserCard
-              dancerId="Trainee 3"
+              dancerId="Billy"
               syncDelay={processedData.syncDelay}
               currentDance={processedData.predictedDance3}
               currentPos={predictedPos.indexOf(3)}

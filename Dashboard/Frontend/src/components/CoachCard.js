@@ -7,6 +7,9 @@ import { IoChatbubbleOutline } from "react-icons/io5";
 function CoachCard({ currentDance, actualPositions, dancerDance, dancerPos }) {
   return (
     <div>
+      <div className="no_coach_overlay">
+        <div className="no_coach_overlay_text">No Coach Selected</div>
+      </div>
       <Card className="coach_card_wrapper">
         <Card.Body>
           <Card.Title className="card_title">Coach</Card.Title>

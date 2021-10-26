@@ -169,9 +169,9 @@ connection.once("open", async () => {
             gZ: tempD1gZ.toFixed(2),
           };
           io.emit("newD1HandData", FinalData);
+          // console.log("D1:", FinalData);
           overallDancer1Data.push(FinalData);
           tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
-          // console.log("D1", FinalData);
         }
         counter_1 += 1;
     }
@@ -216,9 +216,9 @@ connection.once("open", async () => {
             gZ: tempD2gZ.toFixed(2),
           };
           io.emit("newD2HandData", FinalData);
+          // console.log("D2:", FinalData);
           overallDancer2Data.push(FinalData);
           tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
-          // console.log("D2", FinalData);
         }
         counter_2 += 1;
     }
@@ -262,9 +262,9 @@ connection.once("open", async () => {
             gZ: tempD3gZ.toFixed(2),
           };
           io.emit("newD3HandData", FinalData);
+          // console.log("D3:", FinalData);
           overallDancer3Data.push(FinalData);
           tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
-          // console.log("D3", FinalData);
         }
         counter_3 += 1;
     }
@@ -290,9 +290,9 @@ connection.once("open", async () => {
             emgMean: Number(tempEmgMean.toFixed(2)),
           };
           io.emit("newEmgData", FinalData);
+          // console.log("EMG:", FinalData);
           overallEmgData.push(FinalData);
           tempEmgMean = 0;
-          // console.log("emg", FinalData);
         }
 
         counter_4 += 1;
@@ -305,7 +305,11 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         // TODO: implement logout once session is over
-        if (change.fullDocument.predictedDance === "Logout") {
+        if (
+          change.fullDocument.predictedDance1 === "Logout" &&
+          change.fullDocument.predictedDance2 === "Logout" &&
+          change.fullDocument.predictedDance3 === "Logout"
+        ) {
           var endMs = new Date();
           var duration = (endMs.getTime() - startMs.getTime()) / 1000;
           const historyObj = {
@@ -329,9 +333,10 @@ connection.once("open", async () => {
           predictedPos: change.fullDocument.predictedPos
             .split(" | ")
             .map(Number),
-          syncDelay: Number(change.fullDocument.syncDelay),
+          syncDelay: Number(change.fullDocument.syncDelay).toFixed(2),
         };
         if (counter_5 % samplingProcessed == 0) {
+          console.log("Processed:", ProcessedData);
           io.emit("newProcessedData", ProcessedData);
         }
         counter_5 += 1;
