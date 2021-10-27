@@ -88,6 +88,9 @@ int lMoveCnt = 0;
 int rMoveCnt = 0;
 int sMoveCnt = 0;
 char newPosition;
+unsigned long stopTime;
+bool firstStop = false;
+unsigned long elapsedTime;
 
 
 bool handshake_completed = false;
@@ -160,6 +163,7 @@ void loop() {
 //    }
 //  }
 //}
+
   if (Serial.available() > 0) {
     byte cmd = Serial.read();
     switch(char(cmd)) {
@@ -377,6 +381,11 @@ void processAccelData() {
 
       // Detect state of motion as idling
       if (idling_count >= 10) {
+        if (idling_count == 10) {
+          firstStop = true;
+        } else {
+          firstStop = false;
+        }
         idling = true;
         dancing = false;
         dancing_count = 0;
@@ -467,7 +476,12 @@ void processGyroDataTurning() {
     gyroYSumT += gyroYT;
     gyroZSumT += gyroZT;
 
-    gCountT += 1;
+    if (gCountT < 60) {
+      gCountT += 1;
+    }
+
+//    Serial.print("gCountT");
+//    Serial.println(gCountT);
 
     gyroXAvgT = gyroXSumT / (gCountT * 1.0);
     gyroYAvgT = gyroYSumT / (gCountT * 1.0);
@@ -487,6 +501,11 @@ void clearGyroSum() {
 
 //Insert Detect Position Code
 void detectPosition() {
+    if (firstStop) {
+      stopTime = millis();
+    }
+    elapsedTime = millis();
+    
     //already detect the new position
     if (positionDetected) {
       return;
@@ -496,6 +515,12 @@ void detectPosition() {
       clearGyroSum();
       firstClear = false;
     }
+
+//    Serial.print("gyroYAvg");
+//    Serial.println(gyroYAvgT);
+
+//    Serial.print("sMoveCnt");
+//    Serial.println(sMoveCnt);
 
     if (gyroYAvgT > 1600) {
       rMoveCnt += 1;
@@ -519,7 +544,7 @@ void detectPosition() {
       positionDetected = true;
       newPosition = 'R';
       clearGyroSum();
-    } else if (sMoveCnt > 60) {
+    } else if (elapsedTime - stopTime > 25000) {
       lMoveCnt = 0;
       rMoveCnt = 0;
       sMoveCnt = 0;
@@ -527,4 +552,12 @@ void detectPosition() {
       newPosition = 'S';
       clearGyroSum();
     }
+//    } else if (sMoveCnt > 250) {
+//      lMoveCnt = 0;
+//      rMoveCnt = 0;
+//      sMoveCnt = 0;
+//      positionDetected = true;
+//      newPosition = 'S';
+//      clearGyroSum();
+//    }
 }
