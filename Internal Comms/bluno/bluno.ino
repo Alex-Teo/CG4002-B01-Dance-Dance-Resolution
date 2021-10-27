@@ -60,7 +60,8 @@ long gyroYAvgT = 0;
 long gyroZAvgT = 0;
 int gCountT = 0;
 int gyroXT, gyroYT, gyroZT;
-bool firstClear;
+bool firstClear = false;
+bool veryFirst = true;
 
 //emg data
 double totalValue = 0; 
@@ -364,6 +365,7 @@ void processAccelData() {
 
         // Detect state of motion as moving
         if (dancing_count >= 10) {
+          veryFirst = false;
           dancing = true;
           idling = false;
 //          Serial.print("moving! ");
@@ -529,28 +531,53 @@ void detectPosition() {
     } else {
       sMoveCnt += 1;
     }
-    
-    if (lMoveCnt > 15) {
-      lMoveCnt = 0;
-      rMoveCnt = 0;
-      sMoveCnt = 0;
-      positionDetected = true;
-      newPosition = 'L';
-      clearGyroSum();
-    } else if (rMoveCnt > 15) {
-      lMoveCnt = 0;
-      rMoveCnt = 0;
-      sMoveCnt = 0;
-      positionDetected = true;
-      newPosition = 'R';
-      clearGyroSum();
-    } else if (elapsedTime - stopTime > 25000) {
-      lMoveCnt = 0;
-      rMoveCnt = 0;
-      sMoveCnt = 0;
-      positionDetected = true;
-      newPosition = 'S';
-      clearGyroSum();
+
+    if (veryFirst) {
+      if (lMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'L';
+        clearGyroSum();
+      } else if (rMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'R';
+        clearGyroSum();
+      } else if (elapsedTime - stopTime > 30000) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'S';
+        clearGyroSum();
+      }
+    } else {
+      if (lMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'L';
+        clearGyroSum();
+      } else if (rMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'R';
+        clearGyroSum();
+      } else if (elapsedTime - stopTime > 25000) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'S';
+        clearGyroSum();
+      }
     }
 //    } else if (sMoveCnt > 250) {
 //      lMoveCnt = 0;
