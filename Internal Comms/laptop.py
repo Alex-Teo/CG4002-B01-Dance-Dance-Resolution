@@ -176,7 +176,7 @@ class MyDelegate(btle.DefaultDelegate):
         beetle_num = BEETLE_DICT[self.beetle_addr]
 
         if VERY_FIRST:
-            if round(time.time() - STOP_FIRST_TIME) == 27:
+            if round(time.time() - STOP_FIRST_TIME) == 22:
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
                     if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
