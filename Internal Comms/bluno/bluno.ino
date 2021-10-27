@@ -547,7 +547,7 @@ void detectPosition() {
         positionDetected = true;
         newPosition = 'R';
         clearGyroSum();
-      } else if (elapsedTime - stopTime > 30000) {
+      } else if (elapsedTime - stopTime > 25000) {
         lMoveCnt = 0;
         rMoveCnt = 0;
         sMoveCnt = 0;
