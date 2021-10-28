@@ -52,7 +52,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     div = processedDataDummy.length / coachDataDummy.length;
-    let delay = 1000; //20hz -> 50
+    let delay = 100; //20hz -> 50
 
     // Clear exisiting collections
 
@@ -68,12 +68,13 @@ const importData = async () => {
 
     // Add in dummy data w delay
     for (var i = 0; i < coachDataDummy.length; i++) {
+      await EmgData.insertMany(emgDataDummy[i]);
+      await CoachData.insertMany(coachDataDummy[i]);
       await D1RawHandData.insertMany(d1RawHandDataDummy[i]);
       await D2RawHandData.insertMany(d2RawHandDataDummy[i]);
       await D3RawHandData.insertMany(d3RawHandDataDummy[i]);
-      await EmgData.insertMany(emgDataDummy[i]);
       await ProcessedData.insertMany(processedDataDummy[i]);
-      await CoachData.insertMany(coachDataDummy[i]);
+
       // await D1RawChestData.insertMany(d1RawChestDataDummy[i]);
       // await D2RawChestData.insertMany(d2RawChestDataDummy[i]);
       // await D3RawChestData.insertMany(d3RawChestDataDummy[i]);

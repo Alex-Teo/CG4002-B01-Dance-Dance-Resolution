@@ -110,6 +110,14 @@ connection.once("open", async () => {
   startDate = "";
   startTime = "";
 
+  var prevProcessedData = {
+    predictedDance1: "Inactive",
+    predictedDance2: "Inactive",
+    predictedDance3: "Inactive",
+    predictedPos: [1, 2, 3],
+    syncDelay: 0,
+  };
+
   // Sockets for raw data
   // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
   D1HandDataStream.on("change", (change) => {
@@ -169,6 +177,7 @@ connection.once("open", async () => {
             gZ: tempD1gZ.toFixed(2),
           };
           io.emit("newD1HandData", FinalData);
+          io.emit("newProcessedData", prevProcessedData);
           // console.log("D1:", FinalData);
           overallDancer1Data.push(FinalData);
           tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
@@ -216,6 +225,8 @@ connection.once("open", async () => {
             gZ: tempD2gZ.toFixed(2),
           };
           io.emit("newD2HandData", FinalData);
+          io.emit("newProcessedData", prevProcessedData);
+          console.log("D2 Received");
           // console.log("D2:", FinalData);
           overallDancer2Data.push(FinalData);
           tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
@@ -262,6 +273,7 @@ connection.once("open", async () => {
             gZ: tempD3gZ.toFixed(2),
           };
           io.emit("newD3HandData", FinalData);
+          io.emit("newProcessedData", prevProcessedData);
           // console.log("D3:", FinalData);
           overallDancer3Data.push(FinalData);
           tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
@@ -336,11 +348,12 @@ connection.once("open", async () => {
           syncDelay: Number(change.fullDocument.syncDelay).toFixed(2),
         };
         if (counter_5 % samplingProcessed == 0) {
-          console.log("Processed:", ProcessedData);
+          console.log("Prev Processed:", prevProcessedData);
+          prevProcessedData = ProcessedData;
           io.emit("newProcessedData", ProcessedData);
         }
         counter_5 += 1;
-        console.log(counter_5);
+      // console.log(counter_5);
     }
   });
 
