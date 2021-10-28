@@ -52,7 +52,7 @@ const importData = async () => {
   try {
     const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     div = processedDataDummy.length / coachDataDummy.length;
-    let delay = 100; //20hz -> 50
+    let delay = 1000; //20hz -> 50
 
     // Clear exisiting collections
 

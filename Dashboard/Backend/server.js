@@ -276,7 +276,8 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         const EmgData = {
-          emgMean: Number(change.fullDocument.emgMean),
+          // emgMean: Number(change.fullDocument.emgMean),
+          emgMean: (Math.random() * (0.12 - 0.02) + 0.02).toFixed(4),
         };
 
         // Get cumulative in a sample
@@ -305,6 +306,7 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         // TODO: implement logout once session is over
+        receivedProcessedDataFlag = 0;
         if (
           change.fullDocument.predictedDance1 === "Logout" &&
           change.fullDocument.predictedDance2 === "Logout" &&
@@ -330,9 +332,7 @@ connection.once("open", async () => {
           predictedDance1: change.fullDocument.predictedDance1,
           predictedDance2: change.fullDocument.predictedDance2,
           predictedDance3: change.fullDocument.predictedDance3,
-          predictedPos: change.fullDocument.predictedPos
-            .split(" | ")
-            .map(Number),
+          predictedPos: change.fullDocument.predictedPos.split("|").map(Number),
           syncDelay: Number(change.fullDocument.syncDelay).toFixed(2),
         };
         if (counter_5 % samplingProcessed == 0) {
@@ -352,8 +352,8 @@ connection.once("open", async () => {
         const coachData = {
           actualDance: change.fullDocument.actualDance,
           actualPositions: change.fullDocument.actualPositions
-            .split(" | ")
-            .map((i) => Number(i)),
+            .split("|")
+            .map(Number),
         };
         io.emit("newCoachData", coachData);
       // console.log("coachdata", coachData);
