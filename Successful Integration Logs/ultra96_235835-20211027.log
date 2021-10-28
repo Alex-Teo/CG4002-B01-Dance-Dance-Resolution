@@ -1,0 +1,377 @@
+[2021-10-27 23:59:28,308] {Extcomms.py:102} INFO - Receiving data at 0.563186 Hz
+[2021-10-27 23:59:29,279] {Extcomms.py:102} INFO - Receiving data at 30.909836 Hz
+[2021-10-27 23:59:30,700] {Extcomms.py:102} INFO - Receiving data at 21.111613 Hz
+[2021-10-27 23:59:31,487] {Extcomms.py:102} INFO - Receiving data at 38.112678 Hz
+[2021-10-27 23:59:32,321] {Extcomms.py:102} INFO - Receiving data at 35.987813 Hz
+[2021-10-27 23:59:33,134] {Extcomms.py:102} INFO - Receiving data at 36.907839 Hz
+[2021-10-27 23:59:34,406] {Extcomms.py:102} INFO - Receiving data at 23.567897 Hz
+[2021-10-27 23:59:36,738] {Extcomms.py:102} INFO - Receiving data at 12.866904 Hz
+[2021-10-27 23:59:38,343] {Extcomms.py:102} INFO - Receiving data at 18.694618 Hz
+[2021-10-27 23:59:39,827] {Extcomms.py:102} INFO - Receiving data at 20.213286 Hz
+[2021-10-27 23:59:40,635] {Extcomms.py:102} INFO - Receiving data at 37.130462 Hz
+[2021-10-27 23:59:42,036] {Extcomms.py:102} INFO - Receiving data at 21.414978 Hz
+[2021-10-27 23:59:43,512] {Extcomms.py:102} INFO - Receiving data at 20.316903 Hz
+[2021-10-27 23:59:44,965] {Extcomms.py:102} INFO - Receiving data at 20.652745 Hz
+[2021-10-27 23:59:46,423] {Extcomms.py:102} INFO - Receiving data at 20.579074 Hz
+[2021-10-27 23:59:47,840] {Extcomms.py:102} INFO - Receiving data at 21.172792 Hz
+[2021-10-27 23:59:48,647] {Extcomms.py:102} INFO - Receiving data at 37.148242 Hz
+[2021-10-27 23:59:50,084] {Extcomms.py:102} INFO - Receiving data at 20.874454 Hz
+[2021-10-27 23:59:51,565] {Extcomms.py:102} INFO - Receiving data at 20.268931 Hz
+[2021-10-27 23:59:52,806] {Extcomms.py:296} INFO - Dancer 2 dab
+[2021-10-27 23:59:54,301] {Extcomms.py:102} INFO - Receiving data at 10.962708 Hz
+[2021-10-27 23:59:55,840] {Extcomms.py:102} INFO - Receiving data at 19.497877 Hz
+[2021-10-27 23:59:58,026] {Extcomms.py:102} INFO - Receiving data at 13.722509 Hz
+[2021-10-28 00:00:00,294] {Extcomms.py:102} INFO - Receiving data at 13.227736 Hz
+[2021-10-28 00:00:02,299] {Extcomms.py:306} INFO - Dancer 3 dab
+[2021-10-28 00:00:02,382] {Extcomms.py:102} INFO - Receiving data at 14.369619 Hz
+[2021-10-28 00:00:03,206] {Extcomms.py:102} INFO - Receiving data at 36.384433 Hz
+[2021-10-28 00:00:04,041] {Extcomms.py:285} INFO - Dancer 1 dab
+[2021-10-28 00:00:04,057] {Extcomms.py:436} INFO - predictions: 0.9397706985473633
+[2021-10-28 00:00:04,057] {Extcomms.py:438} INFO - predictions: dab
+[2021-10-28 00:00:04,058] {Extcomms.py:443} INFO - eval_results: 1 2 3|dab|0.9397706985473633|
+[2021-10-28 00:00:04,058] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'dab', 'predictedDance2': 'dab', 'predictedDance3': 'dab', 'predictedPos': '1|2|3', 'syncDelay': '0.9397706985473633'}
+[2021-10-28 00:00:04,131] {Extcomms.py:452} INFO - received positions: [1, 2, 3]
+[2021-10-28 00:00:19,697] {Extcomms.py:102} INFO - Receiving data at 1.819211 Hz
+[2021-10-28 00:00:20,737] {Extcomms.py:102} INFO - Receiving data at 28.825650 Hz
+[2021-10-28 00:00:21,625] {Extcomms.py:102} INFO - Receiving data at 33.789562 Hz
+[2021-10-28 00:00:23,038] {Extcomms.py:102} INFO - Receiving data at 21.232119 Hz
+[2021-10-28 00:00:24,508] {Extcomms.py:102} INFO - Receiving data at 20.409540 Hz
+[2021-10-28 00:00:26,010] {Extcomms.py:102} INFO - Receiving data at 19.969998 Hz
+[2021-10-28 00:00:27,432] {Extcomms.py:102} INFO - Receiving data at 21.102592 Hz
+[2021-10-28 00:00:29,092] {Extcomms.py:102} INFO - Receiving data at 18.070798 Hz
+[2021-10-28 00:00:30,749] {Extcomms.py:102} INFO - Receiving data at 18.105430 Hz
+[2021-10-28 00:00:33,014] {Extcomms.py:102} INFO - Receiving data at 13.243768 Hz
+[2021-10-28 00:00:35,258] {Extcomms.py:102} INFO - Receiving data at 13.373245 Hz
+[2021-10-28 00:00:37,439] {Extcomms.py:102} INFO - Receiving data at 13.752642 Hz
+[2021-10-28 00:00:38,301] {Extcomms.py:102} INFO - Receiving data at 34.801129 Hz
+[2021-10-28 00:00:39,774] {Extcomms.py:102} INFO - Receiving data at 20.371689 Hz
+[2021-10-28 00:00:41,229] {Extcomms.py:102} INFO - Receiving data at 20.617281 Hz
+[2021-10-28 00:00:42,669] {Extcomms.py:285} INFO - Dancer 1 mermaid
+[2021-10-28 00:00:42,725] {Extcomms.py:102} INFO - Receiving data at 20.055952 Hz
+[2021-10-28 00:00:44,208] {Extcomms.py:102} INFO - Receiving data at 20.229616 Hz
+[2021-10-28 00:00:45,681] {Extcomms.py:102} INFO - Receiving data at 20.356898 Hz
+[2021-10-28 00:00:46,495] {Extcomms.py:102} INFO - Receiving data at 36.862146 Hz
+[2021-10-28 00:00:47,158] {Extcomms.py:296} INFO - Dancer 2 mermaid
+[2021-10-28 00:00:49,346] {Extcomms.py:102} INFO - Receiving data at 10.521547 Hz
+[2021-10-28 00:00:50,694] {Extcomms.py:306} INFO - Dancer 3 mermaid
+[2021-10-28 00:00:50,707] {Extcomms.py:436} INFO - predictions: 0.7617702484130859
+[2021-10-28 00:00:50,710] {Extcomms.py:438} INFO - predictions: mermaid
+[2021-10-28 00:00:50,711] {Extcomms.py:443} INFO - eval_results: 2 1 3|mermaid|0.7617702484130859|
+[2021-10-28 00:00:50,712] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'mermaid', 'predictedDance2': 'mermaid', 'predictedDance3': 'mermaid', 'predictedPos': '2|1|3', 'syncDelay': '0.7617702484130859'}
+[2021-10-28 00:00:50,800] {Extcomms.py:452} INFO - received positions: [2, 1, 3]
+[2021-10-28 00:00:51,174] {Extcomms.py:102} INFO - Receiving data at 16.414097 Hz
+[2021-10-28 00:01:15,277] {Extcomms.py:102} INFO - Receiving data at 1.244686 Hz
+[2021-10-28 00:01:16,083] {Extcomms.py:102} INFO - Receiving data at 37.214030 Hz
+[2021-10-28 00:01:16,900] {Extcomms.py:102} INFO - Receiving data at 36.731876 Hz
+[2021-10-28 00:01:18,988] {Extcomms.py:102} INFO - Receiving data at 14.361438 Hz
+[2021-10-28 00:01:19,882] {Extcomms.py:102} INFO - Receiving data at 33.581844 Hz
+[2021-10-28 00:01:21,380] {Extcomms.py:102} INFO - Receiving data at 20.017783 Hz
+[2021-10-28 00:01:22,898] {Extcomms.py:102} INFO - Receiving data at 19.766498 Hz
+[2021-10-28 00:01:23,743] {Extcomms.py:102} INFO - Receiving data at 35.502647 Hz
+[2021-10-28 00:01:25,663] {Extcomms.py:102} INFO - Receiving data at 15.625640 Hz
+[2021-10-28 00:01:27,881] {Extcomms.py:102} INFO - Receiving data at 13.529261 Hz
+[2021-10-28 00:01:29,458] {Extcomms.py:102} INFO - Receiving data at 19.013578 Hz
+[2021-10-28 00:01:31,630] {Extcomms.py:102} INFO - Receiving data at 13.811164 Hz
+[2021-10-28 00:01:33,841] {Extcomms.py:102} INFO - Receiving data at 13.570110 Hz
+[2021-10-28 00:01:35,154] {Extcomms.py:102} INFO - Receiving data at 22.846104 Hz
+[2021-10-28 00:01:36,666] {Extcomms.py:102} INFO - Receiving data at 19.850255 Hz
+[2021-10-28 00:01:37,910] {Extcomms.py:285} INFO - Dancer 1 jamesbond
+[2021-10-28 00:01:38,258] {Extcomms.py:102} INFO - Receiving data at 18.844334 Hz
+[2021-10-28 00:01:39,861] {Extcomms.py:102} INFO - Receiving data at 18.708933 Hz
+[2021-10-28 00:01:41,440] {Extcomms.py:296} INFO - Dancer 2 jamesbond
+[2021-10-28 00:01:41,457] {Extcomms.py:102} INFO - Receiving data at 18.801810 Hz
+[2021-10-28 00:01:43,782] {Extcomms.py:102} INFO - Receiving data at 12.900667 Hz
+[2021-10-28 00:01:45,474] {Extcomms.py:306} INFO - Dancer 3 jamesbond
+[2021-10-28 00:01:45,487] {Extcomms.py:436} INFO - predictions: 3.4473488330841064
+[2021-10-28 00:01:45,487] {Extcomms.py:438} INFO - predictions: jamesbond
+[2021-10-28 00:01:45,488] {Extcomms.py:443} INFO - eval_results: 1 2 3|jamesbond|3.4473488330841064|
+[2021-10-28 00:01:45,488] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'jamesbond', 'predictedDance2': 'jamesbond', 'predictedDance3': 'jamesbond', 'predictedPos': '1|2|3', 'syncDelay': '3.4473488330841064'}
+[2021-10-28 00:01:45,546] {Extcomms.py:452} INFO - received positions: [1, 2, 3]
+[2021-10-28 00:02:09,008] {Extcomms.py:102} INFO - Receiving data at 1.189261 Hz
+[2021-10-28 00:02:10,324] {Extcomms.py:102} INFO - Receiving data at 22.788963 Hz
+[2021-10-28 00:02:11,536] {Extcomms.py:102} INFO - Receiving data at 24.760368 Hz
+[2021-10-28 00:02:13,879] {Extcomms.py:102} INFO - Receiving data at 12.803746 Hz
+[2021-10-28 00:02:14,677] {Extcomms.py:102} INFO - Receiving data at 37.585435 Hz
+[2021-10-28 00:02:15,538] {Extcomms.py:102} INFO - Receiving data at 34.872182 Hz
+[2021-10-28 00:02:16,986] {Extcomms.py:102} INFO - Receiving data at 20.711948 Hz
+[2021-10-28 00:02:18,781] {Extcomms.py:102} INFO - Receiving data at 16.710985 Hz
+[2021-10-28 00:02:21,085] {Extcomms.py:102} INFO - Receiving data at 13.024094 Hz
+[2021-10-28 00:02:22,668] {Extcomms.py:102} INFO - Receiving data at 18.951924 Hz
+[2021-10-28 00:02:24,919] {Extcomms.py:102} INFO - Receiving data at 13.322184 Hz
+[2021-10-28 00:02:27,219] {Extcomms.py:102} INFO - Receiving data at 13.045372 Hz
+[2021-10-28 00:02:29,145] {Extcomms.py:102} INFO - Receiving data at 15.575932 Hz
+[2021-10-28 00:02:30,606] {Extcomms.py:102} INFO - Receiving data at 20.543570 Hz
+[2021-10-28 00:02:31,424] {Extcomms.py:102} INFO - Receiving data at 36.656394 Hz
+[2021-10-28 00:02:32,912] {Extcomms.py:102} INFO - Receiving data at 20.165547 Hz
+[2021-10-28 00:02:33,983] {Extcomms.py:296} INFO - Dancer 2 dab
+[2021-10-28 00:02:34,363] {Extcomms.py:102} INFO - Receiving data at 20.676701 Hz
+[2021-10-28 00:02:35,804] {Extcomms.py:102} INFO - Receiving data at 20.815508 Hz
+[2021-10-28 00:02:37,196] {Extcomms.py:102} INFO - Receiving data at 21.543375 Hz
+[2021-10-28 00:02:38,026] {Extcomms.py:102} INFO - Receiving data at 36.150376 Hz
+[2021-10-28 00:02:38,855] {Extcomms.py:285} INFO - Dancer 1 dab
+[2021-10-28 00:02:40,465] {Extcomms.py:306} INFO - Dancer 3 dab
+[2021-10-28 00:02:40,480] {Extcomms.py:436} INFO - predictions: 1.2713050842285156
+[2021-10-28 00:02:40,481] {Extcomms.py:438} INFO - predictions: dab
+[2021-10-28 00:02:40,482] {Extcomms.py:443} INFO - eval_results: 1 3 2|dab|1.2713050842285156|
+[2021-10-28 00:02:40,482] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'dab', 'predictedDance2': 'dab', 'predictedDance3': 'dab', 'predictedPos': '1|3|2', 'syncDelay': '1.2713050842285156'}
+[2021-10-28 00:02:40,534] {Extcomms.py:452} INFO - received positions: [1, 3, 2]
+[2021-10-28 00:03:02,070] {Extcomms.py:102} INFO - Receiving data at 1.247702 Hz
+[2021-10-28 00:03:03,347] {Extcomms.py:102} INFO - Receiving data at 23.507291 Hz
+[2021-10-28 00:03:04,546] {Extcomms.py:102} INFO - Receiving data at 25.017097 Hz
+[2021-10-28 00:03:06,100] {Extcomms.py:102} INFO - Receiving data at 19.300090 Hz
+[2021-10-28 00:03:06,970] {Extcomms.py:102} INFO - Receiving data at 34.503215 Hz
+[2021-10-28 00:03:08,464] {Extcomms.py:102} INFO - Receiving data at 20.081174 Hz
+[2021-10-28 00:03:10,643] {Extcomms.py:102} INFO - Receiving data at 13.765049 Hz
+[2021-10-28 00:03:12,889] {Extcomms.py:102} INFO - Receiving data at 13.356343 Hz
+[2021-10-28 00:03:15,147] {Extcomms.py:102} INFO - Receiving data at 13.285561 Hz
+[2021-10-28 00:03:16,725] {Extcomms.py:102} INFO - Receiving data at 19.017891 Hz
+[2021-10-28 00:03:17,596] {Extcomms.py:102} INFO - Receiving data at 34.424641 Hz
+[2021-10-28 00:03:19,068] {Extcomms.py:102} INFO - Receiving data at 20.388600 Hz
+[2021-10-28 00:03:20,503] {Extcomms.py:102} INFO - Receiving data at 20.893417 Hz
+[2021-10-28 00:03:21,969] {Extcomms.py:285} INFO - Dancer 1 mermaid
+[2021-10-28 00:03:21,989] {Extcomms.py:102} INFO - Receiving data at 20.198772 Hz
+[2021-10-28 00:03:23,551] {Extcomms.py:102} INFO - Receiving data at 19.200527 Hz
+[2021-10-28 00:03:25,031] {Extcomms.py:102} INFO - Receiving data at 20.268089 Hz
+[2021-10-28 00:03:25,899] {Extcomms.py:102} INFO - Receiving data at 34.586769 Hz
+[2021-10-28 00:03:27,413] {Extcomms.py:102} INFO - Receiving data at 19.804058 Hz
+[2021-10-28 00:03:28,629] {Extcomms.py:296} INFO - Dancer 2 mermaid
+[2021-10-28 00:03:29,275] {Extcomms.py:102} INFO - Receiving data at 16.116956 Hz
+[2021-10-28 00:03:31,533] {Extcomms.py:102} INFO - Receiving data at 13.285249 Hz
+[2021-10-28 00:03:33,196] {Extcomms.py:102} INFO - Receiving data at 18.040449 Hz
+[2021-10-28 00:03:33,893] {Extcomms.py:306} INFO - Dancer 3 mermaid
+[2021-10-28 00:03:33,909] {Extcomms.py:436} INFO - predictions: 1.068924903869629
+[2021-10-28 00:03:33,912] {Extcomms.py:438} INFO - predictions: mermaid
+[2021-10-28 00:03:33,912] {Extcomms.py:443} INFO - eval_results: 2 1 3|mermaid|1.068924903869629|
+[2021-10-28 00:03:33,913] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'mermaid', 'predictedDance2': 'mermaid', 'predictedDance3': 'mermaid', 'predictedPos': '2|1|3', 'syncDelay': '1.068924903869629'}
+[2021-10-28 00:03:33,967] {Extcomms.py:452} INFO - received positions: [2, 1, 3]
+[2021-10-28 00:03:34,730] {Extcomms.py:102} INFO - Receiving data at 19.550699 Hz
+[2021-10-28 00:03:36,217] {Extcomms.py:102} INFO - Receiving data at 20.184882 Hz
+[2021-10-28 00:03:53,955] {Extcomms.py:102} INFO - Receiving data at 1.691266 Hz
+[2021-10-28 00:03:55,461] {Extcomms.py:102} INFO - Receiving data at 19.914842 Hz
+[2021-10-28 00:03:56,320] {Extcomms.py:102} INFO - Receiving data at 34.935425 Hz
+[2021-10-28 00:03:58,437] {Extcomms.py:102} INFO - Receiving data at 14.172436 Hz
+[2021-10-28 00:03:59,315] {Extcomms.py:102} INFO - Receiving data at 34.180649 Hz
+[2021-10-28 00:04:00,788] {Extcomms.py:102} INFO - Receiving data at 20.361638 Hz
+[2021-10-28 00:04:01,799] {Extcomms.py:102} INFO - Receiving data at 29.677274 Hz
+[2021-10-28 00:04:03,549] {Extcomms.py:102} INFO - Receiving data at 17.144424 Hz
+[2021-10-28 00:04:05,851] {Extcomms.py:102} INFO - Receiving data at 13.028444 Hz
+[2021-10-28 00:04:08,123] {Extcomms.py:102} INFO - Receiving data at 13.207083 Hz
+[2021-10-28 00:04:09,677] {Extcomms.py:102} INFO - Receiving data at 19.299232 Hz
+[2021-10-28 00:04:10,466] {Extcomms.py:102} INFO - Receiving data at 38.017229 Hz
+[2021-10-28 00:04:11,109] {Extcomms.py:285} INFO - Dancer 1 jamesbond
+[2021-10-28 00:04:12,559] {Extcomms.py:102} INFO - Receiving data at 14.335057 Hz
+[2021-10-28 00:04:14,025] {Extcomms.py:102} INFO - Receiving data at 20.466585 Hz
+[2021-10-28 00:04:15,470] {Extcomms.py:296} INFO - Dancer 2 jamesbond
+[2021-10-28 00:04:15,541] {Extcomms.py:102} INFO - Receiving data at 19.792834 Hz
+[2021-10-28 00:04:17,803] {Extcomms.py:102} INFO - Receiving data at 13.259576 Hz
+[2021-10-28 00:04:20,078] {Extcomms.py:102} INFO - Receiving data at 13.188679 Hz
+[2021-10-28 00:04:21,668] {Extcomms.py:102} INFO - Receiving data at 18.864200 Hz
+[2021-10-28 00:04:22,674] {Extcomms.py:306} INFO - Dancer 3 jamesbond
+[2021-10-28 00:04:22,689] {Extcomms.py:436} INFO - predictions: 2.6038732528686523
+[2021-10-28 00:04:22,692] {Extcomms.py:438} INFO - predictions: jamesbond
+[2021-10-28 00:04:22,693] {Extcomms.py:443} INFO - eval_results: 2 1 3|jamesbond|2.6038732528686523|
+[2021-10-28 00:04:22,693] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'jamesbond', 'predictedDance2': 'jamesbond', 'predictedDance3': 'jamesbond', 'predictedPos': '2|1|3', 'syncDelay': '2.6038732528686523'}
+[2021-10-28 00:04:22,747] {Extcomms.py:452} INFO - received positions: [3, 1, 2]
+[2021-10-28 00:04:23,308] {Extcomms.py:102} INFO - Receiving data at 18.289371 Hz
+[2021-10-28 00:04:24,766] {Extcomms.py:102} INFO - Receiving data at 20.580289 Hz
+[2021-10-28 00:04:25,559] {Extcomms.py:102} INFO - Receiving data at 37.854991 Hz
+[2021-10-28 00:04:48,333] {Extcomms.py:102} INFO - Receiving data at 1.317254 Hz
+[2021-10-28 00:04:50,060] {Extcomms.py:102} INFO - Receiving data at 17.376835 Hz
+[2021-10-28 00:04:51,510] {Extcomms.py:102} INFO - Receiving data at 20.685658 Hz
+[2021-10-28 00:04:53,683] {Extcomms.py:102} INFO - Receiving data at 13.803190 Hz
+[2021-10-28 00:04:55,160] {Extcomms.py:102} INFO - Receiving data at 20.313124 Hz
+[2021-10-28 00:04:56,567] {Extcomms.py:102} INFO - Receiving data at 21.333478 Hz
+[2021-10-28 00:04:57,401] {Extcomms.py:102} INFO - Receiving data at 35.938280 Hz
+[2021-10-28 00:04:58,885] {Extcomms.py:102} INFO - Receiving data at 20.214069 Hz
+[2021-10-28 00:05:00,378] {Extcomms.py:102} INFO - Receiving data at 20.096511 Hz
+[2021-10-28 00:05:01,864] {Extcomms.py:102} INFO - Receiving data at 20.187673 Hz
+[2021-10-28 00:05:03,334] {Extcomms.py:102} INFO - Receiving data at 20.410887 Hz
+[2021-10-28 00:05:04,138] {Extcomms.py:102} INFO - Receiving data at 37.334628 Hz
+[2021-10-28 00:05:04,792] {Extcomms.py:285} INFO - Dancer 1 dab
+[2021-10-28 00:05:07,147] {Extcomms.py:102} INFO - Receiving data at 9.968740 Hz
+[2021-10-28 00:05:09,493] {Extcomms.py:102} INFO - Receiving data at 12.785454 Hz
+[2021-10-28 00:05:11,744] {Extcomms.py:102} INFO - Receiving data at 13.328263 Hz
+[2021-10-28 00:05:13,448] {Extcomms.py:102} INFO - Receiving data at 17.608585 Hz
+[2021-10-28 00:05:14,566] {Extcomms.py:306} INFO - Dancer 3 dab
+[2021-10-28 00:05:15,217] {Extcomms.py:102} INFO - Receiving data at 16.962967 Hz
+[2021-10-28 00:05:16,174] {Extcomms.py:296} INFO - Dancer 2 dab
+[2021-10-28 00:05:16,188] {Extcomms.py:436} INFO - predictions: 0.6726055145263672
+[2021-10-28 00:05:16,191] {Extcomms.py:438} INFO - predictions: dab
+[2021-10-28 00:05:16,192] {Extcomms.py:443} INFO - eval_results: 2 3 1|dab|0.6726055145263672|
+[2021-10-28 00:05:16,192] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'dab', 'predictedDance2': 'dab', 'predictedDance3': 'dab', 'predictedPos': '2|3|1', 'syncDelay': '0.6726055145263672'}
+[2021-10-28 00:05:16,246] {Extcomms.py:452} INFO - received positions: [2, 3, 1]
+[2021-10-28 00:05:16,636] {Extcomms.py:102} INFO - Receiving data at 21.139008 Hz
+[2021-10-28 00:05:18,135] {Extcomms.py:102} INFO - Receiving data at 20.003427 Hz
+[2021-10-28 00:05:18,962] {Extcomms.py:102} INFO - Receiving data at 36.295141 Hz
+[2021-10-28 00:05:40,881] {Extcomms.py:102} INFO - Receiving data at 1.368672 Hz
+[2021-10-28 00:05:41,741] {Extcomms.py:102} INFO - Receiving data at 34.887700 Hz
+[2021-10-28 00:05:43,305] {Extcomms.py:102} INFO - Receiving data at 19.180233 Hz
+[2021-10-28 00:05:45,422] {Extcomms.py:102} INFO - Receiving data at 14.168910 Hz
+[2021-10-28 00:05:46,293] {Extcomms.py:102} INFO - Receiving data at 34.474459 Hz
+[2021-10-28 00:05:47,755] {Extcomms.py:102} INFO - Receiving data at 20.511692 Hz
+[2021-10-28 00:05:49,228] {Extcomms.py:102} INFO - Receiving data at 20.366364 Hz
+[2021-10-28 00:05:50,650] {Extcomms.py:102} INFO - Receiving data at 21.105048 Hz
+[2021-10-28 00:05:52,483] {Extcomms.py:102} INFO - Receiving data at 16.362490 Hz
+[2021-10-28 00:05:54,121] {Extcomms.py:102} INFO - Receiving data at 18.320898 Hz
+[2021-10-28 00:05:56,374] {Extcomms.py:102} INFO - Receiving data at 13.315831 Hz
+[2021-10-28 00:05:58,581] {Extcomms.py:102} INFO - Receiving data at 13.591709 Hz
+[2021-10-28 00:06:01,068] {Extcomms.py:102} INFO - Receiving data at 12.063855 Hz
+[2021-10-28 00:06:02,473] {Extcomms.py:102} INFO - Receiving data at 21.347188 Hz
+[2021-10-28 00:06:03,586] {Extcomms.py:285} INFO - Dancer 1 jamesbond
+[2021-10-28 00:06:04,241] {Extcomms.py:102} INFO - Receiving data at 16.971602 Hz
+[2021-10-28 00:06:05,737] {Extcomms.py:102} INFO - Receiving data at 20.040977 Hz
+[2021-10-28 00:06:06,989] {Extcomms.py:296} INFO - Dancer 2 jamesbond
+[2021-10-28 00:06:07,417] {Extcomms.py:102} INFO - Receiving data at 17.860004 Hz
+[2021-10-28 00:06:09,170] {Extcomms.py:306} INFO - Dancer 3 jamesbond
+[2021-10-28 00:06:09,183] {Extcomms.py:436} INFO - predictions: 1.7123806476593018
+[2021-10-28 00:06:09,184] {Extcomms.py:438} INFO - predictions: jamesbond
+[2021-10-28 00:06:09,184] {Extcomms.py:443} INFO - eval_results: 1 2 3|jamesbond|1.7123806476593018|
+[2021-10-28 00:06:09,185] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'jamesbond', 'predictedDance2': 'jamesbond', 'predictedDance3': 'jamesbond', 'predictedPos': '1|2|3', 'syncDelay': '1.7123806476593018'}
+[2021-10-28 00:06:09,245] {Extcomms.py:452} INFO - received positions: [1, 2, 3]
+[2021-10-28 00:06:34,745] {Extcomms.py:102} INFO - Receiving data at 1.097796 Hz
+[2021-10-28 00:06:35,758] {Extcomms.py:102} INFO - Receiving data at 29.598710 Hz
+[2021-10-28 00:06:37,286] {Extcomms.py:102} INFO - Receiving data at 19.642474 Hz
+[2021-10-28 00:06:38,742] {Extcomms.py:102} INFO - Receiving data at 20.598738 Hz
+[2021-10-28 00:06:39,570] {Extcomms.py:102} INFO - Receiving data at 36.210038 Hz
+[2021-10-28 00:06:40,455] {Extcomms.py:102} INFO - Receiving data at 33.896068 Hz
+[2021-10-28 00:06:42,530] {Extcomms.py:102} INFO - Receiving data at 14.459021 Hz
+[2021-10-28 00:06:43,980] {Extcomms.py:102} INFO - Receiving data at 20.691134 Hz
+[2021-10-28 00:06:44,841] {Extcomms.py:102} INFO - Receiving data at 34.848018 Hz
+[2021-10-28 00:06:46,337] {Extcomms.py:102} INFO - Receiving data at 20.051532 Hz
+[2021-10-28 00:06:47,759] {Extcomms.py:102} INFO - Receiving data at 21.096977 Hz
+[2021-10-28 00:06:48,593] {Extcomms.py:102} INFO - Receiving data at 35.998840 Hz
+[2021-10-28 00:06:50,164] {Extcomms.py:102} INFO - Receiving data at 19.085489 Hz
+[2021-10-28 00:06:51,166] {Extcomms.py:296} INFO - Dancer 2 jamesbond
+[2021-10-28 00:06:52,098] {Extcomms.py:102} INFO - Receiving data at 15.514231 Hz
+[2021-10-28 00:06:54,452] {Extcomms.py:102} INFO - Receiving data at 12.744879 Hz
+[2021-10-28 00:06:56,093] {Extcomms.py:102} INFO - Receiving data at 18.281838 Hz
+[2021-10-28 00:06:58,297] {Extcomms.py:102} INFO - Receiving data at 13.610396 Hz
+[2021-10-28 00:07:00,481] {Extcomms.py:102} INFO - Receiving data at 13.737757 Hz
+[2021-10-28 00:07:02,710] {Extcomms.py:102} INFO - Receiving data at 13.461425 Hz
+[2021-10-28 00:07:04,277] {Extcomms.py:102} INFO - Receiving data at 19.142974 Hz
+[2021-10-28 00:07:05,111] {Extcomms.py:306} INFO - Dancer 3 jamesbond
+[2021-10-28 00:07:06,325] {Extcomms.py:285} INFO - Dancer 1 jamesbond
+[2021-10-28 00:07:06,338] {Extcomms.py:436} INFO - predictions: 6.265618801116943
+[2021-10-28 00:07:06,341] {Extcomms.py:438} INFO - predictions: jamesbond
+[2021-10-28 00:07:06,342] {Extcomms.py:443} INFO - eval_results: 2 1 3|jamesbond|6.265618801116943|
+[2021-10-28 00:07:06,342] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'jamesbond', 'predictedDance2': 'jamesbond', 'predictedDance3': 'jamesbond', 'predictedPos': '2|1|3', 'syncDelay': '6.265618801116943'}
+[2021-10-28 00:07:06,416] {Extcomms.py:452} INFO - received positions: [2, 1, 3]
+[2021-10-28 00:07:06,488] {Extcomms.py:102} INFO - Receiving data at 13.564483 Hz
+[2021-10-28 00:07:07,290] {Extcomms.py:102} INFO - Receiving data at 37.431107 Hz
+[2021-10-28 00:07:08,739] {Extcomms.py:102} INFO - Receiving data at 20.703350 Hz
+[2021-10-28 00:07:10,167] {Extcomms.py:102} INFO - Receiving data at 21.004525 Hz
+[2021-10-28 00:07:11,644] {Extcomms.py:102} INFO - Receiving data at 20.317824 Hz
+[2021-10-28 00:07:12,439] {Extcomms.py:102} INFO - Receiving data at 37.704795 Hz
+[2021-10-28 00:07:13,872] {Extcomms.py:102} INFO - Receiving data at 20.947410 Hz
+[2021-10-28 00:07:14,898] {Extcomms.py:296} INFO - Dancer 2 jamesbond
+[2021-10-28 00:07:15,735] {Extcomms.py:102} INFO - Receiving data at 16.097280 Hz
+[2021-10-28 00:07:18,004] {Extcomms.py:102} INFO - Receiving data at 13.225369 Hz
+[2021-10-28 00:07:19,680] {Extcomms.py:102} INFO - Receiving data at 17.897413 Hz
+[2021-10-28 00:07:21,998] {Extcomms.py:102} INFO - Receiving data at 12.940268 Hz
+[2021-10-28 00:07:24,301] {Extcomms.py:102} INFO - Receiving data at 13.024490 Hz
+[2021-10-28 00:07:36,606] {Extcomms.py:102} INFO - Receiving data at 2.438211 Hz
+[2021-10-28 00:07:37,757] {Extcomms.py:102} INFO - Receiving data at 26.045948 Hz
+[2021-10-28 00:07:38,556] {Extcomms.py:102} INFO - Receiving data at 37.553970 Hz
+[2021-10-28 00:07:39,769] {Extcomms.py:102} INFO - Receiving data at 24.735719 Hz
+[2021-10-28 00:07:41,082] {Extcomms.py:306} INFO - Dancer 3 jamesbond
+[2021-10-28 00:07:42,258] {Extcomms.py:102} INFO - Receiving data at 12.052512 Hz
+[2021-10-28 00:07:43,086] {Extcomms.py:102} INFO - Receiving data at 36.254117 Hz
+[2021-10-28 00:07:45,199] {Extcomms.py:102} INFO - Receiving data at 14.195490 Hz
+[2021-10-28 00:07:45,997] {Extcomms.py:102} INFO - Receiving data at 37.613883 Hz
+[2021-10-28 00:07:47,416] {Extcomms.py:102} INFO - Receiving data at 21.129885 Hz
+[2021-10-28 00:07:48,928] {Extcomms.py:102} INFO - Receiving data at 19.849169 Hz
+[2021-10-28 00:07:50,348] {Extcomms.py:102} INFO - Receiving data at 21.120380 Hz
+[2021-10-28 00:07:51,935] {Extcomms.py:102} INFO - Receiving data at 18.901392 Hz
+[2021-10-28 00:07:54,125] {Extcomms.py:102} INFO - Receiving data at 13.703886 Hz
+[2021-10-28 00:07:56,361] {Extcomms.py:102} INFO - Receiving data at 13.415158 Hz
+[2021-10-28 00:07:57,970] {Extcomms.py:102} INFO - Receiving data at 18.640520 Hz
+[2021-10-28 00:08:00,288] {Extcomms.py:102} INFO - Receiving data at 12.940832 Hz
+[2021-10-28 00:08:02,539] {Extcomms.py:102} INFO - Receiving data at 13.328338 Hz
+[2021-10-28 00:08:04,440] {Extcomms.py:306} INFO - Dancer 3 mermaid
+[2021-10-28 00:08:04,457] {Extcomms.py:436} INFO - predictions: 0.4424769878387451
+[2021-10-28 00:08:04,460] {Extcomms.py:438} INFO - predictions: jamesbond
+[2021-10-28 00:08:04,461] {Extcomms.py:443} INFO - eval_results: 1 3 2|jamesbond|0.4424769878387451|
+[2021-10-28 00:08:04,461] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'jamesbond', 'predictedDance2': 'jamesbond', 'predictedDance3': 'mermaid', 'predictedPos': '1|3|2', 'syncDelay': '0.4424769878387451'}
+[2021-10-28 00:08:04,512] {Extcomms.py:452} INFO - received positions: [1, 3, 2]
+[2021-10-28 00:08:04,697] {Extcomms.py:102} INFO - Receiving data at 13.904114 Hz
+[2021-10-28 00:08:06,162] {Extcomms.py:102} INFO - Receiving data at 20.470884 Hz
+[2021-10-28 00:08:07,660] {Extcomms.py:102} INFO - Receiving data at 20.039203 Hz
+[2021-10-28 00:08:08,482] {Extcomms.py:102} INFO - Receiving data at 36.455175 Hz
+[2021-10-28 00:08:09,943] {Extcomms.py:102} INFO - Receiving data at 20.542004 Hz
+[2021-10-28 00:08:11,423] {Extcomms.py:102} INFO - Receiving data at 20.266205 Hz
+[2021-10-28 00:08:12,626] {Extcomms.py:296} INFO - Dancer 2 mermaid
+[2021-10-28 00:08:12,854] {Extcomms.py:102} INFO - Receiving data at 20.960132 Hz
+[2021-10-28 00:08:13,653] {Extcomms.py:102} INFO - Receiving data at 37.574492 Hz
+[2021-10-28 00:08:15,066] {Extcomms.py:102} INFO - Receiving data at 21.235792 Hz
+[2021-10-28 00:08:16,547] {Extcomms.py:102} INFO - Receiving data at 20.245128 Hz
+[2021-10-28 00:08:18,056] {Extcomms.py:102} INFO - Receiving data at 19.883498 Hz
+[2021-10-28 00:08:18,915] {Extcomms.py:102} INFO - Receiving data at 34.941905 Hz
+[2021-10-28 00:08:30,465] {Extcomms.py:102} INFO - Receiving data at 2.597428 Hz
+[2021-10-28 00:08:32,120] {Extcomms.py:285} INFO - Dancer 1 mermaid
+[2021-10-28 00:08:32,304] {Extcomms.py:102} INFO - Receiving data at 16.311393 Hz
+[2021-10-28 00:08:33,542] {Extcomms.py:102} INFO - Receiving data at 24.234124 Hz
+[2021-10-28 00:08:34,970] {Extcomms.py:102} INFO - Receiving data at 21.001482 Hz
+[2021-10-28 00:08:35,817] {Extcomms.py:102} INFO - Receiving data at 35.414067 Hz
+[2021-10-28 00:08:37,302] {Extcomms.py:102} INFO - Receiving data at 20.205123 Hz
+[2021-10-28 00:08:39,321] {Extcomms.py:102} INFO - Receiving data at 14.859972 Hz
+[2021-10-28 00:08:40,953] {Extcomms.py:102} INFO - Receiving data at 18.381236 Hz
+[2021-10-28 00:08:43,172] {Extcomms.py:102} INFO - Receiving data at 13.521365 Hz
+[2021-10-28 00:08:45,419] {Extcomms.py:102} INFO - Receiving data at 13.348925 Hz
+[2021-10-28 00:08:46,253] {Extcomms.py:102} INFO - Receiving data at 35.958749 Hz
+[2021-10-28 00:08:47,777] {Extcomms.py:102} INFO - Receiving data at 19.687282 Hz
+[2021-10-28 00:08:49,232] {Extcomms.py:102} INFO - Receiving data at 20.627211 Hz
+[2021-10-28 00:08:50,693] {Extcomms.py:102} INFO - Receiving data at 20.533845 Hz
+[2021-10-28 00:08:51,535] {Extcomms.py:102} INFO - Receiving data at 35.597611 Hz
+[2021-10-28 00:08:52,350] {Extcomms.py:296} INFO - Dancer 2 mermaid
+[2021-10-28 00:08:52,364] {Extcomms.py:436} INFO - predictions: 1.4287018775939941
+[2021-10-28 00:08:52,368] {Extcomms.py:438} INFO - predictions: mermaid
+[2021-10-28 00:08:52,369] {Extcomms.py:443} INFO - eval_results: 3 2 1|mermaid|1.4287018775939941|
+[2021-10-28 00:08:52,369] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'mermaid', 'predictedDance2': 'mermaid', 'predictedDance3': 'mermaid', 'predictedPos': '3|2|1', 'syncDelay': '1.4287018775939941'}
+[2021-10-28 00:08:52,423] {Extcomms.py:452} INFO - received positions: [3, 2, 1]
+[2021-10-28 00:08:53,651] {Extcomms.py:102} INFO - Receiving data at 14.178650 Hz
+[2021-10-28 00:08:55,218] {Extcomms.py:102} INFO - Receiving data at 19.150365 Hz
+[2021-10-28 00:08:56,079] {Extcomms.py:102} INFO - Receiving data at 34.822163 Hz
+[2021-10-28 00:08:57,590] {Extcomms.py:102} INFO - Receiving data at 19.863460 Hz
+[2021-10-28 00:08:59,023] {Extcomms.py:102} INFO - Receiving data at 20.924360 Hz
+[2021-10-28 00:09:00,303] {Extcomms.py:285} INFO - Dancer 1 mermaid
+[2021-10-28 00:09:00,603] {Extcomms.py:102} INFO - Receiving data at 18.996062 Hz
+[2021-10-28 00:09:02,888] {Extcomms.py:102} INFO - Receiving data at 13.125903 Hz
+[2021-10-28 00:09:05,103] {Extcomms.py:102} INFO - Receiving data at 13.544342 Hz
+[2021-10-28 00:09:06,664] {Extcomms.py:102} INFO - Receiving data at 19.216752 Hz
+[2021-10-28 00:09:08,918] {Extcomms.py:102} INFO - Receiving data at 13.309338 Hz
+[2021-10-28 00:09:24,286] {Extcomms.py:102} INFO - Receiving data at 1.952124 Hz
+[2021-10-28 00:09:25,203] {Extcomms.py:102} INFO - Receiving data at 32.709821 Hz
+[2021-10-28 00:09:26,004] {Extcomms.py:102} INFO - Receiving data at 37.461976 Hz
+[2021-10-28 00:09:27,423] {Extcomms.py:102} INFO - Receiving data at 21.150812 Hz
+[2021-10-28 00:09:28,375] {Extcomms.py:306} INFO - Dancer 3 dab
+[2021-10-28 00:09:29,695] {Extcomms.py:102} INFO - Receiving data at 13.204355 Hz
+[2021-10-28 00:09:31,211] {Extcomms.py:102} INFO - Receiving data at 19.785430 Hz
+[2021-10-28 00:09:32,676] {Extcomms.py:102} INFO - Receiving data at 20.476611 Hz
+[2021-10-28 00:09:33,520] {Extcomms.py:102} INFO - Receiving data at 35.535172 Hz
+[2021-10-28 00:09:34,990] {Extcomms.py:102} INFO - Receiving data at 20.410265 Hz
+[2021-10-28 00:09:36,423] {Extcomms.py:102} INFO - Receiving data at 20.937295 Hz
+[2021-10-28 00:09:38,204] {Extcomms.py:102} INFO - Receiving data at 16.840717 Hz
+[2021-10-28 00:09:39,879] {Extcomms.py:102} INFO - Receiving data at 17.917707 Hz
+[2021-10-28 00:09:42,217] {Extcomms.py:102} INFO - Receiving data at 12.828420 Hz
+[2021-10-28 00:09:44,478] {Extcomms.py:102} INFO - Receiving data at 13.268725 Hz
+[2021-10-28 00:09:46,669] {Extcomms.py:102} INFO - Receiving data at 13.694114 Hz
+[2021-10-28 00:09:48,299] {Extcomms.py:102} INFO - Receiving data at 18.402374 Hz
+[2021-10-28 00:09:50,497] {Extcomms.py:102} INFO - Receiving data at 13.646850 Hz
+[2021-10-28 00:09:52,070] {Extcomms.py:306} INFO - Dancer 3 dab
+[2021-10-28 00:09:52,083] {Extcomms.py:436} INFO - predictions: 0.6088089942932129
+[2021-10-28 00:09:52,087] {Extcomms.py:438} INFO - predictions: dab
+[2021-10-28 00:09:52,087] {Extcomms.py:443} INFO - eval_results: 1 2 3|dab|0.6088089942932129|
+[2021-10-28 00:09:52,088] {Extcomms.py:444} INFO - dashboard_results: {'predictedDance1': 'mermaid', 'predictedDance2': 'dab', 'predictedDance3': 'dab', 'predictedPos': '1|2|3', 'syncDelay': '0.6088089942932129'}
+[2021-10-28 00:09:52,137] {Extcomms.py:452} INFO - received positions: [1, 2, 3]
+[2021-10-28 00:09:52,405] {Extcomms.py:102} INFO - Receiving data at 15.725813 Hz
+[2021-10-28 00:09:53,865] {Extcomms.py:102} INFO - Receiving data at 20.553829 Hz
+[2021-10-28 00:09:55,351] {Extcomms.py:102} INFO - Receiving data at 20.181858 Hz
+[2021-10-28 00:09:56,792] {Extcomms.py:102} INFO - Receiving data at 20.816579 Hz
+[2021-10-28 00:09:57,661] {Extcomms.py:102} INFO - Receiving data at 34.543462 Hz
+[2021-10-28 00:09:59,096] {Extcomms.py:102} INFO - Receiving data at 20.897366 Hz
+[2021-10-28 00:10:00,180] {Extcomms.py:285} INFO - Dancer 1 dab
+[2021-10-28 00:10:00,543] {Extcomms.py:102} INFO - Receiving data at 20.737128 Hz
+[2021-10-28 00:10:02,005] {Extcomms.py:102} INFO - Receiving data at 20.526254 Hz
+[2021-10-28 00:10:02,874] {Extcomms.py:102} INFO - Receiving data at 34.522204 Hz
+[2021-10-28 00:10:04,343] {Extcomms.py:102} INFO - Receiving data at 20.419161 Hz
+[2021-10-28 00:10:04,882] {Extcomms.py:462} INFO - 

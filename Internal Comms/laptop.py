@@ -19,8 +19,8 @@ RESET = 'R'
 BEETLE_ADDR_1 = "b0:b1:13:2d:b6:21" # SET 1 CHEST
 BEETLE_ADDR_2 = "b0:b1:13:2d:b5:48" # SET 1 HAND
 BEETLE_ADDR_3 = "b0:b1:13:2d:d6:75" # SET 2 CHEST
-BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND
-BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST
+BEETLE_ADDR_5 = "b0:b1:13:2d:b6:2a" # SET 2 HAND
+BEETLE_ADDR_4 = "b0:b1:13:2d:cd:81" # EMG SET CHEST
 BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
 
 
@@ -44,6 +44,10 @@ PACKET_DICT = {b'E': "EMG Packet", b'I': "IMU Packet", b'T': "Time Packet"}
 START_MOVE = False
 START_MOVE_TIME = False
 VERY_FIRST = True
+POS_DETECTED = ""
+POS_DETECTED_BOOL = False
+STOP_FIRST_BOOL = True
+STOP_FIRST_TIME = 999999
 
 DATA_LIST_1 = []
 DATA_LIST_2 = []
@@ -164,6 +168,110 @@ class MyDelegate(btle.DefaultDelegate):
         global START_MOVE
         global START_MOVE_TIME
         global VERY_FIRST
+        global POS_DETECTED
+        global POS_DETECTED_BOOL
+        global STOP_FIRST_TIME
+        global STOP_FIRST_BOOL
+
+        beetle_num = BEETLE_DICT[self.beetle_addr]
+
+        if VERY_FIRST:
+            if round(time.time() - STOP_FIRST_TIME) == 27:
+                if POS_DETECTED_BOOL:
+                    # Collect data only if beetle is detected to be moving
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                        try:
+                            position_data = f"${DANCER_ID},{POS_DETECTED}\n"
+                            SEND_BUFFER.append(position_data)
+                            STOP_FIRST_TIME = 999999
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {POS_DETECTED}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+
+                        except Exception:
+                            print(traceback.format_exc()) 
+                    POS_DETECTED_BOOL = False
+
+                else:
+                    # Collect data only if beetle is detected to be moving
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                        try:
+                            POS_DETECTED = "S"
+                            position_data = f"${DANCER_ID},{POS_DETECTED}\n"
+                            SEND_BUFFER.append(position_data)
+                            STOP_FIRST_TIME = 999999
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {POS_DETECTED}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+
+                        except Exception:
+                            print(traceback.format_exc()) 
+
+        else: 
+            if round(time.time() - STOP_FIRST_TIME) == 31:
+                if POS_DETECTED_BOOL:
+                    # Collect data only if beetle is detected to be moving
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                        try:
+                            position_data = f"${DANCER_ID},{POS_DETECTED}\n"
+                            SEND_BUFFER.append(position_data)
+                            STOP_FIRST_TIME = 999999
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {POS_DETECTED}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+
+                        except Exception:
+                            print(traceback.format_exc()) 
+                    POS_DETECTED_BOOL = False
+
+                else:
+                    # Collect data only if beetle is detected to be moving
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                        try:
+                            POS_DETECTED = "S"
+                            position_data = f"${DANCER_ID},{POS_DETECTED}\n"
+                            SEND_BUFFER.append(position_data)
+                            STOP_FIRST_TIME = 999999
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {POS_DETECTED}")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+                            print("")
+
+                        except Exception:
+                            print(traceback.format_exc()) 
+
+
 
         # IMU Packet
         if fragment[0] == 73:
@@ -203,6 +311,9 @@ class MyDelegate(btle.DefaultDelegate):
                         start_time = time.time()
                         START_MOVE_TIME = True
 
+                    if not STOP_FIRST_BOOL:
+                        STOP_FIRST_BOOL = True
+
 
                 elif (moving == b'N' and beetle_pos == 0):
                     moving_status = "Hand Not Moving"
@@ -210,6 +321,13 @@ class MyDelegate(btle.DefaultDelegate):
 
                     if START_MOVE:
                         START_MOVE = False
+
+                    if STOP_FIRST_BOOL:
+                        STOP_FIRST_TIME = time.time()
+                        STOP_FIRST_BOOL = False
+
+
+                
 
                 elif (moving == b'N' and beetle_pos == 1):
                     moving_status = "Chest Not Moving"
@@ -248,8 +366,9 @@ class MyDelegate(btle.DefaultDelegate):
                             print("")
                             print("")
                             START_MOVE_TIME = False
-                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
-                        SEND_BUFFER.append(final_data)
+                        if moving_packet == 1:
+                            final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
+                            SEND_BUFFER.append(final_data)
                         
                         # emg += 1
                     except Exception:
@@ -265,50 +384,54 @@ class MyDelegate(btle.DefaultDelegate):
     
         # IMU Packet
         elif fragment[0] == 80: 
-            if not VERY_FIRST:
+            packet = struct.unpack('<cclllhl', fragment)
+            
+            arduino_checksum = packet[-1]
+            checkSumState = calcDataChecksum(packet,arduino_checksum)
+            if (checkSumState):
+                # print("Checksum Correct")
+                beetle_num = BEETLE_DICT[self.beetle_addr]
+                position = packet[1]
+                if position == b'S':
+                    position = "S"
+                    POS_DETECTED = "S"
+                    POS_DETECTED_BOOL = True
+                elif position == b'L':
+                    position = "L"
+                    POS_DETECTED = "L"
+                    POS_DETECTED_BOOL = True
+                elif position == b'R':
+                    position = "R"
+                    POS_DETECTED = "R"
+                    POS_DETECTED_BOOL = True
 
-                packet = struct.unpack('<cclllhl', fragment)
+                # # Collect data only if beetle is detected to be moving
+                # if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                #     try:
+                #         position_data = f"${DANCER_ID},{position}\n"
+                #         SEND_BUFFER.append(position_data)
+                #         print("")
+                #         print("")
+                #         print("")
+                #         print("")
+                #         print("")
+                #         logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {position}")
+                #         print("")
+                #         print("")
+                #         print("")
+                #         print("")
+                #         print("")
+
+                #     except Exception:
+                #         print(traceback.format_exc())      
                 
-                arduino_checksum = packet[-1]
-                checkSumState = calcDataChecksum(packet,arduino_checksum)
-                if (checkSumState):
-                    # print("Checksum Correct")
-                    beetle_num = BEETLE_DICT[self.beetle_addr]
-                    position = packet[1]
-                    if position == b'S':
-                        position = "S"
-                    elif position == b'L':
-                        position = "L"
-                    elif position == b'R':
-                        position = "R"
-
-                    # Collect data only if beetle is detected to be moving
-                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
-                        try:
-                            position_data = f"${DANCER_ID},{position}\n"
-                            SEND_BUFFER.append(position_data)
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {position}")
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-
-                        except Exception:
-                            print(traceback.format_exc())      
-                    
-                    else:
-                        pass
-
-                    # Send Data to Ultra96
                 else:
-                    logger.error("Checksum Incorrect")
-                    # Ignore Data
+                    pass
+
+                # Send Data to Ultra96
+            else:
+                logger.error("Checksum Incorrect")
+                # Ignore Data
 
         else: 
             return
@@ -341,7 +464,7 @@ class myThread(threading.Thread):
     def run(self):
         global SEND_BUFFER
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.connect(("localhost", 8000))
+            sock.connect(("localhost", 8888))
             
             try:
                 idle_count = 0
@@ -354,7 +477,7 @@ class myThread(threading.Thread):
                     while True:
                         try:
                             if self.beetle.waitForNotifications(2.0):
-                                if len(SEND_BUFFER) == 3:
+                                if len(SEND_BUFFER) >= 1:
                                     compiled_data = "".join(SEND_BUFFER)
                                     sock.sendall(compiled_data.encode())
                                     SEND_BUFFER = []

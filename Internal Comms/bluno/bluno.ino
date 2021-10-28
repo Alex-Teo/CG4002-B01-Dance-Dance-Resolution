@@ -60,7 +60,8 @@ long gyroYAvgT = 0;
 long gyroZAvgT = 0;
 int gCountT = 0;
 int gyroXT, gyroYT, gyroZT;
-bool firstClear;
+bool firstClear = false;
+bool veryFirst = true;
 
 //emg data
 double totalValue = 0; 
@@ -88,6 +89,9 @@ int lMoveCnt = 0;
 int rMoveCnt = 0;
 int sMoveCnt = 0;
 char newPosition;
+unsigned long stopTime;
+bool firstStop = false;
+unsigned long elapsedTime;
 
 
 bool handshake_completed = false;
@@ -160,6 +164,7 @@ void loop() {
 //    }
 //  }
 //}
+
   if (Serial.available() > 0) {
     byte cmd = Serial.read();
     switch(char(cmd)) {
@@ -184,23 +189,23 @@ void loop() {
       sendIMUData();
       previous_dpacket_time = current_time;
     }
-    // if (!dancing) {
-    //   if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
-    //     processGyroDataTurning();
-    //     detectPosition();
-    //     previous_ppacket_time = current_time;
-    //   }
-    // }
-    // if (positionDetected) {
-    //   if (!positionDataSent) {
-    //     sendPositionData();
-    //     positionDataSent = true;
-    //   }
-    //   if (dancing) {
-    //     positionDetected = false;
-    //     positionDataSent = false;
-    //   }
-    // }
+    if (!dancing) {
+      if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
+        processGyroDataTurning();
+        detectPosition();
+        previous_ppacket_time = current_time;
+      }
+    }
+    if (positionDetected) {
+      if (!positionDataSent) {
+        sendPositionData();
+        positionDataSent = true;
+      }
+      if (dancing) {
+        positionDetected = false;
+        positionDataSent = false;
+      }
+    }
   }
 }
 
@@ -360,6 +365,7 @@ void processAccelData() {
 
         // Detect state of motion as moving
         if (dancing_count >= 10) {
+          veryFirst = false;
           dancing = true;
           idling = false;
 //          Serial.print("moving! ");
@@ -377,6 +383,11 @@ void processAccelData() {
 
       // Detect state of motion as idling
       if (idling_count >= 10) {
+        if (idling_count == 10) {
+          firstStop = true;
+        } else {
+          firstStop = false;
+        }
         idling = true;
         dancing = false;
         dancing_count = 0;
@@ -467,7 +478,12 @@ void processGyroDataTurning() {
     gyroYSumT += gyroYT;
     gyroZSumT += gyroZT;
 
-    gCountT += 1;
+    if (gCountT < 60) {
+      gCountT += 1;
+    }
+
+//    Serial.print("gCountT");
+//    Serial.println(gCountT);
 
     gyroXAvgT = gyroXSumT / (gCountT * 1.0);
     gyroYAvgT = gyroYSumT / (gCountT * 1.0);
@@ -487,6 +503,11 @@ void clearGyroSum() {
 
 //Insert Detect Position Code
 void detectPosition() {
+    if (firstStop) {
+      stopTime = millis();
+    }
+    elapsedTime = millis();
+    
     //already detect the new position
     if (positionDetected) {
       return;
@@ -497,6 +518,12 @@ void detectPosition() {
       firstClear = false;
     }
 
+//    Serial.print("gyroYAvg");
+//    Serial.println(gyroYAvgT);
+
+//    Serial.print("sMoveCnt");
+//    Serial.println(sMoveCnt);
+
     if (gyroYAvgT > 1600) {
       rMoveCnt += 1;
     } else if (gyroYAvgT < -1600) {
@@ -504,27 +531,60 @@ void detectPosition() {
     } else {
       sMoveCnt += 1;
     }
-    
-    if (lMoveCnt > 15) {
-      lMoveCnt = 0;
-      rMoveCnt = 0;
-      sMoveCnt = 0;
-      positionDetected = true;
-      newPosition = 'L';
-      clearGyroSum();
-    } else if (rMoveCnt > 15) {
-      lMoveCnt = 0;
-      rMoveCnt = 0;
-      sMoveCnt = 0;
-      positionDetected = true;
-      newPosition = 'R';
-      clearGyroSum();
-    } else if (sMoveCnt > 60) {
-      lMoveCnt = 0;
-      rMoveCnt = 0;
-      sMoveCnt = 0;
-      positionDetected = true;
-      newPosition = 'S';
-      clearGyroSum();
+
+    if (veryFirst) {
+      if (lMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'L';
+        clearGyroSum();
+      } else if (rMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'R';
+        clearGyroSum();
+      } else if (elapsedTime - stopTime > 25000) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'S';
+        clearGyroSum();
+      }
+    } else {
+      if (lMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'L';
+        clearGyroSum();
+      } else if (rMoveCnt > 15) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'R';
+        clearGyroSum();
+      } else if (elapsedTime - stopTime > 29000) {
+        lMoveCnt = 0;
+        rMoveCnt = 0;
+        sMoveCnt = 0;
+        positionDetected = true;
+        newPosition = 'S';
+        clearGyroSum();
+      }
     }
+//    } else if (sMoveCnt > 250) {
+//      lMoveCnt = 0;
+//      rMoveCnt = 0;
+//      sMoveCnt = 0;
+//      positionDetected = true;
+//      newPosition = 'S';
+//      clearGyroSum();
+//    }
 }
