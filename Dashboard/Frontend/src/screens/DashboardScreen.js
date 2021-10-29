@@ -21,6 +21,7 @@ import {
 
 import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 const DashboardScreen = () => {
   // ---------------- Socket ---------------- //
@@ -38,20 +39,6 @@ const DashboardScreen = () => {
     toggleDisplayLogout();
     console.log("Manual logout clicked!");
     socket.emit("CLIENT_LOGOUT");
-  };
-
-  const resetData = () => {
-    toggleDisplayLogout();
-    setCoachData(initalCoachData);
-    setEmgArray(initialEmgArray);
-    setProcessedData(initialProcessedData);
-    setPredictedPos(initialPredictedPos);
-    setD1HandAcc(initialD1HandAcc);
-    setD2HandAcc(initialD2HandAcc);
-    setD3HandAcc(initialD3HandAcc);
-    setD1HandGyro(initialD1HandGyro);
-    setD2HandGyro(initialD2HandGyro);
-    setD3HandGyro(initialD3HandGyro);
   };
 
   // ---------------- useState ---------------- //
@@ -195,13 +182,11 @@ const DashboardScreen = () => {
           >
             Continue Dancing
           </Button>{" "}
-          <Button
-            className="option_btn"
-            variant="danger"
-            onClick={() => resetData()}
-          >
-            End Session
-          </Button>{" "}
+          <Link to="/history">
+            <Button className="option_btn" variant="danger">
+              End Session
+            </Button>{" "}
+          </Link>
         </div>
       </div>
 
