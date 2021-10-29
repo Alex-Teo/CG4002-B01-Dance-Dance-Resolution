@@ -51,7 +51,7 @@ function HistoryTable() {
       },
     },
     {
-      name: "Actions",
+      name: "",
       options: {
         customBodyRender: (value, tableMeta, updateValue) => {
           return (

@@ -8,3 +8,12 @@
 .option_btn {
   margin: 0;
 }
+
+.MUIDataTableHeadCell-contentWrapper-56 {
+  justify-content: center;
+  margin: 0 0 0 20px;
+}
+
+.MUIDataTableBodyCell-root-67 .MUIDataTableBodyCell-stackedCommon-72 {
+  text-align: center;
+}
