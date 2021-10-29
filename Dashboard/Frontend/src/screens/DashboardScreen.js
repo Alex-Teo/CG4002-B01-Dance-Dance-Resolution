@@ -30,7 +30,7 @@ const DashboardScreen = () => {
     console.log(`Client connected with socket.io ID: ${socket.id}`);
   });
 
-  // ---------------- onClick Fxn ---------------- //
+  // ---------------- onClick ---------------- //
   const toggleDisplayLogout = () => {
     setDisplayLogout(!displayLogout);
   };
@@ -43,8 +43,6 @@ const DashboardScreen = () => {
 
   // ---------------- useState ---------------- //
   const [displayLogout, setDisplayLogout] = useState(false);
-
-  // ---------------- useState (Data) ---------------- //
   const [coachData, setCoachData] = useState(initalCoachData);
   const [emgArray, setEmgArray] = useState(initialEmgArray);
   const [processedData, setProcessedData] = useState(initialProcessedData);
