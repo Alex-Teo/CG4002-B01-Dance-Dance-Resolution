@@ -52,9 +52,6 @@ connection.once("open", async () => {
   await connection.dropCollection("emg_datas");
   await connection.dropCollection("processed_datas");
   await connection.dropCollection("coach_datas");
-  // await connection.dropCollection("d1_raw_chest_datas");
-  // await connection.dropCollection("d2_raw_chest_datas");
-  // await connection.dropCollection("d3_raw_chest_datas");
   console.log(" MongoDB: Deleted old collections");
 
   await connection.createCollection("d1_raw_hand_datas");
@@ -63,9 +60,6 @@ connection.once("open", async () => {
   await connection.createCollection("emg_datas");
   await connection.createCollection("processed_datas");
   await connection.createCollection("coach_datas");
-  // await connection.createCollection("d1_raw_chest_datas");
-  // await connection.createCollection("d2_raw_chest_datas");
-  // await connection.createCollection("d3_raw_chest_datas");
   console.log(" MongoDB: Creating fresh collections");
 
   // Setup change streams
@@ -75,14 +69,11 @@ connection.once("open", async () => {
   const EmgDataStream = connection.collection("emg_datas").watch();
   const ProcessedDataStream = connection.collection("processed_datas").watch();
   const CoachDataStream = connection.collection("coach_datas").watch();
-  // const D1ChestDataStream = connection.collection("d1_raw_chest_datas").watch();
-  // const D2ChestDataStream = connection.collection("d2_raw_chest_datas").watch();
-  // const D3ChestDataStream = connection.collection("d3_raw_chest_datas").watch();
 
   console.log(" MongoDB (Change Streams): Watching collections as streams");
 
   // ---------------- Emit on Change ---------------- //
-  // Constats
+  // Constants
   const samplingRaw = 1;
   const samplingProcessed = 1;
 
@@ -176,9 +167,8 @@ connection.once("open", async () => {
             gY: tempD1gY.toFixed(2),
             gZ: tempD1gZ.toFixed(2),
           };
-          io.emit("newD1HandData", FinalData);
-          io.emit("newProcessedData", prevProcessedData);
-          // console.log("D1:", FinalData);
+          io.emit("SERVER_D1_DATA", FinalData);
+          io.emit("SERVER_PROCESSED_DATA", prevProcessedData);
           overallDancer1Data.push(FinalData);
           tempD1aX = tempD1aY = tempD1aZ = tempD1gX = tempD1gY = tempD1gZ = 0;
         }
@@ -224,10 +214,8 @@ connection.once("open", async () => {
             gY: tempD2gY.toFixed(2),
             gZ: tempD2gZ.toFixed(2),
           };
-          io.emit("newD2HandData", FinalData);
-          io.emit("newProcessedData", prevProcessedData);
-          console.log("D2 Received");
-          // console.log("D2:", FinalData);
+          io.emit("SERVER_D2_DATA", FinalData);
+          io.emit("SERVER_PROCESSED_DATA", prevProcessedData);
           overallDancer2Data.push(FinalData);
           tempD2aX = tempD2aY = tempD2aZ = tempD2gX = tempD2gY = tempD2gZ = 0;
         }
@@ -272,9 +260,8 @@ connection.once("open", async () => {
             gY: tempD3gY.toFixed(2),
             gZ: tempD3gZ.toFixed(2),
           };
-          io.emit("newD3HandData", FinalData);
-          io.emit("newProcessedData", prevProcessedData);
-          // console.log("D3:", FinalData);
+          io.emit("SERVER_D3_DATA", FinalData);
+          io.emit("SERVER_PROCESSED_DATA", prevProcessedData);
           overallDancer3Data.push(FinalData);
           tempD3aX = tempD3aY = tempD3aZ = tempD3gX = tempD3gY = tempD3gZ = 0;
         }
@@ -302,8 +289,7 @@ connection.once("open", async () => {
           const FinalData = {
             emgMean: Number(tempEmgMean.toFixed(2)),
           };
-          io.emit("newEmgData", FinalData);
-          // console.log("EMG:", FinalData);
+          io.emit("SERVER_EMG_DATA", FinalData);
           overallEmgData.push(FinalData);
           tempEmgMean = 0;
         }
@@ -317,7 +303,6 @@ connection.once("open", async () => {
   ProcessedDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
-        // TODO: implement logout once session is over
         receivedProcessedDataFlag = 0;
         if (
           change.fullDocument.predictedDance1 === "Logout" &&
@@ -336,7 +321,7 @@ connection.once("open", async () => {
             overallDancer3Data: overallDancer3Data,
           };
           connection.collection("history_datas").insertOne(historyObj);
-          io.emit("logoutDetected");
+          io.emit("SERVER_LOGOUT");
           console.log("New entry in history collection");
         }
 
@@ -348,17 +333,15 @@ connection.once("open", async () => {
           syncDelay: Number(change.fullDocument.syncDelay).toFixed(2),
         };
         if (counter_5 % samplingProcessed == 0) {
-          console.log("Prev Processed:", prevProcessedData);
           prevProcessedData = ProcessedData;
-          io.emit("newProcessedData", ProcessedData);
+          io.emit("SERVER_PROCESSED_DATA", ProcessedData);
         }
         counter_5 += 1;
-      // console.log(counter_5);
     }
   });
 
-  //Sockets for coach data
-  //{actualDance:string, actualPositions:array}
+  // Sockets for coach data
+  // {actualDance:string, actualPositions:array}
   CoachDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
@@ -368,8 +351,7 @@ connection.once("open", async () => {
             .split("|")
             .map(Number),
         };
-        io.emit("newCoachData", coachData);
-      // console.log("coachdata", coachData);
+        io.emit("SERVER_COACH_DATA", coachData);
     }
   });
 });

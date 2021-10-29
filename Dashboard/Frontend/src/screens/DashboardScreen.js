@@ -4,19 +4,19 @@ import CoachCard from "../components/CoachCard";
 import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { io } from "socket.io-client";
 
 const DashboardScreen = () => {
   // ---------------- useState ---------------- //
-
   const [displayLogout, setDisplayLogout] = useState(false);
 
   const toggleDisplayLogout = () => {
     setDisplayLogout(!displayLogout);
   };
 
+  // ---------------- useState (Data) ---------------- //
   const [coachData, setCoachData] = useState({
     actualDance: "No Coach",
     actualPositions: [1, 2, 3],
@@ -232,73 +232,6 @@ const DashboardScreen = () => {
     },
   ]);
 
-  // //Use state for chest IMU
-  // const [d1ChestAcc, setD1ChestAcc] = useState([
-  //   {
-  //     id: "D1 Chest AccX ",
-  //     color: "hsl(91, 70%, 50%)",
-  //     data: [
-  //       {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "D1 Chest AccY ",
-  //     color: "hsl(10, 20%, 50%)",
-  //     data: [
-  //       {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "D1 Chest AccZ ",
-  //     color: "hsl(60, 70%, 90%)",
-  //     data: [
-  //       {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     ],
-  //   },
-  // ]);
-
-  // const [d1ChestGyro, setD1ChestGyro] = useState([
-  //   {
-  //     id: "D1 Chest GyroX ",
-  //     color: "hsl(91, 70%, 50%)",
-  //     data: [
-  //       {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "D1 Chest GyroY ",
-  //     color: "hsl(10, 20%, 50%)",
-  //     data: [
-  //       {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: "D1 Chest GyroZ ",
-  //     color: "hsl(60, 70%, 90%)",
-  //     data: [
-  //       {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     ],
-  //   },
-  // ]);
-
   // ---------------- Sockets ---------------- //
   useEffect(() => {
     var d1Time = 1;
@@ -312,7 +245,7 @@ const DashboardScreen = () => {
 
     // Sockets for raw data
     // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
-    socket.on("newD1HandData", (FinalData) => {
+    socket.on("SERVER_D1_DATA", (FinalData) => {
       let tempD1HandAcc = d1HandAcc;
       let tempD1HandGyro = d1HandGyro;
 
@@ -342,7 +275,7 @@ const DashboardScreen = () => {
       // console.log("d1", d1HandAcc, d1HandGyro);
     });
 
-    socket.on("newD2HandData", (FinalData) => {
+    socket.on("SERVER_D2_DATA", (FinalData) => {
       let tempD2HandAcc = d2HandAcc;
       let tempD2HandGyro = d2HandGyro;
 
@@ -370,7 +303,7 @@ const DashboardScreen = () => {
       // console.log("d2", d2HandAcc, d2HandGyro);
     });
 
-    socket.on("newD3HandData", (FinalData) => {
+    socket.on("SERVER_D3_DATA", (FinalData) => {
       let tempD3HandAcc = d3HandAcc;
       let tempD3HandGyro = d3HandGyro;
 
@@ -400,7 +333,7 @@ const DashboardScreen = () => {
 
     // Socket for Emg data
     // {emgMean:num}
-    socket.on("newEmgData", (FinalData) => {
+    socket.on("SERVER_EMG_DATA", (FinalData) => {
       let newArray = emgArray;
       newArray.push(FinalData);
       setEmgArray(newArray);
@@ -408,50 +341,21 @@ const DashboardScreen = () => {
     });
 
     // {predictedDance:string, predictedPos:array, syncDelay:number}
-    socket.on("newProcessedData", (ProcessedData) => {
+    socket.on("SERVER_PROCESSED_DATA", (ProcessedData) => {
       setProcessedData(ProcessedData);
       setPredictedPos(ProcessedData.predictedPos);
       // console.log("processed", processedData);
     });
 
     // {actualDance:string, actualPositions:array}
-    socket.on("newCoachData", (coachData) => {
+    socket.on("SERVER_COACH_DATA", (coachData) => {
       setCoachData(coachData);
       // console.log("coach", currentCoachData);
     });
 
-    socket.on("logoutDetected", () => {
+    socket.on("SERVER_LOGOUT", () => {
       toggleDisplayLogout();
     });
-
-    // socket.on("newD1ChestData", (FinalData) => {
-    //   let tempD1ChestAcc = d1ChestAcc;
-    //   let tempD1ChestGyro = d1ChestGyro;
-
-    //   if (tempD1ChestAcc[0].data.length > 10) {
-    //     tempD1ChestAcc[0].data.shift();
-    //     tempD1ChestAcc[1].data.shift();
-    //     tempD1ChestAcc[2].data.shift();
-    //   }
-    //   if (tempD1ChestGyro[0].data.length > 10) {
-    //     tempD1ChestGyro[0].data.shift();
-    //     tempD1ChestGyro[1].data.shift();
-    //     tempD1ChestGyro[2].data.shift();
-    //   }
-    //   tempD1ChestAcc[0].data.push({ x: d1Time, y: FinalData.acc.aX });
-    //   tempD1ChestAcc[1].data.push({ x: d1Time, y: FinalData.acc.aY });
-    //   tempD1ChestAcc[2].data.push({ x: d1Time, y: FinalData.acc.aZ });
-
-    //   tempD1ChestGyro[0].data.push({ x: d1Time, y: FinalData.gyro.gX });
-    //   tempD1ChestGyro[1].data.push({ x: d1Time, y: FinalData.gyro.gY });
-    //   tempD1ChestGyro[2].data.push({ x: d1Time, y: FinalData.gyro.gZ });
-
-    //   d4Time += 1;
-    //   console.log(tempD1ChestAcc);
-    //   setD1ChestAcc(tempD1ChestAcc);
-    //   setD1ChestGyro(tempD1ChestGyro);
-    // console.log("d3", d3HandAcc, d3HandGyro);
-    // });
   }, []);
   return (
     <div className="dashboard_wrapper">

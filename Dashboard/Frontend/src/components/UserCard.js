@@ -17,7 +17,7 @@ function UserCard({
         <Card.Title className="cardTitle">
           {dancerId}
           <div className="position_label">
-            {currentPos == 0 ? "L" : currentPos == 1 ? "M" : "R"}
+            {currentPos === 0 ? "L" : currentPos === 1 ? "M" : "R"}
           </div>
         </Card.Title>
         <Card.Text>
