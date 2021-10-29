@@ -9,10 +9,19 @@ import "./HistoryTable.css";
 function HistoryTable() {
   const [historyData, setHistoryData] = useState([]);
   const handleRowClick = (rowData, rowMeta) => {
-    console.log(rowData);
+    var objId = rowData[0];
+    console.log(rowData[0]);
   };
 
   const tableColumns = [
+    {
+      name: "_id",
+      label: "ID",
+      options: {
+        filter: false,
+        sort: true,
+      },
+    },
     {
       name: "date",
       label: "Date",
