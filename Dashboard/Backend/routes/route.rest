@@ -7,3 +7,7 @@ GET http://localhost:5000/api/processeddata
 ###
 
 GET http://localhost:5000/api/rawdata
+
+###
+GET http://localhost:5000/api/history/617c3d485e09b20568cddea3
+
