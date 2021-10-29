@@ -26,7 +26,7 @@ connection.once("open", async () => {
 // Fxn importData() used for testing -> importing of dummy data
 const logout = async () => {
   try {
-    await ProcessedData.insertMany({
+    await ProcessedData.insertOne({
       predictedDance1: "Logout",
       predictedDance2: "Logout",
       predictedDance3: "Logout",

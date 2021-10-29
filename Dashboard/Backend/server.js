@@ -12,27 +12,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// ---------------- Socket.io Setup ---------------- //
-// Init server side socket
-const io = require("socket.io")(server, {
-  cors: {
-    origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
-  },
-});
-
-// Function runs everytime a client connects to the server
-io.on("connection", (socket) => {
-  console.log(
-    "Socket.io: Client-server connection established, ID -",
-    socket.id
-  );
-  // Client socket requests
-  socket.on("CLIENT_LOGOUT", function () {
-    console.log("Manual logout request received!");
-  });
-});
-
 // ---------------- MongoDB Setup ---------------- //
 
 // Connect to MongoDB Atlas
@@ -45,11 +24,9 @@ connection.on(
   "error",
   console.error.bind(console, "MongoDB: Connection error: ")
 );
+console.log("MongoDB: Connected");
 
-// Reset MongoDB Collections
 connection.once("open", async () => {
-  console.log("MongoDB: Connected");
-
   await connection.dropCollection("d1_raw_hand_datas");
   await connection.dropCollection("d2_raw_hand_datas");
   await connection.dropCollection("d3_raw_hand_datas");
@@ -75,6 +52,31 @@ connection.once("open", async () => {
   const CoachDataStream = connection.collection("coach_datas").watch();
 
   console.log(" MongoDB (Change Streams): Watching collections as streams");
+
+  // ---------------- Socket.io Setup ---------------- //
+  const io = require("socket.io")(server, {
+    cors: {
+      origin: ["http://localhost:3000"],
+      methods: ["GET", "POST"],
+    },
+  });
+
+  io.on("connection", (socket) => {
+    console.log(
+      "Socket.io: Client-server connection established, ID -",
+      socket.id
+    );
+    socket.on("CLIENT_LOGOUT", function () {
+      connection.collection("processed_datas").insertOne({
+        predictedDance1: "Logout",
+        predictedDance2: "Logout",
+        predictedDance3: "Logout",
+        predictedPos: "1|2|3",
+        syncDelay: 0,
+      });
+      console.log("Manual logout request received!");
+    });
+  });
 
   // ---------------- Emit on Change ---------------- //
   // Constants

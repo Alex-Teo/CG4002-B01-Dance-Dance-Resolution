@@ -18,15 +18,14 @@ const DashboardScreen = () => {
   });
 
   // ---------------- onClick Fxn ---------------- //
-
   const toggleDisplayLogout = () => {
     setDisplayLogout(!displayLogout);
-    console.log("Manual logout clicked!");
-    socket.emit("CLIENT_LOGOUT");
   };
 
   const manualLogout = () => {
     toggleDisplayLogout();
+    console.log("Manual logout clicked!");
+    socket.emit("CLIENT_LOGOUT");
   };
 
   // ---------------- useState ---------------- //
@@ -428,7 +427,7 @@ const DashboardScreen = () => {
             dancerDance={processedData.predictedDance}
             dancerPos={processedData.predictedPos}
           />
-          <Button onClick={manualLogout}>TEST</Button>
+          <Button onClick={() => manualLogout()}>TEST</Button>
         </div>
       </div>
     </div>
