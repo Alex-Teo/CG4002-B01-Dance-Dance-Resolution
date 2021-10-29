@@ -8,6 +8,9 @@ import "./HistoryTable.css";
 
 function HistoryTable() {
   const [historyData, setHistoryData] = useState([]);
+  const handleRowClick = (rowData, rowMeta) => {
+    console.log(rowData);
+  };
 
   const tableColumns = [
     {
@@ -54,6 +57,7 @@ function HistoryTable() {
     tableBodyMaxHeight: "500px",
     selectableRows: "none",
     expandableRowsOnClick: true,
+    onRowClick: handleRowClick,
   };
 
   useEffect(() => {
