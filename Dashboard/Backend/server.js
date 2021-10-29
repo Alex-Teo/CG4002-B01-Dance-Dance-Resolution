@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const fs = require("fs");
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -74,7 +75,6 @@ connection.once("open", async () => {
         predictedPos: "1|2|3",
         syncDelay: 0,
       });
-      console.log("Manual logout request received!");
     });
   });
 
@@ -124,18 +124,19 @@ connection.once("open", async () => {
           var startMs = new Date();
           startDate =
             startMs.getFullYear() +
-            "-" +
+            "_" +
             (startMs.getMonth() + 1) +
-            "-" +
+            "_" +
             startMs.getDate();
           startTime =
             startMs.getHours() +
-            ":" +
+            "_" +
             startMs.getMinutes() +
-            ":" +
+            "_" +
             startMs.getSeconds();
           startFlag = 0;
-          console.log(startTime);
+          console.log("-------------------------------");
+          console.log("Start Session: ", startTime);
         }
 
         const RawData = {
@@ -316,6 +317,12 @@ connection.once("open", async () => {
           change.fullDocument.predictedDance3 === "Logout"
         ) {
           var endMs = new Date();
+          var endTime =
+            endMs.getHours() +
+            "_" +
+            endMs.getMinutes() +
+            "_" +
+            endMs.getSeconds();
           var duration = (endMs.getTime() - startMs.getTime()) / 1000;
           const historyObj = {
             date: startDate.toString(),
@@ -328,7 +335,26 @@ connection.once("open", async () => {
           };
           connection.collection("history_datas").insertOne(historyObj);
           io.emit("SERVER_LOGOUT");
+
+          // Write log file
+          var elements = [
+            "./Backend/logs/",
+            "d_",
+            startDate,
+            "_t_",
+            startTime,
+            ".txt",
+          ];
+          fs.writeFile(elements.join(""), JSON.stringify(historyObj), (err) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+          });
+          console.log("End Session:", endTime);
+          console.log("Session lasted for", duration, "seconds!");
           console.log("New entry in history collection");
+          console.log("-------------------------------");
         }
 
         const ProcessedData = {
