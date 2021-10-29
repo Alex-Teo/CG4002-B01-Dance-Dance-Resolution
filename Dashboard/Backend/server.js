@@ -27,6 +27,10 @@ io.on("connection", (socket) => {
     "Socket.io: Client-server connection established, ID -",
     socket.id
   );
+  // Client socket requests
+  socket.on("CLIENT_LOGOUT", function () {
+    console.log("Manual logout request received!");
+  });
 });
 
 // ---------------- MongoDB Setup ---------------- //
