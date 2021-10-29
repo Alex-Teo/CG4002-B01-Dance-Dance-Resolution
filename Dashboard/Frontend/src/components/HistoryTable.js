@@ -23,6 +23,7 @@ function HistoryTable() {
       options: {
         filter: false,
         sort: true,
+        display: false,
       },
     },
     {
@@ -43,7 +44,7 @@ function HistoryTable() {
     },
     {
       name: "duration",
-      label: "Duration",
+      label: "Duration (sec)",
       options: {
         filter: false,
         sort: true,
@@ -59,6 +60,7 @@ function HistoryTable() {
             </Button>
           );
         },
+        sort: false,
       },
     },
   ];
