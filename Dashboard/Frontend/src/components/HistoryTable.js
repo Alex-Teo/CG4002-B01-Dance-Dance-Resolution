@@ -9,8 +9,11 @@ import "./HistoryTable.css";
 function HistoryTable() {
   const [historyData, setHistoryData] = useState([]);
   const handleRowClick = (rowData, rowMeta) => {
-    var objId = rowData[0];
-    console.log(rowData[0]);
+    var id = rowData[0];
+    axios.get(`http://localhost:5000/api/history/${id}`).then((res) => {
+      var result = res.data;
+      console.log(result);
+    });
   };
 
   const tableColumns = [
