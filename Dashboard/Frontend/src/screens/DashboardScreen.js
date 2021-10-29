@@ -6,6 +6,18 @@ import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
 
 import { SocketContext } from "../context/socket";
+import {
+  initalCoachData,
+  initialEmgArray,
+  initialProcessedData,
+  initialPredictedPos,
+  initialD1HandAcc,
+  initialD2HandAcc,
+  initialD3HandAcc,
+  initialD1HandGyro,
+  initialD2HandGyro,
+  initialD3HandGyro,
+} from "../context/inititaldata";
 
 import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -28,224 +40,34 @@ const DashboardScreen = () => {
     socket.emit("CLIENT_LOGOUT");
   };
 
+  const resetData = () => {
+    toggleDisplayLogout();
+    setCoachData(initalCoachData);
+    setEmgArray(initialEmgArray);
+    setProcessedData(initialProcessedData);
+    setPredictedPos(initialPredictedPos);
+    setD1HandAcc(initialD1HandAcc);
+    setD2HandAcc(initialD2HandAcc);
+    setD3HandAcc(initialD3HandAcc);
+    setD1HandGyro(initialD1HandGyro);
+    setD2HandGyro(initialD2HandGyro);
+    setD3HandGyro(initialD3HandGyro);
+  };
+
   // ---------------- useState ---------------- //
   const [displayLogout, setDisplayLogout] = useState(false);
 
   // ---------------- useState (Data) ---------------- //
-  const [coachData, setCoachData] = useState({
-    actualDance: "No Coach",
-    actualPositions: [1, 2, 3],
-  });
-
-  const [emgArray, setEmgArray] = useState([
-    {
-      emgMean: 0,
-    },
-  ]);
-
-  const [processedData, setProcessedData] = useState({
-    predictedDance1: "Inactive",
-    predictedDance2: "Inactive",
-    predictedDance3: "Inactive",
-    predictedPos: [1, 2, 3],
-    syncDelay: 0,
-  });
-
-  const [predictedPos, setPredictedPos] = useState([1, 2, 3]);
-
-  const [d1HandAcc, setD1HandAcc] = useState([
-    {
-      id: "D1 AccX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D1 AccY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D1 AccZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ]);
-  const [d2HandAcc, setD2HandAcc] = useState([
-    {
-      id: "D2 AccX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D2 AccY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D2 AccZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ]);
-  const [d3HandAcc, setD3HandAcc] = useState([
-    {
-      id: "D3 AccX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D3 AccY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D3 AccZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ]);
-
-  const [d1HandGyro, setD1HandGyro] = useState([
-    {
-      id: "D1 GyroX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D1 GyroY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D1 GyroZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ]);
-  const [d2HandGyro, setD2HandGyro] = useState([
-    {
-      id: "D2 GyroX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D2 GyroY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D2 GyroZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ]);
-  const [d3HandGyro, setD3HandGyro] = useState([
-    {
-      id: "D3 GyroX",
-      color: "hsl(91, 70%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D3 GyroY",
-      color: "hsl(10, 20%, 50%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-    {
-      id: "D3 GyroZ",
-      color: "hsl(60, 70%, 90%)",
-      data: [
-        {
-          x: 0,
-          y: 0,
-        },
-      ],
-    },
-  ]);
+  const [coachData, setCoachData] = useState(initalCoachData);
+  const [emgArray, setEmgArray] = useState(initialEmgArray);
+  const [processedData, setProcessedData] = useState(initialProcessedData);
+  const [predictedPos, setPredictedPos] = useState(initialPredictedPos);
+  const [d1HandAcc, setD1HandAcc] = useState(initialD1HandAcc);
+  const [d2HandAcc, setD2HandAcc] = useState(initialD2HandAcc);
+  const [d3HandAcc, setD3HandAcc] = useState(initialD3HandAcc);
+  const [d1HandGyro, setD1HandGyro] = useState(initialD1HandGyro);
+  const [d2HandGyro, setD2HandGyro] = useState(initialD2HandGyro);
+  const [d3HandGyro, setD3HandGyro] = useState(initialD3HandGyro);
 
   // ---------------- Sockets ---------------- //
   useEffect(() => {
@@ -373,7 +195,11 @@ const DashboardScreen = () => {
           >
             Continue Dancing
           </Button>{" "}
-          <Button className="option_btn" variant="danger">
+          <Button
+            className="option_btn"
+            variant="danger"
+            onClick={() => resetData()}
+          >
             End Session
           </Button>{" "}
         </div>
