@@ -2,6 +2,8 @@ import axios from "axios";
 import MUIDataTable from "mui-datatables";
 import { useState, useEffect } from "react";
 
+import Button from "react-bootstrap/Button";
+
 import "./HistoryTable.css";
 
 function HistoryTable() {
@@ -32,12 +34,26 @@ function HistoryTable() {
         sort: true,
       },
     },
+    {
+      name: "Actions",
+      options: {
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <Button className="option_btn" variant="outline-success">
+              View
+            </Button>
+          );
+        },
+      },
+    },
   ];
 
   const tableOptions = {
     filterType: "checkbox",
     tableBodyHeight: "500px",
     tableBodyMaxHeight: "500px",
+    selectableRows: "none",
+    expandableRowsOnClick: true,
   };
 
   useEffect(() => {
@@ -50,7 +66,7 @@ function HistoryTable() {
     <div>
       <MUIDataTable
         className="history_table"
-        title={"History"}
+        // title={"History"}
         data={historyData}
         columns={tableColumns}
         options={tableOptions}
