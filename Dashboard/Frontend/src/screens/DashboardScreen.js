@@ -243,8 +243,6 @@ const DashboardScreen = () => {
       console.log(`Client connected with socket.io ID: ${socket.id}`);
     });
 
-    // Sockets for raw data
-    // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
     socket.on("SERVER_D1_DATA", (FinalData) => {
       let tempD1HandAcc = d1HandAcc;
       let tempD1HandGyro = d1HandGyro;
@@ -270,9 +268,6 @@ const DashboardScreen = () => {
       d1Time += 1;
       setD1HandAcc(tempD1HandAcc);
       setD1HandGyro(tempD1HandGyro);
-      // console.log(`Data Group ${data}`);
-      // data += 1;
-      // console.log("d1", d1HandAcc, d1HandGyro);
     });
 
     socket.on("SERVER_D2_DATA", (FinalData) => {
@@ -300,7 +295,6 @@ const DashboardScreen = () => {
       d2Time += 1;
       setD2HandAcc(tempD2HandAcc);
       setD2HandGyro(tempD2HandGyro);
-      // console.log("d2", d2HandAcc, d2HandGyro);
     });
 
     socket.on("SERVER_D3_DATA", (FinalData) => {
@@ -328,29 +322,21 @@ const DashboardScreen = () => {
       d3Time += 1;
       setD3HandAcc(tempD3HandAcc);
       setD3HandGyro(tempD3HandGyro);
-      // console.log("d3", d3HandAcc, d3HandGyro);
     });
 
-    // Socket for Emg data
-    // {emgMean:num}
     socket.on("SERVER_EMG_DATA", (FinalData) => {
       let newArray = emgArray;
       newArray.push(FinalData);
       setEmgArray(newArray);
-      // console.log("emg1", emgArray);
     });
 
-    // {predictedDance:string, predictedPos:array, syncDelay:number}
     socket.on("SERVER_PROCESSED_DATA", (ProcessedData) => {
       setProcessedData(ProcessedData);
       setPredictedPos(ProcessedData.predictedPos);
-      // console.log("processed", processedData);
     });
 
-    // {actualDance:string, actualPositions:array}
     socket.on("SERVER_COACH_DATA", (coachData) => {
       setCoachData(coachData);
-      // console.log("coach", currentCoachData);
     });
 
     socket.on("SERVER_LOGOUT", () => {
