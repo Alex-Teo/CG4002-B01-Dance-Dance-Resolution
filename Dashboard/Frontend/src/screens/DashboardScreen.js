@@ -1,14 +1,22 @@
 import "./Dashboard.css";
+
 import UserCard from "../components/UserCard";
 import CoachCard from "../components/CoachCard";
 import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
 
-import { useEffect, useState } from "react";
+import { SocketContext } from "../context/socket";
+
+import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import { io } from "socket.io-client";
 
 const DashboardScreen = () => {
+  // ---------------- Socket ---------------- //
+  const socket = useContext(SocketContext);
+  socket.on("connect", () => {
+    console.log(`Client connected with socket.io ID: ${socket.id}`);
+  });
+
   // ---------------- useState ---------------- //
   const [displayLogout, setDisplayLogout] = useState(false);
 
@@ -237,11 +245,6 @@ const DashboardScreen = () => {
     var d1Time = 1;
     var d2Time = 1;
     var d3Time = 1;
-
-    const socket = io.connect("http://localhost:5000");
-    socket.on("connect", () => {
-      console.log(`Client connected with socket.io ID: ${socket.id}`);
-    });
 
     socket.on("SERVER_D1_DATA", (FinalData) => {
       let tempD1HandAcc = d1HandAcc;
