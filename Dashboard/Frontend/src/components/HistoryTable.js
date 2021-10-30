@@ -72,7 +72,12 @@ function HistoryTable() {
       Logout: 0,
     };
     array.forEach(function (item) {
-      map[item.predictedDance1] += 1;
+      var mode = getMode([
+        item.predictedDance1,
+        item.predictedDance2,
+        item.predictedDance3,
+      ]);
+      map[mode] += 1;
     });
     return map;
   }
@@ -188,6 +193,7 @@ function HistoryTable() {
         </div>
         <div className="modal_content">
           <div className="modal_content_1">
+            <div className="sub2_header">Dances</div>
             <Pie
               data={[
                 {
@@ -200,7 +206,7 @@ function HistoryTable() {
                   id: "Cowboy",
                   label: "Cowboy",
                   value: pieData["Cowboy"],
-                  color: "hsl(251, 70%, 50%)",
+                  color: "hsl(30, 70%, 50%)",
                 },
                 {
                   id: "Scarecrow",
@@ -236,16 +242,19 @@ function HistoryTable() {
                   id: "Pushback",
                   label: "Pushback",
                   value: pieData["Pushback"],
-                  color: "hsl(210, 70%, 50%)",
+                  color: "hsl(120, 70%, 50%)",
                 },
-                {
-                  id: "Logout",
-                  label: "Logout",
-                  value: pieData["Logout"],
-                  color: "hsl(147, 70%, 50%)",
-                },
+                // {
+                //   id: "Logout",
+                //   label: "Logout",
+                //   value: pieData["Logout"],
+                //   color: "hsl(147, 70%, 50%)",
+                // },
               ]}
             />
+            <div className="sub2_header">Most Frequent Dance</div>
+            <br />
+            {getMode(dances)}
           </div>
           <div className="modal_content_1">
             <div className="sub2_header">Average Sync Delay</div>
