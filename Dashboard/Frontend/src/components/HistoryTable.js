@@ -10,6 +10,7 @@ function HistoryTable() {
   const [historyData, setHistoryData] = useState([]);
   const [modal, setModal] = useState(false);
   const [modalRes, setModalRes] = useState([]);
+  const [processedData, setProcessedData] = useState([]);
 
   const handleRowClick = (rowData, rowMeta) => {
     var id = rowData[0];
@@ -17,6 +18,12 @@ function HistoryTable() {
       toggleModal();
       console.log(res.data[0]);
       setModalRes(res.data[0]);
+      var uniqueDances = [
+        ...new Set(
+          res.data[0].overallProcessedData.map((item) => item.predictedDance1)
+        ),
+      ];
+      setProcessedData(uniqueDances);
     });
   };
 
@@ -111,7 +118,17 @@ function HistoryTable() {
             {modalRes.duration}s
           </div>
         </div>
-        <div className="modalContent"></div>
+        <div className="modalContent">
+          <div className="modal_header_component">
+            <div className="sub_header">
+              Total Dances ({processedData.length})
+            </div>
+            <br />
+            {processedData.map((data) => {
+              return <div>{data}</div>;
+            })}
+          </div>
+        </div>
       </div>
       <MUIDataTable
         className="history_table"
