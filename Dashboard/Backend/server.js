@@ -107,6 +107,7 @@ connection.once("open", async () => {
   var startMs = new Date();
   var startDate = "";
   var startTime = "";
+  var startTime1 = 1;
 
   var prevProcessedData = {
     predictedDance1: "Inactive",
@@ -134,6 +135,12 @@ connection.once("open", async () => {
             "-" +
             startMs.getMinutes() +
             "-" +
+            startMs.getSeconds();
+          startTime1 =
+            startMs.getHours() +
+            ":" +
+            startMs.getMinutes() +
+            ":" +
             startMs.getSeconds();
           startFlag = 0;
           console.log("-------------------------------");
@@ -327,7 +334,7 @@ connection.once("open", async () => {
           var duration = (endMs.getTime() - startMs.getTime()) / 1000;
           const historyObj = {
             date: startDate.toString(),
-            time: startTime.toString(),
+            time: startTime1.toString(),
             duration: duration.toString(),
             overallEmgData: overallEmgData,
             overallDancer1Data: overallDancer1Data,
@@ -362,6 +369,7 @@ connection.once("open", async () => {
           startMs = new Date();
           startDate = "";
           startTime = "";
+          startTime1 = "";
 
           console.log("End Session:", endTime);
           console.log("Session lasted for", duration, "seconds!");
