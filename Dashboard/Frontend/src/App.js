@@ -15,8 +15,8 @@ function App() {
     <SocketContext.Provider value={socket}>
       <div>
         <Router>
-          <Route exact path="/login" component={LoginScreen} />
-          {/* <Sidebar /> */}
+          {/* <Route exact path="/login" component={LoginScreen} /> */}
+          <Sidebar />
           <div className="pageContainer">
             <Switch>
               <Route exact path="/" component={WelcomeScreen} />

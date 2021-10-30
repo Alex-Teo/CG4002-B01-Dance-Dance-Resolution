@@ -8,12 +8,20 @@ import "./HistoryTable.css";
 
 function HistoryTable() {
   const [historyData, setHistoryData] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [modalRes, setModalRes] = useState([]);
+
   const handleRowClick = (rowData, rowMeta) => {
     var id = rowData[0];
     axios.get(`http://localhost:5000/api/history/${id}`).then((res) => {
-      var result = res.data;
-      console.log(result);
+      toggleModal();
+      console.log(res.data[0]);
+      setModalRes(res.data[0]);
     });
+  };
+
+  const toggleModal = () => {
+    setModal(!modal);
   };
 
   const tableColumns = [
@@ -82,6 +90,29 @@ function HistoryTable() {
   }, []);
   return (
     <div>
+      <div
+        className={modal ? "history_bg" : "history_bg_hidden"}
+        onClick={() => toggleModal()}
+      ></div>
+      <div className={modal ? "history_modal" : "history_modal_hidden"}>
+        <div className="modal_header">
+          <div className="modal_header_component">
+            <div className="sub_header">Date</div> <br />
+            {modalRes.date}
+          </div>
+          <div className="modal_header_component">
+            <div className="sub_header">Time</div>
+            <br />
+            {modalRes.time}
+          </div>
+          <div className="modal_header_component">
+            <div className="sub_header">Duration</div>
+            <br />
+            {modalRes.duration}s
+          </div>
+        </div>
+        <div className="modalContent"></div>
+      </div>
       <MUIDataTable
         className="history_table"
         // title={"History"}

@@ -3,6 +3,7 @@
   position: absolute;
   left: 25%;
   top: 150px;
+  z-index: 1;
 }
 
 .option_btn {
@@ -16,4 +17,53 @@
 
 .MUIDataTableBodyCell-root-67 .MUIDataTableBodyCell-stackedCommon-72 {
   text-align: center;
+}
+
+.history_modal {
+  position: absolute;
+  left: 23.5%;
+  top: 30vh;
+  height: 50vh;
+  width: 50vw;
+  background-color: white;
+  z-index: 10;
+  border-radius: 10px;
+  z-index: 5;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+}
+
+.history_modal_hidden {
+  display: none;
+}
+
+.history_bg {
+  position: absolute;
+  top: -100px;
+  height: calc(100vh + 100px);
+  width: 100%;
+  background-color: black;
+  opacity: 0.9;
+  z-index: 5;
+}
+
+.history_bg_hidden {
+  display: none;
+}
+
+.modal_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.modal_header_component {
+  text-align: center;
+}
+
+.sub_header {
+  margin-bottom: -25px;
+  font-size: 20px;
+  font-weight: 800;
 }
