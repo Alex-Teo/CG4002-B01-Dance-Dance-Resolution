@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 import Button from "react-bootstrap/Button";
 
+import Pie from "../components/Pie";
+
 import "./HistoryTable.css";
 
 function HistoryTable() {
@@ -14,6 +16,7 @@ function HistoryTable() {
   const [uniqueDances, setUniqueDances] = useState([]);
   const [aveSyncDelay, setAveSyncDelay] = useState([]);
   const [accList, setAccList] = useState([]);
+  const [pieData, setPieData] = useState({});
 
   function getMode(array) {
     if (array.length == 0) return null;
@@ -45,15 +48,33 @@ function HistoryTable() {
     var accuracy = [0, 0, 0];
     array.forEach(function (item) {
       mode = getMode([
-        array.predictedDance1,
-        array.predictedDance2,
-        array.predictedDance3,
+        item.predictedDance1,
+        item.predictedDance2,
+        item.predictedDance3,
       ]);
-      if (array.predictedDance1 === mode) accuracy[0] += 1;
-      if (array.predictedDance2 === mode) accuracy[1] += 1;
-      if (array.predictedDance3 === mode) accuracy[2] += 1;
+      if (item.predictedDance1 === mode) accuracy[0] += 1;
+      if (item.predictedDance2 === mode) accuracy[1] += 1;
+      if (item.predictedDance3 === mode) accuracy[2] += 1;
     });
     return accuracy;
+  }
+
+  function getPieData(array) {
+    const map = {
+      Window360: 0,
+      Cowboy: 0,
+      Scarecrow: 0,
+      JamesBond: 0,
+      Snake: 0,
+      Dab: 0,
+      Mermaid: 0,
+      Pushback: 0,
+      Logout: 0,
+    };
+    array.forEach(function (item) {
+      map[item.predictedDance1] += 1;
+    });
+    return map;
   }
 
   const handleRowClick = (rowData, rowMeta) => {
@@ -70,6 +91,7 @@ function HistoryTable() {
       setUniqueDances(uniqueDancesSet);
       setAveSyncDelay(getAveSync(res.data[0].overallProcessedData));
       setAccList(getAccuracy(res.data[0].overallProcessedData));
+      setPieData(getPieData(res.data[0].overallProcessedData));
     });
   };
 
@@ -166,16 +188,64 @@ function HistoryTable() {
         </div>
         <div className="modal_content">
           <div className="modal_content_1">
-            <div className="sub2_header">Most Frequent Dance</div>
-            <br />
-            {getMode(dances)}
-            <div className="sub2_header">
-              Unique Dances ({uniqueDances.size})
-            </div>
-            <br />
-            {Array.from(uniqueDances).map((uD) => {
-              return <div>{uD}</div>;
-            })}
+            <Pie
+              data={[
+                {
+                  id: "Window360",
+                  label: "Window360",
+                  value: pieData["Window360"],
+                  color: "hsl(213, 70%, 50%)",
+                },
+                {
+                  id: "Cowboy",
+                  label: "Cowboy",
+                  value: pieData["Cowboy"],
+                  color: "hsl(251, 70%, 50%)",
+                },
+                {
+                  id: "Scarecrow",
+                  label: "Scarecrow",
+                  value: pieData["Scarecrow"],
+                  color: "hsl(114, 70%, 50%)",
+                },
+                {
+                  id: "JamesBond",
+                  label: "JamesBond",
+                  value: pieData["JamesBond"],
+                  color: "hsl(198, 70%, 50%)",
+                },
+                {
+                  id: "Snake",
+                  label: "Snake",
+                  value: pieData["Snake"],
+                  color: "hsl(117, 70%, 50%)",
+                },
+                {
+                  id: "Dab",
+                  label: "Dab",
+                  value: pieData["Dab"],
+                  color: "hsl(104, 70%, 50%)",
+                },
+                {
+                  id: "Mermaid",
+                  label: "Mermaid",
+                  value: pieData["Mermaid"],
+                  color: "hsl(98, 70%, 50%)",
+                },
+                {
+                  id: "Pushback",
+                  label: "Pushback",
+                  value: pieData["Pushback"],
+                  color: "hsl(210, 70%, 50%)",
+                },
+                {
+                  id: "Logout",
+                  label: "Logout",
+                  value: pieData["Logout"],
+                  color: "hsl(147, 70%, 50%)",
+                },
+              ]}
+            />
           </div>
           <div className="modal_content_1">
             <div className="sub2_header">Average Sync Delay</div>
