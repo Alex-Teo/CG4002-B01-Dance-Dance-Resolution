@@ -193,7 +193,7 @@ function HistoryTable() {
         </div>
         <div className="modal_content">
           <div className="modal_content_1">
-            <div className="sub2_header">Dances</div>
+            <div className="sub2_header">Dances Performed</div>
             <Pie
               data={[
                 {
@@ -252,11 +252,14 @@ function HistoryTable() {
                 // },
               ]}
             />
+          </div>
+          <div className="modal_content_1">
+            <div className="sub2_header">Dance Difficulty</div>
+          </div>
+          <div className="modal_content_1">
             <div className="sub2_header">Most Frequent Dance</div>
             <br />
             {getMode(dances)}
-          </div>
-          <div className="modal_content_1">
             <div className="sub2_header">Average Sync Delay</div>
             <br />
             {aveSyncDelay}s<div className="sub2_header">Dancer Accuracy</div>
