@@ -13,8 +13,9 @@ function HistoryTable() {
   const [dances, setDances] = useState([]);
   const [uniqueDances, setUniqueDances] = useState([]);
   const [aveSyncDelay, setAveSyncDelay] = useState([]);
+  const [accList, setAccList] = useState([]);
 
-  function mode(array) {
+  function getMode(array) {
     if (array.length == 0) return null;
     var modeMap = {};
     var maxEl = array[0],
@@ -31,12 +32,28 @@ function HistoryTable() {
     return maxEl;
   }
 
-  function aveSync(array) {
+  function getAveSync(array) {
     var sum = 0;
     array.forEach(function (item) {
       sum += Number(item.syncDelay);
     });
     return sum.toFixed(2);
+  }
+
+  function getAccuracy(array) {
+    var mode = "";
+    var accuracy = [0, 0, 0];
+    array.forEach(function (item) {
+      mode = getMode([
+        array.predictedDance1,
+        array.predictedDance2,
+        array.predictedDance3,
+      ]);
+      if (array.predictedDance1 === mode) accuracy[0] += 1;
+      if (array.predictedDance2 === mode) accuracy[1] += 1;
+      if (array.predictedDance3 === mode) accuracy[2] += 1;
+    });
+    return accuracy;
   }
 
   const handleRowClick = (rowData, rowMeta) => {
@@ -51,7 +68,8 @@ function HistoryTable() {
       var uniqueDancesSet = new Set(dancesList);
       setDances(dancesList);
       setUniqueDances(uniqueDancesSet);
-      setAveSyncDelay(aveSync(res.data[0].overallProcessedData));
+      setAveSyncDelay(getAveSync(res.data[0].overallProcessedData));
+      setAccList(getAccuracy(res.data[0].overallProcessedData));
     });
   };
 
@@ -150,7 +168,7 @@ function HistoryTable() {
           <div className="modal_content_1">
             <div className="sub2_header">Most Frequent Dance</div>
             <br />
-            {mode(dances)}
+            {getMode(dances)}
             <div className="sub2_header">
               Unique Dances ({uniqueDances.size})
             </div>
@@ -162,7 +180,12 @@ function HistoryTable() {
           <div className="modal_content_1">
             <div className="sub2_header">Average Sync Delay</div>
             <br />
-            {aveSyncDelay}s
+            {aveSyncDelay}s<div className="sub2_header">Dancer Accuracy</div>
+            <br />
+            Dancer 1 - {(accList[0] / dances.length) * 100}%
+            <br />
+            Dancer 2 - {(accList[1] / dances.length) * 100}%
+            <br /> Dancer 3 - {(accList[2] / dances.length) * 100}%
           </div>
         </div>
       </div>
