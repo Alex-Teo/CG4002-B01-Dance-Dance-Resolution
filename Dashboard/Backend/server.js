@@ -101,11 +101,12 @@ connection.once("open", async () => {
   var overallDancer1Data = [];
   var overallDancer2Data = [];
   var overallDancer3Data = [];
+  var overallProcessedData = [];
 
-  startFlag = 1;
-  startMs = new Date();
-  startDate = "";
-  startTime = "";
+  var startFlag = 1;
+  var startMs = new Date();
+  var startDate = "";
+  var startTime = "";
 
   var prevProcessedData = {
     predictedDance1: "Inactive",
@@ -124,15 +125,15 @@ connection.once("open", async () => {
           var startMs = new Date();
           startDate =
             startMs.getFullYear() +
-            "_" +
+            "-" +
             (startMs.getMonth() + 1) +
-            "_" +
+            "-" +
             startMs.getDate();
           startTime =
             startMs.getHours() +
-            "_" +
+            "-" +
             startMs.getMinutes() +
-            "_" +
+            "-" +
             startMs.getSeconds();
           startFlag = 0;
           console.log("-------------------------------");
@@ -319,9 +320,9 @@ connection.once("open", async () => {
           var endMs = new Date();
           var endTime =
             endMs.getHours() +
-            "_" +
+            "-" +
             endMs.getMinutes() +
-            "_" +
+            "-" +
             endMs.getSeconds();
           var duration = (endMs.getTime() - startMs.getTime()) / 1000;
           const historyObj = {
@@ -332,6 +333,7 @@ connection.once("open", async () => {
             overallDancer1Data: overallDancer1Data,
             overallDancer2Data: overallDancer2Data,
             overallDancer3Data: overallDancer3Data,
+            overallProcessedData: overallProcessedData,
           };
           connection.collection("history_datas").insertOne(historyObj);
           io.emit("SERVER_LOGOUT");
@@ -339,9 +341,8 @@ connection.once("open", async () => {
           // Write log file
           var elements = [
             "./Backend/logs/",
-            "d_",
             startDate,
-            "_t_",
+            "__",
             startTime,
             ".txt",
           ];
@@ -351,6 +352,17 @@ connection.once("open", async () => {
               return;
             }
           });
+
+          overallEmgData = [];
+          overallDancer1Data = [];
+          overallDancer2Data = [];
+          overallDancer3Data = [];
+          overallProcessedData = [];
+          startFlag = 1;
+          startMs = new Date();
+          startDate = "";
+          startTime = "";
+
           console.log("End Session:", endTime);
           console.log("Session lasted for", duration, "seconds!");
           console.log("New entry in history collection");
@@ -366,6 +378,7 @@ connection.once("open", async () => {
         };
         if (counter_5 % samplingProcessed == 0) {
           prevProcessedData = ProcessedData;
+          overallProcessedData.push(ProcessedData);
           io.emit("SERVER_PROCESSED_DATA", ProcessedData);
         }
         counter_5 += 1;
