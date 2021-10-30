@@ -21,9 +21,9 @@
 
 .history_modal {
   position: absolute;
-  left: 5%;
-  top: 20vh;
-  height: 60vh;
+  left: 6%;
+  top: 25vh;
+  height: 55vh;
   width: 85vw;
   background-color: white;
   z-index: 10;
