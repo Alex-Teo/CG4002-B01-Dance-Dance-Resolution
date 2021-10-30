@@ -9,9 +9,10 @@
 
 .signin_email,
 .signin_pw {
-  width: 80%;
+  width: 90%;
   height: 50px;
-  border: black 0.5px solid;
+  border: black 1px solid;
+  padding: 10px;
 }
 
 .signin_submit,
@@ -37,13 +38,26 @@
 
 hr {
   color: black;
-  height: 2px;
+  height: 1px;
   border: none;
   background: black;
-  width: 100px;
+  width: 150px;
   margin: 10px;
 }
 
 .or {
   line-height: 20px;
+}
+
+.input_wrapper {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin_icon {
+  margin: 0 20px 0 0;
+  font-size: 25px;
 }
