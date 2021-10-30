@@ -1,13 +1,15 @@
 import "./SignIn.css";
 
 import Button from "react-bootstrap/Button";
-import { FaUserAlt, FaLock } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
+import { MdMail } from "react-icons/md";
 
 function SignIn() {
   return (
     <form className="signin_form">
+      <div className="signin_text">Sign In</div>
       <div className="input_wrapper">
-        <FaUserAlt className="signin_icon" />
+        <MdMail className="signin_icon" />
         <input
           className="signin_email"
           type="text"
@@ -24,14 +26,13 @@ function SignIn() {
           placeholder="Password"
         />
       </div>
-
       <input className="signin_submit" type="submit" value="Login" />
       <div className="split">
         <hr />
         <div className="or">or </div>
         <hr />
       </div>
-      <Button className="goto_reg">Register</Button>
+      <Button className="goto_reg"> Register</Button>
     </form>
   );
 }

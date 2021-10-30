@@ -8,7 +8,11 @@ import SignIn from "../components/SignIn";
 import { useState } from "react";
 
 function LoginScreen() {
-  const [signIn, setSignIn] = useState(true);
+  const [signIn, setSignIn] = useState(false);
+
+  const toggleForm = () => {
+    setSignIn(!signIn);
+  };
 
   return (
     <div className="login_wrapper">
@@ -17,7 +21,7 @@ function LoginScreen() {
       </div>
       <div className="login_form_wrapper">
         <img className="blob1" src={blob1} />
-        <img className="blob2" src={blob2} />
+        <img className="blob2" src={blob2} onClick={() => toggleForm()} />
         <div className="login_form">{signIn ? <SignIn /> : <Register />}</div>
       </div>
     </div>
