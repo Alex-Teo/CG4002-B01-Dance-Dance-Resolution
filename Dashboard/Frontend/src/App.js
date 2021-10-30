@@ -8,13 +8,15 @@ import Sidebar from "./components/Sidebar";
 import DashboardScreen from "./screens/DashboardScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 function App() {
   return (
     <SocketContext.Provider value={socket}>
       <div>
         <Router>
-          <Sidebar />
+          <Route exact path="/login" component={LoginScreen} />
+          {/* <Sidebar /> */}
           <div className="pageContainer">
             <Switch>
               <Route exact path="/" component={WelcomeScreen} />

@@ -1,0 +1,36 @@
+.login_wrapper {
+  display: grid;
+  grid-template-columns: 5fr 8fr;
+}
+
+.login_photo > img {
+  max-height: 100vh;
+  object-fit: cover;
+  width: 100%;
+}
+
+.login_form_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_form {
+  height: 400px;
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  z-index: 5;
+}
+
+.blob1 {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-100%, -80%);
+}
+
+.blob2 {
+  position: absolute;
+  z-index: 2;
+  transform: translate(60%, 60%);
+}

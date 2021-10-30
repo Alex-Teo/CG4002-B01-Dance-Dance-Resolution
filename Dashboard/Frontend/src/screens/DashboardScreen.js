@@ -1,4 +1,4 @@
-import "./Dashboard.css";
+import "./DashboardScreen.css";
 
 import UserCard from "../components/UserCard";
 import CoachCard from "../components/CoachCard";

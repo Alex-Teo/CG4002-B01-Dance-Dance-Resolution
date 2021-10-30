@@ -1,4 +1,4 @@
-import "./History.css";
+import "./HistoryScreen.css";
 
 import ScreenHeader from "../components/ScreenHeader";
 import HistoryTable from "../components/HistoryTable";
