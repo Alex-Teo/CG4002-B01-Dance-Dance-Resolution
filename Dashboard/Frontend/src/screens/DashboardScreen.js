@@ -236,7 +236,13 @@ const DashboardScreen = () => {
             dancerDance={processedData.predictedDance}
             dancerPos={processedData.predictedPos}
           />
-          <Button onClick={() => manualLogout()}>TEST</Button>
+          <Button
+            variant="danger"
+            className="end_button"
+            onClick={() => manualLogout()}
+          >
+            End Session
+          </Button>
         </div>
       </div>
     </div>

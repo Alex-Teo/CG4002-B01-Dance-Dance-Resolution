@@ -34,12 +34,14 @@ for (var i = 0; i < 10000; i++) {
 
   for (var id = 0; id < 3; id++) {
     const predictedDance = dances[Math.floor(Math.random() * dances.length)];
+    const randomDance = dances[Math.floor(Math.random() * dances.length)];
+    const p = 0.2;
     const syncDelay = Math.random().toPrecision(1);
 
     processedDataDummy.push({
-      predictedDance1: predictedDance,
-      predictedDance2: predictedDance,
-      predictedDance3: predictedDance,
+      predictedDance1: p < Math.random() ? predictedDance : randomDance,
+      predictedDance2: p < Math.random() ? predictedDance : randomDance,
+      predictedDance3: p < Math.random() ? predictedDance : randomDance,
       predictedPos: predictedPos,
       syncDelay: syncDelay,
     });

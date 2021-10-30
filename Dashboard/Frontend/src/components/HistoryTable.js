@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 
 import Pie from "../components/Pie";
+import Bar from "../components/Bar";
 
 import "./HistoryTable.css";
 
@@ -17,6 +18,7 @@ function HistoryTable() {
   const [aveSyncDelay, setAveSyncDelay] = useState([]);
   const [accList, setAccList] = useState([]);
   const [pieData, setPieData] = useState({});
+  const [barData, setBarData] = useState({});
 
   function getMode(array) {
     if (array.length == 0) return null;
@@ -59,6 +61,31 @@ function HistoryTable() {
     return accuracy;
   }
 
+  function getBarData(array) {
+    const map = {
+      Window360: 0,
+      Cowboy: 0,
+      Scarecrow: 0,
+      JamesBond: 0,
+      Snake: 0,
+      Dab: 0,
+      Mermaid: 0,
+      Pushback: 0,
+      Logout: 0,
+    };
+    array.forEach(function (item) {
+      var mode = getMode([
+        item.predictedDance1,
+        item.predictedDance2,
+        item.predictedDance3,
+      ]);
+      if (item.predictedDance1 != mode) map[mode] += 1;
+      if (item.predictedDance2 != mode) map[mode] += 1;
+      if (item.predictedDance3 != mode) map[mode] += 1;
+    });
+    return map;
+  }
+
   function getPieData(array) {
     const map = {
       Window360: 0,
@@ -97,6 +124,7 @@ function HistoryTable() {
       setAveSyncDelay(getAveSync(res.data[0].overallProcessedData));
       setAccList(getAccuracy(res.data[0].overallProcessedData));
       setPieData(getPieData(res.data[0].overallProcessedData));
+      setBarData(getBarData(res.data[0].overallProcessedData));
     });
   };
 
@@ -120,6 +148,7 @@ function HistoryTable() {
       options: {
         filter: false,
         sort: true,
+        sortDirection: "asc",
       },
     },
     {
@@ -128,6 +157,7 @@ function HistoryTable() {
       options: {
         filter: false,
         sort: true,
+        sortDirection: "asc",
       },
     },
     {
@@ -244,17 +274,47 @@ function HistoryTable() {
                   value: pieData["Pushback"],
                   color: "hsl(120, 70%, 50%)",
                 },
-                // {
-                //   id: "Logout",
-                //   label: "Logout",
-                //   value: pieData["Logout"],
-                //   color: "hsl(147, 70%, 50%)",
-                // },
               ]}
             />
           </div>
           <div className="modal_content_1">
-            <div className="sub2_header">Dance Difficulty</div>
+            <div className="sub2_header">Mistakes Made</div>
+            <Bar
+              data={[
+                {
+                  dance: "Window360",
+                  window360: barData["Window360"],
+                },
+                {
+                  dance: "Cowboy",
+                  cowboy: barData["Cowboy"],
+                },
+                {
+                  dance: "Scarecrow",
+                  window360: barData["Scarecrow"],
+                },
+                {
+                  dance: "JamesBond",
+                  cowboy: barData["JamesBond"],
+                },
+                {
+                  dance: "Snake",
+                  window360: barData["Snake"],
+                },
+                {
+                  dance: "Dab",
+                  cowboy: barData["Dab"],
+                },
+                {
+                  dance: "Mermaid",
+                  window360: barData["Mermaid"],
+                },
+                {
+                  dance: "Pushback",
+                  cowboy: barData["Pushback"],
+                },
+              ]}
+            />
           </div>
           <div className="modal_content_1">
             <div className="sub2_header">Most Frequent Dance</div>
@@ -264,10 +324,10 @@ function HistoryTable() {
             <br />
             {aveSyncDelay}s<div className="sub2_header">Dancer Accuracy</div>
             <br />
-            Dancer 1 - {(accList[0] / dances.length) * 100}%
+            Dancer 1 - {((accList[0] / dances.length) * 100).toFixed(1)}%
             <br />
-            Dancer 2 - {(accList[1] / dances.length) * 100}%
-            <br /> Dancer 3 - {(accList[2] / dances.length) * 100}%
+            Dancer 2 - {((accList[1] / dances.length) * 100).toFixed(1)}%
+            <br /> Dancer 3 - {((accList[2] / dances.length) * 100).toFixed(1)}%
           </div>
         </div>
       </div>
