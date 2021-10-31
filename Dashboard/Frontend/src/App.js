@@ -9,6 +9,7 @@ import DashboardScreen from "./screens/DashboardScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import TutorialScreen from "./screens/TutorialScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route exact path="/" component={WelcomeScreen} />
               <Route exact path="/dashboard" component={DashboardScreen} />
               <Route exact path="/history" component={HistoryScreen} />
+              <Route exact path="/tutorial" component={TutorialScreen} />
             </Switch>
           </div>
         </Router>

@@ -4,7 +4,16 @@ function Bar({ data }) {
   return (
     <ResponsiveBar
       data={data}
-      keys={["window360", "cowboy"]}
+      keys={[
+        "window360",
+        "cowboy",
+        "scarecrow",
+        "jamesbond",
+        "snake",
+        "dab",
+        "mermaid",
+        "pushback",
+      ]}
       indexBy="dance"
       margin={{ top: 30, right: 20, bottom: 50, left: 150 }}
       padding={0.3}

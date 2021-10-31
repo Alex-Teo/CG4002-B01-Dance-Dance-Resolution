@@ -1,0 +1,36 @@
+.tutorial_wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.sub_tutorial_wrapper {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  height: calc(100vh - 100px);
+  padding: 50px 0 50px 0;
+}
+
+.grid_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.thumbnail_img {
+  height: calc(100vh / 6);
+  transition: 0.3s;
+}
+
+.thumbnail_img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.video_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

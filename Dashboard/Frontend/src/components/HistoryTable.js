@@ -291,35 +291,35 @@ function HistoryTable() {
                 },
                 {
                   dance: "Scarecrow",
-                  window360: barData["Scarecrow"],
+                  scarecrow: barData["Scarecrow"],
                 },
                 {
                   dance: "JamesBond",
-                  cowboy: barData["JamesBond"],
+                  jamesbond: barData["JamesBond"],
                 },
                 {
                   dance: "Snake",
-                  window360: barData["Snake"],
+                  snake: barData["Snake"],
                 },
                 {
                   dance: "Dab",
-                  cowboy: barData["Dab"],
+                  dab: barData["Dab"],
                 },
                 {
                   dance: "Mermaid",
-                  window360: barData["Mermaid"],
+                  mermaid: barData["Mermaid"],
                 },
                 {
                   dance: "Pushback",
-                  cowboy: barData["Pushback"],
+                  pushback: barData["Pushback"],
                 },
               ]}
             />
           </div>
           <div className="modal_content_1">
-            <div className="sub2_header">Most Frequent Dance</div>
+            {/* <div className="sub2_header">Most Frequent Dance</div>
             <br />
-            {getMode(dances)}
+            {getMode(dances)} */}
             <div className="sub2_header">Average Sync Delay</div>
             <br />
             {aveSyncDelay}s<div className="sub2_header">Dancer Accuracy</div>

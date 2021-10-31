@@ -290,8 +290,8 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         const EmgData = {
-          // emgMean: Number(change.fullDocument.emgMean),
-          emgMean: (Math.random() * (0.12 - 0.02) + 0.02).toFixed(4),
+          emgMean: Number(change.fullDocument.emgMean),
+          // emgMean: (Math.random() * (0.12 - 0.02) + 0.02).toFixed(4),
         };
 
         // Get cumulative in a sample
