@@ -43,62 +43,92 @@ function TutorialScreen() {
       <div className="sub_tutorial_wrapper">
         <div className="video_wrapper">
           <ReactPlayer
+            className="player"
             url={vid}
             height="80vh"
+            width="30vw"
             volume={0}
             loop={true}
             playing={true}
           />
         </div>
         <div className="grid_wrapper">
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/cowboy.jpg"
-            alt="cowboy"
-            onClick={() => handleClick("cowboy")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/dab.jpg"
-            alt="dab"
-            onClick={() => handleClick("dab")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/jamesbond.jpg"
-            alt="jamesbond"
-            onClick={() => handleClick("jamesbond")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/mermaid.jpg"
-            alt="mermaid"
-            onClick={() => handleClick("mermaid")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/pushback.jpg"
-            alt="pushback"
-            onClick={() => handleClick("pushback")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/scarecrow.jpg"
-            alt="scarecrow"
-            onClick={() => handleClick("scarecrow")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/snake.jpg"
-            alt="snake"
-            onClick={() => handleClick("snake")}
-          />
-          <img
-            className="thumbnail_img"
-            src="thumbnailimages/window360.png"
-            alt="window360"
-            onClick={() => handleClick("window360")}
-          />
+          <div className="img_overlay">
+            <div className="ovl">Cowboy</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/cowboy.jpg"
+              alt="cowboy"
+              onClick={() => handleClick("cowboy")}
+            />
+          </div>
+          <div className="img_overlay">
+            <div className="ovl">Dab</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/dab.jpg"
+              alt="dab"
+              onClick={() => handleClick("dab")}
+            />
+          </div>
+          <div className="img_overlay">
+            <div className="ovl">JamesBond</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/jamesbond.jpg"
+              alt="jamesbond"
+              onClick={() => handleClick("jamesbond")}
+            />
+          </div>
+
+          <div className="img_overlay">
+            <div className="ovl">Mermaid</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/mermaid.jpg"
+              alt="mermaid"
+              onClick={() => handleClick("mermaid")}
+            />
+          </div>
+
+          <div className="img_overlay">
+            <div className="ovl">Pushback</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/pushback.jpg"
+              alt="pushback"
+              onClick={() => handleClick("pushback")}
+            />
+          </div>
+
+          <div className="img_overlay">
+            <div className="ovl">Scarecrow</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/scarecrow.jpg"
+              alt="scarecrow"
+              onClick={() => handleClick("scarecrow")}
+            />
+          </div>
+
+          <div className="img_overlay">
+            <div className="ovl">Snake</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/snake.jpg"
+              alt="snake"
+              onClick={() => handleClick("snake")}
+            />
+          </div>
+          <div className="img_overlay">
+            <div className="ovl">Window360</div>
+            <img
+              className="thumbnail_img"
+              src="thumbnailimages/window360.png"
+              alt="window360"
+              onClick={() => handleClick("window360")}
+            />
+          </div>
         </div>
       </div>
     </div>
