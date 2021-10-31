@@ -41,6 +41,13 @@ function Sidebar() {
           </a>
           <span class="tooltip">History</span>
         </li>
+        <li>
+          <a href="/tutorial">
+            <i class="bx bx-help-circle"></i>
+            <span class="linkName">Tutorial</span>
+          </a>
+          <span class="tooltip">Tutorial</span>
+        </li>
         <li class="profile">
           <div class="profileDetails">
             <img src={profilePlaceholder} alt="" />

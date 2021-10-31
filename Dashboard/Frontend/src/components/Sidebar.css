@@ -222,6 +222,10 @@
   color: black;
 }
 
+.bx-help-circle::before {
+  color: black;
+}
+
 .bx-log-out:before {
   color: black;
   cursor: pointer;
