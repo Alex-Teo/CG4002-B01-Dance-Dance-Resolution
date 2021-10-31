@@ -53,49 +53,49 @@ function TutorialScreen() {
         <div className="grid_wrapper">
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/cowboy.jpg"
             alt="cowboy"
             onClick={() => handleClick("cowboy")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/dab.jpg"
             alt="dab"
             onClick={() => handleClick("dab")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/jamesbond.jpg"
             alt="jamesbond"
             onClick={() => handleClick("jamesbond")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/mermaid.jpg"
             alt="mermaid"
             onClick={() => handleClick("mermaid")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/pushback.jpg"
             alt="pushback"
             onClick={() => handleClick("pushback")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/scarecrow.jpg"
             alt="scarecrow"
             onClick={() => handleClick("scarecrow")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/snake.jpg"
             alt="snake"
             onClick={() => handleClick("snake")}
           />
           <img
             className="thumbnail_img"
-            src="https://via.placeholder.com/1024x768/eee?text=4:3"
+            src="thumbnailimages/window360.png"
             alt="window360"
             onClick={() => handleClick("window360")}
           />

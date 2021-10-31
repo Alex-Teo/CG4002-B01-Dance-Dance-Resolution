@@ -12,6 +12,7 @@ node_modules/
 # production
 /Frontend/build
 /Frontend/public/videos
+/Frontend/public/thumbnailImages
 /Backend/logs
 
 # misc
