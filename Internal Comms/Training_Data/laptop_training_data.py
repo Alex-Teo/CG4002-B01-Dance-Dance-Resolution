@@ -12,8 +12,8 @@ RESET = 'R'
 BEETLE_ADDR_1 = "b0:b1:13:2d:b6:21" # SET 1 CHEST
 BEETLE_ADDR_2 = "b0:b1:13:2d:b5:48" # SET 1 HAND
 BEETLE_ADDR_3 = "b0:b1:13:2d:d6:75" # SET 2 CHEST
-BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND
-BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST
+BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND (SPOILT)
+BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST (SPOILT)
 BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
 
 SERIVCE_ID = "0000dfb0-0000-1000-8000-00805f9b34fb"
@@ -125,10 +125,10 @@ class MyDelegate(btle.DefaultDelegate):
             if (checkSumState):
                 # print("Checksum Correct")
                 beetle_num = BEETLE_DICT[self.beetle_addr]
-                if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
-                    beetle_pos = "Chest"
-                else:
+                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                     beetle_pos = "Hand"
+                else:
+                    beetle_pos = "Chest"
 
                 # print("Data from: Beetle " + str(beetle_num))
                 packet_type = PACKET_DICT[packet[0]]
@@ -161,7 +161,7 @@ class MyDelegate(btle.DefaultDelegate):
                 dance_move = "test"
 
                 # Collect data only if hand beetle is detected to be moving
-                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                     if HAND_MOVING:
                         row_data = [beetle_pos, gyrox, gyroy, gyroz, accx, accy, accz, dance_move]
                         DATA_LIST_1.append(row_data)
