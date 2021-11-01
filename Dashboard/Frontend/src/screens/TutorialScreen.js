@@ -6,8 +6,9 @@ import ReactPlayer from "react-player";
 
 function TutorialScreen() {
   const [vid, setVid] = useState();
+  const [empty, setEmpty] = useState(true);
   const handleClick = (dance) => {
-    console.log(dance);
+    setEmpty(false);
     switch (dance) {
       case "cowboy":
         setVid("/videos/cowboy.mp4");
@@ -44,17 +45,24 @@ function TutorialScreen() {
           screenDesc="To make you a beter dancer"
         />
         <div className="sub_tutorial_wrapper">
-          <div className="video_wrapper">
-            <ReactPlayer
-              className="player"
-              url={vid}
-              height="80vh"
-              width="30vw"
-              volume={0}
-              loop={true}
-              playing={true}
-            />
-          </div>
+          {empty ? (
+            <div className="inst">
+              Choose <br /> Dance Move
+            </div>
+          ) : (
+            <div className="video_wrapper">
+              <ReactPlayer
+                className="player"
+                url={vid}
+                height="80vh"
+                width="30vw"
+                volume={0}
+                loop={true}
+                playing={true}
+              />
+            </div>
+          )}
+
           <div className="grid_wrapper">
             <div className="img_overlay">
               <div className="ovl">Cowboy</div>
