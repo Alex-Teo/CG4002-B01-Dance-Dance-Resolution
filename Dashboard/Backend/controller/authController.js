@@ -48,4 +48,17 @@ const authUser = async (req, res) => {
   }
 };
 
-module.exports = authUser;
+//  @route  GET api/auth/user
+//  @desc   Get user data
+//  @access Private
+const getUserData = async (req, res) => {
+  try {
+    User.findById(req.user.id)
+      .select("-password")
+      .then((user) => res.json(user));
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = { authUser, getUserData };

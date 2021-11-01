@@ -17,7 +17,7 @@ POST  http://localhost:5000/api/user
 content-type: application/json
 
 {
-    "email": "amir97azhar@gmail.com",
+    "email": "itooth55@gmail.com",
     "password": "Aa300863051197"
 }
 
@@ -30,3 +30,13 @@ content-type: application/json
     "password": "Aa300863051197"
 }
 
+
+####
+POST  http://localhost:5000/api/auth/user
+content-type: application/json
+Authorization: x-auth-token
+
+{
+    "email": "amir97azhar@gmail.com",
+    "password": "Aa300863051197"
+}
