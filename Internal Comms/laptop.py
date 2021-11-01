@@ -81,8 +81,6 @@ class MyDelegate(btle.DefaultDelegate):
 
     def handleNotification(self,cHandle,fragment):
         packet_size = len(fragment)
-        # print("Packet Size: " + str(packet_size))
-        # print(fragment)
         
         # Handshake not completed
         if not HANDSHAKE_BOOL_DICT[self.beetle_addr]:
@@ -109,21 +107,16 @@ class MyDelegate(btle.DefaultDelegate):
 
             # Data assembling is required
             else:
-                logger.info(f"Data Assembling Begin in Beetle {BEETLE_DICT[self.beetle_addr]}")
+                # logger.info(f"Data Assembling Begin in Beetle {BEETLE_DICT[self.beetle_addr]}")
                 
                 existing_fragmented_data = BUFFER_DICT[self.beetle_addr]
-                # print("Existing Buffer Data: ")
-                # print(existing_fragmented_data)
+
                 # No data fragments currently present
                 if existing_fragmented_data == b'': 
                     existing_fragmented_data = fragment
                     fragmented_data_length = len(existing_fragmented_data)
-                    # print("Fragmented Data: ")
-                    # print(existing_fragmented_data)
                 
                 else:
-                    # print("Fragmented Data: ")
-                    # print(fragment)
                     existing_fragmented_data += fragment
                     fragmented_data_length = len(existing_fragmented_data)
 
@@ -133,11 +126,7 @@ class MyDelegate(btle.DefaultDelegate):
                     # Clear assembled data fragments
                     BUFFER_DICT[self.beetle_addr] = b''
 
-                    logger.info(f"Data Assembling Completed in Beetle {BEETLE_DICT[self.beetle_addr]}")
-                    # print(fragment)
-                    # print("")
-                    # print("")
-                    # print("")
+                    # logger.info(f"Data Assembling Completed in Beetle {BEETLE_DICT[self.beetle_addr]}")
                     # Send for data reading directly since it is a complete packet
                     self.handleData(fragment)
 
@@ -145,11 +134,7 @@ class MyDelegate(btle.DefaultDelegate):
                 elif fragmented_data_length > 20:
                     fragment = existing_fragmented_data[0:20]
                     
-                    logger.info(f"Data Assembling Completed in Beetle {BEETLE_DICT[self.beetle_addr]}")
-                    # print(fragment)
-                    # print("")
-                    # print("")
-                    # print("")
+                    # logger.info(f"Data Assembling Completed in Beetle {BEETLE_DICT[self.beetle_addr]}")
 
                     # Store rest of fragment into buffer dictionary
                     BUFFER_DICT[self.beetle_addr] = existing_fragmented_data[20:]
@@ -157,10 +142,6 @@ class MyDelegate(btle.DefaultDelegate):
                     self.handleData(fragment)
                     
                 else:
-                    # print("Buffer not full.")
-                    # print("")
-                    # print("")
-                    # print("")
                     BUFFER_DICT[self.beetle_addr] += fragment
         
     def handleData(self,fragment):
@@ -451,11 +432,12 @@ class myThread(threading.Thread):
                     logger.info(f"Receiving data from {BEETLE_TYPE[self.beetle.addr]} Beetle...")
                     while True:
                         try:
-                            if self.beetle.waitForNotifications(2.0):
-                                if len(SEND_BUFFER) >= 1:
+                            if len(SEND_BUFFER) >= 1:
                                     compiled_data = "".join(SEND_BUFFER)
                                     sock.sendall(compiled_data.encode())
+                                    print(compiled_data)
                                     SEND_BUFFER = []
+                            if self.beetle.waitForNotifications(2.0):
                                 continue
                             idle_count += 1
                             logger.info(f"idle count: {idle_count}")
