@@ -28,6 +28,7 @@
   z-index: 2;
   position: relative;
   border-radius: 10px;
+  transition: 0.3s;
 }
 
 .thumbnail_img:hover {
