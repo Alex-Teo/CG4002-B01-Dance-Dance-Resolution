@@ -155,10 +155,10 @@ class MyDelegate(btle.DefaultDelegate):
 
                 #################################################################################################
                 #################################################################################################
-                #################### CHANGE TO DANCEMOVE: DAB/JAMESBOND/MERMAID ################################
+                ### CHANGE TO DANCEMOVE: DAB/JAMESBOND/MERMAID/COWBOY/PUSHBACK/SCARECROW/SNAKE/WINDOW/LOGOUT ####
                 #################################################################################################
                 #################################################################################################
-                dance_move = "test"
+                dance_move = "dab"
 
                 # Collect data only if hand beetle is detected to be moving
                 if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
@@ -170,10 +170,10 @@ class MyDelegate(btle.DefaultDelegate):
 
                             #################################################################################################
                             #################################################################################################
-                            #################### CHANGE TO DANCEMOVE: dab_hand/jamesbond_hand/mermaid_hand ##################
+                            ### CHANGE TO DANCEMOVE: DAB/JAMESBOND/MERMAID/COWBOY/PUSHBACK/SCARECROW/SNAKE/WINDOW/LOGOUT ####
                             #################################################################################################
                             #################################################################################################    
-                            with open('test_hand.csv','a',newline='') as f:
+                            with open('dab_hand.csv','a',newline='') as f:
                                 writer = csv.writer(f)
                                 writer.writerows(DATA_LIST_1)                            
                             DATA_LIST_1.clear()
