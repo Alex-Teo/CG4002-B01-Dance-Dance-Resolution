@@ -179,7 +179,7 @@ class MyDelegate(btle.DefaultDelegate):
             if round(time.time() - STOP_FIRST_TIME) == 27:
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
-                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                         try:
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
                             SEND_BUFFER.append(position_data)
@@ -202,7 +202,7 @@ class MyDelegate(btle.DefaultDelegate):
 
                 else:
                     # Collect data only if beetle is detected to be moving
-                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                         try:
                             POS_DETECTED = "S"
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
@@ -227,7 +227,7 @@ class MyDelegate(btle.DefaultDelegate):
             if round(time.time() - STOP_FIRST_TIME) == 31:
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
-                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                         try:
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
                             SEND_BUFFER.append(position_data)
@@ -250,7 +250,7 @@ class MyDelegate(btle.DefaultDelegate):
 
                 else:
                     # Collect data only if beetle is detected to be moving
-                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
+                    if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                         try:
                             POS_DETECTED = "S"
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
@@ -284,11 +284,11 @@ class MyDelegate(btle.DefaultDelegate):
                 # print("Checksum Correct")
                 beetle_num = BEETLE_DICT[self.beetle_addr]
                 # if (beetle_num == 1 or beetle_num == 3 or beetle_num == 5):
-                if (beetle_num == 1 or beetle_num == 3):
+                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
 
-                    beetle_pos = 1 #"Chest"
-                else:
                     beetle_pos = 0 #"Hand"
+                else:
+                    beetle_pos = 1 #"Chest"
 
                 # print("Data from: Beetle " + str(beetle_num))
                 data_type = PACKET_DICT[packet[0]]
@@ -314,7 +314,6 @@ class MyDelegate(btle.DefaultDelegate):
                     if not STOP_FIRST_BOOL:
                         STOP_FIRST_BOOL = True
 
-
                 elif (moving == b'N' and beetle_pos == 0):
                     moving_status = "Hand Not Moving"
                     moving_packet = 0
@@ -325,9 +324,6 @@ class MyDelegate(btle.DefaultDelegate):
                     if STOP_FIRST_BOOL:
                         STOP_FIRST_TIME = time.time()
                         STOP_FIRST_BOOL = False
-
-
-                
 
                 elif (moving == b'N' and beetle_pos == 1):
                     moving_status = "Chest Not Moving"
@@ -349,30 +345,29 @@ class MyDelegate(btle.DefaultDelegate):
                 #         print(traceback.format_exc())
 
                 # Collect data only if beetle is detected to be moving
-                if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
-                    try:
-                        if START_MOVE and START_MOVE_TIME:
-                            sync_delay_data = f"!{DANCER_ID},{start_time}\n"
-                            SEND_BUFFER.append(sync_delay_data)
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            logger.info(f"START TIME SENT: {start_time}")
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            print("")
-                            START_MOVE_TIME = False
-                        if moving_packet == 1:
-                            final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
-                            SEND_BUFFER.append(final_data)
-                        
-                        # emg += 1
-                    except Exception:
-                        print(traceback.format_exc())       
+                try:
+                    if START_MOVE and START_MOVE_TIME:
+                        sync_delay_data = f"!{DANCER_ID},{start_time}\n"
+                        SEND_BUFFER.append(sync_delay_data)
+                        print("")
+                        print("")
+                        print("")
+                        print("")
+                        print("")
+                        logger.info(f"START TIME SENT: {start_time}")
+                        print("")
+                        print("")
+                        print("")
+                        print("")
+                        print("")
+                        START_MOVE_TIME = False
+                    if moving_packet == 1:
+                        final_data = f"#{DANCER_ID},{beetle_pos},{gyrox},{gyroy},{gyroz},{accx},{accy},{accz},{emg},{moving_packet}\n"
+                        SEND_BUFFER.append(final_data)
+                    
+                    # emg += 1
+                except Exception:
+                    print(traceback.format_exc())       
                 
                 else:
                     pass
@@ -405,26 +400,6 @@ class MyDelegate(btle.DefaultDelegate):
                     POS_DETECTED = "R"
                     POS_DETECTED_BOOL = True
 
-                # # Collect data only if beetle is detected to be moving
-                # if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6):
-                #     try:
-                #         position_data = f"${DANCER_ID},{position}\n"
-                #         SEND_BUFFER.append(position_data)
-                #         print("")
-                #         print("")
-                #         print("")
-                #         print("")
-                #         print("")
-                #         logger.info(f"{BEETLE_TYPE[self.beetle_addr]} BEETLE NEW POSITION: {position}")
-                #         print("")
-                #         print("")
-                #         print("")
-                #         print("")
-                #         print("")
-
-                #     except Exception:
-                #         print(traceback.format_exc())      
-                
                 else:
                     pass
 
