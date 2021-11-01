@@ -11,3 +11,22 @@ GET http://localhost:5000/api/rawdata
 ###
 GET http://localhost:5000/api/history/617c3d485e09b20568cddea3
 
+
+####
+POST  http://localhost:5000/api/user
+content-type: application/json
+
+{
+    "email": "amir97azhar@gmail.com",
+    "password": "Aa300863051197"
+}
+
+####
+POST  http://localhost:5000/api/auth
+content-type: application/json
+
+{
+    "email": "amir97azhar@gmail.com",
+    "password": "Aa300863051197"
+}
+

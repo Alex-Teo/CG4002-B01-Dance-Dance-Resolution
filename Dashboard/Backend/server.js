@@ -419,4 +419,10 @@ app.use("/api/processeddata", processedDataRoute);
 const rawDataRoute = require("./routes/rawDataRoute");
 app.use("/api/rawdata", rawDataRoute);
 
+const userRoute = require("./routes/userRoute");
+app.use("/api/user", userRoute);
+
+const authRoute = require("./routes/authRoute");
+app.use("/api/auth", authRoute);
+
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
