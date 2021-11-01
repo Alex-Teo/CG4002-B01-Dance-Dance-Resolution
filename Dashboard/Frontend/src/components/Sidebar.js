@@ -21,6 +21,10 @@ function Sidebar() {
     }
   };
 
+  const logout = () => {
+    window.location.href = "http://localhost:3000/";
+  };
+
   return (
     <div class="sidebar" id="sidebar">
       <div class="logoDetails">
@@ -56,7 +60,7 @@ function Sidebar() {
               <div class="job">Dancing since 2021</div>
             </div>
           </div>
-          <i class="bx bx-log-out" id="log_out"></i>
+          <i class="bx bx-log-out" id="log_out" onClick={() => logout()}></i>
         </li>
       </ul>
     </div>

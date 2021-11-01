@@ -41,6 +41,6 @@
 .reg_text {
   position: absolute;
   transform: translateY(-35vh);
-  font-size: 50px;
+  font-size: 70px;
   font-weight: 800;
 }

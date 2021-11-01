@@ -1,6 +1,7 @@
 .tutorial_wrapper {
   display: grid;
   grid-template-columns: 1fr;
+  padding-left: 78px;
 }
 
 .sub_tutorial_wrapper {

@@ -12,6 +12,7 @@ h2 {
 .dashboard_wrapper {
   display: grid;
   grid-template-columns: 1fr;
+  margin-left: 78px;
 }
 
 .sub_dashboard_wrapper {

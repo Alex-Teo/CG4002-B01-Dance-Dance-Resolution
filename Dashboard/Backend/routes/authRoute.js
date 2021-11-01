@@ -4,9 +4,10 @@ const { authUser, getUserData } = require("../controller/authController");
 
 const auth = require("../middleware/auth");
 
-// Auth
+// Auth user
 router.post("/", authUser);
 
+// Get user data
 router.get("/user", auth, getUserData);
 
 module.exports = router;

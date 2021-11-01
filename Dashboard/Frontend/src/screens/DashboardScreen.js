@@ -4,6 +4,7 @@ import UserCard from "../components/UserCard";
 import CoachCard from "../components/CoachCard";
 import Analytics from "../components/Analytics";
 import ScreenHeader from "../components/ScreenHeader";
+import Sidebar from "../components/Sidebar";
 
 import { SocketContext } from "../context/socket";
 import {
@@ -161,88 +162,93 @@ const DashboardScreen = () => {
     });
   }, []);
   return (
-    <div className="dashboard_wrapper">
-      <ScreenHeader
-        screenTitle="Dashboard"
-        screenDesc="A closer look at your performance"
-      />
-      <div className={displayLogout ? "logout_bg" : "logout_bg_hidden"}></div>
-      <div className={displayLogout ? "logout_prompt" : "logout_prompt_hidden"}>
-        <div className="logout_msg">
-          We have detected a logout dance move!
-          <div className="sub_msg">Would you like to end the session?</div>
-        </div>
-        <div className="logout_options">
-          <Button
-            className="option_btn"
-            variant="outline-secondary"
-            onClick={() => toggleDisplayLogout()}
-          >
-            Continue Dancing
-          </Button>{" "}
-          <Link to="/history">
-            <Button className="option_btn" variant="danger">
-              End Session
+    <div>
+      <Sidebar />
+      <div className="dashboard_wrapper">
+        <ScreenHeader
+          screenTitle="Dashboard"
+          screenDesc="A closer look at your performance"
+        />
+        <div className={displayLogout ? "logout_bg" : "logout_bg_hidden"}></div>
+        <div
+          className={displayLogout ? "logout_prompt" : "logout_prompt_hidden"}
+        >
+          <div className="logout_msg">
+            We have detected a logout dance move!
+            <div className="sub_msg">Would you like to end the session?</div>
+          </div>
+          <div className="logout_options">
+            <Button
+              className="option_btn"
+              variant="outline-secondary"
+              onClick={() => toggleDisplayLogout()}
+            >
+              Continue Dancing
             </Button>{" "}
-          </Link>
-        </div>
-      </div>
-
-      <div className="sub_dashboard_wrapper">
-        <div className="info_wrapper">
-          <div className="users_wrapper">
-            <UserCard
-              dancerId="Jess"
-              syncDelay={processedData.syncDelay}
-              currentDance={processedData.predictedDance1}
-              currentPos={predictedPos.indexOf(1)}
-              coachDance={coachData.actualDance}
-              coachPos={coachData.actualPositions}
-            />
-            <UserCard
-              dancerId="Amir"
-              syncDelay={processedData.syncDelay}
-              currentDance={processedData.predictedDance2}
-              currentPos={predictedPos.indexOf(2)}
-              coachDance={coachData.actualDance}
-              coachPos={coachData.actualPositions}
-            />
-            <UserCard
-              dancerId="Billy"
-              syncDelay={processedData.syncDelay}
-              currentDance={processedData.predictedDance3}
-              currentPos={predictedPos.indexOf(3)}
-              coachDance={coachData.actualDance}
-              coachPos={coachData.actualPositions}
-            />
-          </div>
-          <div className="graph_wrapper">
-            <Analytics
-              d1HandAcc={d1HandAcc}
-              d2HandAcc={d2HandAcc}
-              d3HandAcc={d3HandAcc}
-              d1HandGyro={d1HandGyro}
-              d2HandGyro={d2HandGyro}
-              d3HandGyro={d3HandGyro}
-              emgArray={emgArray.slice(-20)}
-            />
+            <Link to="/history">
+              <Button className="option_btn" variant="danger">
+                End Session
+              </Button>{" "}
+            </Link>
           </div>
         </div>
 
-        <div className="coach_wrapper">
-          <CoachCard
-            currentDance={coachData.actualDance}
-            actualPositions={coachData.actualPositions}
-            dancerDance={processedData.predictedDance}
-            dancerPos={processedData.predictedPos}
-          />
-          <Button
-            variant="danger"
-            className="end_button"
-            onClick={() => manualLogout()}
-          >
-            End Session
-          </Button>
+        <div className="sub_dashboard_wrapper">
+          <div className="info_wrapper">
+            <div className="users_wrapper">
+              <UserCard
+                dancerId="Jess"
+                syncDelay={processedData.syncDelay}
+                currentDance={processedData.predictedDance1}
+                currentPos={predictedPos.indexOf(1)}
+                coachDance={coachData.actualDance}
+                coachPos={coachData.actualPositions}
+              />
+              <UserCard
+                dancerId="Amir"
+                syncDelay={processedData.syncDelay}
+                currentDance={processedData.predictedDance2}
+                currentPos={predictedPos.indexOf(2)}
+                coachDance={coachData.actualDance}
+                coachPos={coachData.actualPositions}
+              />
+              <UserCard
+                dancerId="Billy"
+                syncDelay={processedData.syncDelay}
+                currentDance={processedData.predictedDance3}
+                currentPos={predictedPos.indexOf(3)}
+                coachDance={coachData.actualDance}
+                coachPos={coachData.actualPositions}
+              />
+            </div>
+            <div className="graph_wrapper">
+              <Analytics
+                d1HandAcc={d1HandAcc}
+                d2HandAcc={d2HandAcc}
+                d3HandAcc={d3HandAcc}
+                d1HandGyro={d1HandGyro}
+                d2HandGyro={d2HandGyro}
+                d3HandGyro={d3HandGyro}
+                emgArray={emgArray.slice(-20)}
+              />
+            </div>
+          </div>
+
+          <div className="coach_wrapper">
+            <CoachCard
+              currentDance={coachData.actualDance}
+              actualPositions={coachData.actualPositions}
+              dancerDance={processedData.predictedDance}
+              dancerPos={processedData.predictedPos}
+            />
+            <Button
+              variant="danger"
+              className="end_button"
+              onClick={() => manualLogout()}
+            >
+              End Session
+            </Button>
+          </div>
         </div>
       </div>
     </div>

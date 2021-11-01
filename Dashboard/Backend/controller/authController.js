@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 //  @route  POST api/auth
-//  @desc   Authenticate new user
+//  @desc   Authenticate  user
 //  @access Public
 const authUser = async (req, res) => {
   try {

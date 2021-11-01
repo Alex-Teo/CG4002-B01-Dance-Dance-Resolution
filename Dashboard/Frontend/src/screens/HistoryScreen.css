@@ -1,4 +1,6 @@
 .history_wrapper {
   display: grid;
   grid-template-columns: 1fr;
+  padding-left: 78px;
+  height: 100vh;
 }

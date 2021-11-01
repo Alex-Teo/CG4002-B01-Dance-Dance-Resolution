@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SocketContext, socket } from "./context/socket";
 
 // Screens
-import Sidebar from "./components/Sidebar";
 import DashboardScreen from "./screens/DashboardScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
@@ -16,11 +15,10 @@ function App() {
     <SocketContext.Provider value={socket}>
       <div>
         <Router>
-          {/* <Route exact path="/login" component={LoginScreen} /> */}
-          <Sidebar />
+          <Route exact path="/" component={LoginScreen} />
           <div className="pageContainer">
             <Switch>
-              <Route exact path="/" component={WelcomeScreen} />
+              <Route exact path="/welcome" component={WelcomeScreen} />
               <Route exact path="/dashboard" component={DashboardScreen} />
               <Route exact path="/history" component={HistoryScreen} />
               <Route exact path="/tutorial" component={TutorialScreen} />
