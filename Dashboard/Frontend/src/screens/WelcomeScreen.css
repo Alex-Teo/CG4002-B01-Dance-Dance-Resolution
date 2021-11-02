@@ -23,9 +23,10 @@
 }
 
 .start_dancing_button {
-  height: 80px;
+  height: 100px;
+  width: 200px;
   border-radius: 20px;
-  padding-top: calc(0.3 * 80px);
+  padding-top: calc(0.3 * 100px);
   background: linear-gradient(to right, rgb(106, 220, 106) 50%, #e4f5f9 50%);
   background-size: 300% 5%;
   background-position: right bottom;
@@ -35,6 +36,7 @@
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
     0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
   border: 3px solid rgb(106, 220, 106);
+  font-size: 25px;
 }
 
 .start_dancing_button:hover {
