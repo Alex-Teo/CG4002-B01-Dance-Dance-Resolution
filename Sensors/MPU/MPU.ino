@@ -125,7 +125,7 @@ void setOffsetValues() {
     mpu.setXGyroOffset(47);
     mpu.setYGyroOffset(-32);
     mpu.setZGyroOffset(-2);
-  } else if (ID == 4) { //set2 yellow (gg
+  } else if (ID == 4) { // H2
     mpu.setXAccelOffset(-2970);
     mpu.setYAccelOffset(3988);
     mpu.setZAccelOffset(1568);
@@ -133,6 +133,14 @@ void setOffsetValues() {
     mpu.setXGyroOffset(57);
     mpu.setYGyroOffset(121);
     mpu.setZGyroOffset(-64);
+  } else if (ID == 5) { // C3
+    mpu.setXAccelOffset(-310);
+    mpu.setYAccelOffset(1716);
+    mpu.setZAccelOffset(773);
+
+    mpu.setXGyroOffset(119);
+    mpu.setYGyroOffset(21);
+    mpu.setZGyroOffset(-33);
   } else if (ID == 6) { // H3
     mpu.setXAccelOffset(1244);
     mpu.setYAccelOffset(79);
