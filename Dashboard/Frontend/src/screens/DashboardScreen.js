@@ -180,7 +180,7 @@ const DashboardScreen = () => {
           <div className="logout_options">
             <Button
               className="option_btn"
-              variant="outline-secondary"
+              variant="secondary"
               onClick={() => toggleDisplayLogout()}
             >
               Continue Dancing
