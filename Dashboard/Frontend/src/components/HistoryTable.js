@@ -37,9 +37,9 @@ function HistoryTable() {
     return maxEl;
   }
 
-  function getAveSync(array) {
+  function getTotalSync(array) {
     var sum = 0;
-    array.forEach(function (item) {
+    array.forEach((item) => {
       sum += Number(item.syncDelay);
     });
     return sum.toFixed(2);
@@ -121,7 +121,11 @@ function HistoryTable() {
       var uniqueDancesSet = new Set(dancesList);
       setDances(dancesList);
       setUniqueDances(uniqueDancesSet);
-      setAveSyncDelay(getAveSync(res.data[0].overallProcessedData));
+      setAveSyncDelay(
+        Number(
+          getTotalSync(res.data[0].overallProcessedData) / dancesList.length
+        ).toFixed(3)
+      );
       setAccList(getAccuracy(res.data[0].overallProcessedData));
       setPieData(getPieData(res.data[0].overallProcessedData));
       setBarData(getBarData(res.data[0].overallProcessedData));

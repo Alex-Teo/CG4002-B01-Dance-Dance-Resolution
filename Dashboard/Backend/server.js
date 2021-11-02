@@ -118,6 +118,8 @@ connection.once("open", async () => {
     syncDelay: 0,
   };
 
+  var prevEmgMean = 0;
+
   // Sockets for raw data
   // {aX:num, aY:num, aZ:num, gX:num, gY:num, gZ:num}
   D1HandDataStream.on("change", (change) => {
@@ -293,20 +295,21 @@ connection.once("open", async () => {
       case "insert":
         const EmgData = {
           emgMean: Number(change.fullDocument.emgMean),
-          // emgMean: (Math.random() * (0.12 - 0.02) + 0.02).toFixed(4),
         };
 
         // Get cumulative in a sample
-        tempEmgMean += Number(EmgData.emgMean);
+        tempEmgMean = Number(EmgData.emgMean);
 
         // Send ave data at a specified freq
         if (counter_4 % samplingRaw == 0) {
-          tempEmgMean = tempEmgMean / samplingRaw;
+          tempEmgMean = tempEmgMean - prevEmgMean; // Use change in emg value (gradient) as the fatigue level
+          prevEmgMean = tempEmgMean;
 
           const FinalData = {
             emgMean: Number(tempEmgMean.toFixed(2)),
           };
           io.emit("SERVER_EMG_DATA", FinalData);
+          // console.log(`EMG: ${FinalData.emgMean}`);
           overallEmgData.push(FinalData);
           tempEmgMean = 0;
         }
@@ -379,6 +382,7 @@ connection.once("open", async () => {
           startTime = "";
           startTime1 = "";
           consoleStartTime = Date.now();
+          prevEmgMean = 0;
 
           console.log("End Session:", endTime);
           console.log("Session lasted for", duration, "minute(s)!");
