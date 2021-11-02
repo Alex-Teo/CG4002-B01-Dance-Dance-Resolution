@@ -162,7 +162,7 @@ function HistoryTable() {
     },
     {
       name: "duration",
-      label: "Duration (sec)",
+      label: "Duration (min)",
       options: {
         filter: false,
         sort: true,
@@ -218,7 +218,7 @@ function HistoryTable() {
           <div className="modal_header_component">
             <div className="sub_header">Session Duration</div>
             <br />
-            {modalRes.duration}s
+            {modalRes.duration} min
           </div>
         </div>
         <div className="modal_content">

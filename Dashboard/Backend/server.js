@@ -108,6 +108,7 @@ connection.once("open", async () => {
   var startDate = "";
   var startTime = "";
   var startTime1 = 1;
+  var consoleStartTime = Date.now();
 
   var prevProcessedData = {
     predictedDance1: "Inactive",
@@ -124,6 +125,7 @@ connection.once("open", async () => {
       case "insert":
         if (startFlag) {
           var startMs = new Date();
+          consoleStartTime = Date.now();
           startDate =
             startMs.getFullYear() +
             "-" +
@@ -324,6 +326,7 @@ connection.once("open", async () => {
           change.fullDocument.predictedDance2 === "Logout" &&
           change.fullDocument.predictedDance3 === "Logout"
         ) {
+          var consoleEndTime = Date.now();
           var endMs = new Date();
           var endTime =
             endMs.getHours() +
@@ -331,7 +334,12 @@ connection.once("open", async () => {
             endMs.getMinutes() +
             "-" +
             endMs.getSeconds();
-          var duration = (endMs.getTime() - startMs.getTime()) / 1000;
+          var duration = (
+            (consoleEndTime - consoleStartTime) /
+            1000 /
+            60
+          ).toFixed(0);
+          if (duration < 1) duration = 1;
           const historyObj = {
             date: startDate.toString(),
             time: startTime1.toString(),
@@ -370,9 +378,10 @@ connection.once("open", async () => {
           startDate = "";
           startTime = "";
           startTime1 = "";
+          consoleStartTime = Date.now();
 
           console.log("End Session:", endTime);
-          console.log("Session lasted for", duration, "seconds!");
+          console.log("Session lasted for", duration, "minute(s)!");
           console.log("New entry in history collection");
           console.log("-------------------------------");
         }
