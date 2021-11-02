@@ -17,7 +17,7 @@ function Register() {
     }).then((response) => {
       console.log(response);
       console.log("User successfully registered!");
-      window.location.href = "http://localhost:3000";
+      window.location.href = "http://localhost:3000/welcome";
     });
   };
 

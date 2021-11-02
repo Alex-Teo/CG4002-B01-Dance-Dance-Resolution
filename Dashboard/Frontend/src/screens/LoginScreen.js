@@ -8,7 +8,7 @@ import SignIn from "../components/SignIn";
 import { useState } from "react";
 
 function LoginScreen() {
-  const [signIn, setSignIn] = useState(false);
+  const [signIn, setSignIn] = useState(true);
 
   const toggleForm = () => {
     setSignIn(!signIn);

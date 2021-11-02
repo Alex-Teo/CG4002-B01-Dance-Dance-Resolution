@@ -17,7 +17,7 @@ function SignIn() {
     }).then((response) => {
       console.log(response);
       console.log("User successfully login!");
-      window.location.href = "http://localhost:3000";
+      window.location.href = "http://localhost:3000/welcome";
     });
   };
   return (
