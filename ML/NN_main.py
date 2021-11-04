@@ -161,7 +161,7 @@ class ML:
 
         cm = confusion_matrix(actuals, predictions)
         print(cm)
-        labels = ['cowboy','dab','jamesbond','logout', 'mermaid', 'pushback', 'scarecrow', 'snake', 'window']
+        labels = ['cowboy','dab','jamesbond','logout', 'mermaid', 'pushback', 'scarecrow', 'snake', 'window360']
         fig = plt.figure()
         ax = fig.add_subplot(111)
         cax = ax.matshow(cm)
