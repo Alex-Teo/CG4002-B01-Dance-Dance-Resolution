@@ -5,7 +5,7 @@ import torch
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Subset
 from torch.utils.data import DataLoader
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 from torch import nn
 from torch.utils.data import Dataset
 from scipy import stats
@@ -158,6 +158,20 @@ class ML:
         predictions, actuals = np.hstack(predictions), np.hstack(actuals)
         # calculate accuracy
         acc = accuracy_score(actuals, predictions)
+
+        cm = confusion_matrix(actuals, predictions)
+        print(cm)
+        labels = ['cowboy','dab','jamesbond','logout', 'mermaid', 'pushback', 'scarecrow', 'snake', 'window360']
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        cax = ax.matshow(cm)
+        plt.title('Confusion matrix of the classifier')
+        fig.colorbar(cax)
+        ax.set_xticklabels([''] + labels)
+        ax.set_yticklabels([''] + labels)
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.show()
         return acc
     
     
@@ -213,7 +227,7 @@ class ML:
         self.dance_data = []
 
 
-
+'''
 dancer_1_mlclass = ML()
 dancer_2_mlclass = ML()
 dancer_3_mlclass = ML()
@@ -231,22 +245,23 @@ for idx, row in jamesdata.iterrows():
     pred_1 = dancer_1_mlclass.predict(dancer_1_prediction_list)
     if pred_1 is not None:
         print(pred_1) #append pred_1 to mqueue
-        dancer_1_prediction_list = []
+        dancer_1_prediction_list.clear()
         break
 for idx, row in mermaiddata.iterrows():
     dancer_2_mlclass.write_data(0, row[1:7].tolist())   #1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
     pred_2 = dancer_2_mlclass.predict(dancer_2_prediction_list)
     if pred_2 is not None:
         print(pred_2) 
-        dancer_2_prediction_list = []
+        dancer_2_prediction_list.clear()
         break
 for idx, row in dabdata.iterrows():
     dancer_3_mlclass.write_data(0, row[1:7].tolist())   #1st arg is dancer_id 2 arg is data e.g a list [GyroX, GyroY, GyroZ, AccX, AccY, AccZ]
     pred_3 = dancer_3_mlclass.predict(dancer_3_prediction_list)
     if pred_3 is not None:
         print(pred_3)
-        dancer_3_prediction_list = []
+        dancer_3_prediction_list.clear()
         break
+'''
 '''
 mlclass = ML()
 print(mlclass.training())
