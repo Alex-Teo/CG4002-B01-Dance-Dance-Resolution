@@ -25,21 +25,33 @@ MPU6050 mpu;
 float preAX = 0;
 float preAY = 0;
 float preAZ = 16384;
+float preGX = 0;
+float preGY = 0;
+float preGZ = 0;
 
 int aCount = 0;
 int gCount = 0;
+int gDanceCount = 0;
 long accelXDiff[SAMPLES];
 long accelYDiff[SAMPLES];
 long accelZDiff[SAMPLES];
 long accelXDiffSum = 0;
 long accelYDiffSum = 0;
 long accelZDiffSum = 0;
+long gyroXDiff[SAMPLES];
+long gyroYDiff[SAMPLES];
+long gyroZDiff[SAMPLES];
+long gyroXDiffSum = 0;
+long gyroYDiffSum = 0;
+long gyroZDiffSum = 0;
 long gyroXSum = 0;
 long gyroYSum = 0;
 long gyroZSum = 0;
 float gyroXAvg = 0;
 float gyroYAvg = 0;
 float gyroZAvg = 0;
+boolean dancing1 = false;
+boolean dancing2 = false;
 boolean dancing = false;
 
 //store raw data of accel and gyro
@@ -125,7 +137,7 @@ void setOffsetValues() {
     mpu.setXGyroOffset(47);
     mpu.setYGyroOffset(-32);
     mpu.setZGyroOffset(-2);
-  } else if (ID == 4) { // H2
+  } else if (ID == 4) { //H2
     mpu.setXAccelOffset(-2970);
     mpu.setYAccelOffset(3988);
     mpu.setZAccelOffset(1568);
@@ -133,7 +145,7 @@ void setOffsetValues() {
     mpu.setXGyroOffset(57);
     mpu.setYGyroOffset(121);
     mpu.setZGyroOffset(-64);
-  } else if (ID == 5) { // C3
+  } else if (ID == 5) { //C3
     mpu.setXAccelOffset(-310);
     mpu.setYAccelOffset(1716);
     mpu.setZAccelOffset(773);
@@ -190,14 +202,16 @@ void processAccelData() {
         accelYDiffSum += abs(accelYDiff[i]);
         accelZDiffSum += abs(accelZDiff[i]);
       }
+
       
       if (accelXDiffSum >= 10000 || accelYDiffSum >= 10000 || accelZDiffSum >= 10000) {
-        dancing = true;
-        Serial.println("dancing!");
-        Serial.print("gyroYAvg value: ");
-        Serial.println(gyroYAvg);
+        dancing1 = true;
+//        Serial.println("===================");
+//        Serial.println("dancing1 is true");
+//        Serial.println("===================");
       } else {
         dancing = false;
+        dancing1 = false;
         Serial.println("not dancing!");
       }
       aCount = 0;
@@ -232,8 +246,63 @@ void processGyroData() {
   while(Wire.available() < 6);
   mpu.getRotation(&gyroX, &gyroY, &gyroZ);
 
-  //process the walking/stop data
-  if (!dancing) {
+  if (abs(gyroX) < 44576 && abs(gyroY) < 44576 && abs(gyroZ) < 44576) {
+    gyroXDiff[aCount] = gyroX - preGX;
+    gyroYDiff[aCount] = gyroY - preGY;
+    gyroZDiff[aCount] = gyroZ - preGZ;
+    preGX = gyroX;
+    preGY = gyroY;
+    preGZ = gyroZ;
+    
+    gDanceCount += 1;
+
+    //thresholding
+    if (gDanceCount >= 5) {
+      for (int i = 0; i < SAMPLES; i++) {
+        gyroXDiffSum += abs(gyroXDiff[i]);
+        gyroYDiffSum += abs(gyroYDiff[i]);
+        gyroZDiffSum += abs(gyroZDiff[i]);
+      }
+
+//      Serial.print("gyroXDiffSum value: ");
+//      Serial.println(gyroXDiffSum);
+//      Serial.print("gyroYDiffSum value: ");
+//      Serial.println(gyroXDiffSum);
+//      Serial.print("gyroYDiffSum value: ");
+//      Serial.println(gyroXDiffSum);
+      if (gyroXDiffSum >= 12000 || gyroYDiffSum >= 12000 || gyroZDiffSum >= 12000) {
+        dancing2 = true;
+        Serial.println("dancing 2 is true");
+        
+        if (dancing1 && dancing2) {
+          dancing = true;
+          Serial.println("is dancing!");
+        }
+        
+        
+      } else {
+        dancing = false;
+        dancing2 = false;
+        Serial.println("not dancing!");
+      }
+      gDanceCount = 0;
+      gyroXDiffSum = 0;
+      gyroYDiffSum = 0;
+      gyroZDiffSum = 0;
+    }
+  }
+
+  if (dancing) {
+    
+    //process Gyro Data
+    //convert data to degrees. 
+    //LSB per degrees per second = 131.0 according to the datasheet.
+    //range is 250 deg/s from datasheet.
+    rotX = gyroX / 131.0; 
+    rotY = gyroY / 131.0; 
+    rotZ = gyroZ / 131.0;
+    
+  } else { //process the walking/stop data
     gyroXSum += gyroX;
     gyroYSum += gyroY;
     gyroZSum += gyroZ;
@@ -251,14 +320,9 @@ void processGyroData() {
     rotX = gyroX / 131.0; 
     rotY = gyroY / 131.0; 
     rotZ = gyroZ / 131.0;
-
-  } else {
-    //process the dancing data
-    rotX = gyroX / 131.0; 
-    rotY = gyroY / 131.0; 
-    rotZ = gyroZ / 131.0;
-
   }
+
+  
 }
 
 void detectPosition() {
@@ -268,8 +332,8 @@ void detectPosition() {
         return;
       }
 
-      Serial.print("gyroYAvg value: ");
-      Serial.println(gyroYAvg);
+//      Serial.print("gyroYAvg value: ");
+//      Serial.println(gyroYAvg);
       if (gyroYAvg > 1600) {
         rMoveCnt += 1;
       }
