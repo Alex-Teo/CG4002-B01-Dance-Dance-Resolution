@@ -16,11 +16,20 @@ ACK = 'A'
 HELLO = 'H'
 RESET = 'R'
 
-BEETLE_ADDR_1 = "b0:b1:13:2d:b6:21" # SET 1 CHEST
-BEETLE_ADDR_2 = "b0:b1:13:2d:b5:48" # SET 1 HAND
-BEETLE_ADDR_3 = "b0:b1:13:2d:d6:75" # SET 2 CHEST
-BEETLE_ADDR_4 = "2c:ab:33:cc:5f:45" # SET 2 HAND 
-BEETLE_ADDR_5 = "c8:df:84:fe:4c:19" # EMG SET CHEST 
+# BEETLE_ADDR_1 = "b0:b1:13:2d:b6:21" # SET 1 CHEST
+# BEETLE_ADDR_2 = "b0:b1:13:2d:b5:48" # SET 1 HAND
+# BEETLE_ADDR_3 = "b0:b1:13:2d:d6:75" # SET 2 CHEST
+# BEETLE_ADDR_4 = "2c:ab:33:cc:5f:45" # SET 2 HAND 
+# BEETLE_ADDR_5 = "c8:df:84:fe:4c:19" # EMG SET CHEST 
+# BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
+# BEETLE_ADDR_7 = "b0:b1:13:2d:b6:2a" # SPOILT SET 1 
+# BEETLE_ADDR_8 = "b0:b1:13:2d:cd:81" # SPOILT SET 2
+
+BEETLE_ADDR_1 = "b0:b1:13:2d:b6:20" # SET 1 CHEST
+BEETLE_ADDR_2 = "b0:b1:13:2d:b5:40" # SET 1 HAND
+BEETLE_ADDR_3 = "b0:b1:13:2d:d6:70" # SET 2 CHEST
+BEETLE_ADDR_4 = "2c:ab:33:cc:5f:40" # SET 2 HAND 
+BEETLE_ADDR_5 = "c8:df:84:fe:4c:10" # EMG SET CHEST 
 BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
 BEETLE_ADDR_7 = "b0:b1:13:2d:b6:2a" # SPOILT SET 1 
 BEETLE_ADDR_8 = "b0:b1:13:2d:cd:81" # SPOILT SET 2
@@ -159,7 +168,7 @@ class MyDelegate(btle.DefaultDelegate):
 
         if VERY_FIRST:
 
-            if round(time.time() - STOP_FIRST_TIME) >= 10 and not POS_DATA_SENT:
+            if round(time.time() - STOP_FIRST_TIME) >= 41 and not POS_DATA_SENT:
 
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
@@ -206,7 +215,7 @@ class MyDelegate(btle.DefaultDelegate):
                         print(traceback.format_exc()) 
 
         else: 
-            if round(time.time() - STOP_FIRST_TIME) >= 10 and not POS_DATA_SENT:
+            if round(time.time() - STOP_FIRST_TIME) >= 24 and not POS_DATA_SENT:
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
                     try:
