@@ -19,12 +19,11 @@ RESET = 'R'
 BEETLE_ADDR_1 = "b0:b1:13:2d:b6:21" # SET 1 CHEST
 BEETLE_ADDR_2 = "b0:b1:13:2d:b5:48" # SET 1 HAND
 BEETLE_ADDR_3 = "b0:b1:13:2d:d6:75" # SET 2 CHEST
-BEETLE_ADDR_4 = "b0:b1:13:2d:b6:2a" # SET 2 HAND (SPOILT)
-BEETLE_ADDR_5 = "b0:b1:13:2d:cd:81" # EMG SET CHEST (SPOILT)
+BEETLE_ADDR_4 = "2c:ab:33:cc:5f:45" # SET 2 HAND 
+BEETLE_ADDR_5 = "c8:df:84:fe:4c:19" # EMG SET CHEST 
 BEETLE_ADDR_6 = "b0:b1:13:2d:d6:7b" # EMG SET HAND
-BEETLE_ADDR_7 = "2c:ab:33:cc:5f:45" # NEW SET 1 
-BEETLE_ADDR_8 = "c8:df:84:fe:4c:19" # NEW SET 2
-
+BEETLE_ADDR_7 = "b0:b1:13:2d:b6:2a" # SPOILT SET 1 
+BEETLE_ADDR_8 = "b0:b1:13:2d:cd:81" # SPOILT SET 2
 
 SERIVCE_ID = "0000dfb0-0000-1000-8000-00805f9b34fb"
 
@@ -48,8 +47,9 @@ START_MOVE_TIME = False
 VERY_FIRST = True
 POS_DETECTED = ""
 POS_DETECTED_BOOL = False
+POS_DATA_SENT = False
 STOP_FIRST_BOOL = True
-STOP_FIRST_TIME = 999999
+STOP_FIRST_TIME = 9999999999
 
 DATA_LIST_1 = []
 DATA_LIST_2 = []
@@ -155,18 +155,21 @@ class MyDelegate(btle.DefaultDelegate):
         global POS_DETECTED_BOOL
         global STOP_FIRST_TIME
         global STOP_FIRST_BOOL
+        global POS_DATA_SENT
 
         beetle_num = BEETLE_DICT[self.beetle_addr]
 
         if VERY_FIRST:
-            if round(time.time() - STOP_FIRST_TIME) == 27:
+
+            if round(time.time() - STOP_FIRST_TIME) >= 41 and not POS_DATA_SENT:
+
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
                     if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                         try:
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
                             SEND_BUFFER.append(position_data)
-                            STOP_FIRST_TIME = 999999
+                            STOP_FIRST_TIME = 9999999999
                             print("")
                             print("")
                             print("")
@@ -178,6 +181,7 @@ class MyDelegate(btle.DefaultDelegate):
                             print("")
                             print("")
                             print("")
+                            POS_DATA_SENT = True
 
                         except Exception:
                             print(traceback.format_exc()) 
@@ -190,7 +194,7 @@ class MyDelegate(btle.DefaultDelegate):
                             POS_DETECTED = "S"
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
                             SEND_BUFFER.append(position_data)
-                            STOP_FIRST_TIME = 999999
+                            STOP_FIRST_TIME = 9999999999
                             print("")
                             print("")
                             print("")
@@ -202,19 +206,20 @@ class MyDelegate(btle.DefaultDelegate):
                             print("")
                             print("")
                             print("")
+                            POS_DATA_SENT = True
 
                         except Exception:
                             print(traceback.format_exc()) 
 
         else: 
-            if round(time.time() - STOP_FIRST_TIME) == 31:
+            if round(time.time() - STOP_FIRST_TIME) >= 24 and not POS_DATA_SENT:
                 if POS_DETECTED_BOOL:
                     # Collect data only if beetle is detected to be moving
                     if (beetle_num == 2 or beetle_num == 4 or beetle_num == 6 or beetle_num == 1 or beetle_num == 3):
                         try:
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
                             SEND_BUFFER.append(position_data)
-                            STOP_FIRST_TIME = 999999
+                            STOP_FIRST_TIME = 9999999999
                             print("")
                             print("")
                             print("")
@@ -226,6 +231,7 @@ class MyDelegate(btle.DefaultDelegate):
                             print("")
                             print("")
                             print("")
+                            POS_DATA_SENT = True
 
                         except Exception:
                             print(traceback.format_exc()) 
@@ -238,7 +244,7 @@ class MyDelegate(btle.DefaultDelegate):
                             POS_DETECTED = "S"
                             position_data = f"${DANCER_ID},{POS_DETECTED}\n"
                             SEND_BUFFER.append(position_data)
-                            STOP_FIRST_TIME = 999999
+                            STOP_FIRST_TIME = 9999999999
                             print("")
                             print("")
                             print("")
@@ -250,6 +256,7 @@ class MyDelegate(btle.DefaultDelegate):
                             print("")
                             print("")
                             print("")
+                            POS_DATA_SENT = True
 
                         except Exception:
                             print(traceback.format_exc()) 
@@ -288,6 +295,8 @@ class MyDelegate(btle.DefaultDelegate):
                     moving_status = "Hand Moving"
                     moving_packet = 1
                     VERY_FIRST = False
+                    POS_DATA_SENT = True
+
 
                     if not START_MOVE and not START_MOVE_TIME:
                         START_MOVE = True
@@ -304,9 +313,12 @@ class MyDelegate(btle.DefaultDelegate):
                     if START_MOVE:
                         START_MOVE = False
 
+
                     if STOP_FIRST_BOOL:
                         STOP_FIRST_TIME = time.time()
                         STOP_FIRST_BOOL = False
+                        POS_DATA_SENT = False
+
 
                 elif (moving == b'N' and beetle_pos == 1):
                     moving_status = "Chest Not Moving"
