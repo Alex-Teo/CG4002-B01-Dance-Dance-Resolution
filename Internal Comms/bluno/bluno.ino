@@ -380,7 +380,7 @@ void processAccelData() {
         idling_count = 0;
 
         // Detect state of motion as moving
-        if (dancing_count >= 10) {
+        if (dancing_count >= 8) {
           veryFirst = false;
           dancing = true;
           idling = false;
@@ -393,17 +393,12 @@ void processAccelData() {
 //        Serial.println(idling_count);
       }
 
-      if (idling_count == 10) {
-        firstClear = true;
-      }
-
       // Detect state of motion as idling
-      if (idling_count >= 10) {
-        if (idling_count == 10) {
+      if (idling_count >= 3) {
+        if (idling_count == 3) {
+          firstClear = true;
           firstStop = true;
-        } else {
-          firstStop = false;
-        }
+        } 
         idling = true;
         dancing = false;
         dancing_count = 0;
@@ -521,6 +516,7 @@ void clearGyroSum() {
 void detectPosition() {
     if (firstStop) {
       stopTime = millis();
+      firstStop = false;
     }
     elapsedTime = millis();
     
@@ -563,7 +559,7 @@ void detectPosition() {
         positionDetected = true;
         newPosition = 'R';
         clearGyroSum();
-      } else if (elapsedTime - stopTime > 25000) {
+      } else if (elapsedTime - stopTime > 39000) {
         lMoveCnt = 0;
         rMoveCnt = 0;
         sMoveCnt = 0;
@@ -586,7 +582,7 @@ void detectPosition() {
         positionDetected = true;
         newPosition = 'R';
         clearGyroSum();
-      } else if (elapsedTime - stopTime > 29000) {
+      } else if (elapsedTime - stopTime > 22000) {
         lMoveCnt = 0;
         rMoveCnt = 0;
         sMoveCnt = 0;
