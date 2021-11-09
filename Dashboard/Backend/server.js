@@ -68,10 +68,11 @@ connection.once("open", async () => {
       socket.id
     );
     socket.on("CLIENT_LOGOUT", function () {
+      console.log("Client request logout!");
       connection.collection("processed_datas").insertOne({
-        predictedDance1: "Logout",
-        predictedDance2: "Logout",
-        predictedDance3: "Logout",
+        predictedDance1: "logout",
+        predictedDance2: "logout",
+        predictedDance3: "logout",
         predictedPos: "1|2|3",
         syncDelay: 0,
       });
@@ -325,9 +326,9 @@ connection.once("open", async () => {
       case "insert":
         receivedProcessedDataFlag = 0;
         if (
-          change.fullDocument.predictedDance1 === "Logout" &&
-          change.fullDocument.predictedDance2 === "Logout" &&
-          change.fullDocument.predictedDance3 === "Logout"
+          change.fullDocument.predictedDance1 === "logout" &&
+          change.fullDocument.predictedDance2 === "logout" &&
+          change.fullDocument.predictedDance3 === "logout"
         ) {
           var consoleEndTime = Date.now();
           var endMs = new Date();
@@ -354,6 +355,7 @@ connection.once("open", async () => {
             overallProcessedData: overallProcessedData,
           };
           connection.collection("history_datas").insertOne(historyObj);
+          console.log("Server request logout!");
           io.emit("SERVER_LOGOUT");
 
           // Write log file

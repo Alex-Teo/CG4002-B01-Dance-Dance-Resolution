@@ -14,7 +14,6 @@ function HistoryTable() {
   const [modal, setModal] = useState(false);
   const [modalRes, setModalRes] = useState([]);
   const [dances, setDances] = useState([]);
-  const [uniqueDances, setUniqueDances] = useState([]);
   const [aveSyncDelay, setAveSyncDelay] = useState([]);
   const [accList, setAccList] = useState([]);
   const [pieData, setPieData] = useState({});
@@ -63,15 +62,15 @@ function HistoryTable() {
 
   function getBarData(array) {
     const map = {
-      Window360: 0,
-      Cowboy: 0,
-      Scarecrow: 0,
-      JamesBond: 0,
-      Snake: 0,
-      Dab: 0,
-      Mermaid: 0,
-      Pushback: 0,
-      Logout: 0,
+      window360: 0,
+      cowboy: 0,
+      scarecrow: 0,
+      jamesbond: 0,
+      snake: 0,
+      dab: 0,
+      mermaid: 0,
+      pushback: 0,
+      logout: 0,
     };
     array.forEach(function (item) {
       var mode = getMode([
@@ -88,15 +87,15 @@ function HistoryTable() {
 
   function getPieData(array) {
     const map = {
-      Window360: 0,
-      Cowboy: 0,
-      Scarecrow: 0,
-      JamesBond: 0,
-      Snake: 0,
-      Dab: 0,
-      Mermaid: 0,
-      Pushback: 0,
-      Logout: 0,
+      window360: 0,
+      cowboy: 0,
+      scarecrow: 0,
+      jamesbond: 0,
+      snake: 0,
+      dab: 0,
+      mermaid: 0,
+      pushback: 0,
+      logout: 0,
     };
     array.forEach(function (item) {
       var mode = getMode([
@@ -120,7 +119,7 @@ function HistoryTable() {
       );
       var uniqueDancesSet = new Set(dancesList);
       setDances(dancesList);
-      setUniqueDances(uniqueDancesSet);
+
       setAveSyncDelay(
         Number(
           getTotalSync(res.data[0].overallProcessedData) / dancesList.length
@@ -231,51 +230,51 @@ function HistoryTable() {
             <Pie
               data={[
                 {
-                  id: "Window360",
-                  label: "Window360",
-                  value: pieData["Window360"],
+                  id: "window360",
+                  label: "window360",
+                  value: pieData["window360"],
                   color: "hsl(213, 70%, 50%)",
                 },
                 {
-                  id: "Cowboy",
-                  label: "Cowboy",
-                  value: pieData["Cowboy"],
+                  id: "cowboy",
+                  label: "cowboy",
+                  value: pieData["cowboy"],
                   color: "hsl(30, 70%, 50%)",
                 },
                 {
-                  id: "Scarecrow",
-                  label: "Scarecrow",
-                  value: pieData["Scarecrow"],
+                  id: "scarecrow",
+                  label: "scarecrow",
+                  value: pieData["scarecrow"],
                   color: "hsl(114, 70%, 50%)",
                 },
                 {
-                  id: "JamesBond",
-                  label: "JamesBond",
-                  value: pieData["JamesBond"],
+                  id: "jamesbond",
+                  label: "jamesbond",
+                  value: pieData["jamesbond"],
                   color: "hsl(198, 70%, 50%)",
                 },
                 {
-                  id: "Snake",
-                  label: "Snake",
-                  value: pieData["Snake"],
+                  id: "snake",
+                  label: "snake",
+                  value: pieData["snake"],
                   color: "hsl(117, 70%, 50%)",
                 },
                 {
-                  id: "Dab",
-                  label: "Dab",
-                  value: pieData["Dab"],
+                  id: "dab",
+                  label: "dab",
+                  value: pieData["dab"],
                   color: "hsl(104, 70%, 50%)",
                 },
                 {
-                  id: "Mermaid",
-                  label: "Mermaid",
-                  value: pieData["Mermaid"],
+                  id: "mermaid",
+                  label: "mermaid",
+                  value: pieData["mermaid"],
                   color: "hsl(98, 70%, 50%)",
                 },
                 {
-                  id: "Pushback",
-                  label: "Pushback",
-                  value: pieData["Pushback"],
+                  id: "pushback",
+                  label: "pushback",
+                  value: pieData["pushback"],
                   color: "hsl(120, 70%, 50%)",
                 },
               ]}
@@ -286,36 +285,36 @@ function HistoryTable() {
             <Bar
               data={[
                 {
-                  dance: "Window360",
-                  window360: barData["Window360"],
+                  dance: "window360",
+                  window360: barData["window360"],
                 },
                 {
-                  dance: "Cowboy",
-                  cowboy: barData["Cowboy"],
+                  dance: "cowboy",
+                  cowboy: barData["cowboy"],
                 },
                 {
-                  dance: "Scarecrow",
-                  scarecrow: barData["Scarecrow"],
+                  dance: "scarecrow",
+                  scarecrow: barData["scarecrow"],
                 },
                 {
-                  dance: "JamesBond",
-                  jamesbond: barData["JamesBond"],
+                  dance: "jamesbond",
+                  jamesbond: barData["jamesbond"],
                 },
                 {
-                  dance: "Snake",
-                  snake: barData["Snake"],
+                  dance: "snake",
+                  snake: barData["snake"],
                 },
                 {
-                  dance: "Dab",
-                  dab: barData["Dab"],
+                  dance: "dab",
+                  dab: barData["dab"],
                 },
                 {
-                  dance: "Mermaid",
-                  mermaid: barData["Mermaid"],
+                  dance: "mermaid",
+                  mermaid: barData["mermaid"],
                 },
                 {
-                  dance: "Pushback",
-                  pushback: barData["Pushback"],
+                  dance: "pushback",
+                  pushback: barData["pushback"],
                 },
               ]}
             />
