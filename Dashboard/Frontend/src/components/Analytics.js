@@ -54,6 +54,8 @@ function Analytics({
         return <Line data={d3HandAcc} axis={"Accelerometer"} />;
       case "Dancer 3 Gyroscope":
         return <Line data={d3HandGyro} axis={"Gyroscope"} />;
+      default:
+        return <Stream data={emgArray} />;
     }
   };
 

@@ -20,7 +20,7 @@ function HistoryTable() {
   const [barData, setBarData] = useState({});
 
   function getMode(array) {
-    if (array.length == 0) return null;
+    if (array.length === 0) return null;
     var modeMap = {};
     var maxEl = array[0],
       maxCount = 1;
@@ -78,9 +78,9 @@ function HistoryTable() {
         item.predictedDance2,
         item.predictedDance3,
       ]);
-      if (item.predictedDance1 != mode) map[mode] += 1;
-      if (item.predictedDance2 != mode) map[mode] += 1;
-      if (item.predictedDance3 != mode) map[mode] += 1;
+      if (item.predictedDance1 !== mode) map[mode] += 1;
+      if (item.predictedDance2 !== mode) map[mode] += 1;
+      if (item.predictedDance3 !== mode) map[mode] += 1;
     });
     return map;
   }
@@ -117,7 +117,6 @@ function HistoryTable() {
       var dancesList = res.data[0].overallProcessedData.map(
         (item) => item.predictedDance1
       );
-      var uniqueDancesSet = new Set(dancesList);
       setDances(dancesList);
 
       setAveSyncDelay(
