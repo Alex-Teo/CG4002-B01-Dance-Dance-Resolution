@@ -104,7 +104,9 @@ connection.once("open", async () => {
   var overallDancer3Data = [];
   var overallProcessedData = [];
 
-  var startFlag = 1;
+  var d1Flag = 0;
+  var d2Flag = 0;
+  var d3Flag = 0;
   var startMs = new Date();
   var startDate = "";
   var startTime = "";
@@ -126,7 +128,8 @@ connection.once("open", async () => {
   D1HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
-        if (startFlag) {
+        d1Flag = 1;
+        if (d1Flag || d2Flag || d3Flag) {
           var startMs = new Date();
           consoleStartTime = Date.now();
           startDate =
@@ -151,7 +154,6 @@ connection.once("open", async () => {
           console.log("-------------------------------");
           console.log("Start Session: ", startTime);
         }
-
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -199,6 +201,32 @@ connection.once("open", async () => {
   D2HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
+        d2Flag = 1;
+        if (d1Flag || d2Flag || d3Flag) {
+          var startMs = new Date();
+          consoleStartTime = Date.now();
+          startDate =
+            startMs.getFullYear() +
+            "-" +
+            (startMs.getMonth() + 1) +
+            "-" +
+            startMs.getDate();
+          startTime =
+            startMs.getHours() +
+            "-" +
+            startMs.getMinutes() +
+            "-" +
+            startMs.getSeconds();
+          startTime1 =
+            startMs.getHours() +
+            ":" +
+            startMs.getMinutes() +
+            ":" +
+            startMs.getSeconds();
+          startFlag = 0;
+          console.log("-------------------------------");
+          console.log("Start Session: ", startTime);
+        }
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -246,6 +274,32 @@ connection.once("open", async () => {
   D3HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
+        d3Flag = 1;
+        if (d1Flag || d2Flag || d3Flag) {
+          var startMs = new Date();
+          consoleStartTime = Date.now();
+          startDate =
+            startMs.getFullYear() +
+            "-" +
+            (startMs.getMonth() + 1) +
+            "-" +
+            startMs.getDate();
+          startTime =
+            startMs.getHours() +
+            "-" +
+            startMs.getMinutes() +
+            "-" +
+            startMs.getSeconds();
+          startTime1 =
+            startMs.getHours() +
+            ":" +
+            startMs.getMinutes() +
+            ":" +
+            startMs.getSeconds();
+          startFlag = 0;
+          console.log("-------------------------------");
+          console.log("Start Session: ", startTime);
+        }
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -378,7 +432,9 @@ connection.once("open", async () => {
           overallDancer2Data = [];
           overallDancer3Data = [];
           overallProcessedData = [];
-          startFlag = 1;
+          d1Flag = 0;
+          d2Flag = 0;
+          d3Flag = 0;
           startMs = new Date();
           startDate = "";
           startTime = "";
