@@ -104,9 +104,7 @@ connection.once("open", async () => {
   var overallDancer3Data = [];
   var overallProcessedData = [];
 
-  var d1Flag = 0;
-  var d2Flag = 0;
-  var d3Flag = 0;
+  var startFlag = 1;
   var startMs = new Date();
   var startDate = "";
   var startTime = "";
@@ -128,8 +126,7 @@ connection.once("open", async () => {
   D1HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
-        d1Flag = 1;
-        if (d1Flag || d2Flag || d3Flag) {
+        if (startFlag) {
           var startMs = new Date();
           consoleStartTime = Date.now();
           startDate =
@@ -154,6 +151,7 @@ connection.once("open", async () => {
           console.log("-------------------------------");
           console.log("Start Session: ", startTime);
         }
+
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -201,8 +199,7 @@ connection.once("open", async () => {
   D2HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
-        d2Flag = 1;
-        if (d1Flag || d2Flag || d3Flag) {
+        if (startFlag) {
           var startMs = new Date();
           consoleStartTime = Date.now();
           startDate =
@@ -274,8 +271,7 @@ connection.once("open", async () => {
   D3HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
-        d3Flag = 1;
-        if (d1Flag || d2Flag || d3Flag) {
+        if (startFlag) {
           var startMs = new Date();
           consoleStartTime = Date.now();
           startDate =
@@ -361,7 +357,7 @@ connection.once("open", async () => {
           prevEmgMean = tempEmgMean;
 
           const FinalData = {
-            emgMean: Number(tempEmgMean.toFixed(2)),
+            emgMean: Number(Math.abs(tempEmgMean.toFixed(2))),
           };
           io.emit("SERVER_EMG_DATA", FinalData);
           // console.log(`EMG: ${FinalData.emgMean}`);
@@ -432,9 +428,7 @@ connection.once("open", async () => {
           overallDancer2Data = [];
           overallDancer3Data = [];
           overallProcessedData = [];
-          d1Flag = 0;
-          d2Flag = 0;
-          d3Flag = 0;
+          startFlag = 1;
           startMs = new Date();
           startDate = "";
           startTime = "";
@@ -453,7 +447,7 @@ connection.once("open", async () => {
           predictedDance2: change.fullDocument.predictedDance2,
           predictedDance3: change.fullDocument.predictedDance3,
           predictedPos: change.fullDocument.predictedPos.split("|").map(Number),
-          syncDelay: Number(change.fullDocument.syncDelay).toFixed(2),
+          syncDelay: Number(change.fullDocument.syncDelay).toFixed(0),
         };
         if (counter_5 % samplingProcessed == 0) {
           prevProcessedData = ProcessedData;
