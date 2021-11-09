@@ -24,6 +24,8 @@ def data_scaling(df, train_mode):
             #ENCODE Y
             Y = encoder.transform(Y)
             Y = pd.DataFrame(Y)
+            le_name_mapping = dict(zip(encoder.classes_, encoder.transform(encoder.classes_)))
+            print(le_name_mapping)
             Y.columns = ['label']
         else:
             sc=StandardScaler()
@@ -34,6 +36,8 @@ def data_scaling(df, train_mode):
             encoder = LabelEncoder()
             Y = encoder.fit_transform(Y)
             Y = pd.DataFrame(Y)
+            le_name_mapping = dict(zip(encoder.classes_, encoder.transform(encoder.classes_)))
+            print(le_name_mapping)
             Y.columns = ['label']
             with open(config.SC_EN_PATH, 'wb') as fp:
                 pickle.dump((sc,encoder), fp)
