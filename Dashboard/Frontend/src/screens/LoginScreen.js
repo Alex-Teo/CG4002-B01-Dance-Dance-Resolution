@@ -20,8 +20,13 @@ function LoginScreen() {
         <img src={loginPhoto} alt="LoginPhoto" />
       </div>
       <div className="login_form_wrapper">
-        <img className="blob1" src={blob1} />
-        <img className="blob2" src={blob2} onClick={() => toggleForm()} />
+        <img className="blob1" src={blob1} alt="blob" />
+        <img
+          className="blob2"
+          src={blob2}
+          onClick={() => toggleForm()}
+          alt="blob"
+        />
         <div className="login_form">{signIn ? <SignIn /> : <Register />}</div>
       </div>
     </div>

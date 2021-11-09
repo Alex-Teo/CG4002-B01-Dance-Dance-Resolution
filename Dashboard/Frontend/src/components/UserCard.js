@@ -32,7 +32,7 @@ function UserCard({
             <CgStopwatch className="stopwatchIcon" />
             <div>
               <div className="valueHeader">Delay</div>
-              <div className="value">{syncDelay}</div>
+              <div className="value">{syncDelay}ms</div>
             </div>
           </div>
         </Card.Text>

@@ -63,12 +63,12 @@ connection.once("open", async () => {
   });
 
   io.on("connection", (socket) => {
-    console.log(
-      "Socket.io: Client-server connection established, ID -",
-      socket.id
-    );
+    // console.log(
+    //   "Socket.io: Client-server connection established, ID -",
+    //   socket.id
+    // );
     socket.on("CLIENT_LOGOUT", function () {
-      console.log("Client request logout!");
+      console.log("Insert logout data!");
       connection.collection("processed_datas").insertOne({
         predictedDance1: "logout",
         predictedDance2: "logout",

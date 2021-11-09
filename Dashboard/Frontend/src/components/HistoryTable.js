@@ -123,7 +123,7 @@ function HistoryTable() {
       setAveSyncDelay(
         Number(
           getTotalSync(res.data[0].overallProcessedData) / dancesList.length
-        ).toFixed(3)
+        ).toFixed(0)
       );
       setAccList(getAccuracy(res.data[0].overallProcessedData));
       setPieData(getPieData(res.data[0].overallProcessedData));
@@ -325,7 +325,7 @@ function HistoryTable() {
             {getMode(dances)} */}
             <div className="sub2_header">Average Sync Delay</div>
             <br />
-            {aveSyncDelay}s<div className="sub2_header">Dancer Accuracy</div>
+            {aveSyncDelay}ms<div className="sub2_header">Dancer Accuracy</div>
             <br />
             Dancer 1 - {((accList[0] / dances.length) * 100).toFixed(1)}%
             <br />
