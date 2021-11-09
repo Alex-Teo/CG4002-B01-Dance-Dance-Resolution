@@ -303,7 +303,7 @@ connection.once("open", async () => {
 
         // Send ave data at a specified freq
         if (counter_4 % samplingRaw == 0) {
-          tempEmgMean = tempEmgMean - prevEmgMean; // Use change in emg value (gradient) as the fatigue level
+          tempEmgMean -= prevEmgMean; // Use change in emg value (gradient) as the fatigue level
           prevEmgMean = tempEmgMean;
 
           const FinalData = {
