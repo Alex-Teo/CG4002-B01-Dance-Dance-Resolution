@@ -5,6 +5,24 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 
+// ---------------- Helper Functions ---------------- //
+function getMode(array) {
+  if (array.length === 0) return null;
+  var modeMap = {};
+  var maxEl = array[0],
+    maxCount = 1;
+  for (var i = 0; i < array.length; i++) {
+    var el = array[i];
+    if (modeMap[el] == null) modeMap[el] = 1;
+    else modeMap[el]++;
+    if (modeMap[el] > maxCount) {
+      maxEl = el;
+      maxCount = modeMap[el];
+    }
+  }
+  return maxEl;
+}
+
 // ---------------- Server Setup ---------------- //
 const app = express();
 const server = require("http").createServer(app);
@@ -375,11 +393,12 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         receivedProcessedDataFlag = 0;
-        if (
-          change.fullDocument.predictedDance1 === "logout" &&
-          change.fullDocument.predictedDance2 === "logout" &&
-          change.fullDocument.predictedDance3 === "logout"
-        ) {
+        var predArr = [
+          change.fullDocument.predictedDance1,
+          change.fullDocument.predictedDance2,
+          change.fullDocument.predictedDance3,
+        ];
+        if (getMode(predArr) === "logout") {
           var consoleEndTime = Date.now();
           var endMs = new Date();
           var endTime =
