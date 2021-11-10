@@ -19,6 +19,8 @@ function HistoryTable() {
   const [pieData, setPieData] = useState({});
   const [barData, setBarData] = useState({});
 
+  // ---------------- Helper Functions ---------------- //
+
   function getMode(array) {
     if (array.length === 0) return null;
     var modeMap = {};
