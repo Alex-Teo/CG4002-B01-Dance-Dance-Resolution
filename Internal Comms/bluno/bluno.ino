@@ -394,8 +394,8 @@ void processAccelData() {
       }
 
       // Detect state of motion as idling
-      if (idling_count >= 3) {
-        if (idling_count == 3) {
+      if (idling_count >= 5) {
+        if (idling_count == 5) {
           firstClear = true;
           firstStop = true;
         } 
