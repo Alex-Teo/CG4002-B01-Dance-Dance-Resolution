@@ -34,6 +34,9 @@ function TutorialScreen() {
       case "window360":
         setVid("/videos/window360.mov");
         break;
+      default:
+        setVid("/videos/cowboy.mp4");
+        break;
     }
   };
   return (

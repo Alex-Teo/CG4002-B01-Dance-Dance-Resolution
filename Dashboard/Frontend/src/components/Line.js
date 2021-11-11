@@ -35,7 +35,7 @@ function Line({ data, axis }) {
         tickPadding: 5,
         tickRotation: 0,
         legend: axis,
-        legendOffset: -40,
+        legendOffset: -50,
         legendPosition: "middle",
       }}
       pointSize={0}

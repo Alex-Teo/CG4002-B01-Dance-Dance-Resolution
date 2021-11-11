@@ -3,14 +3,14 @@ const coachDataDummy = [];
 
 for (var i = 0; i < 10000; i++) {
   const dances = [
-    "Window360",
-    "Cowboy",
-    "Scarecrow",
-    "JamesBond",
-    "Snake",
-    "Dab",
-    "Mermaid",
-    "Pushback",
+    "window360",
+    "cowboy",
+    "scarecrow",
+    "jamesbond",
+    "snake",
+    "dab",
+    "mermaid",
+    "pushback",
   ];
 
   const positions = [

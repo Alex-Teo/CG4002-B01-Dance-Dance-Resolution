@@ -205,7 +205,7 @@ const DashboardScreen = () => {
                 coachPos={coachData.actualPositions}
               />
               <UserCard
-                dancerId="Amir"
+                dancerId="Andrew"
                 syncDelay={processedData.syncDelay}
                 currentDance={processedData.predictedDance2}
                 currentPos={predictedPos.indexOf(2)}
@@ -213,7 +213,7 @@ const DashboardScreen = () => {
                 coachPos={coachData.actualPositions}
               />
               <UserCard
-                dancerId="Billy"
+                dancerId="Alex"
                 syncDelay={processedData.syncDelay}
                 currentDance={processedData.predictedDance3}
                 currentPos={predictedPos.indexOf(3)}

@@ -15,9 +15,15 @@ function UserCard({
     <Card className="trainee_card">
       <Card.Body>
         <Card.Title className="cardTitle">
-          {dancerId}
-          <div className="position_label">
-            {currentPos === 0 ? "L" : currentPos === 1 ? "M" : "R"}
+          <div className="label_wrapper">
+            {dancerId}
+            <div
+              className={
+                dancerId === "Andrew" ? "position_label_a" : "position_label"
+              }
+            >
+              {currentPos === 0 ? "L" : currentPos === 1 ? "M" : "R"}
+            </div>
           </div>
         </Card.Title>
         <Card.Text>
@@ -32,7 +38,7 @@ function UserCard({
             <CgStopwatch className="stopwatchIcon" />
             <div>
               <div className="valueHeader">Delay</div>
-              <div className="value">{syncDelay}</div>
+              <div className="value">{syncDelay}ms</div>
             </div>
           </div>
         </Card.Text>

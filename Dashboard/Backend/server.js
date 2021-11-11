@@ -5,6 +5,24 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 
+// ---------------- Helper Functions ---------------- //
+function getMode(array) {
+  if (array.length === 0) return null;
+  var modeMap = {};
+  var maxEl = array[0],
+    maxCount = 1;
+  for (var i = 0; i < array.length; i++) {
+    var el = array[i];
+    if (modeMap[el] == null) modeMap[el] = 1;
+    else modeMap[el]++;
+    if (modeMap[el] > maxCount) {
+      maxEl = el;
+      maxCount = modeMap[el];
+    }
+  }
+  return maxEl;
+}
+
 // ---------------- Server Setup ---------------- //
 const app = express();
 const server = require("http").createServer(app);
@@ -63,15 +81,16 @@ connection.once("open", async () => {
   });
 
   io.on("connection", (socket) => {
-    console.log(
-      "Socket.io: Client-server connection established, ID -",
-      socket.id
-    );
+    // console.log(
+    //   "Socket.io: Client-server connection established, ID -",
+    //   socket.id
+    // );
     socket.on("CLIENT_LOGOUT", function () {
+      console.log("Insert logout data!");
       connection.collection("processed_datas").insertOne({
-        predictedDance1: "Logout",
-        predictedDance2: "Logout",
-        predictedDance3: "Logout",
+        predictedDance1: "logout",
+        predictedDance2: "logout",
+        predictedDance3: "logout",
         predictedPos: "1|2|3",
         syncDelay: 0,
       });
@@ -198,6 +217,31 @@ connection.once("open", async () => {
   D2HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
+        if (startFlag) {
+          var startMs = new Date();
+          consoleStartTime = Date.now();
+          startDate =
+            startMs.getFullYear() +
+            "-" +
+            (startMs.getMonth() + 1) +
+            "-" +
+            startMs.getDate();
+          startTime =
+            startMs.getHours() +
+            "-" +
+            startMs.getMinutes() +
+            "-" +
+            startMs.getSeconds();
+          startTime1 =
+            startMs.getHours() +
+            ":" +
+            startMs.getMinutes() +
+            ":" +
+            startMs.getSeconds();
+          startFlag = 0;
+          console.log("-------------------------------");
+          console.log("Start Session: ", startTime);
+        }
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -245,6 +289,31 @@ connection.once("open", async () => {
   D3HandDataStream.on("change", (change) => {
     switch (change.operationType) {
       case "insert":
+        if (startFlag) {
+          var startMs = new Date();
+          consoleStartTime = Date.now();
+          startDate =
+            startMs.getFullYear() +
+            "-" +
+            (startMs.getMonth() + 1) +
+            "-" +
+            startMs.getDate();
+          startTime =
+            startMs.getHours() +
+            "-" +
+            startMs.getMinutes() +
+            "-" +
+            startMs.getSeconds();
+          startTime1 =
+            startMs.getHours() +
+            ":" +
+            startMs.getMinutes() +
+            ":" +
+            startMs.getSeconds();
+          startFlag = 0;
+          console.log("-------------------------------");
+          console.log("Start Session: ", startTime);
+        }
         const RawData = {
           aX: change.fullDocument.aX,
           aY: change.fullDocument.aY,
@@ -302,11 +371,11 @@ connection.once("open", async () => {
 
         // Send ave data at a specified freq
         if (counter_4 % samplingRaw == 0) {
-          tempEmgMean = tempEmgMean - prevEmgMean; // Use change in emg value (gradient) as the fatigue level
+          tempEmgMean -= prevEmgMean; // Use change in emg value (gradient) as the fatigue level
           prevEmgMean = tempEmgMean;
 
           const FinalData = {
-            emgMean: Number(tempEmgMean.toFixed(2)),
+            emgMean: Number(Math.abs(tempEmgMean.toFixed(2))),
           };
           io.emit("SERVER_EMG_DATA", FinalData);
           // console.log(`EMG: ${FinalData.emgMean}`);
@@ -324,11 +393,12 @@ connection.once("open", async () => {
     switch (change.operationType) {
       case "insert":
         receivedProcessedDataFlag = 0;
-        if (
-          change.fullDocument.predictedDance1 === "Logout" &&
-          change.fullDocument.predictedDance2 === "Logout" &&
-          change.fullDocument.predictedDance3 === "Logout"
-        ) {
+        var predArr = [
+          change.fullDocument.predictedDance1,
+          change.fullDocument.predictedDance2,
+          change.fullDocument.predictedDance3,
+        ];
+        if (getMode(predArr) === "logout") {
           var consoleEndTime = Date.now();
           var endMs = new Date();
           var endTime =
@@ -354,6 +424,7 @@ connection.once("open", async () => {
             overallProcessedData: overallProcessedData,
           };
           connection.collection("history_datas").insertOne(historyObj);
+          console.log("Server request logout!");
           io.emit("SERVER_LOGOUT");
 
           // Write log file
@@ -395,7 +466,7 @@ connection.once("open", async () => {
           predictedDance2: change.fullDocument.predictedDance2,
           predictedDance3: change.fullDocument.predictedDance3,
           predictedPos: change.fullDocument.predictedPos.split("|").map(Number),
-          syncDelay: Number(change.fullDocument.syncDelay).toFixed(2),
+          syncDelay: Number(change.fullDocument.syncDelay).toFixed(0),
         };
         if (counter_5 % samplingProcessed == 0) {
           prevProcessedData = ProcessedData;

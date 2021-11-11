@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
-    "client": "npm start --prefix frontend",
+    "start": "node Backend/server.js",
+    "server": "nodemon Backend/server.js",
+    "client": "npm start --prefix Frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seederScript",
-    "logout": "node backend/logoutScript"
+    "logout": "node Backend/logoutScript"
   },
   "keywords": [],
   "author": "",
