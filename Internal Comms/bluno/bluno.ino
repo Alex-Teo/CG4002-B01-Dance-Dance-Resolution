@@ -93,14 +93,15 @@ unsigned long stopTime;
 bool firstStop = false;
 unsigned long elapsedTime;
 
-
 bool handshake_completed = false;
 unsigned long current_time;
 unsigned long previous_dpacket_time = 0;
 unsigned long previous_ppacket_time = 0;
 
+// Function to reset beetle
 void(* resetFunc) (void) = 0;
 
+// Define IMU packet format
 struct IMU_Packet {
   char type;
   char moving;
@@ -115,6 +116,7 @@ struct IMU_Packet {
   int checksum;
 };
 
+// Define Position packet format
 struct Position_Packet {
   char type;
   char newPosition;
@@ -134,61 +136,37 @@ void setup() {
 }
 
 void loop() {
-//  current_time = millis();
-//  if (current_time - previous_dpacket_time > DATA_THRESHOLD) {
-//    processAccelData(); //pre-processing for accel data
-//    processGyroData(); //pre-processing for gyro data
-////    Serial.println(dancing);
-//    previous_dpacket_time = current_time;
-//  }
-////  if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
-////    Serial.println(gyroYAvg);
-////  }
-//  if (!dancing) {
-//      if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
-//        processGyroDataTurning();
-//        detectPosition();
-//        previous_ppacket_time = current_time;
-//      }
-//    }
-//  if (positionDetected) {
-//    if (!positionDataSent) {
-//      Serial.print("New Position: ");
-//      Serial.println(newPosition);
-////        sendPositionData();
-//      positionDataSent = true;
-//    }
-//    if (dancing) {
-//      positionDetected = false;
-//      positionDataSent = false;
-//    }
-//  }
-//}
-
   if (Serial.available() > 0) {
+    // Read data sent from laptop
     byte cmd = Serial.read();
     switch(char(cmd)) {
+      // Send ACK back to laptop
       case 'H':
         Serial.write('A');
         handshake_completed = false;
         break;
+      // Received ACK from laptop, handshake process is completed
       case 'A':
         handshake_completed = true;
         break;
+      // Received instruction from laptop to reset beetle
       case 'R':
         resetFunc();
         break;
     }
   }
 
+  // Send data after handshake is completed
   if (handshake_completed) {
     current_time = millis();
+    // Send data at 20 Hz
     if (current_time - previous_dpacket_time > DATA_THRESHOLD) {
       processAccelData(); //pre-processing for accel data
       processGyroData(); //pre-processing for gyro data
       sendIMUData();
       previous_dpacket_time = current_time;
     }
+    // Detect position change if dancer is not dancing
     if (!dancing) {
       if (current_time - previous_ppacket_time > POSITION_THRESHOLD) {
         processGyroDataTurning();
@@ -196,6 +174,7 @@ void loop() {
         previous_ppacket_time = current_time;
       }
     }
+    // Send position change data to laptop
     if (positionDetected) {
       if (!positionDataSent) {
         sendPositionData();
@@ -209,10 +188,12 @@ void loop() {
   }
 }
 
+// Calculate IMU packet checksum
 int calcIMUChecksum(IMU_Packet packet) {
   return packet.type ^ packet.moving ^ packet.accx ^ packet.accy ^ packet.accz ^ packet.gyrox ^ packet.gyroy ^ packet.gyroz ^ packet.emg ^ packet.padding;
 }
 
+// Calculate Position packet checksum
 long calcPositionChecksum(Position_Packet packet) {
   return packet.type ^ packet.newPosition ^ packet.padding0 ^ packet.padding1 ^ packet.padding2 ^ packet.padding3;
 }
@@ -232,7 +213,7 @@ void sendIMUData() {
   ipacket.gyroy = scaledRotY;
   ipacket.gyroz = scaledRotZ;
   ipacket.emg = calculateEMGData();
-  ipacket.padding = 0;
+  ipacket.padding = 0; // Padding to ensure packet is size 20 bytes
   ipacket.checksum = calcIMUChecksum(ipacket);
 
   Serial.write((uint8_t *)&ipacket, sizeof(ipacket));
@@ -252,18 +233,15 @@ void sendPositionData() {
 }
 
 float calculateEMGData() {
-  if (ID == 6) {
+  if (ID == 6) { // Only read EMG data if it is EMG set
     totalValue = 0;
     squareValue = 0;
     meanAmplitude = 0;
   
-    //35 samples with 1kHz frequency, tuned down to maintain data reading at 20 Hz
-    //35ms window period
+    // 35 samples with 1kHz frequency, tuned down to maintain data reading at 20 Hz
     for (int i = 0; i < EMG_SAMPLES; i++) {
       float sensorValue = analogRead(A0); //read the analog value
-  //    Serial.print("Sensor Value: ");  Serial.println(sensorValue);
       float convertedValue = (sensorValue / 1024.0) * 5; //convert into voltage range
-  //    Serial.print("Converted Value: ");  Serial.println(convertedValue);
       
       totalValue += convertedValue;
       delay(1);
@@ -271,7 +249,7 @@ float calculateEMGData() {
     meanAmplitude = totalValue / (EMG_SAMPLES * 1.0);
     scaledMeanAmplitude = round(meanAmplitude * 100.0);
   } else {
-    scaledMeanAmplitude = 0;
+    scaledMeanAmplitude = 0; // Send as 0 if it is not EMG set
   }
   return scaledMeanAmplitude;
 }
@@ -303,6 +281,7 @@ void setupMPU() {
   setOffsetValues();
 }
 
+// Calibrate offset values for different beetles
 void setOffsetValues() {
   if (ID == 1) { // C1
     mpu.setXAccelOffset(-2203);
@@ -328,7 +307,7 @@ void setOffsetValues() {
     mpu.setXGyroOffset(47);
     mpu.setYGyroOffset(-32);
     mpu.setZGyroOffset(-2);
-  } else if (ID == 4) { //set2 yellow (gg
+  } else if (ID == 4) { //set2 yellow 
     mpu.setXAccelOffset(-2970);
     mpu.setYAccelOffset(3988);
     mpu.setZAccelOffset(1568);
@@ -368,7 +347,7 @@ void processAccelData() {
     preAZ = accelZ;
     aCount += 1;
 
-    //thresholding
+    // Dancer moving status thresholding
     if (aCount >= 5) {
       for (int i = 0; i < SAMPLES; i++) {
         accelXDiffSum += abs(accelXDiff[i]);
@@ -384,13 +363,9 @@ void processAccelData() {
           veryFirst = false;
           dancing = true;
           idling = false;
-//          Serial.print("moving! ");
-//          Serial.println(moving_count);
         }
       } else {
         idling_count += 1;
-//        Serial.print("idling ");
-//        Serial.println(idling_count);
       }
 
       // Detect state of motion as idling
@@ -402,7 +377,6 @@ void processAccelData() {
         idling = true;
         dancing = false;
         dancing_count = 0;
-//        Serial.print("stop moving! ");
       }
         
       aCount = 0;
@@ -474,6 +448,7 @@ void processGyroData() {
   }
 }
 
+// Process Gyro data to detect position changes
 void processGyroDataTurning() {
   Wire.beginTransmission(I2C_ADDR); //I2C address
   Wire.write(GYRO_OUT); 
@@ -493,9 +468,6 @@ void processGyroDataTurning() {
       gCountT += 1;
     }
 
-//    Serial.print("gCountT");
-//    Serial.println(gCountT);
-
     gyroXAvgT = gyroXSumT / (gCountT * 1.0);
     gyroYAvgT = gyroYSumT / (gCountT * 1.0);
     gyroZAvgT = gyroZSumT / (gCountT * 1.0);
@@ -512,61 +484,55 @@ void clearGyroSum() {
   gCountT = 0;
 }
 
-//Insert Detect Position Code
+// Position Detection
 void detectPosition() {
+    // Capture timestamp when dancer first stops moving
     if (firstStop) {
       stopTime = millis();
       firstStop = false;
     }
     elapsedTime = millis();
     
-    //already detect the new position
+    // Already detected the new position
     if (positionDetected) {
       return;
     }
 
+    // Clear existing Gyro values to accurately determine turning
     if (firstClear) {
       clearGyroSum();
       firstClear = false;
     }
 
-//    Serial.print("gyroYAvg");
-//    Serial.println(gyroYAvgT);
-
-//    Serial.print("sMoveCnt");
-//    Serial.println(sMoveCnt);
-
     if (gyroYAvgT > 1600) {
       rMoveCnt += 1;
     } else if (gyroYAvgT < -1600) {
       lMoveCnt += 1;
-    } else {
-      sMoveCnt += 1;
     }
 
+    // Position change for the very first dance move
     if (veryFirst) {
       if (lMoveCnt > 15) {
         lMoveCnt = 0;
         rMoveCnt = 0;
-        sMoveCnt = 0;
         positionDetected = true;
         newPosition = 'L';
         clearGyroSum();
       } else if (rMoveCnt > 15) {
         lMoveCnt = 0;
         rMoveCnt = 0;
-        sMoveCnt = 0;
         positionDetected = true;
         newPosition = 'R';
         clearGyroSum();
-      } else if (elapsedTime - stopTime > 39000) {
+      } else if (elapsedTime - stopTime > 39000) { // Detect as stay if no left or right turning is detected
         lMoveCnt = 0;
         rMoveCnt = 0;
-        sMoveCnt = 0;
         positionDetected = true;
         newPosition = 'S';
         clearGyroSum();
       }
+
+    // Position change for every other dance moves
     } else {
       if (lMoveCnt > 15) {
         lMoveCnt = 0;
@@ -591,12 +557,4 @@ void detectPosition() {
         clearGyroSum();
       }
     }
-//    } else if (sMoveCnt > 250) {
-//      lMoveCnt = 0;
-//      rMoveCnt = 0;
-//      sMoveCnt = 0;
-//      positionDetected = true;
-//      newPosition = 'S';
-//      clearGyroSum();
-//    }
 }
