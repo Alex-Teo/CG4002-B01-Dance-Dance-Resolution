@@ -1,16 +1,17 @@
 This document contains the offsets of each IMU
 The MPU code will check the ID of the beetle and then set the offset for the IMU on that beetle set
-========================================================================================
 
-Chest
+Set C1 (ID = 1)
+
+AXO -2203
+AYO -211
+AZO 1198
+GXO 604
+GYO 792
+GZO 4
 
 
-
-========================================================================================
-
-Hand
-
-Set 1 (ID = 2)
+Set H1 (ID = 2)
 
 AXO -1088
 AYO 1678
@@ -20,7 +21,17 @@ GYO -18
 GZO 68
 
 
-Set 2 (ID = 4)
+Set C2 (ID = 3)
+
+AXO -4415
+AYO 400
+AZO 969
+GXO 47
+GYO -32
+GZO -2
+
+
+Set H2 (ID = 4)
 
 AXO -2970
 AYO 3988
@@ -30,8 +41,17 @@ GYO 121
 GZO -64
 
 
+Set C3 (ID = 5)
 
-Set 3 (ID = 6)
+AXO -310
+AYO 1716
+AZO 773
+GXO 119
+GYO 21
+GZO -33
+
+
+Set H3 (ID = 6)
 
 AXO 1244
 AYO 79
