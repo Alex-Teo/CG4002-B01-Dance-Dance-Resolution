@@ -65,7 +65,6 @@ bool veryFirst = true;
 
 //emg data
 double totalValue = 0; 
-double squareValue = 0;
 float meanAmplitude = 0;
 int scaledMeanAmplitude = 0;
 
@@ -101,8 +100,8 @@ unsigned long previous_ppacket_time = 0;
 // Function to reset beetle
 void(* resetFunc) (void) = 0;
 
-// Define IMU packet format
-struct IMU_Packet {
+// Define Data packet format
+struct Data_Packet {
   char type;
   char moving;
   int accx;
@@ -163,7 +162,7 @@ void loop() {
     if (current_time - previous_dpacket_time > DATA_THRESHOLD) {
       processAccelData(); //pre-processing for accel data
       processGyroData(); //pre-processing for gyro data
-      sendIMUData();
+      sendData();
       previous_dpacket_time = current_time;
     }
     // Detect position change if dancer is not dancing
@@ -188,8 +187,8 @@ void loop() {
   }
 }
 
-// Calculate IMU packet checksum
-int calcIMUChecksum(IMU_Packet packet) {
+// Calculate Data packet checksum
+int calcDataChecksum(Data_Packet packet) {
   return packet.type ^ packet.moving ^ packet.accx ^ packet.accy ^ packet.accz ^ packet.gyrox ^ packet.gyroy ^ packet.gyroz ^ packet.emg ^ packet.padding;
 }
 
@@ -198,25 +197,25 @@ long calcPositionChecksum(Position_Packet packet) {
   return packet.type ^ packet.newPosition ^ packet.padding0 ^ packet.padding1 ^ packet.padding2 ^ packet.padding3;
 }
 
-void sendIMUData() {
-  IMU_Packet ipacket;
-  ipacket.type = 'I';
+void sendData() {
+  Data_Packet dpacket;
+  dpacket.type = 'D';
   if (dancing) {
-    ipacket.moving = 'Y';
+    dpacket.moving = 'Y';
   } else {
-    ipacket.moving = 'N';
+    dpacket.moving = 'N';
   }
-  ipacket.accx = scaledgForceX;
-  ipacket.accy = scaledgForceY;
-  ipacket.accz = scaledgForceZ;
-  ipacket.gyrox = scaledRotX;
-  ipacket.gyroy = scaledRotY;
-  ipacket.gyroz = scaledRotZ;
-  ipacket.emg = calculateEMGData();
-  ipacket.padding = 0; // Padding to ensure packet is size 20 bytes
-  ipacket.checksum = calcIMUChecksum(ipacket);
+  dpacket.accx = scaledgForceX;
+  dpacket.accy = scaledgForceY;
+  dpacket.accz = scaledgForceZ;
+  dpacket.gyrox = scaledRotX;
+  dpacket.gyroy = scaledRotY;
+  dpacket.gyroz = scaledRotZ;
+  dpacket.emg = calculateEMGData();
+  dpacket.padding = 0; // Padding to ensure packet is size 20 bytes
+  dpacket.checksum = calcDataChecksum(dpacket);
 
-  Serial.write((uint8_t *)&ipacket, sizeof(ipacket));
+  Serial.write((uint8_t *)&dpacket, sizeof(dpacket));
 }
 
 void sendPositionData() {
@@ -235,7 +234,6 @@ void sendPositionData() {
 float calculateEMGData() {
   if (ID == 6) { // Only read EMG data if it is EMG set
     totalValue = 0;
-    squareValue = 0;
     meanAmplitude = 0;
   
     // 35 samples with 1kHz frequency, tuned down to maintain data reading at 20 Hz
