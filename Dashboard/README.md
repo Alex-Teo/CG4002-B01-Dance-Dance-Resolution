@@ -1,5 +1,9 @@
 # Dashboard
 
+### Author
+Amir Azhar </br>
+https://github.com/AmirAzhar
+
 ## Quick Start Guide
 
 ```bash
