@@ -38,8 +38,6 @@ HANDSHAKE_BOOL_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3
 
 START_DICT = {BEETLE_ADDR_1: False, BEETLE_ADDR_2: False, BEETLE_ADDR_3: False, BEETLE_ADDR_4: False, BEETLE_ADDR_5: False, BEETLE_ADDR_6: False}
 
-PACKET_DICT = {b'E': "EMG Packet", b'I': "IMU Packet", b'T': "Time Packet"}
-
 START_MOVE = False
 START_MOVE_TIME = False
 VERY_FIRST = True
@@ -184,8 +182,8 @@ class MyDelegate(btle.DefaultDelegate):
                 except Exception:
                     print(traceback.format_exc()) 
 
-        # IMU Packet
-        if fragment[0] == 73: # If fragment[0] is char 'I'
+        # DATA Packet
+        if fragment[0] == 68: # If fragment[0] is char 'D'
             packet = struct.unpack('<cchhhhhhhhh', fragment)
             
             arduino_checksum = packet[-1]
