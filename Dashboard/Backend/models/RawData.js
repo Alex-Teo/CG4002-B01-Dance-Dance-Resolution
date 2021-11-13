@@ -15,15 +15,8 @@ const D1RawHandData = mongoose.model("d1_raw_hand_data", rawDataSchema);
 const D2RawHandData = mongoose.model("d2_raw_hand_data", rawDataSchema);
 const D3RawHandData = mongoose.model("d3_raw_hand_data", rawDataSchema);
 
-const D1RawChestData = mongoose.model("d1_raw_chest_data", rawDataSchema);
-const D2RawChestData = mongoose.model("d2_raw_chest_data", rawDataSchema);
-const D3RawChestData = mongoose.model("d3_raw_chest_data", rawDataSchema);
-
 module.exports = {
   D1RawHandData,
   D2RawHandData,
   D3RawHandData,
-  D1RawChestData,
-  D2RawChestData,
-  D3RawChestData,
 };
