@@ -2,7 +2,7 @@
 
 <h2 align="center">Description</h2>
 
-### About Dashboard
+### About Me
 The Dashboard is one of the 6 components in the CG4002 Capstone project. It is a fullstack web application that utilises the MERN tech stack (MongoDB, Express, React and Node). This web application serves as a user interface for dancers using our application. The core component of this web application is to display real time data received directly from the dancers' sensors. The web application is run locally and not delpoyed not any hosting websites.
 
 ### Author 
@@ -32,6 +32,7 @@ npm run client
 <h2 align="center">Folder Descriptions</h2>
 
 ### Backend
-This folder contain all the files that handles the behind-the-scenes of the website. For this application, the backend folder mainly holds the files for setting up of the web server and the connection to the database
+The Backend folder contains all the files that handles the behind-the-scenes of the website. For this application, the backend folder mainly holds the files for setting up of the web server and the connection to the database
 
 ### Frontend
+The Frontend folder contains all the files pertaining to the website of the application that users will interact with. For this application, the frontend folder holds the files for the React JS UI Components
