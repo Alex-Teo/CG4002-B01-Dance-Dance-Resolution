@@ -1,13 +1,10 @@
 <h1 align="center">Dashboard</h1>
 
-<h2 align="center">Description</h2>
+<h3 align="center"> About the Dashboard</h3>
+<h6 align="center">The Dashboard is one of the 6 components in the CG4002 Capstone project. It is a fullstack web application that utilises the MERN tech stack (MongoDB, Express, React and Node). This web application serves as a user interface for dancers using our application. The core component of this web application is to display real time data received directly from the dancers' sensors. The web application is run locally and not delpoyed not any hosting websites.</h6>
 
-### About the Dashboard
-The Dashboard is one of the 6 components in the CG4002 Capstone project. It is a fullstack web application that utilises the MERN tech stack (MongoDB, Express, React and Node). This web application serves as a user interface for dancers using our application. The core component of this web application is to display real time data received directly from the dancers' sensors. The web application is run locally and not delpoyed not any hosting websites.
-
-### Author 
-Amir Azhar </br>
-https://github.com/AmirAzhar
+<h3 align="center"> Author</h3>
+<h6 align="center">Amir Azhar</br>https://github.com/AmirAzhar</h6>
 
 <h2 align="center">Quick Start Guide</h2>
 
