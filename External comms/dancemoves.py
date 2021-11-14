@@ -1,5 +1,3 @@
-positions = [1, 2, 3]
-
 def swap_positions(positions, pos):
     pos = [pos[positions[0]-1], pos[positions[1]-1], pos[positions[2]-1]]
 
