@@ -5,7 +5,7 @@ import torch
 from sklearn.model_selection import train_test_split
 from torch.utils.data import Subset
 from torch.utils.data import DataLoader
-from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from torch import nn
 from torch.utils.data import Dataset
 from scipy import stats
@@ -172,6 +172,7 @@ class ML:
         plt.xlabel('Predicted')
         plt.ylabel('True')
         plt.show()
+        print(classification_report(actuals, predictions, target_names=labels))
         return acc
     
     
@@ -262,7 +263,6 @@ for idx, row in dabdata.iterrows():
         dancer_3_prediction_list.clear()
         break
 '''
-'''
+
 mlclass = ML()
 print(mlclass.training())
-'''
