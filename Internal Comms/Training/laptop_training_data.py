@@ -1,3 +1,5 @@
+# This code file is used to generate and record training data from the dancers into empty CSV files that are residing in the same folder. 
+
 from bluepy import btle
 from bluepy.btle import Scanner, DefaultDelegate, BTLEDisconnectError
 from time import sleep
