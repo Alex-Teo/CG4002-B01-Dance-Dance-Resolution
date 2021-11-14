@@ -10,21 +10,22 @@
 
 ```bash
 # Install dependencies for server
+cd Dashboard
 npm install
 
 # Install dependencies for client
+cd Dashboard/Frontend
 npm install
 
 # Run the client & server with concurrently
 npm run dev
 
-# Run the Express server only
+# Run the Express server only (http://localhost:5000)
 npm run server
 
-# Run the React client only
+# Run the React client only (http://localhost:3000)
 npm run client
 
-# Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
 <h2 align="center">Folder Descriptions</h2>
 
