@@ -1,0 +1,8 @@
+   Build using "D:/apps/Xilinx/Vitis_HLS/2021.1/tps/win64/msys64/mingw64/bin/g++"
+   Compiling apatb_mlp_dance3_util.cpp
+   Compiling main.cpp_pre.cpp.tb.cpp
+   Compiling testbench.cpp_pre.cpp.tb.cpp
+   Compiling apatb_mlp_dance3.cpp
+   Compiling apatb_mlp_dance3_ir.ll
+   Generating cosim.tv.exe
+Makefile.rules:392: recipe for target 'cosim.tv.exe' failed

@@ -1,0 +1,504 @@
+
+
+================================================================
+== Vitis HLS Report for 'mlp_dance3'
+================================================================
+* Date:           Tue Oct 12 03:34:50 2021
+
+* Version:        2021.1 (Build 3247384 on Thu Jun 10 19:36:33 MDT 2021)
+* Project:        MLP_FINAL
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: zynquplus
+* Target device:  xczu3eg-sbva484-1-i
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.853 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        ?|        ?|         ?|         ?|    ?|    ?|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                   |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |     Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_42_1  |        ?|        ?|   2 ~ 745|          -|          -|   inf|        no|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 0
+HasMFsm: 0
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 18
+* Pipeline : 0
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 8 9 11 17 18 
+3 --> 4 
+4 --> 5 
+5 --> 6 
+6 --> 7 
+7 --> 18 
+8 --> 18 
+9 --> 10 
+10 --> 18 
+11 --> 12 
+12 --> 13 
+13 --> 14 
+14 --> 15 
+15 --> 16 
+16 --> 17 
+17 --> 2 
+18 --> 17 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 0.48>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%buffer_0_0_0546 = alloca i32 1"   --->   Operation 19 'alloca' 'buffer_0_0_0546' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%buffer_0_1_0547 = alloca i32 1"   --->   Operation 20 'alloca' 'buffer_0_1_0547' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%buffer_0_2_0548 = alloca i32 1"   --->   Operation 21 'alloca' 'buffer_0_2_0548' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%buffer_0_3_0549 = alloca i32 1"   --->   Operation 22 'alloca' 'buffer_0_3_0549' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 23 [1/1] (0.00ns)   --->   "%buffer_0_4_0550 = alloca i32 1"   --->   Operation 23 'alloca' 'buffer_0_4_0550' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%buffer_0_5_0551 = alloca i32 1"   --->   Operation 24 'alloca' 'buffer_0_5_0551' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%buffer_0_6_0552 = alloca i32 1"   --->   Operation 25 'alloca' 'buffer_0_6_0552' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%buffer_0_7_0553 = alloca i32 1"   --->   Operation 26 'alloca' 'buffer_0_7_0553' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 27 [1/1] (0.00ns)   --->   "%buffer_1_0_025 = alloca i32 1"   --->   Operation 27 'alloca' 'buffer_1_0_025' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 28 [1/1] (0.00ns)   --->   "%buffer_1_1_026 = alloca i32 1"   --->   Operation 28 'alloca' 'buffer_1_1_026' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 29 [1/1] (0.00ns)   --->   "%buffer_1_2_027 = alloca i32 1"   --->   Operation 29 'alloca' 'buffer_1_2_027' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 30 [1/1] (0.00ns)   --->   "%weights_1_0_0_01 = alloca i32 1"   --->   Operation 30 'alloca' 'weights_1_0_0_01' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 31 [1/1] (0.00ns)   --->   "%weights_1_0_1_02 = alloca i32 1"   --->   Operation 31 'alloca' 'weights_1_0_1_02' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 32 [1/1] (0.00ns)   --->   "%weights_1_0_2_03 = alloca i32 1"   --->   Operation 32 'alloca' 'weights_1_0_2_03' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 33 [1/1] (0.00ns)   --->   "%weights_1_1_0_04 = alloca i32 1"   --->   Operation 33 'alloca' 'weights_1_1_0_04' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 34 [1/1] (0.00ns)   --->   "%weights_1_1_1_05 = alloca i32 1"   --->   Operation 34 'alloca' 'weights_1_1_1_05' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 35 [1/1] (0.00ns)   --->   "%weights_1_1_2_06 = alloca i32 1"   --->   Operation 35 'alloca' 'weights_1_1_2_06' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 36 [1/1] (0.00ns)   --->   "%weights_1_2_0_07 = alloca i32 1"   --->   Operation 36 'alloca' 'weights_1_2_0_07' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 37 [1/1] (0.00ns)   --->   "%weights_1_2_1_08 = alloca i32 1"   --->   Operation 37 'alloca' 'weights_1_2_1_08' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 38 [1/1] (0.00ns)   --->   "%weights_1_2_2_09 = alloca i32 1"   --->   Operation 38 'alloca' 'weights_1_2_2_09' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 39 [1/1] (0.00ns)   --->   "%weights_1_3_0_010 = alloca i32 1"   --->   Operation 39 'alloca' 'weights_1_3_0_010' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 40 [1/1] (0.00ns)   --->   "%weights_1_3_1_011 = alloca i32 1"   --->   Operation 40 'alloca' 'weights_1_3_1_011' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 41 [1/1] (0.00ns)   --->   "%weights_1_3_2_012 = alloca i32 1"   --->   Operation 41 'alloca' 'weights_1_3_2_012' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 42 [1/1] (0.00ns)   --->   "%weights_1_4_0_013 = alloca i32 1"   --->   Operation 42 'alloca' 'weights_1_4_0_013' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 43 [1/1] (0.00ns)   --->   "%weights_1_4_1_014 = alloca i32 1"   --->   Operation 43 'alloca' 'weights_1_4_1_014' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 44 [1/1] (0.00ns)   --->   "%weights_1_4_2_015 = alloca i32 1"   --->   Operation 44 'alloca' 'weights_1_4_2_015' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 45 [1/1] (0.00ns)   --->   "%weights_1_5_0_016 = alloca i32 1"   --->   Operation 45 'alloca' 'weights_1_5_0_016' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 46 [1/1] (0.00ns)   --->   "%weights_1_5_1_017 = alloca i32 1"   --->   Operation 46 'alloca' 'weights_1_5_1_017' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 47 [1/1] (0.00ns)   --->   "%weights_1_5_2_018 = alloca i32 1"   --->   Operation 47 'alloca' 'weights_1_5_2_018' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 48 [1/1] (0.00ns)   --->   "%weights_1_6_0_019 = alloca i32 1"   --->   Operation 48 'alloca' 'weights_1_6_0_019' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 49 [1/1] (0.00ns)   --->   "%weights_1_6_1_020 = alloca i32 1"   --->   Operation 49 'alloca' 'weights_1_6_1_020' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 50 [1/1] (0.00ns)   --->   "%weights_1_6_2_021 = alloca i32 1"   --->   Operation 50 'alloca' 'weights_1_6_2_021' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 51 [1/1] (0.00ns)   --->   "%weights_1_7_0_022 = alloca i32 1"   --->   Operation 51 'alloca' 'weights_1_7_0_022' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 52 [1/1] (0.00ns)   --->   "%weights_1_7_1_023 = alloca i32 1"   --->   Operation 52 'alloca' 'weights_1_7_1_023' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 53 [1/1] (0.00ns)   --->   "%weights_1_7_2_024 = alloca i32 1"   --->   Operation 53 'alloca' 'weights_1_7_2_024' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 54 [1/1] (0.00ns)   --->   "%staged = alloca i32 1"   --->   Operation 54 'alloca' 'staged' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 55 [1/1] (0.00ns)   --->   "%buffer_1_0_1_loc = alloca i64 1"   --->   Operation 55 'alloca' 'buffer_1_0_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 56 [1/1] (0.00ns)   --->   "%buffer_1_1_1_loc = alloca i64 1"   --->   Operation 56 'alloca' 'buffer_1_1_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 57 [1/1] (0.00ns)   --->   "%buffer_1_2_1_loc = alloca i64 1"   --->   Operation 57 'alloca' 'buffer_1_2_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 58 [1/1] (0.00ns)   --->   "%buffer_0_0_1_loc = alloca i64 1"   --->   Operation 58 'alloca' 'buffer_0_0_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 59 [1/1] (0.00ns)   --->   "%buffer_0_1_1_loc = alloca i64 1"   --->   Operation 59 'alloca' 'buffer_0_1_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 60 [1/1] (0.00ns)   --->   "%buffer_0_2_1_loc = alloca i64 1"   --->   Operation 60 'alloca' 'buffer_0_2_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 61 [1/1] (0.00ns)   --->   "%buffer_0_3_1_loc = alloca i64 1"   --->   Operation 61 'alloca' 'buffer_0_3_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 62 [1/1] (0.00ns)   --->   "%buffer_0_4_1_loc = alloca i64 1"   --->   Operation 62 'alloca' 'buffer_0_4_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 63 [1/1] (0.00ns)   --->   "%buffer_0_5_1_loc = alloca i64 1"   --->   Operation 63 'alloca' 'buffer_0_5_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 64 [1/1] (0.00ns)   --->   "%buffer_0_6_1_loc = alloca i64 1"   --->   Operation 64 'alloca' 'buffer_0_6_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 65 [1/1] (0.00ns)   --->   "%buffer_0_7_1_loc = alloca i64 1"   --->   Operation 65 'alloca' 'buffer_0_7_1_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 66 [1/1] (0.00ns)   --->   "%weights_1_0_0_2_loc = alloca i64 1"   --->   Operation 66 'alloca' 'weights_1_0_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 67 [1/1] (0.00ns)   --->   "%weights_1_0_1_2_loc = alloca i64 1"   --->   Operation 67 'alloca' 'weights_1_0_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 68 [1/1] (0.00ns)   --->   "%weights_1_0_2_2_loc = alloca i64 1"   --->   Operation 68 'alloca' 'weights_1_0_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 69 [1/1] (0.00ns)   --->   "%weights_1_1_0_2_loc = alloca i64 1"   --->   Operation 69 'alloca' 'weights_1_1_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 70 [1/1] (0.00ns)   --->   "%weights_1_1_1_2_loc = alloca i64 1"   --->   Operation 70 'alloca' 'weights_1_1_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 71 [1/1] (0.00ns)   --->   "%weights_1_1_2_2_loc = alloca i64 1"   --->   Operation 71 'alloca' 'weights_1_1_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 72 [1/1] (0.00ns)   --->   "%weights_1_2_0_2_loc = alloca i64 1"   --->   Operation 72 'alloca' 'weights_1_2_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 73 [1/1] (0.00ns)   --->   "%weights_1_2_1_2_loc = alloca i64 1"   --->   Operation 73 'alloca' 'weights_1_2_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 74 [1/1] (0.00ns)   --->   "%weights_1_2_2_2_loc = alloca i64 1"   --->   Operation 74 'alloca' 'weights_1_2_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 75 [1/1] (0.00ns)   --->   "%weights_1_3_0_2_loc = alloca i64 1"   --->   Operation 75 'alloca' 'weights_1_3_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 76 [1/1] (0.00ns)   --->   "%weights_1_3_1_2_loc = alloca i64 1"   --->   Operation 76 'alloca' 'weights_1_3_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 77 [1/1] (0.00ns)   --->   "%weights_1_3_2_2_loc = alloca i64 1"   --->   Operation 77 'alloca' 'weights_1_3_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 78 [1/1] (0.00ns)   --->   "%weights_1_4_0_2_loc = alloca i64 1"   --->   Operation 78 'alloca' 'weights_1_4_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 79 [1/1] (0.00ns)   --->   "%weights_1_4_1_2_loc = alloca i64 1"   --->   Operation 79 'alloca' 'weights_1_4_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 80 [1/1] (0.00ns)   --->   "%weights_1_4_2_2_loc = alloca i64 1"   --->   Operation 80 'alloca' 'weights_1_4_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 81 [1/1] (0.00ns)   --->   "%weights_1_5_0_2_loc = alloca i64 1"   --->   Operation 81 'alloca' 'weights_1_5_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 82 [1/1] (0.00ns)   --->   "%weights_1_5_1_2_loc = alloca i64 1"   --->   Operation 82 'alloca' 'weights_1_5_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 83 [1/1] (0.00ns)   --->   "%weights_1_5_2_2_loc = alloca i64 1"   --->   Operation 83 'alloca' 'weights_1_5_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 84 [1/1] (0.00ns)   --->   "%weights_1_6_0_2_loc = alloca i64 1"   --->   Operation 84 'alloca' 'weights_1_6_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 85 [1/1] (0.00ns)   --->   "%weights_1_6_1_2_loc = alloca i64 1"   --->   Operation 85 'alloca' 'weights_1_6_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 86 [1/1] (0.00ns)   --->   "%weights_1_6_2_2_loc = alloca i64 1"   --->   Operation 86 'alloca' 'weights_1_6_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 87 [1/1] (0.00ns)   --->   "%weights_1_7_0_2_loc = alloca i64 1"   --->   Operation 87 'alloca' 'weights_1_7_0_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 88 [1/1] (0.00ns)   --->   "%weights_1_7_1_2_loc = alloca i64 1"   --->   Operation 88 'alloca' 'weights_1_7_1_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 89 [1/1] (0.00ns)   --->   "%weights_1_7_2_2_loc = alloca i64 1"   --->   Operation 89 'alloca' 'weights_1_7_2_2_loc' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 90 [1/1] (0.00ns)   --->   "%spectopmodule_ln0 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_2"   --->   Operation 90 'spectopmodule' 'spectopmodule_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 91 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 0, void @empty_3, i32 0, i32 0, void @empty_1, i32 0, i32 0, void @empty_1, void @empty_1, void @empty_1, i32 0, i32 0, i32 0, i32 0, void @empty_1, void @empty_1"   --->   Operation 91 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 92 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %S_AXIS_V, void @empty, i32 1, i32 1, void @empty_0, i32 0, i32 0, void @empty_1, void @empty_1, void @empty_1, i32 0, i32 0, i32 0, i32 0, void @empty_1, void @empty_1"   --->   Operation 92 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 93 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %S_AXIS_V"   --->   Operation 93 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 94 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i64 %M_AXIS_V, void @empty, i32 1, i32 1, void @empty_0, i32 0, i32 0, void @empty_1, void @empty_1, void @empty_1, i32 0, i32 0, i32 0, i32 0, void @empty_1, void @empty_1"   --->   Operation 94 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 95 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i64 %M_AXIS_V"   --->   Operation 95 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 96 [1/1] (0.00ns)   --->   "%input = alloca i64 1" [main.cpp:11]   --->   Operation 96 'alloca' 'input' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 97 [1/1] (0.00ns)   --->   "%weights_0 = alloca i64 1" [main.cpp:12]   --->   Operation 97 'alloca' 'weights_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 98 [1/1] (0.00ns)   --->   "%bias_0 = alloca i64 1" [main.cpp:17]   --->   Operation 98 'alloca' 'bias_0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 99 [1/1] (0.48ns)   --->   "%store_ln42 = store i32 0, i32 %staged" [main.cpp:42]   --->   Operation 99 'store' 'store_ln42' <Predicate = true> <Delay = 0.48>
+ST_1 : Operation 100 [1/1] (0.00ns)   --->   "%br_ln42 = br void" [main.cpp:42]   --->   Operation 100 'br' 'br_ln42' <Predicate = true> <Delay = 0.00>
+
+State 2 <SV = 1> <Delay = 1.35>
+ST_2 : Operation 101 [1/1] (0.00ns)   --->   "%staged_3 = load i32 %staged"   --->   Operation 101 'load' 'staged_3' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 102 [1/1] (0.00ns)   --->   "%loop_begin = specloopbegin i32 @_ssdm_op_SpecLoopBegin"   --->   Operation 102 'specloopbegin' 'loop_begin' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 103 [1/1] (0.00ns)   --->   "%specloopname_ln37 = specloopname void @_ssdm_op_SpecLoopName, void @empty_11" [main.cpp:37]   --->   Operation 103 'specloopname' 'specloopname_ln37' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 104 [1/1] (0.88ns)   --->   "%switch_ln44 = switch i32 %staged_3, void %.loopexit61, i32 0, void %.preheader7.preheader.preheader, i32 1, void %.loopexit, i32 2, void, i32 3, void %.preheader3.preheader, i32 4, void %.preheader2.preheader" [main.cpp:44]   --->   Operation 104 'switch' 'switch_ln44' <Predicate = true> <Delay = 0.88>
+ST_2 : Operation 105 [1/1] (0.00ns)   --->   "%buffer_0_0_0546_load = load i32 %buffer_0_0_0546"   --->   Operation 105 'load' 'buffer_0_0_0546_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 106 [1/1] (0.00ns)   --->   "%buffer_0_1_0547_load = load i32 %buffer_0_1_0547"   --->   Operation 106 'load' 'buffer_0_1_0547_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 107 [1/1] (0.00ns)   --->   "%buffer_0_2_0548_load = load i32 %buffer_0_2_0548"   --->   Operation 107 'load' 'buffer_0_2_0548_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 108 [1/1] (0.00ns)   --->   "%buffer_0_3_0549_load = load i32 %buffer_0_3_0549"   --->   Operation 108 'load' 'buffer_0_3_0549_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 109 [1/1] (0.00ns)   --->   "%buffer_0_4_0550_load = load i32 %buffer_0_4_0550"   --->   Operation 109 'load' 'buffer_0_4_0550_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 110 [1/1] (0.00ns)   --->   "%buffer_0_5_0551_load = load i32 %buffer_0_5_0551"   --->   Operation 110 'load' 'buffer_0_5_0551_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 111 [1/1] (0.00ns)   --->   "%buffer_0_6_0552_load = load i32 %buffer_0_6_0552"   --->   Operation 111 'load' 'buffer_0_6_0552_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 112 [1/1] (0.00ns)   --->   "%buffer_0_7_0553_load = load i32 %buffer_0_7_0553"   --->   Operation 112 'load' 'buffer_0_7_0553_load' <Predicate = (staged_3 == 4)> <Delay = 0.00>
+ST_2 : Operation 113 [2/2] (0.48ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_layer0, i32 %buffer_0_7_0553_load, i32 %buffer_0_6_0552_load, i32 %buffer_0_5_0551_load, i32 %buffer_0_4_0550_load, i32 %buffer_0_3_0549_load, i32 %buffer_0_2_0548_load, i32 %buffer_0_1_0547_load, i32 %buffer_0_0_0546_load, i32 %input, i32 %weights_0, i32 %bias_0, i32 %buffer_0_7_1_loc, i32 %buffer_0_6_1_loc, i32 %buffer_0_5_1_loc, i32 %buffer_0_4_1_loc, i32 %buffer_0_3_1_loc, i32 %buffer_0_2_1_loc, i32 %buffer_0_1_1_loc, i32 %buffer_0_0_1_loc"   --->   Operation 113 'call' 'call_ln0' <Predicate = (staged_3 == 4)> <Delay = 0.48> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_2 : Operation 114 [1/1] (0.00ns)   --->   "%empty_24 = wait i32 @_ssdm_op_Wait"   --->   Operation 114 'wait' 'empty_24' <Predicate = (staged_3 == 3)> <Delay = 0.00>
+ST_2 : Operation 115 [2/2] (1.35ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_retrieve_inputs, i64 %S_AXIS_V, i32 %input"   --->   Operation 115 'call' 'call_ln0' <Predicate = (staged_3 == 3)> <Delay = 1.35> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_2 : Operation 116 [1/1] (0.00ns)   --->   "%empty = wait i32 @_ssdm_op_Wait"   --->   Operation 116 'wait' 'empty' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_2 : Operation 117 [2/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2, i32 %weights_0, i64 %S_AXIS_V"   --->   Operation 117 'call' 'call_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 3 <SV = 2> <Delay = 0.00>
+ST_3 : Operation 118 [1/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_layer0, i32 %buffer_0_7_0553_load, i32 %buffer_0_6_0552_load, i32 %buffer_0_5_0551_load, i32 %buffer_0_4_0550_load, i32 %buffer_0_3_0549_load, i32 %buffer_0_2_0548_load, i32 %buffer_0_1_0547_load, i32 %buffer_0_0_0546_load, i32 %input, i32 %weights_0, i32 %bias_0, i32 %buffer_0_7_1_loc, i32 %buffer_0_6_1_loc, i32 %buffer_0_5_1_loc, i32 %buffer_0_4_1_loc, i32 %buffer_0_3_1_loc, i32 %buffer_0_2_1_loc, i32 %buffer_0_1_1_loc, i32 %buffer_0_0_1_loc"   --->   Operation 118 'call' 'call_ln0' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 4 <SV = 3> <Delay = 5.21>
+ST_4 : Operation 119 [1/1] (0.00ns)   --->   "%buffer_1_0_025_load = load i32 %buffer_1_0_025"   --->   Operation 119 'load' 'buffer_1_0_025_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 120 [1/1] (0.00ns)   --->   "%buffer_1_1_026_load = load i32 %buffer_1_1_026"   --->   Operation 120 'load' 'buffer_1_1_026_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 121 [1/1] (0.00ns)   --->   "%buffer_1_2_027_load = load i32 %buffer_1_2_027"   --->   Operation 121 'load' 'buffer_1_2_027_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 122 [1/1] (0.00ns)   --->   "%weights_1_0_0_01_load = load i32 %weights_1_0_0_01"   --->   Operation 122 'load' 'weights_1_0_0_01_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 123 [1/1] (0.00ns)   --->   "%weights_1_0_1_02_load = load i32 %weights_1_0_1_02"   --->   Operation 123 'load' 'weights_1_0_1_02_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 124 [1/1] (0.00ns)   --->   "%weights_1_0_2_03_load = load i32 %weights_1_0_2_03"   --->   Operation 124 'load' 'weights_1_0_2_03_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 125 [1/1] (0.00ns)   --->   "%weights_1_1_0_04_load = load i32 %weights_1_1_0_04"   --->   Operation 125 'load' 'weights_1_1_0_04_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 126 [1/1] (0.00ns)   --->   "%weights_1_1_1_05_load = load i32 %weights_1_1_1_05"   --->   Operation 126 'load' 'weights_1_1_1_05_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 127 [1/1] (0.00ns)   --->   "%weights_1_1_2_06_load = load i32 %weights_1_1_2_06"   --->   Operation 127 'load' 'weights_1_1_2_06_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 128 [1/1] (0.00ns)   --->   "%weights_1_2_0_07_load = load i32 %weights_1_2_0_07"   --->   Operation 128 'load' 'weights_1_2_0_07_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 129 [1/1] (0.00ns)   --->   "%weights_1_2_1_08_load = load i32 %weights_1_2_1_08"   --->   Operation 129 'load' 'weights_1_2_1_08_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 130 [1/1] (0.00ns)   --->   "%weights_1_2_2_09_load = load i32 %weights_1_2_2_09"   --->   Operation 130 'load' 'weights_1_2_2_09_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 131 [1/1] (0.00ns)   --->   "%weights_1_3_0_010_load = load i32 %weights_1_3_0_010"   --->   Operation 131 'load' 'weights_1_3_0_010_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 132 [1/1] (0.00ns)   --->   "%weights_1_3_1_011_load = load i32 %weights_1_3_1_011"   --->   Operation 132 'load' 'weights_1_3_1_011_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 133 [1/1] (0.00ns)   --->   "%weights_1_3_2_012_load = load i32 %weights_1_3_2_012"   --->   Operation 133 'load' 'weights_1_3_2_012_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 134 [1/1] (0.00ns)   --->   "%weights_1_4_0_013_load = load i32 %weights_1_4_0_013"   --->   Operation 134 'load' 'weights_1_4_0_013_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 135 [1/1] (0.00ns)   --->   "%weights_1_4_1_014_load = load i32 %weights_1_4_1_014"   --->   Operation 135 'load' 'weights_1_4_1_014_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 136 [1/1] (0.00ns)   --->   "%weights_1_4_2_015_load = load i32 %weights_1_4_2_015"   --->   Operation 136 'load' 'weights_1_4_2_015_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 137 [1/1] (0.00ns)   --->   "%weights_1_5_0_016_load = load i32 %weights_1_5_0_016"   --->   Operation 137 'load' 'weights_1_5_0_016_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 138 [1/1] (0.00ns)   --->   "%weights_1_5_1_017_load = load i32 %weights_1_5_1_017"   --->   Operation 138 'load' 'weights_1_5_1_017_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 139 [1/1] (0.00ns)   --->   "%weights_1_5_2_018_load = load i32 %weights_1_5_2_018"   --->   Operation 139 'load' 'weights_1_5_2_018_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 140 [1/1] (0.00ns)   --->   "%weights_1_6_0_019_load = load i32 %weights_1_6_0_019"   --->   Operation 140 'load' 'weights_1_6_0_019_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 141 [1/1] (0.00ns)   --->   "%weights_1_6_1_020_load = load i32 %weights_1_6_1_020"   --->   Operation 141 'load' 'weights_1_6_1_020_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 142 [1/1] (0.00ns)   --->   "%weights_1_6_2_021_load = load i32 %weights_1_6_2_021"   --->   Operation 142 'load' 'weights_1_6_2_021_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 143 [1/1] (0.00ns)   --->   "%weights_1_7_0_022_load = load i32 %weights_1_7_0_022"   --->   Operation 143 'load' 'weights_1_7_0_022_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 144 [1/1] (0.00ns)   --->   "%weights_1_7_1_023_load = load i32 %weights_1_7_1_023"   --->   Operation 144 'load' 'weights_1_7_1_023_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 145 [1/1] (0.00ns)   --->   "%weights_1_7_2_024_load = load i32 %weights_1_7_2_024"   --->   Operation 145 'load' 'weights_1_7_2_024_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 146 [1/1] (0.00ns)   --->   "%buffer_0_7_1_loc_load = load i32 %buffer_0_7_1_loc"   --->   Operation 146 'load' 'buffer_0_7_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 147 [1/1] (0.00ns)   --->   "%buffer_0_6_1_loc_load = load i32 %buffer_0_6_1_loc"   --->   Operation 147 'load' 'buffer_0_6_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 148 [1/1] (0.00ns)   --->   "%buffer_0_5_1_loc_load = load i32 %buffer_0_5_1_loc"   --->   Operation 148 'load' 'buffer_0_5_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 149 [1/1] (0.00ns)   --->   "%buffer_0_4_1_loc_load = load i32 %buffer_0_4_1_loc"   --->   Operation 149 'load' 'buffer_0_4_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 150 [1/1] (0.00ns)   --->   "%buffer_0_3_1_loc_load = load i32 %buffer_0_3_1_loc"   --->   Operation 150 'load' 'buffer_0_3_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 151 [1/1] (0.00ns)   --->   "%buffer_0_2_1_loc_load = load i32 %buffer_0_2_1_loc"   --->   Operation 151 'load' 'buffer_0_2_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 152 [1/1] (0.00ns)   --->   "%buffer_0_1_1_loc_load = load i32 %buffer_0_1_1_loc"   --->   Operation 152 'load' 'buffer_0_1_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 153 [1/1] (0.00ns)   --->   "%buffer_0_0_1_loc_load = load i32 %buffer_0_0_1_loc"   --->   Operation 153 'load' 'buffer_0_0_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 154 [2/2] (5.21ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_layer1, i32 %buffer_1_2_027_load, i32 %buffer_1_1_026_load, i32 %buffer_1_0_025_load, i32 %weights_1_0_0_01_load, i32 %weights_1_0_1_02_load, i32 %weights_1_0_2_03_load, i32 %weights_1_1_0_04_load, i32 %weights_1_1_1_05_load, i32 %weights_1_1_2_06_load, i32 %weights_1_2_0_07_load, i32 %weights_1_2_1_08_load, i32 %weights_1_2_2_09_load, i32 %weights_1_3_0_010_load, i32 %weights_1_3_1_011_load, i32 %weights_1_3_2_012_load, i32 %weights_1_4_0_013_load, i32 %weights_1_4_1_014_load, i32 %weights_1_4_2_015_load, i32 %weights_1_5_0_016_load, i32 %weights_1_5_1_017_load, i32 %weights_1_5_2_018_load, i32 %weights_1_6_0_019_load, i32 %weights_1_6_1_020_load, i32 %weights_1_6_2_021_load, i32 %weights_1_7_0_022_load, i32 %weights_1_7_1_023_load, i32 %weights_1_7_2_024_load, i32 %buffer_0_0_1_loc_load, i32 %buffer_0_1_1_loc_load, i32 %buffer_0_2_1_loc_load, i32 %buffer_0_3_1_loc_load, i32 %buffer_0_4_1_loc_load, i32 %buffer_0_5_1_loc_load, i32 %buffer_0_6_1_loc_load, i32 %buffer_0_7_1_loc_load, i32 %buffer_1_2_1_loc, i32 %buffer_1_1_1_loc, i32 %buffer_1_0_1_loc"   --->   Operation 154 'call' 'call_ln0' <Predicate = true> <Delay = 5.21> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_4 : Operation 155 [1/1] (0.00ns)   --->   "%empty_25 = wait i32 @_ssdm_op_Wait"   --->   Operation 155 'wait' 'empty_25' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 156 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_7_1_loc_load, i32 %buffer_0_7_0553"   --->   Operation 156 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 157 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_6_1_loc_load, i32 %buffer_0_6_0552"   --->   Operation 157 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 158 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_5_1_loc_load, i32 %buffer_0_5_0551"   --->   Operation 158 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 159 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_4_1_loc_load, i32 %buffer_0_4_0550"   --->   Operation 159 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 160 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_3_1_loc_load, i32 %buffer_0_3_0549"   --->   Operation 160 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 161 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_2_1_loc_load, i32 %buffer_0_2_0548"   --->   Operation 161 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 162 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_1_1_loc_load, i32 %buffer_0_1_0547"   --->   Operation 162 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 163 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_0_0_1_loc_load, i32 %buffer_0_0_0546"   --->   Operation 163 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+
+State 5 <SV = 4> <Delay = 0.00>
+ST_5 : Operation 164 [1/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_layer1, i32 %buffer_1_2_027_load, i32 %buffer_1_1_026_load, i32 %buffer_1_0_025_load, i32 %weights_1_0_0_01_load, i32 %weights_1_0_1_02_load, i32 %weights_1_0_2_03_load, i32 %weights_1_1_0_04_load, i32 %weights_1_1_1_05_load, i32 %weights_1_1_2_06_load, i32 %weights_1_2_0_07_load, i32 %weights_1_2_1_08_load, i32 %weights_1_2_2_09_load, i32 %weights_1_3_0_010_load, i32 %weights_1_3_1_011_load, i32 %weights_1_3_2_012_load, i32 %weights_1_4_0_013_load, i32 %weights_1_4_1_014_load, i32 %weights_1_4_2_015_load, i32 %weights_1_5_0_016_load, i32 %weights_1_5_1_017_load, i32 %weights_1_5_2_018_load, i32 %weights_1_6_0_019_load, i32 %weights_1_6_1_020_load, i32 %weights_1_6_2_021_load, i32 %weights_1_7_0_022_load, i32 %weights_1_7_1_023_load, i32 %weights_1_7_2_024_load, i32 %buffer_0_0_1_loc_load, i32 %buffer_0_1_1_loc_load, i32 %buffer_0_2_1_loc_load, i32 %buffer_0_3_1_loc_load, i32 %buffer_0_4_1_loc_load, i32 %buffer_0_5_1_loc_load, i32 %buffer_0_6_1_loc_load, i32 %buffer_0_7_1_loc_load, i32 %buffer_1_2_1_loc, i32 %buffer_1_1_1_loc, i32 %buffer_1_0_1_loc"   --->   Operation 164 'call' 'call_ln0' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 6 <SV = 5> <Delay = 0.00>
+ST_6 : Operation 165 [1/1] (0.00ns)   --->   "%buffer_1_2_1_loc_load = load i32 %buffer_1_2_1_loc"   --->   Operation 165 'load' 'buffer_1_2_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 166 [1/1] (0.00ns)   --->   "%buffer_1_1_1_loc_load = load i32 %buffer_1_1_1_loc"   --->   Operation 166 'load' 'buffer_1_1_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 167 [1/1] (0.00ns)   --->   "%buffer_1_0_1_loc_load = load i32 %buffer_1_0_1_loc"   --->   Operation 167 'load' 'buffer_1_0_1_loc_load' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 168 [2/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_output, i32 %buffer_1_0_1_loc_load, i32 %buffer_1_1_1_loc_load, i32 %buffer_1_2_1_loc_load, i64 %M_AXIS_V"   --->   Operation 168 'call' 'call_ln0' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_6 : Operation 169 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_1_2_1_loc_load, i32 %buffer_1_2_027"   --->   Operation 169 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 170 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_1_1_1_loc_load, i32 %buffer_1_1_026"   --->   Operation 170 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+ST_6 : Operation 171 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %buffer_1_0_1_loc_load, i32 %buffer_1_0_025"   --->   Operation 171 'store' 'store_ln0' <Predicate = true> <Delay = 0.00>
+
+State 7 <SV = 6> <Delay = 0.84>
+ST_7 : Operation 172 [1/2] (0.84ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_output, i32 %buffer_1_0_1_loc_load, i32 %buffer_1_1_1_loc_load, i32 %buffer_1_2_1_loc_load, i64 %M_AXIS_V"   --->   Operation 172 'call' 'call_ln0' <Predicate = true> <Delay = 0.84> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_7 : Operation 173 [1/1] (0.60ns)   --->   "%br_ln0 = br void %.loopexit61"   --->   Operation 173 'br' 'br_ln0' <Predicate = true> <Delay = 0.60>
+
+State 8 <SV = 2> <Delay = 0.60>
+ST_8 : Operation 174 [1/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_retrieve_inputs, i64 %S_AXIS_V, i32 %input"   --->   Operation 174 'call' 'call_ln0' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_8 : Operation 175 [1/1] (0.60ns)   --->   "%br_ln0 = br void %.loopexit61"   --->   Operation 175 'br' 'br_ln0' <Predicate = true> <Delay = 0.60>
+
+State 9 <SV = 5> <Delay = 3.34>
+ST_9 : Operation 176 [1/1] (0.00ns)   --->   "%S_AXIS_V_read = read i64 @_ssdm_op_Read.axis.volatile.i64P128A, i64 %S_AXIS_V" [D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:145]   --->   Operation 176 'read' 'S_AXIS_V_read' <Predicate = true> <Delay = 0.00> <CoreInst = "axis">   --->   Core 123 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_9 : Operation 177 [1/1] (0.00ns)   --->   "%trunc_ln145 = trunc i64 %S_AXIS_V_read" [D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:145]   --->   Operation 177 'trunc' 'trunc_ln145' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 178 [1/1] (0.00ns)   --->   "%in_data = bitcast i32 %trunc_ln145" [D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:145]   --->   Operation 178 'bitcast' 'in_data' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 179 [1/1] (0.00ns)   --->   "%tmp = partselect i8 @_ssdm_op_PartSelect.i8.i64.i32.i32, i64 %S_AXIS_V_read, i32 23, i32 30" [main.cpp:137]   --->   Operation 179 'partselect' 'tmp' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 180 [1/1] (0.00ns)   --->   "%trunc_ln137 = trunc i64 %S_AXIS_V_read" [main.cpp:137]   --->   Operation 180 'trunc' 'trunc_ln137' <Predicate = true> <Delay = 0.00>
+ST_9 : Operation 181 [1/1] (0.85ns)   --->   "%icmp_ln137 = icmp_ne  i8 %tmp, i8 255" [main.cpp:137]   --->   Operation 181 'icmp' 'icmp_ln137' <Predicate = true> <Delay = 0.85> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 182 [1/1] (0.97ns)   --->   "%icmp_ln137_1 = icmp_eq  i23 %trunc_ln137, i23 0" [main.cpp:137]   --->   Operation 182 'icmp' 'icmp_ln137_1' <Predicate = true> <Delay = 0.97> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 0.97> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_9 : Operation 183 [2/2] (3.34ns)   --->   "%tmp_1 = fcmp_oeq  i32 %in_data, i32 0" [main.cpp:137]   --->   Operation 183 'fcmp' 'tmp_1' <Predicate = true> <Delay = 3.34> <CoreInst = "FCompare">   --->   Core 19 'FCompare' <Latency = 1> <II = 1> <Delay = 3.34> <FuncUnit> <Opcode : 'fcmp'> <InPorts = 2> <OutPorts = 1>
+
+State 10 <SV = 6> <Delay = 3.79>
+ST_10 : Operation 184 [1/1] (0.00ns) (grouped into LUT with out node select_ln142)   --->   "%or_ln137 = or i1 %icmp_ln137_1, i1 %icmp_ln137" [main.cpp:137]   --->   Operation 184 'or' 'or_ln137' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.33> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 185 [1/2] (3.34ns)   --->   "%tmp_1 = fcmp_oeq  i32 %in_data, i32 0" [main.cpp:137]   --->   Operation 185 'fcmp' 'tmp_1' <Predicate = true> <Delay = 3.34> <CoreInst = "FCompare">   --->   Core 19 'FCompare' <Latency = 1> <II = 1> <Delay = 3.34> <FuncUnit> <Opcode : 'fcmp'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 186 [1/1] (0.00ns) (grouped into LUT with out node select_ln142)   --->   "%and_ln137 = and i1 %or_ln137, i1 %tmp_1" [main.cpp:137]   --->   Operation 186 'and' 'and_ln137' <Predicate = true> <Delay = 0.00> <CoreInst = "LogicGate">   --->   Core 74 'LogicGate' <Latency = 0> <II = 1> <Delay = 0.33> <FuncUnit> <Opcode : 'and' 'or' 'xor'> <InPorts = 2> <OutPorts = 1>
+ST_10 : Operation 187 [1/1] (0.45ns) (out node of the LUT)   --->   "%select_ln142 = select i1 %and_ln137, i32 3, i32 5" [main.cpp:142]   --->   Operation 187 'select' 'select_ln142' <Predicate = true> <Delay = 0.45> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.45> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_10 : Operation 188 [1/1] (0.60ns)   --->   "%br_ln142 = br void %.loopexit61" [main.cpp:142]   --->   Operation 188 'br' 'br_ln142' <Predicate = true> <Delay = 0.60>
+
+State 11 <SV = 2> <Delay = 0.00>
+ST_11 : Operation 189 [1/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2, i32 %weights_0, i64 %S_AXIS_V"   --->   Operation 189 'call' 'call_ln0' <Predicate = true> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 12 <SV = 3> <Delay = 0.00>
+ST_12 : Operation 190 [1/1] (0.00ns)   --->   "%empty_20 = wait i32 @_ssdm_op_Wait"   --->   Operation 190 'wait' 'empty_20' <Predicate = true> <Delay = 0.00>
+
+State 13 <SV = 4> <Delay = 0.48>
+ST_13 : Operation 191 [1/1] (0.00ns)   --->   "%weights_1_0_0_01_load_1 = load i32 %weights_1_0_0_01"   --->   Operation 191 'load' 'weights_1_0_0_01_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 192 [1/1] (0.00ns)   --->   "%weights_1_0_1_02_load_1 = load i32 %weights_1_0_1_02"   --->   Operation 192 'load' 'weights_1_0_1_02_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 193 [1/1] (0.00ns)   --->   "%weights_1_0_2_03_load_1 = load i32 %weights_1_0_2_03"   --->   Operation 193 'load' 'weights_1_0_2_03_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 194 [1/1] (0.00ns)   --->   "%weights_1_1_0_04_load_1 = load i32 %weights_1_1_0_04"   --->   Operation 194 'load' 'weights_1_1_0_04_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 195 [1/1] (0.00ns)   --->   "%weights_1_1_1_05_load_1 = load i32 %weights_1_1_1_05"   --->   Operation 195 'load' 'weights_1_1_1_05_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 196 [1/1] (0.00ns)   --->   "%weights_1_1_2_06_load_1 = load i32 %weights_1_1_2_06"   --->   Operation 196 'load' 'weights_1_1_2_06_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 197 [1/1] (0.00ns)   --->   "%weights_1_2_0_07_load_1 = load i32 %weights_1_2_0_07"   --->   Operation 197 'load' 'weights_1_2_0_07_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 198 [1/1] (0.00ns)   --->   "%weights_1_2_1_08_load_1 = load i32 %weights_1_2_1_08"   --->   Operation 198 'load' 'weights_1_2_1_08_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 199 [1/1] (0.00ns)   --->   "%weights_1_2_2_09_load_1 = load i32 %weights_1_2_2_09"   --->   Operation 199 'load' 'weights_1_2_2_09_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 200 [1/1] (0.00ns)   --->   "%weights_1_3_0_010_load_1 = load i32 %weights_1_3_0_010"   --->   Operation 200 'load' 'weights_1_3_0_010_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 201 [1/1] (0.00ns)   --->   "%weights_1_3_1_011_load_1 = load i32 %weights_1_3_1_011"   --->   Operation 201 'load' 'weights_1_3_1_011_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 202 [1/1] (0.00ns)   --->   "%weights_1_3_2_012_load_1 = load i32 %weights_1_3_2_012"   --->   Operation 202 'load' 'weights_1_3_2_012_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 203 [1/1] (0.00ns)   --->   "%weights_1_4_0_013_load_1 = load i32 %weights_1_4_0_013"   --->   Operation 203 'load' 'weights_1_4_0_013_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 204 [1/1] (0.00ns)   --->   "%weights_1_4_1_014_load_1 = load i32 %weights_1_4_1_014"   --->   Operation 204 'load' 'weights_1_4_1_014_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 205 [1/1] (0.00ns)   --->   "%weights_1_4_2_015_load_1 = load i32 %weights_1_4_2_015"   --->   Operation 205 'load' 'weights_1_4_2_015_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 206 [1/1] (0.00ns)   --->   "%weights_1_5_0_016_load_1 = load i32 %weights_1_5_0_016"   --->   Operation 206 'load' 'weights_1_5_0_016_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 207 [1/1] (0.00ns)   --->   "%weights_1_5_1_017_load_1 = load i32 %weights_1_5_1_017"   --->   Operation 207 'load' 'weights_1_5_1_017_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 208 [1/1] (0.00ns)   --->   "%weights_1_5_2_018_load_1 = load i32 %weights_1_5_2_018"   --->   Operation 208 'load' 'weights_1_5_2_018_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 209 [1/1] (0.00ns)   --->   "%weights_1_6_0_019_load_1 = load i32 %weights_1_6_0_019"   --->   Operation 209 'load' 'weights_1_6_0_019_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 210 [1/1] (0.00ns)   --->   "%weights_1_6_1_020_load_1 = load i32 %weights_1_6_1_020"   --->   Operation 210 'load' 'weights_1_6_1_020_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 211 [1/1] (0.00ns)   --->   "%weights_1_6_2_021_load_1 = load i32 %weights_1_6_2_021"   --->   Operation 211 'load' 'weights_1_6_2_021_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 212 [1/1] (0.00ns)   --->   "%weights_1_7_0_022_load_1 = load i32 %weights_1_7_0_022"   --->   Operation 212 'load' 'weights_1_7_0_022_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 213 [1/1] (0.00ns)   --->   "%weights_1_7_1_023_load_1 = load i32 %weights_1_7_1_023"   --->   Operation 213 'load' 'weights_1_7_1_023_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 214 [1/1] (0.00ns)   --->   "%weights_1_7_2_024_load_1 = load i32 %weights_1_7_2_024"   --->   Operation 214 'load' 'weights_1_7_2_024_load_1' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 215 [1/1] (0.00ns)   --->   "%empty_21 = wait i32 @_ssdm_op_Wait"   --->   Operation 215 'wait' 'empty_21' <Predicate = true> <Delay = 0.00>
+ST_13 : Operation 216 [2/2] (0.48ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3, i32 %weights_1_7_2_024_load_1, i32 %weights_1_7_1_023_load_1, i32 %weights_1_7_0_022_load_1, i32 %weights_1_6_2_021_load_1, i32 %weights_1_6_1_020_load_1, i32 %weights_1_6_0_019_load_1, i32 %weights_1_5_2_018_load_1, i32 %weights_1_5_1_017_load_1, i32 %weights_1_5_0_016_load_1, i32 %weights_1_4_2_015_load_1, i32 %weights_1_4_1_014_load_1, i32 %weights_1_4_0_013_load_1, i32 %weights_1_3_2_012_load_1, i32 %weights_1_3_1_011_load_1, i32 %weights_1_3_0_010_load_1, i32 %weights_1_2_2_09_load_1, i32 %weights_1_2_1_08_load_1, i32 %weights_1_2_0_07_load_1, i32 %weights_1_1_2_06_load_1, i32 %weights_1_1_1_05_load_1, i32 %weights_1_1_0_04_load_1, i32 %weights_1_0_2_03_load_1, i32 %weights_1_0_1_02_load_1, i32 %weights_1_0_0_01_load_1, i64 %S_AXIS_V, i32 %weights_1_7_2_2_loc, i32 %weights_1_7_1_2_loc, i32 %weights_1_7_0_2_loc, i32 %weights_1_6_2_2_loc, i32 %weights_1_6_1_2_loc, i32 %weights_1_6_0_2_loc, i32 %weights_1_5_2_2_loc, i32 %weights_1_5_1_2_loc, i32 %weights_1_5_0_2_loc, i32 %weights_1_4_2_2_loc, i32 %weights_1_4_1_2_loc, i32 %weights_1_4_0_2_loc, i32 %weights_1_3_2_2_loc, i32 %weights_1_3_1_2_loc, i32 %weights_1_3_0_2_loc, i32 %weights_1_2_2_2_loc, i32 %weights_1_2_1_2_loc, i32 %weights_1_2_0_2_loc, i32 %weights_1_1_2_2_loc, i32 %weights_1_1_1_2_loc, i32 %weights_1_1_0_2_loc, i32 %weights_1_0_2_2_loc, i32 %weights_1_0_1_2_loc, i32 %weights_1_0_0_2_loc"   --->   Operation 216 'call' 'call_ln0' <Predicate = true> <Delay = 0.48> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 14 <SV = 5> <Delay = 1.36>
+ST_14 : Operation 217 [1/2] (1.36ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3, i32 %weights_1_7_2_024_load_1, i32 %weights_1_7_1_023_load_1, i32 %weights_1_7_0_022_load_1, i32 %weights_1_6_2_021_load_1, i32 %weights_1_6_1_020_load_1, i32 %weights_1_6_0_019_load_1, i32 %weights_1_5_2_018_load_1, i32 %weights_1_5_1_017_load_1, i32 %weights_1_5_0_016_load_1, i32 %weights_1_4_2_015_load_1, i32 %weights_1_4_1_014_load_1, i32 %weights_1_4_0_013_load_1, i32 %weights_1_3_2_012_load_1, i32 %weights_1_3_1_011_load_1, i32 %weights_1_3_0_010_load_1, i32 %weights_1_2_2_09_load_1, i32 %weights_1_2_1_08_load_1, i32 %weights_1_2_0_07_load_1, i32 %weights_1_1_2_06_load_1, i32 %weights_1_1_1_05_load_1, i32 %weights_1_1_0_04_load_1, i32 %weights_1_0_2_03_load_1, i32 %weights_1_0_1_02_load_1, i32 %weights_1_0_0_01_load_1, i64 %S_AXIS_V, i32 %weights_1_7_2_2_loc, i32 %weights_1_7_1_2_loc, i32 %weights_1_7_0_2_loc, i32 %weights_1_6_2_2_loc, i32 %weights_1_6_1_2_loc, i32 %weights_1_6_0_2_loc, i32 %weights_1_5_2_2_loc, i32 %weights_1_5_1_2_loc, i32 %weights_1_5_0_2_loc, i32 %weights_1_4_2_2_loc, i32 %weights_1_4_1_2_loc, i32 %weights_1_4_0_2_loc, i32 %weights_1_3_2_2_loc, i32 %weights_1_3_1_2_loc, i32 %weights_1_3_0_2_loc, i32 %weights_1_2_2_2_loc, i32 %weights_1_2_1_2_loc, i32 %weights_1_2_0_2_loc, i32 %weights_1_1_2_2_loc, i32 %weights_1_1_1_2_loc, i32 %weights_1_1_0_2_loc, i32 %weights_1_0_2_2_loc, i32 %weights_1_0_1_2_loc, i32 %weights_1_0_0_2_loc"   --->   Operation 217 'call' 'call_ln0' <Predicate = true> <Delay = 1.36> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 15 <SV = 6> <Delay = 0.00>
+ST_15 : Operation 218 [1/1] (0.00ns)   --->   "%empty_22 = wait i32 @_ssdm_op_Wait"   --->   Operation 218 'wait' 'empty_22' <Predicate = true> <Delay = 0.00>
+
+State 16 <SV = 7> <Delay = 1.35>
+ST_16 : Operation 219 [1/1] (0.00ns)   --->   "%empty_23 = wait i32 @_ssdm_op_Wait"   --->   Operation 219 'wait' 'empty_23' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 220 [2/2] (1.35ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_loadbias0, i64 %S_AXIS_V, i32 %bias_0"   --->   Operation 220 'call' 'call_ln0' <Predicate = true> <Delay = 1.35> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+
+State 17 <SV = 8> <Delay = 1.03>
+ST_17 : Operation 221 [1/1] (0.00ns)   --->   "%weights_1_7_2_2_loc_load = load i32 %weights_1_7_2_2_loc"   --->   Operation 221 'load' 'weights_1_7_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 222 [1/1] (0.00ns)   --->   "%weights_1_7_1_2_loc_load = load i32 %weights_1_7_1_2_loc"   --->   Operation 222 'load' 'weights_1_7_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 223 [1/1] (0.00ns)   --->   "%weights_1_7_0_2_loc_load = load i32 %weights_1_7_0_2_loc"   --->   Operation 223 'load' 'weights_1_7_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 224 [1/1] (0.00ns)   --->   "%weights_1_6_2_2_loc_load = load i32 %weights_1_6_2_2_loc"   --->   Operation 224 'load' 'weights_1_6_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 225 [1/1] (0.00ns)   --->   "%weights_1_6_1_2_loc_load = load i32 %weights_1_6_1_2_loc"   --->   Operation 225 'load' 'weights_1_6_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 226 [1/1] (0.00ns)   --->   "%weights_1_6_0_2_loc_load = load i32 %weights_1_6_0_2_loc"   --->   Operation 226 'load' 'weights_1_6_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 227 [1/1] (0.00ns)   --->   "%weights_1_5_2_2_loc_load = load i32 %weights_1_5_2_2_loc"   --->   Operation 227 'load' 'weights_1_5_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 228 [1/1] (0.00ns)   --->   "%weights_1_5_1_2_loc_load = load i32 %weights_1_5_1_2_loc"   --->   Operation 228 'load' 'weights_1_5_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 229 [1/1] (0.00ns)   --->   "%weights_1_5_0_2_loc_load = load i32 %weights_1_5_0_2_loc"   --->   Operation 229 'load' 'weights_1_5_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 230 [1/1] (0.00ns)   --->   "%weights_1_4_2_2_loc_load = load i32 %weights_1_4_2_2_loc"   --->   Operation 230 'load' 'weights_1_4_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 231 [1/1] (0.00ns)   --->   "%weights_1_4_1_2_loc_load = load i32 %weights_1_4_1_2_loc"   --->   Operation 231 'load' 'weights_1_4_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 232 [1/1] (0.00ns)   --->   "%weights_1_4_0_2_loc_load = load i32 %weights_1_4_0_2_loc"   --->   Operation 232 'load' 'weights_1_4_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 233 [1/1] (0.00ns)   --->   "%weights_1_3_2_2_loc_load = load i32 %weights_1_3_2_2_loc"   --->   Operation 233 'load' 'weights_1_3_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 234 [1/1] (0.00ns)   --->   "%weights_1_3_1_2_loc_load = load i32 %weights_1_3_1_2_loc"   --->   Operation 234 'load' 'weights_1_3_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 235 [1/1] (0.00ns)   --->   "%weights_1_3_0_2_loc_load = load i32 %weights_1_3_0_2_loc"   --->   Operation 235 'load' 'weights_1_3_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 236 [1/1] (0.00ns)   --->   "%weights_1_2_2_2_loc_load = load i32 %weights_1_2_2_2_loc"   --->   Operation 236 'load' 'weights_1_2_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 237 [1/1] (0.00ns)   --->   "%weights_1_2_1_2_loc_load = load i32 %weights_1_2_1_2_loc"   --->   Operation 237 'load' 'weights_1_2_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 238 [1/1] (0.00ns)   --->   "%weights_1_2_0_2_loc_load = load i32 %weights_1_2_0_2_loc"   --->   Operation 238 'load' 'weights_1_2_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 239 [1/1] (0.00ns)   --->   "%weights_1_1_2_2_loc_load = load i32 %weights_1_1_2_2_loc"   --->   Operation 239 'load' 'weights_1_1_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 240 [1/1] (0.00ns)   --->   "%weights_1_1_1_2_loc_load = load i32 %weights_1_1_1_2_loc"   --->   Operation 240 'load' 'weights_1_1_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 241 [1/1] (0.00ns)   --->   "%weights_1_1_0_2_loc_load = load i32 %weights_1_1_0_2_loc"   --->   Operation 241 'load' 'weights_1_1_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 242 [1/1] (0.00ns)   --->   "%weights_1_0_2_2_loc_load = load i32 %weights_1_0_2_2_loc"   --->   Operation 242 'load' 'weights_1_0_2_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 243 [1/1] (0.00ns)   --->   "%weights_1_0_1_2_loc_load = load i32 %weights_1_0_1_2_loc"   --->   Operation 243 'load' 'weights_1_0_1_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 244 [1/1] (0.00ns)   --->   "%weights_1_0_0_2_loc_load = load i32 %weights_1_0_0_2_loc"   --->   Operation 244 'load' 'weights_1_0_0_2_loc_load' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 245 [1/2] (0.00ns)   --->   "%call_ln0 = call void @mlp_dance3_Pipeline_loadbias0, i64 %S_AXIS_V, i32 %bias_0"   --->   Operation 245 'call' 'call_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00> <CoreType = "Generic">   --->   Core 0 '' <Latency = 0> <II = 1> <Delay = 1.00> <Generic> <Opcode : >
+ST_17 : Operation 246 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_7_2_2_loc_load, i32 %weights_1_7_2_024"   --->   Operation 246 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 247 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_7_1_2_loc_load, i32 %weights_1_7_1_023"   --->   Operation 247 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 248 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_7_0_2_loc_load, i32 %weights_1_7_0_022"   --->   Operation 248 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 249 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_6_2_2_loc_load, i32 %weights_1_6_2_021"   --->   Operation 249 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 250 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_6_1_2_loc_load, i32 %weights_1_6_1_020"   --->   Operation 250 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 251 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_6_0_2_loc_load, i32 %weights_1_6_0_019"   --->   Operation 251 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 252 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_5_2_2_loc_load, i32 %weights_1_5_2_018"   --->   Operation 252 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 253 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_5_1_2_loc_load, i32 %weights_1_5_1_017"   --->   Operation 253 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 254 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_5_0_2_loc_load, i32 %weights_1_5_0_016"   --->   Operation 254 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 255 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_4_2_2_loc_load, i32 %weights_1_4_2_015"   --->   Operation 255 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 256 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_4_1_2_loc_load, i32 %weights_1_4_1_014"   --->   Operation 256 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 257 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_4_0_2_loc_load, i32 %weights_1_4_0_013"   --->   Operation 257 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 258 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_3_2_2_loc_load, i32 %weights_1_3_2_012"   --->   Operation 258 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 259 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_3_1_2_loc_load, i32 %weights_1_3_1_011"   --->   Operation 259 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 260 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_3_0_2_loc_load, i32 %weights_1_3_0_010"   --->   Operation 260 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 261 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_2_2_2_loc_load, i32 %weights_1_2_2_09"   --->   Operation 261 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 262 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_2_1_2_loc_load, i32 %weights_1_2_1_08"   --->   Operation 262 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 263 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_2_0_2_loc_load, i32 %weights_1_2_0_07"   --->   Operation 263 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 264 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_1_2_2_loc_load, i32 %weights_1_1_2_06"   --->   Operation 264 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 265 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_1_1_2_loc_load, i32 %weights_1_1_1_05"   --->   Operation 265 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 266 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_1_0_2_loc_load, i32 %weights_1_1_0_04"   --->   Operation 266 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 267 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_0_2_2_loc_load, i32 %weights_1_0_2_03"   --->   Operation 267 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 268 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_0_1_2_loc_load, i32 %weights_1_0_1_02"   --->   Operation 268 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 269 [1/1] (0.00ns)   --->   "%store_ln0 = store i32 %weights_1_0_0_2_loc_load, i32 %weights_1_0_0_01"   --->   Operation 269 'store' 'store_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.00>
+ST_17 : Operation 270 [1/1] (0.54ns)   --->   "%br_ln0 = br void %.loopexit"   --->   Operation 270 'br' 'br_ln0' <Predicate = (staged_3 == 0)> <Delay = 0.54>
+ST_17 : Operation 271 [1/1] (0.00ns)   --->   "%staged_2 = phi i32 %staged_1, void %.loopexit61, i32 2, void %.preheader7.preheader.preheader, i32 1, void"   --->   Operation 271 'phi' 'staged_2' <Predicate = true> <Delay = 0.00>
+ST_17 : Operation 272 [1/1] (0.48ns)   --->   "%store_ln42 = store i32 %staged_2, i32 %staged" [main.cpp:42]   --->   Operation 272 'store' 'store_ln42' <Predicate = true> <Delay = 0.48>
+ST_17 : Operation 273 [1/1] (0.00ns)   --->   "%br_ln42 = br void" [main.cpp:42]   --->   Operation 273 'br' 'br_ln42' <Predicate = true> <Delay = 0.00>
+
+State 18 <SV = 7> <Delay = 0.54>
+ST_18 : Operation 274 [1/1] (0.00ns)   --->   "%staged_1 = phi i32 %select_ln142, void, i32 2, void %.preheader2.preheader, i32 4, void %.preheader3.preheader, i32 %staged_3, void"   --->   Operation 274 'phi' 'staged_1' <Predicate = true> <Delay = 0.00>
+ST_18 : Operation 275 [1/1] (0.54ns)   --->   "%br_ln0 = br void %.loopexit"   --->   Operation 275 'br' 'br_ln0' <Predicate = true> <Delay = 0.54>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 0.489ns
+The critical path consists of the following:
+	'alloca' operation ('staged') [38]  (0 ns)
+	'store' operation ('store_ln42', main.cpp:42) of constant 0 on local variable 'staged' [83]  (0.489 ns)
+
+ <State 2>: 1.35ns
+The critical path consists of the following:
+	'call' operation ('call_ln0') to 'mlp_dance3_Pipeline_retrieve_inputs' [155]  (1.35 ns)
+
+ <State 3>: 0ns
+The critical path consists of the following:
+
+ <State 4>: 5.22ns
+The critical path consists of the following:
+	'load' operation ('buffer_1_0_025_load') on local variable 'buffer_1_0_025' [99]  (0 ns)
+	'call' operation ('call_ln0') to 'mlp_dance3_Pipeline_layer1' [135]  (5.22 ns)
+
+ <State 5>: 0ns
+The critical path consists of the following:
+
+ <State 6>: 0ns
+The critical path consists of the following:
+
+ <State 7>: 0.843ns
+The critical path consists of the following:
+	'call' operation ('call_ln0') to 'mlp_dance3_Pipeline_output' [140]  (0.843 ns)
+
+ <State 8>: 0.605ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('staged') with incoming values : ('staged') ('select_ln142', main.cpp:142) [253]  (0.605 ns)
+
+ <State 9>: 3.35ns
+The critical path consists of the following:
+	axis read operation ('S_AXIS_V_read', D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:145) on port 'S_AXIS_V' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:145) [158]  (0 ns)
+	'fcmp' operation ('tmp_1', main.cpp:137) [166]  (3.35 ns)
+
+ <State 10>: 3.8ns
+The critical path consists of the following:
+	'fcmp' operation ('tmp_1', main.cpp:137) [166]  (3.35 ns)
+	'and' operation ('and_ln137', main.cpp:137) [167]  (0 ns)
+	'select' operation ('select_ln142', main.cpp:142) [168]  (0.45 ns)
+
+ <State 11>: 0ns
+The critical path consists of the following:
+
+ <State 12>: 0ns
+The critical path consists of the following:
+
+ <State 13>: 0.489ns
+The critical path consists of the following:
+	'load' operation ('weights_1_0_0_01_load_1') on local variable 'weights_1_0_0_01' [171]  (0 ns)
+	'call' operation ('call_ln0') to 'mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3' [199]  (0.489 ns)
+
+ <State 14>: 1.37ns
+The critical path consists of the following:
+	'call' operation ('call_ln0') to 'mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3' [199]  (1.37 ns)
+
+ <State 15>: 0ns
+The critical path consists of the following:
+
+ <State 16>: 1.35ns
+The critical path consists of the following:
+	'call' operation ('call_ln0') to 'mlp_dance3_Pipeline_loadbias0' [226]  (1.35 ns)
+
+ <State 17>: 1.04ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('staged') with incoming values : ('staged') ('select_ln142', main.cpp:142) [256]  (0.547 ns)
+	'phi' operation ('staged') with incoming values : ('staged') ('select_ln142', main.cpp:142) [256]  (0 ns)
+	'store' operation ('store_ln42', main.cpp:42) of variable 'staged' on local variable 'staged' [257]  (0.489 ns)
+
+ <State 18>: 0.547ns
+The critical path consists of the following:
+	multiplexor before 'phi' operation ('staged') with incoming values : ('staged') ('select_ln142', main.cpp:142) [256]  (0.547 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+	State 6
+	State 7
+	State 8
+	State 9
+	State 10
+	State 11
+	State 12
+	State 13
+	State 14
+	State 15
+	State 16
+	State 17
+	State 18
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

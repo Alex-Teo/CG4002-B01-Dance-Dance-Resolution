@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Thu Sep 30 02:33:44 2021
+# Process ID: 30956
+# Current directory: D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/verilog
+# Command line: vivado.exe -mode batch -source run_vivadosyn.tcl
+# Log file: D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/verilog/vivado.log
+# Journal file: D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/verilog\vivado.jou
+#-----------------------------------------------------------
+source run_vivadosyn.tcl

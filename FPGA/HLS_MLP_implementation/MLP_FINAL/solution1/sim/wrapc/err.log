@@ -1,0 +1,25 @@
+In file included from D:/apps/Xilinx/Vitis_HLS/2021.1/include/floating_point_v7_0_bitacc_cmodel.h:144:0,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/hls_fpo.h:189,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/hls_half_fpo.h:64,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/hls_half.h:71,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/etc/ap_private.h:91,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/ap_common.h:653,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/ap_int.h:55,
+                 from apatb_mlp_dance3.cpp:7:
+D:/apps/Xilinx/Vitis_HLS/2021.1/include/gmp.h:63:0: warning: "__GMP_LIBGMP_DLL" redefined
+ #define __GMP_LIBGMP_DLL  0
+ 
+In file included from D:/apps/Xilinx/Vitis_HLS/2021.1/include/hls_fpo.h:189:0,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/hls_half_fpo.h:64,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/hls_half.h:71,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/etc/ap_private.h:91,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/ap_common.h:653,
+                 from D:/apps/Xilinx/Vitis_HLS/2021.1/include/ap_int.h:55,
+                 from apatb_mlp_dance3.cpp:7:
+D:/apps/Xilinx/Vitis_HLS/2021.1/include/floating_point_v7_0_bitacc_cmodel.h:136:0: note: this is the location of the previous definition
+ #define __GMP_LIBGMP_DLL 1
+ 
+e-m:e-i64:64-i128:128-i256:256-i512:512-i1024:1024-i2048:2048-i4096:4096-n8:16:32:64-S128-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/systemc/gcc/libsystemc.a(sc_main_main.o): In function `sc_elab_and_sim':
+Y:\systemc\gold\systemc-2.3.1a\build_win_gcc\src\sysc\kernel/../../../../src/sysc/kernel/sc_main_main.cpp:84: undefined reference to `sc_main'
+collect2.exe: error: ld returned 1 exit status
+make: *** [cosim.tv.exe] Error 1

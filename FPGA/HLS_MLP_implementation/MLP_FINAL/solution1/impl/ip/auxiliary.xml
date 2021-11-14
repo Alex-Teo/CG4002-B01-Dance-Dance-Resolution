@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="mlp_dance3" xd:componentRef="mlp_dance3" xd:initiationInterval="x" xd:clockPeriod="10" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:arg xd:name="S_AXIS" xd:originalName="S_AXIS" xd:direction="in" xd:interfaceRef="S_AXIS_V" xd:busTypeRef="axis" xd:dataWidth="64"/>
+  <xd:arg xd:name="M_AXIS" xd:originalName="M_AXIS" xd:direction="out" xd:interfaceRef="M_AXIS_V" xd:busTypeRef="axis" xd:dataWidth="64"/>
+  <xd:latencyEstimates xd:best-case="undef" xd:worst-case="undef" xd:average-case="undef"/>
+  <xd:resourceEstimates xd:LUT="10565" xd:FF="15359" xd:BRAM="0" xd:DSP="53"/>
+</xd:acceleratorMap>
