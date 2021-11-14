@@ -34,11 +34,11 @@ class Client(threading.Thread):
 
         self.groupid = group_id 
         self.secret_key = secret_key
-                                        #explanation not in order
-        self.idx = 0                    #check if there is a connection, 
-        self.timeout = 60              #and if the client sends to the server. 
-        self.has_no_response = False    #If there is a timeout, the display will update to the next one.
-        self.connection = None          # If logout, the display shut downs
+                                        
+        self.idx = 0                     
+        self.timeout = 60              
+        self.has_no_response = False    
+        self.connection = None          
         self.timer = None
         self.logout = False
 
