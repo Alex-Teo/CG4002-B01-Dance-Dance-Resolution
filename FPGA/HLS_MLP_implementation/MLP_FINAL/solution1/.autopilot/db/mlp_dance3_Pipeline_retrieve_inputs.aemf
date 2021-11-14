@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1633980897598">
+  <ports id="1" name="S_AXIS_V" type="PortType" originalName="this" coreId="1528853351" bitwidth="64">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="2" name="input_r" type="PortType" coreName="RAM" coreId="1852142702" bitwidth="32" direction="DirOut" iftype="IfTypeRegister" arraysize="78">
+    <dataInputObjs>getelementptr</dataInputObjs>
+  </ports>
+  <edges id="31" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="32" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="33" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="34" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="37" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="40" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="41" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="42" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="43" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="46" source_obj="//@ports.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="47" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="48" source_obj="//@regions.0/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="49" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@ports.1"/>
+  <edges id="52" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.4"/>
+  <edges id="53" source_obj="//@regions.0/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <edges id="54" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <edges id="55" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.6"/>
+  <edges id="56" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.6"/>
+  <edges id="57" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.7"/>
+  <edges id="99" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="100" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="101" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="102" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="103" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="104" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.6"/>
+  <edges id="105" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.6"/>
+  <blocks id="7" name="newFuncRoot" type="BlockType">
+    <controlOutputObjs>.preheader3</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="3" name="i" originalName="i" coreId="0" bitwidth="7" opcode="alloca" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="5" name="i_write_ln0" coreId="0" opcode="store" m_display="0" m_delay="0.48" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="6" name="br_ln0" coreId="0" opcode="br" m_display="0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <controlInputObjs>.preheader3</controlInputObjs>
+    </node_objs>
+  </blocks>
+  <blocks id="26" name=".loopexit61.loopexit12.exitStub" type="BlockType">
+    <controlInputObjs>.preheader3</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="25" name="_ln0" coreId="0" opcode="ret" m_display="0" m_topoIndex="16" m_clusterGroupNumber="-1"/>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" iiViolation="" id="86" pipe_depth="1" RegionName="retrieve_inputs">
+    <basic_blocks id="14" name=".preheader3" type="BlockType">
+      <controlInputObjs>newFuncRoot</controlInputObjs>
+      <controlInputObjs>.split11</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.loopexit61.loopexit12.exitStub</controlOutputObjs>
+      <controlOutputObjs>.split11</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="8" name="i_1" lineNumber="143" originalName="i" fileName="main.cpp" fileDirectory=".." coreId="0" contextFuncName="mlp_dance3" bitwidth="7" opcode="load" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="143" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>zext</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="10" name="icmp_ln143" lineNumber="143" fileName="main.cpp" fileDirectory=".." rtlName="icmp_ln143_fu_71_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="mlp_dance3" bitwidth="1" opcode="icmp" m_display="0" m_delay="0.86" m_topoIndex="5" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="143" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="12" name="add_ln143" lineNumber="143" fileName="main.cpp" fileDirectory=".." rtlName="add_ln143_fu_77_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="mlp_dance3" bitwidth="7" opcode="add" m_display="0" m_delay="0.89" m_topoIndex="6" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="143" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="13" name="br_ln143" lineNumber="143" fileName="main.cpp" fileDirectory=".." coreId="0" contextFuncName="mlp_dance3" opcode="br" m_display="0" m_topoIndex="7" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="143" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>.split11</controlInputObjs>
+        <controlInputObjs>.loopexit61.loopexit12.exitStub</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="main.cpp">
+        <validLinenumbers>143</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="24" name=".split11" type="BlockType">
+      <controlInputObjs>.preheader3</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>.preheader3</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="15" name="i_1_cast" lineNumber="143" fileName="main.cpp" fileDirectory=".." rtlName="i_1_cast_fu_83_p1" coreId="0" contextFuncName="mlp_dance3" bitwidth="64" opcode="zext" m_display="0" m_topoIndex="8" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="143" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>getelementptr</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="17" name="S_AXIS_V_read" lineNumber="145" fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." coreName="axis" implIndex="axi4stream" control="no" opType="adapter" coreId="123" contextFuncName="read" bitwidth="64" opcode="read" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="read"/>
+        <dataInputObjs>S_AXIS_V</dataInputObjs>
+        <dataOutputObjs>trunc</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="18" name="trunc_ln145" lineNumber="145" fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." rtlName="trunc_ln145_fu_88_p1" coreId="0" contextFuncName="read" bitwidth="32" opcode="trunc" m_display="0" m_topoIndex="10" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="read"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>bitcast</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="19" name="bitcast_ln145" lineNumber="145" fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h" fileDirectory=".." rtlName="input_r_d0" coreId="0" contextFuncName="read" bitwidth="32" opcode="bitcast" m_display="0" m_topoIndex="11" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h" linenumber="145" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="read"/>
+        <dataInputObjs>trunc</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="20" name="input_addr" lineNumber="145" fileName="main.cpp" fileDirectory=".." coreId="0" contextFuncName="mlp_dance3" bitwidth="7" opcode="getelementptr" m_display="0" m_topoIndex="12" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="145" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>zext</dataInputObjs>
+        <dataOutputObjs>input_r</dataOutputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="21" name="input_addr_write_ln145" lineNumber="145" fileName="main.cpp" fileDirectory=".." coreName="RAM" implIndex="auto" control="no" opType="ram" coreId="83" contextFuncName="mlp_dance3" opcode="store" m_display="0" m_delay="1.35" m_topoIndex="13" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="145" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>bitcast</dataInputObjs>
+        <dataInputObjs>getelementptr</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="22" name="i_write_ln143" lineNumber="143" fileName="main.cpp" fileDirectory=".." coreId="0" contextFuncName="mlp_dance3" opcode="store" m_display="0" m_delay="0.48" m_topoIndex="14" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="main.cpp" linenumber="143" fileDirectory="D:\o\nus_files\2122-Year4-sem-1\CG4002\YETONG-Ultra96\Ultra96-main\FPGA\HLS\MLP_FINAL" functionName="mlp_dance3"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="23" name="br_ln0" coreId="0" opcode="br" m_display="0" m_topoIndex="15" m_clusterGroupNumber="-1">
+        <controlInputObjs>.preheader3</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="main.cpp">
+        <validLinenumbers>143</validLinenumbers>
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+      <fileValidLineNumbers fileName="D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h">
+        <validLinenumbers>145</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <regnodes realName="i_reg_102">
+    <nodeIds>3</nodeIds>
+  </regnodes>
+  <expressionNodes realName="input_addr_gep_fu_50">
+    <nodeIds>20</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_fu_40">
+    <nodeIds>3</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_1_cast_fu_83">
+    <nodeIds>15</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="trunc_ln145_fu_88">
+    <nodeIds>18</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="bitcast_ln145_fu_92">
+    <nodeIds>19</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln143_fu_71">
+    <nodeIds>10</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="add_ln143_fu_77">
+    <nodeIds>12</nodeIds>
+  </expressionNodes>
+  <ioNodes realName="i_1_load_fu_68">
+    <nodeIds>8</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln143_store_fu_97">
+    <nodeIds>22</nodeIds>
+  </ioNodes>
+  <ioNodes realName="S_AXIS_V_read_read_fu_44">
+    <nodeIds>17</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln0_store_fu_63">
+    <nodeIds>5</nodeIds>
+  </ioNodes>
+  <memoryPorts dataString="input_r">
+    <nodeIds>21</nodeIds>
+  </memoryPorts>
+  <ioPorts name="S_AXIS_V">
+    <contents name="read">
+      <nodeIds>17</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="input_r(p0)">
+    <contents name="store">
+      <nodeIds>21</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="3" stage="1" latency="1"/>
+      <operations id="4" stage="1" latency="1"/>
+      <operations id="5" stage="1" latency="1"/>
+      <operations id="6" stage="1" latency="1"/>
+      <operations id="8" stage="1" latency="1"/>
+      <operations id="9" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="1"/>
+      <operations id="11" stage="1" latency="1"/>
+      <operations id="12" stage="1" latency="1"/>
+      <operations id="13" stage="1" latency="1"/>
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="20" stage="1" latency="1"/>
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="25" stage="1" latency="1"/>
+    </states>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="mlp_dance3_Pipeline_retrieve_inputs" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="80" mMaxLatency="80">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>7</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="retrieve_inputs" mII="1" mDepth="1" mMinTripCount="78" mMaxTripCount="78" mMinLatency="78" mMaxLatency="78" mType="1">
+      <basicBlocks>14</basicBlocks>
+      <basicBlocks>24</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>26</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

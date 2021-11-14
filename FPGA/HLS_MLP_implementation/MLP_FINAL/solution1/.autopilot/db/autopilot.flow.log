@@ -1,0 +1,1705 @@
+INFO-FLOW: Workspace D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1 opened at Tue Oct 12 03:34:23 +0800 2021
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute     set_part xczu3eg-sbva484-1-i 
+Execute       create_platform xczu3eg-sbva484-1-i -board  
+DBG:HLSDevice: Trying to load device library: D:/apps/Xilinx/Vitis_HLS/2021.1\lib\win64.o\librdi_hlsvwrap.dll
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: D:/apps/Xilinx/Vivado/2021.1/data/parts/arch.xml
+DBG:HLSDevice: init success
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+INFO: [HLS 200-1611] Setting target device to 'xczu3eg-sbva484-1-i'
+Command       create_platform done; 1.542 sec.
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.124 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 1.695 sec.
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     get_config_interface -m_axi_latency 
+Execute     get_config_interface -m_axi_alignment_byte_size 
+Execute     get_config_interface -m_axi_max_widen_bitwidth 
+Execute     get_config_interface -default_interface 
+Execute     get_config_rtl -register_reset_num 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -format=ip_catalog 
+INFO: [HLS 200-1464] Running solution command: config_export -format=ip_catalog
+Execute     config_export -format=ip_catalog 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -rtl=verilog 
+INFO: [HLS 200-1464] Running solution command: config_export -rtl=verilog
+Execute     config_export -rtl=verilog 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -vivado_clock=10 
+INFO: [HLS 200-1464] Running solution command: config_export -vivado_clock=10
+Execute     config_export -vivado_clock=10 
+Command   open_solution done; 1.724 sec.
+Execute   set_part xczu3eg-sbva484-1-i 
+INFO: [HLS 200-1510] Running: set_part xczu3eg-sbva484-1-i 
+Execute     create_platform xczu3eg-sbva484-1-i -board  
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.122 sec.
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info 
+Execute     config_compile -quiet -complex-mul-dsp=0 
+Command   set_part done; 0.174 sec.
+Execute   create_clock -period 10 -name default 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+Execute   config_export -format ip_catalog -rtl verilog -vivado_clock 10 
+INFO: [HLS 200-1510] Running: config_export -format ip_catalog -rtl verilog -vivado_clock 10 
+Execute   source ./MLP_FINAL/solution1/directives.tcl 
+Execute     set_directive_top -name mlp_dance3 mlp_dance3 
+INFO: [HLS 200-1510] Running: set_directive_top -name mlp_dance3 mlp_dance3 
+Execute   csynth_design 
+INFO: [HLS 200-1510] Running: csynth_design 
+Execute     get_config_compile -effort 
+Execute     get_config_compile -enable_clang39 
+Execute     get_config_compile -g 
+Execute     get_config_compile -hw_syn 
+Execute     get_config_compile -ng 
+Execute     get_config_compile -opt_fp 
+Execute     get_config_compile -skip_cdt 
+Execute     get_config_compile -skip_syncheck 
+Execute     get_config_compile -skip_transform 
+Execute     get_config_compile -pre_tcl 
+Execute     get_config_compile -keep_printf 
+Execute     elaborate -effort=medium -skip_syncheck=0 -keep_printf=0 -skip_cdt=0 -skip_transform=0 -ng=0 -g=0 -opt_fp=0 -from_csynth_design=1 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.17 seconds; current allocated memory: 289.249 MB.
+INFO: [HLS 200-10] Analyzing design file 'main.cpp' ... 
+INFO-FLOW: Compiling one TU...
+Execute       get_config_compile -pragma_strict_mode 
+INFO-FLOW: Handling main.cpp as C++
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info 
+INFO-FLOW: Running: GCC PP 39
+INFO-FLOW: Source preprocessing
+Execute       ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang main.cpp -foptimization-record-file=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.main.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info --sysroot D:/apps/Xilinx/Vitis_HLS/2021.1/tps/mingw/6.2.0/win64.o/nt -fhls -fno-exceptions -E -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-mingw32 -fno-threadsafe-statics -fno-use-cxa-atexit -I D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/39 -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -I /usr/include/x86_64-linux-gnu -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -hls-platform-db-name=D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.main.cpp.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.main.cpp.err.log 
+Command       ap_eval done; 0.173 sec.
+INFO-FLOW: Done: GCC PP 39 time: 0.2 seconds per iteration
+Execute       set_directive_top mlp_dance3 -name=mlp_dance3 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/huddle.tcl 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/json2huddle.tcl 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/try/try.tcl 
+Execute       list_core -type functional_unit 
+Execute       ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fsyntax-only -fhls -target fpga64-xilinx-linux-gnu D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -hls-platform-db-name=D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.err.log 
+Command       ap_eval done; 0.468 sec.
+Execute       clang_tidy xilinx-systemc-detector D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp std=gnu++14 -target fpga  -directive=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/.systemc_flag 
+INFO-FLOW: exec D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-systemc-detector -import-directive=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/.systemc_flag -fix-errors D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.407 sec.
+INFO-FLOW: Running: clang-tidy CDT preprocess 39
+Execute       clang_tidy xilinx-directive2pragma D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp std=gnu++14 -target fpga  -directive=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/all.directive.json 
+INFO-FLOW: exec D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-directive2pragma -import-directive=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/all.directive.json -fix-errors D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.618 sec.
+Execute       clang_tidy xilinx-constantarray-param,xilinx-remove-assert D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp std=gnu++14 -target fpga  
+INFO-FLOW: exec D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -header-filter=.* --checks=-*,xilinx-constantarray-param,xilinx-remove-assert -fix-errors D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0
+Command       clang_tidy done; 0.46 sec.
+INFO-FLOW: Done: clang-tidy CDT preprocess 39 time: 1.1 seconds per iteration
+INFO-FLOW: Calling xilinx-label-all-loops ... 
+INFO-FLOW: Calling xilinx-aggregate-on-hls-vector ... 
+Execute       clang_tidy -errorcheck xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp std=gnu++14 -target fpga  
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang-tidy -export-fixes=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang-tidy.main.pp.0.cpp.diag.yml -header-filter=.* --checks=-*,xilinx-label-all-loops,xilinx-aggregate-on-hls-vector,,xilinx-warn-mayneed-no-ctor-attribute -fix-errors D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang-tidy.main.pp.0.cpp.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang-tidy.main.pp.0.cpp.err.log 
+Command         ap_eval done; 0.738 sec.
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/yaml.tcl 
+Command       clang_tidy done; 0.782 sec.
+Execute       get_config_dataflow -strict_mode 
+Execute       ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/xilinx-dataflow-lawyer -export-fixes=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/xilinx-dataflow-lawyer.main.pp.0.cpp.diag.yml D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -- -std=gnu++14 -target fpga -fhls -ferror-limit=0 -fstrict-dataflow > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/xilinx-dataflow-lawyer.main.pp.0.cpp.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/xilinx-dataflow-lawyer.main.pp.0.cpp.err.log 
+Command       ap_eval done; 0.431 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info 
+INFO-FLOW: compiling source code to llvm bc
+Execute       ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.main.pp.0.cpp.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fno-limit-debug-info -fhls -flto -fno-exceptions -Wno-error=c++11-narrowing D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.pp.0.cpp -fno-math-errno -c -emit-llvm -mllvm -disable-llvm-optzns -Werror=implicit-function-declaration -Werror=implicit-hls-streams -Werror=return-type -Wpragmas -Wunused-parameter -fno-threadsafe-statics -fno-use-cxa-atexit -std=gnu++14 -target fpga64-xilinx-linux-gnu -D__VITIS_HLS__ -DAESL_SYN -D__SYNTHESIS__ -D__HLS_SYN__ -I D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot -I D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/ap_sysc -include etc/autopilot_ssdm_op.h -D__DSP48E2__ -g -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.bc -hls-platform-db-name=D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.main.pp.0.cpp.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.main.pp.0.cpp.err.log 
+Command       ap_eval done; 0.474 sec.
+WARNING: [HLS 207-5301] unused parameter 'print': D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot\ap_int_base.h:792:16
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 4.048 seconds; current allocated memory: 290.741 MB.
+INFO-FLOW: Linking Debug ...
+INFO-FLOW: Linking dut bc code.
+Execute       run_link_or_opt -out D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.0.bc -args  "D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.g.bc"  
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/llvm-link D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/main.g.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.0.bc > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/llvm-link.a.g.ld.0.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/llvm-link.a.g.ld.0.bc.err.log 
+INFO-FLOW: 
+Execute       run_link_or_opt -opt -out D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.1.lower.bc -args D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics 
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.diag.yml D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.0.bc -reflow-lower-math-intrinsics -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.1.lower.bc > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.1.lower.bc.err.log 
+INFO-FLOW: 
+INFO-FLOW: Linking math bc lib
+Execute       run_link_or_opt -out D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.2.m1.bc -args D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.1.lower.bc -only-needed D:/apps/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsm_39.bc D:/apps/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsmc++_39.bc 
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/llvm-link D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.1.lower.bc -only-needed D:/apps/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsm_39.bc D:/apps/Xilinx/Vitis_HLS/2021.1/win64/lib/libhlsmc++_39.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.2.m1.bc > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/llvm-link.a.g.ld.2.m1.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/llvm-link.a.g.ld.2.m1.bc.err.log 
+Command         ap_eval done; 2.196 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 2.199 sec.
+Execute       run_link_or_opt -opt -out D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.3.fpc.bc -args D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=mlp_dance3 -reflow-float-conversion 
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.diag.yml D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.2.m1.bc -reflow-globaldce -hls-top-function-name=mlp_dance3 -reflow-float-conversion -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.3.fpc.bc > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.3.fpc.bc.err.log 
+Command         ap_eval done; 0.821 sec.
+INFO-FLOW: 
+Command       run_link_or_opt done; 0.824 sec.
+Execute       run_link_or_opt -out D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.4.m2.bc -args D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.3.fpc.bc -only-needed D:/apps/Xilinx/Vitis_HLS/2021.1/win64/lib/libfloatconversion_39.bc 
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/llvm-link D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.3.fpc.bc -only-needed D:/apps/Xilinx/Vitis_HLS/2021.1/win64/lib/libfloatconversion_39.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.4.m2.bc > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/llvm-link.a.g.ld.4.m2.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/llvm-link.a.g.ld.4.m2.bc.err.log 
+INFO-FLOW: 
+Execute       run_link_or_opt -opt -out D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.5.gdce.bc -args D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=mlp_dance3 
+Execute         ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/opt -pass-remarks-missed=reflow|pasta|unroll -pass-remarks=reflow|pasta|unroll|inline -pass-remarks-output=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.diag.yml D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.4.m2.bc -reflow-globaldce -hls-top-function-name=mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.5.gdce.bc > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/opt.a.g.ld.5.gdce.bc.err.log 
+INFO-FLOW: 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_interface -default_slave_interface 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_interface -m_axi_offset 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_auto_max_ports 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -s_axilite_data64 
+Execute       get_config_compile -instruction_warning_threshold 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_compile -pragma_strict_mode 
+Execute       get_config_compile -pipeline_style 
+Execute       get_config_array_partition -throughput_driven 
+Execute       send_msg_by_id INFO @200-777@%s Vivado 
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+Execute       is_m_axi_addr64 
+INFO-FLOW: Doing LTO.
+Execute       ap_eval exec -ignorestderr D:/apps/Xilinx/Vitis_HLS/2021.1/win64/tools/clang-3.9-csynth/bin/clang -foptimization-record-file=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.a.g.ld.0.bc.diag.yml -mllvm -pass-remarks-missed=reflow|pasta|unroll -mllvm -pass-remarks=reflow|pasta|unroll|inline -fhls -mllvm -hls-top-function-name=mlp_dance3 -mllvm -hls-db-dir -mllvm D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -emit-llvm -c -target fpga64-xilinx-none -mllvm -xcl-xmlinfo=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/kernel.internal.xml -mllvm -top-io-mapping-info=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/top-io-fe.xml -mllvm -hls-bitcode-version=3.1 -mllvm -reflow-enable-slave-interface-default-setting=true -mllvm -gen-kernel-xml=false -mllvm -default-maxi-offset=slave -mllvm -maxi-latency=0 -mllvm -hls-maxi-data-size-in-bits=8 -mllvm -hls-maxi-max-data-size-in-bits=1024 -mllvm -hls-max-widen-size-in-bits=0 -mllvm -xcl-kernel-max-mem-ports=0 -mllvm -maxi-read-trans=16 -mllvm -maxi-write-trans=16 -mllvm -maxi-read-burst-len=16 -mllvm -maxi-write-burst-len=16 -mllvm -reflow-enable-saxi-64bits=0 -mllvm -reflow-basic-block-instr-threshhold=200000 -mllvm -assume-maxi-align=0 -mllvm -no-unaligned-maxi-accesses -mllvm -reflow-pipeline-style-llvm-setting=0 -mllvm -reflow-auto-array-partition-mode=default -mllvm -reflow-enable-auto-array-partition=true -mllvm -reflow-aggregate-bitwidth-threshold=4096 -mllvm -reflow-disaggregate-bitwidth-threshold=4096 -mllvm -hls -mllvm -disable-inlined-alloca-merging=true -x ir D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.ld.5.gdce.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.lto.bc -hls-platform-db-name=D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/platform.db -hls-platform-name=zynquplus_slow > D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.a.g.ld.0.bc.out.log 2> D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/clang.a.g.ld.0.bc.err.log 
+Command       ap_eval done; 0.292 sec.
+INFO: [HLS 214-279] Initial Interval estimation mode is set into default.
+INFO: [HLS 214-284] Auto array partition mode is set into default.
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::read(AXI_L&)' into 'hls::stream<AXI_L, 0>::operator>>(AXI_L&)' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:125:9)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::write(AXI_L const&)' into 'hls::stream<AXI_L, 0>::operator<<(AXI_L const&)' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:129:9)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::operator>>(AXI_L&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:47:13)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::operator<<(AXI_L const&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:180:12)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::operator>>(AXI_L&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:53:13)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::operator>>(AXI_L&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:74:12)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::operator>>(AXI_L&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:136:11)
+INFO: [HLS 214-131] Inlining function 'hls::stream<AXI_L, 0>::operator>>(AXI_L&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:144:12)
+INFO: [HLS 214-210] Disaggregating variable 'node_1' (main.cpp:40:20)
+INFO: [HLS 214-210] Disaggregating variable 'node_0' (main.cpp:39:21)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_22_3' (./math_functions.h:22:20) in function 'node<float, 8, 0>::calculate' completely with a factor of 8 (./math_functions.h:8:0)
+INFO: [HLS 214-186] Unrolling loop 'VITIS_LOOP_22_3' (./math_functions.h:22:20) in function 'node<float, 78, 0>::calculate' completely with a factor of 78 (./math_functions.h:8:0)
+INFO: [HLS 214-178] Inlining function 'AXI_L::AXI_L()' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:5:0)
+INFO: [HLS 214-178] Inlining function 'float relu_func<float>(float)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:5:0)
+INFO: [HLS 214-178] Inlining function 'node<float, 8, 0>::calculate(float*, float*, float&)' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (main.cpp:5:0)
+WARNING: [HLS 214-281] Estimating pipelined loop 'layer0' (main.cpp:150:11) in function 'mlp_dance3' with estimated II increased from II=1 to II=+infinity because of sub function call 'call' (main.cpp:150:11)
+INFO: [HLS 214-270] Starting automatic array partition analysis...
+INFO: [HLS 214-270] Inferring complete partitioning for array 'weights_1' on dimension 2 (main.cpp:13:8)
+INFO: [HLS 214-270] Inferring complete partitioning for array 'buffer_0' on dimension 1 (main.cpp:30:8)
+INFO: [HLS 214-131] Inlining function '_llvm.fpga.pack.none.i64.s_struct.AXI_Ls' into 'mlp_dance3(hls::stream<AXI_L, 0>&, hls::stream<AXI_L, 0>&)' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:174:9)
+INFO-FLOW: DBG:PUTS: copy_raw_kernel_xml ap_link_39: kernel.xml not generated: D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/kernel.internal.xml
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 5.244 seconds; current allocated memory: 294.801 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.147 seconds; current allocated memory: 294.802 MB.
+Execute       opt_and_import_c a -opt_level=2 -skip_syncheck=0 -ng=0 -keep_printf=0 
+Execute         cleanup_all_models 
+INFO: [HLS 200-10] Starting code transformations ...
+INFO-FLOW: Running Standard Transforms...
+Execute         transform -hls -share-std-xform -demangle-name -inline-byval-memcpy -always-inline -promote-dbg-pointer -interface-preproc -mem2reg -scalarrepl -mem2reg -keep-read-access -instcombine -dce -promote-dbg-pointer -bitop-raise -loop-simplify -indvarspre -indvars -loop-simplify -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -simplifycfg -mem2reg -globalopt -global-constprop -deadargelim -instcombine -simplifycfg -scalarrepl -instcombine -reassociate -licm -simplifycfg -loop-simplify -indvars -instcombine -simplifycfg -mem2reg -loop-simplify -indvars -instcombine -gvn -gvn -instcombine -adce -break-crit-edges -simplifycfg -loop-delete -global-array-opt -dce -dse -adce -find-syn-modules -top mlp_dance3 -deadargelim -mem2reg -instcombine -dce -presyn-prepare -auto-rom-infer -interface-preproc -syn-check -check-rec-only -find-region -simplifycfg -func-extr -function-inline -globaldce -mem2reg -instcombine -dce -gvn -globaldce -adce -adse -constprop -instcombine -bit-constprop -instcombine -dce -simplifycfg -bitop-raise -simplifycfg -dce -loop-delete -reassociate -globalopt -global-privatize -mem2reg -dce -global-constprop -pointer-simplify -constprop -dce -func-inst -deadargelim -auto-shift-reg-idiom -promote-dbg-pointer -norm-name D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.0.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.1.bc -f -phase std-opt 
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.218 seconds; current allocated memory: 296.914 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO-FLOW: Checking Synthesizability 1/2..
+Execute         transform -hls -syn-check -check-rec-only -scalarrepl -norm-name -dce -mem2reg -instcombine -function-uniquify -directive-preproc -mem2reg -dse -dce -auto-rom-infer -dce -pag -array-normalize -instcombine -dce -array-seg-normalize -instcombine -dce -data-pack -instcombine -dce -inst-simplify -array-flatten -instcombine -dce -array-burst -dce -deadargelim -promote-global-argument -simplifycfg -mem2reg -globaldce -dce -deadargelim -dce -instcombine -function-inline -globaldce -dce -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -dse -adse -instcombine -ptrLegalization -simplifycfg -dce -instcombine -pointer-simplify -ptrArgReplace -dce -instcombine -resolve-double-ptr -scalarrepl -norm-name -dce -mem2reg -instcombine -ptrLegalization -simplifycfg -deadargelim -instcombine -dce -inst-simplify -function-uniquify -directive-preproc -mem2reg -dse -dce -globaldce -check-dspbuiltin D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.1.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.2.prechk.bc -f 
+INFO-FLOW: Checking Synthesizability 2/2..
+Execute         transform -syn-check D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.2.prechk.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.2.bc -f -phase syn-check 
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.19 seconds; current allocated memory: 296.192 MB.
+INFO-FLOW: Compiler optimizing ...
+INFO-FLOW: Share syncheck's 1.bc for syn flow: copy D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.g.1.bc to D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.1.bc
+INFO-FLOW: Presyn 1...
+Execute         transform -hls -tmp D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -interface-port-rename -function-uniquify -directive-preproc -mem2reg -dse -dce -scalarrepl -norm-name -deadargelim -mem2reg -instcombine -dce -simplifycfg -auto-rom-infer -dce -function-uniquify -resource-proc -clib-intrinsic-prepare -dce -func-buffer -dce -pag -array-normalize -func-legal -instcombine -gvn -constprop -dce -simplifycfg -mem2reg -globaldce -resolve-double-ptr -dce -deadargelim -dce -instcombine -ptrArgReplace -mem2reg -dce -array-seg-normalize -deadargelim -instcombine -dce -function-uniquify -directive-preproc -mem2reg -dse -dce -pointer-simplify -dce -port-alignment -dce -interface-preproc -data-pack -instcombine -dce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -loop-simplify -indvars -instcombine -gvn -loop-simplify -mem2reg -dce -find-region -instcombine -auto-loop-pipeline -inst-simplify -interface-preproc -cfgopt -instcombine -indvars -auto-loop-unroll -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -clean-region -attach-range -gvn -inst-simplify -constprop -simplifycfg -dce -pointer-simplify -dce -globalopt -constprop -dce -array-promote -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -instcombine -dce -array-transform-check -array-reshape -instcombine -simplifycfg -dce -ptrArgReplace -deadargelim -mem2reg -instcombine -simplifycfg -dce -indvars -loop-simplify -loop-bound -xunroll -constprop -instcombine -simplifycfg -indvars -simplifycfg -dce -globaldce -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -duplicate-dataflow-processes -globaldce -instcombine -array-partition -instcombine -simplifycfg -dce -ptrArgReplace -global-constprop -deadargelim -mem2reg -func-legal -dce -global-constprop -deadargelim -mem2reg -simplifycfg -dce -merge-param -deadargelim -globalopt -constprop -dce -array-promote -constprop -dce -ptrArgReplace -mem2reg -simplifycfg -dce -mem-intrinsic-preproc -dce -global-internalize -global-privatize -mem2reg -globaldce -promote-global-argument -ptrArgReplace -mem2reg -dce -globalopt -mergereturn -simplify-global-access -mem2reg -dce -pointer-simplify -dce -functionattrs -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -dce -norm-name -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -accesses-merge -function-inline -complex-op-raise -inst-simplify -globaldce -func-inst -constprop -instcombine -simplifycfg -dce -func-legal -dce -loop-bound -arraycheck -bitwidthmin2 -bitwidthmin2 -on-by-dataflow -loop-delete -instcombine -simplifycfg -globaldce -dce -gvn -deadargelim -dce -loop-simplify -clean-region -simplifycfg -propagate-stable-arguments -loop-stream -instcombine -simplifycfg -dce -globaldce -duplicate-dataflow-processes -stream-intrinsic-preproc -dce -check-ap-stream -loop-simplify -eliminate-keepreads -extract-dataflow-in-loop -loop-simplify -dce -gvn -deadargelim -dse -duplicate-dataflow-processes -check-dataflow-syntax -legalize-stream-variable -legalize-global -extract-subproc -dce -dead-channel-elimination -canonicalize-gep -globaldce -dce -gvn -hls-dead-arg-elim -deadargelim -directive-preproc -annotate-dataflow-channels -scalar-preprocessing -scalar-propagation2 -deadargelim -globaldce -mem2reg -check-dataflow-channels -function-stream -dce -globaldce -prop-fifo-spec -internal-stream-gen -canonicalize-gep -globaldce -dce -gvn -deadargelim -mergereturn -indvars -loop-simplify -instcombine -array-stream -array-seg-normalize -array-partition -func-legal -instcombine -simplifycfg -dce -bundle-memfifo-ops -deadargelim -function-uniquify -directive-preproc -mem2reg -dse -dce -group-axi-access -licm -simplifycfg -dce -loop-delete -hls-display -norm-name D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.1.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.1.tmp.bc -f 
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_46_2' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:0) in function 'mlp_dance3' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_52_3' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:0) in function 'mlp_dance3' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'loadbias0' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:0) in function 'mlp_dance3' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'retrieve_inputs' (D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/autopilot/hls_stream_39.h:0) in function 'mlp_dance3' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'output' (main.cpp:175) in function 'mlp_dance3' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'layer1' (main.cpp:155) in function 'mlp_dance3' for pipelining.
+WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'VITIS_LOOP_13_1' (./math_functions.h:13) because its parent loop or function is pipelined.
+WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'VITIS_LOOP_17_2' (./math_functions.h:17) because its parent loop or function is pipelined.
+INFO: [XFORM 203-502] Unrolling all loops for pipelining in function 'node<float, 78, 0>::calculate' (./math_functions.h:8).
+WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'VITIS_LOOP_13_1' (./math_functions.h:13) because its parent loop or function is pipelined.
+WARNING: [XFORM 203-505] Ignored pipeline directive for loop 'VITIS_LOOP_17_2' (./math_functions.h:17) because its parent loop or function is pipelined.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_13_1' (./math_functions.h:13) in function 'mlp_dance3' completely with a factor of 8.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_17_2' (./math_functions.h:17) in function 'mlp_dance3' completely with a factor of 8.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_13_1' (./math_functions.h:13) in function 'node<float, 78, 0>::calculate' completely with a factor of 78.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_17_2' (./math_functions.h:17) in function 'node<float, 78, 0>::calculate' completely with a factor of 78.
+INFO: [XFORM 203-102] Automatically partitioning small array 'buffer_1' (main.cpp:31) completely based on array size.
+INFO: [XFORM 203-101] Partitioning array 'weights_1' (main.cpp:13) in dimension 2 completely.
+INFO: [XFORM 203-101] Partitioning array 'buffer_0' (main.cpp:30) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'node_0.1'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'node_0.0'  in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'node_1.b_int' (main.cpp:40) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'node_1.a_int' (main.cpp:40) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'buffer_1' (main.cpp:31) in dimension 1 completely.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.0' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.1' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.2' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.3' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.4' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.5' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.6' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'weights_1.7' (main.cpp:13) completely based on array size.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.0' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.1' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.2' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.3' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.4' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.5' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.6' (main.cpp:13) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'weights_1.7' (main.cpp:13) in dimension 1 completely.
+Command         transform done; 0.431 sec.
+INFO-FLOW: Presyn 2...
+Execute         transform -hls -keep-callgraph -scalarrepl -mem2reg -port-alignment -attach-range -dce -pipe-mux-gen -indvars -loop-bound -inst-simplify -instcombine -dce -merge-array-access -mem2reg -dce -clean-region -mergereturn -if-conv -instcombine -dce -constprop -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -gvn -gvn -basicaa -aggr-aa -aggrmodref-aa -aggr-aa -dse -adse -adce -scalarrepl -mem2reg -global-constprop -deadargelim -deadargelim -instcombine -dce -simplifycfg -ptrArgReplace -mem2reg -function-inline -globaldce -mem2reg -instcombine -dce -expr-balance -instcombine -dce -bitwidthmin2 -bitwidthmin2 -interface-preproc -directive-preproc -inst-rectify -instcombine -dce -functionattrs -constprop -instcombine -bit-constprop -simplify-global-access -globalopt -globaldce -inst-simplify -instcombine -elimdeaddata -dce -loop-delete -simplifycfg -loop-simplify -auto-burst -barrier -norm-name D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.1.tmp.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.2.bc -f -phase presyn 
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0 seconds. CPU system time: 1 seconds. Elapsed time: 0.664 seconds; current allocated memory: 318.768 MB.
+Execute         get_config_compile -enable_auto_rewind 
+Execute         get_config_compile -enable_loop_extract 
+INFO-FLOW: Building ssdm...
+Execute         transform -hls -function-uniquify -auto-function-inline -globaldce -ptrArgReplace -mem2reg -dce -reset-lda -loop-simplify -indvars -aggr-aa -licm -loop-dep -loop-bound -licm -loop-simplify -flattenloopnest -array-flatten -gvn -instcombine -dce -array-map -dce -func-legal -gvn -adce -instcombine -cfgopt -simplifycfg -loop-simplify -array-burst -promote-global-argument -dce -array-seg-normalize -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -gvn -gvn -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -dse -adse -adce -licm -inst-simplify -dce -globaldce -instcombine -array-stream -eliminate-keepreads -instcombine -dce -deadargelim -doublePtrSimplify -doublePtrElim -dce -doublePtrSimplify -promote-dbg-pointer -dce -scalarrepl -mem2reg -norm-name -mem2reg -instcombine -dse -adse -adce -ptrLegalization -dce -auto-rom-infer -array-flatten -dce -instcombine -check-doubleptr -loop-rot -constprop -cfgopt -simplifycfg -loop-simplify -indvars -pointer-simplify -dce -loop-bound -loop-simplify -loop-preproc -constprop -global-constprop -gvn -mem2reg -instcombine -dce -loop-bound -loop-merge -dce -deadargelim -dce -canonicalize-dataflow -dce -scalar-propagation2 -deadargelim -globaldce -mem2reg -load-elim -read-loop-dep -loop-simplify -loop-extract-inner -directive-preproc -bitwidthmin2 -bitwidthmin2 -read-loop-dep -interface-preproc -directive-preproc -interface-gen -bram-byte-enable -deadargelim -inst-simplify -dce -gvn -mem2reg -instcombine -dce -adse -loop-bound -instcombine -cfgopt -simplifycfg -loop-simplify -clean-region -io-protocol -find-region -mem2reg -bitop-raise -complex-op-raise -inst-simplify -inst-rectify -instcombine -adce -deadargelim -float-op-raise -loop-simplify -phi-opt -bitop-raise -cfgopt -simplifycfg -strip-dead-prototypes -interface-lower -bitop-lower -intrinsic-lower -auto-function-inline -basicaa -aggrmodref-aa -globalsmodref-aa -aggr-aa -inst-simplify -simplifycfg -loop-simplify -mergereturn -inst-simplify -inst-rectify -dce -load-elim -bitop-lower -float-op-raise -fma-raise -loop-rewind -pointer-simplify -dce -cfgopt -dce -loop-bound -loop-dep -read-loop-dep -dce -dyn-mem-reuse -dce -recurrence-min -dce -check-stream -norm-name -legalize -validate-dataflow -inst-clarity -bitwidth -dump-loop-dep-to-ir -check-all-ssdm -cdfg-build D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.2.bc -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/a.o.3.bc -f -phase build-ssdm 
+INFO: [XFORM 203-541] Flattening a loop nest 'loadweights0' (main.cpp:45:26) in function 'mlp_dance3'.
+INFO: [XFORM 203-541] Flattening a loop nest 'loadweights1' (main.cpp:51:26) in function 'mlp_dance3'.
+WARNING: [XFORM 203-561] 'VITIS_LOOP_42_1' (main.cpp:37:6) in function 'mlp_dance3' is an infinite loop.
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_42_1' (main.cpp:37:6) in function 'mlp_dance3' more than one sub loop.
+INFO: [HLS 200-472] Inferring partial write operation for 'weights_0' (main.cpp:48:22)
+INFO: [HLS 200-472] Inferring partial write operation for 'bias_0' (main.cpp:75:15)
+INFO: [HLS 200-472] Inferring partial write operation for 'input' (main.cpp:145:14)
+Command         transform done; 0.237 sec.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.392 seconds; current allocated memory: 392.671 MB.
+INFO-FLOW: Finish building internal data model.
+Command       opt_and_import_c done; 1.471 sec.
+Command     elaborate done; 11.073 sec.
+Execute     ap_eval exec zip -j D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/dut.hcp $dbDir/a.o.3.bc $dbDir/${topname}.rtl_wrap.cfg.tcl $dbDir/apatb_${topname}.cpp $dbDir/apatb_${topname}_util.cpp $dbDir/apatb_${topname}_ir.ll $dbDir/mapper_${topname}.cpp $dbDir/top-io-fe.xml $dbDir/kernel.internal.xml $workdir/../hls.app 
+Execute     autosyn -from_csynth_design=1 
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO-FLOW: Synthesizing C/C++ design ...
+INFO: [HLS 200-10] Synthesizing 'mlp_dance3' ...
+Execute       ap_set_top_model mlp_dance3 
+Execute       get_model_list mlp_dance3 -filter all-wo-channel -topdown 
+Execute       preproc_iomode -model mlp_dance3 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_loadbias0 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_retrieve_inputs 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_output 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_layer1 
+Execute       preproc_iomode -model mlp_dance3_Pipeline_layer0 
+Execute       preproc_iomode -model calculate 
+Execute       get_model_list mlp_dance3 -filter all-wo-channel 
+INFO-FLOW: Model list for configure: calculate mlp_dance3_Pipeline_layer0 mlp_dance3_Pipeline_layer1 mlp_dance3_Pipeline_output mlp_dance3_Pipeline_retrieve_inputs mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 mlp_dance3_Pipeline_loadbias0 mlp_dance3
+INFO-FLOW: Configuring Module : calculate ...
+Execute       set_default_model calculate 
+Execute       apply_spec_resource_limit calculate 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_layer0 ...
+Execute       set_default_model mlp_dance3_Pipeline_layer0 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_layer0 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_layer1 ...
+Execute       set_default_model mlp_dance3_Pipeline_layer1 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_layer1 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_output ...
+Execute       set_default_model mlp_dance3_Pipeline_output 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_output 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_retrieve_inputs ...
+Execute       set_default_model mlp_dance3_Pipeline_retrieve_inputs 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_retrieve_inputs 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 ...
+Execute       set_default_model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 ...
+Execute       set_default_model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+INFO-FLOW: Configuring Module : mlp_dance3_Pipeline_loadbias0 ...
+Execute       set_default_model mlp_dance3_Pipeline_loadbias0 
+Execute       apply_spec_resource_limit mlp_dance3_Pipeline_loadbias0 
+INFO-FLOW: Configuring Module : mlp_dance3 ...
+Execute       set_default_model mlp_dance3 
+Execute       apply_spec_resource_limit mlp_dance3 
+INFO-FLOW: Model list for preprocess: calculate mlp_dance3_Pipeline_layer0 mlp_dance3_Pipeline_layer1 mlp_dance3_Pipeline_output mlp_dance3_Pipeline_retrieve_inputs mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 mlp_dance3_Pipeline_loadbias0 mlp_dance3
+INFO-FLOW: Preprocessing Module: calculate ...
+Execute       set_default_model calculate 
+Execute       cdfg_preprocess -model calculate 
+Execute       rtl_gen_preprocess calculate 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_layer0 ...
+Execute       set_default_model mlp_dance3_Pipeline_layer0 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_layer0 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_layer0 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_layer1 ...
+Execute       set_default_model mlp_dance3_Pipeline_layer1 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_layer1 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_layer1 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_output ...
+Execute       set_default_model mlp_dance3_Pipeline_output 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_output 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_output 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_retrieve_inputs ...
+Execute       set_default_model mlp_dance3_Pipeline_retrieve_inputs 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_retrieve_inputs 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_retrieve_inputs 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 ...
+Execute       set_default_model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 ...
+Execute       set_default_model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+INFO-FLOW: Preprocessing Module: mlp_dance3_Pipeline_loadbias0 ...
+Execute       set_default_model mlp_dance3_Pipeline_loadbias0 
+Execute       cdfg_preprocess -model mlp_dance3_Pipeline_loadbias0 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_loadbias0 
+INFO-FLOW: Preprocessing Module: mlp_dance3 ...
+Execute       set_default_model mlp_dance3 
+Execute       cdfg_preprocess -model mlp_dance3 
+Execute       rtl_gen_preprocess mlp_dance3 
+INFO-FLOW: Model list for synthesis: calculate mlp_dance3_Pipeline_layer0 mlp_dance3_Pipeline_layer1 mlp_dance3_Pipeline_output mlp_dance3_Pipeline_retrieve_inputs mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 mlp_dance3_Pipeline_loadbias0 mlp_dance3
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'calculate' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model calculate 
+Execute       schedule -model calculate 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining function 'calculate'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[1]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 1). Please consider using a memory core with more ports or partitioning the array 'a'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[3]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 2). Please consider using a memory core with more ports or partitioning the array 'a'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[5]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 3). Please consider using a memory core with more ports or partitioning the array 'a'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[7]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 4). Please consider using a memory core with more ports or partitioning the array 'a'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[69]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 35). Please consider using a memory core with more ports or partitioning the array 'a'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[73]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 37). Please consider using a memory core with more ports or partitioning the array 'a'.
+WARNING: [HLS 200-885] The II Violation in module 'calculate' (function 'calculate'): Unable to schedule 'load' operation ('this.a_int[75]', ./math_functions.h:15) on array 'a' due to limited memory ports (II = 38). Please consider using a memory core with more ports or partitioning the array 'a'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 39, Depth = 395, function 'calculate'
+INFO: [SCHED 204-11] Finished scheduling.
+Command       schedule done; 3.228 sec.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 3.5 seconds; current allocated memory: 395.716 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 1.598 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.sched.adb -f 
+INFO-FLOW: Finish scheduling calculate.
+Execute       set_default_model calculate 
+Execute       bind -model calculate 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+Command       bind done; 0.699 sec.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 3 seconds. CPU system time: 0 seconds. Elapsed time: 2.547 seconds; current allocated memory: 399.416 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 1.146 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.bind.adb -f 
+Command       db_write done; 0.126 sec.
+INFO-FLOW: Finish binding calculate.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_layer0' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_layer0 
+Execute       schedule -model mlp_dance3_Pipeline_layer0 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'layer0'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 39, Depth = 403, loop 'layer0'
+INFO: [SCHED 204-11] Finished scheduling.
+Command       schedule done; 0.593 sec.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 2.029 seconds; current allocated memory: 400.841 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.91 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_layer0.
+Execute       set_default_model mlp_dance3_Pipeline_layer0 
+Execute       bind -model mlp_dance3_Pipeline_layer0 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+Command       bind done; 0.698 sec.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2 seconds. CPU system time: 0 seconds. Elapsed time: 1.787 seconds; current allocated memory: 402.644 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.457 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_layer0.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_layer1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_layer1 
+Execute       schedule -model mlp_dance3_Pipeline_layer1 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'layer1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 51, loop 'layer1'
+INFO: [SCHED 204-11] Finished scheduling.
+Command       schedule done; 0.255 sec.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.912 seconds; current allocated memory: 403.041 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.193 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_layer1.
+Execute       set_default_model mlp_dance3_Pipeline_layer1 
+Execute       bind -model mlp_dance3_Pipeline_layer1 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+Command       bind done; 0.113 sec.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.486 seconds; current allocated memory: 403.661 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.202 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_layer1.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_output' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_output 
+Execute       schedule -model mlp_dance3_Pipeline_output 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'output'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 2, loop 'output'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.414 seconds; current allocated memory: 403.756 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_output.
+Execute       set_default_model mlp_dance3_Pipeline_output 
+Execute       bind -model mlp_dance3_Pipeline_output 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.194 seconds; current allocated memory: 403.880 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_output.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_retrieve_inputs' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_retrieve_inputs 
+Execute       schedule -model mlp_dance3_Pipeline_retrieve_inputs 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'retrieve_inputs'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'retrieve_inputs'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.21 seconds; current allocated memory: 403.954 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_retrieve_inputs.
+Execute       set_default_model mlp_dance3_Pipeline_retrieve_inputs 
+Execute       bind -model mlp_dance3_Pipeline_retrieve_inputs 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.19 seconds; current allocated memory: 404.095 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_retrieve_inputs.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       schedule -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [HLS 200-486] Changing DSP48 latency (root=mul_ln48) to 3 in order to utilize available DSP registers.
+INFO: [SCHED 204-61] Pipelining loop 'loadweights0_VITIS_LOOP_46_2'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 4, loop 'loadweights0_VITIS_LOOP_46_2'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.22 seconds; current allocated memory: 404.222 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.
+Execute       set_default_model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       bind -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.21 seconds; current allocated memory: 404.382 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       schedule -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'loadweights1_VITIS_LOOP_52_3'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'loadweights1_VITIS_LOOP_52_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.279 seconds; current allocated memory: 404.886 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.
+Execute       set_default_model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       bind -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.229 seconds; current allocated memory: 405.558 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3_Pipeline_loadbias0' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3_Pipeline_loadbias0 
+Execute       schedule -model mlp_dance3_Pipeline_loadbias0 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'loadbias0'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 1, loop 'loadbias0'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.261 seconds; current allocated memory: 405.664 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3_Pipeline_loadbias0.
+Execute       set_default_model mlp_dance3_Pipeline_loadbias0 
+Execute       bind -model mlp_dance3_Pipeline_loadbias0 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.194 seconds; current allocated memory: 405.746 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3_Pipeline_loadbias0.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_dance3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       set_default_model mlp_dance3 
+Execute       schedule -model mlp_dance3 
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.268 seconds; current allocated memory: 406.260 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.verbose.sched.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.sched.adb -f 
+INFO-FLOW: Finish scheduling mlp_dance3.
+Execute       set_default_model mlp_dance3 
+Execute       bind -model mlp_dance3 
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+Command       bind done; 0.188 sec.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.434 seconds; current allocated memory: 407.011 MB.
+Execute       syn_report -verbosereport -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.verbose.bind.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.441 sec.
+Execute       db_write -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.bind.adb -f 
+INFO-FLOW: Finish binding mlp_dance3.
+Execute       get_model_list mlp_dance3 -filter all-wo-channel 
+INFO-FLOW: Preprocessing for RTLGen ...
+Execute       rtl_gen_preprocess calculate 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_layer0 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_layer1 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_output 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_retrieve_inputs 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       rtl_gen_preprocess mlp_dance3_Pipeline_loadbias0 
+Execute       rtl_gen_preprocess mlp_dance3 
+INFO-FLOW: Model list for RTL generation: calculate mlp_dance3_Pipeline_layer0 mlp_dance3_Pipeline_layer1 mlp_dance3_Pipeline_output mlp_dance3_Pipeline_retrieve_inputs mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 mlp_dance3_Pipeline_loadbias0 mlp_dance3
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'calculate' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model calculate -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'calculate' pipeline 'calculate' pipeline type 'function pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_5_full_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_4_max_dsp_1': 2 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mul_3ns_8ns_10_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'calculate'.
+Command       create_rtl_model done; 0.218 sec.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.887 seconds; current allocated memory: 412.062 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl calculate -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_calculate 
+Execute       gen_rtl calculate -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_calculate 
+Execute       syn_report -csynth -model calculate -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/calculate_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.275 sec.
+Execute       syn_report -rtlxml -model calculate -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/calculate_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.135 sec.
+Execute       syn_report -verbosereport -model calculate -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 1.248 sec.
+Execute       db_write -model calculate -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.adb 
+Command       db_write done; 0.264 sec.
+Execute       db_write -model calculate -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Command       db_write done; 0.324 sec.
+Execute       gen_tb_info calculate -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_layer0' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_layer0 -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'mlp_dance3_Pipeline_layer0' pipeline 'layer0' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_5_full_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fcmp_32ns_32ns_1_2_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_layer0'.
+Command       create_rtl_model done; 0.112 sec.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 3 seconds. CPU system time: 1 seconds. Elapsed time: 3.87 seconds; current allocated memory: 423.295 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_layer0 -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_layer0 
+Execute       gen_rtl mlp_dance3_Pipeline_layer0 -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_layer0 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_layer0 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_layer0_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_layer0 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_layer0_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_layer0 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.472 sec.
+Execute       db_write -model mlp_dance3_Pipeline_layer0 -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.adb 
+Execute       db_write -model mlp_dance3_Pipeline_layer0 -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_layer0 -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_layer1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_layer1 -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'mlp_dance3_Pipeline_layer1' pipeline 'layer1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_5_full_dsp_1': 9 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fcmp_32ns_32ns_1_2_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fmul_32ns_32ns_32_4_max_dsp_1': 8 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mux_32_32_1_1': 8 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_layer1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.965 seconds; current allocated memory: 428.287 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_layer1 -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_layer1 
+Execute       gen_rtl mlp_dance3_Pipeline_layer1 -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_layer1 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_layer1 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_layer1_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_layer1 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_layer1_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_layer1 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.232 sec.
+Execute       db_write -model mlp_dance3_Pipeline_layer1 -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.adb 
+Execute       db_write -model mlp_dance3_Pipeline_layer1 -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_layer1 -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_output' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_output -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'mlp_dance3_Pipeline_output' pipeline 'output' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mux_32_32_1_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_output'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.736 seconds; current allocated memory: 430.346 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_output -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_output 
+Execute       gen_rtl mlp_dance3_Pipeline_output -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_output 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_output -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_output_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_output -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_output_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_output -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model mlp_dance3_Pipeline_output -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.adb 
+Execute       db_write -model mlp_dance3_Pipeline_output -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_output -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_retrieve_inputs' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_retrieve_inputs -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.compgen.tcl 
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_retrieve_inputs'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.316 seconds; current allocated memory: 430.949 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_retrieve_inputs -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_retrieve_inputs 
+Execute       gen_rtl mlp_dance3_Pipeline_retrieve_inputs -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_retrieve_inputs 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_retrieve_inputs -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_retrieve_inputs_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_retrieve_inputs -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_retrieve_inputs_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_retrieve_inputs -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model mlp_dance3_Pipeline_retrieve_inputs -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.adb 
+Execute       db_write -model mlp_dance3_Pipeline_retrieve_inputs -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_retrieve_inputs -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.compgen.tcl 
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2' pipeline 'loadweights0_VITIS_LOOP_46_2' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Generating core module 'mac_muladd_4ns_7ns_7ns_10_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.289 seconds; current allocated memory: 431.640 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       gen_rtl mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.adb 
+Execute       db_write -model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.compgen.tcl 
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.38 seconds; current allocated memory: 433.001 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       gen_rtl mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.adb 
+Execute       db_write -model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3_Pipeline_loadbias0' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3_Pipeline_loadbias0 -top_prefix mlp_dance3_ -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.compgen.tcl 
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3_Pipeline_loadbias0'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.624 seconds; current allocated memory: 435.794 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3_Pipeline_loadbias0 -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3_mlp_dance3_Pipeline_loadbias0 
+Execute       gen_rtl mlp_dance3_Pipeline_loadbias0 -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3_mlp_dance3_Pipeline_loadbias0 
+Execute       syn_report -csynth -model mlp_dance3_Pipeline_loadbias0 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_loadbias0_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3_Pipeline_loadbias0 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_Pipeline_loadbias0_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3_Pipeline_loadbias0 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       db_write -model mlp_dance3_Pipeline_loadbias0 -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.adb 
+Execute       db_write -model mlp_dance3_Pipeline_loadbias0 -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3_Pipeline_loadbias0 -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_dance3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       create_rtl_model mlp_dance3 -top_prefix  -sub_prefix mlp_dance3_ -mg_file D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.compgen.tcl 
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'mlp_dance3/S_AXIS_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'mlp_dance3/M_AXIS_V' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'mlp_dance3' to 'ap_ctrl_none'.
+INFO: [RTGEN 206-100] Generating core module 'fadd_32ns_32ns_32_5_full_dsp_1': 9 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'fcmp_32ns_32ns_1_2_no_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_dance3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 0.338 seconds; current allocated memory: 438.351 MB.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       gen_rtl mlp_dance3 -istop -style xilinx -f -lang vhdl -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/vhdl/mlp_dance3 
+Execute       gen_rtl mlp_dance3 -istop -style xilinx -f -lang vlog -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/verilog/mlp_dance3 
+Execute       syn_report -csynth -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       syn_report -rtlxml -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/mlp_dance3_csynth.xml 
+Execute         get_solution -flow_target
+Execute           get_solution -flow_target 
+Execute       syn_report -verbosereport -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.verbose.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Command       syn_report done; 0.509 sec.
+Execute       db_write -model mlp_dance3 -f -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.adb 
+Execute       db_write -model mlp_dance3 -bindview -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/design.bindinfo.xml 
+Execute       gen_tb_info mlp_dance3 -p D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3 
+Execute       export_constraint_db -f -tool general -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.constraint.tcl 
+Execute       syn_report -designview -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.design.xml 
+Command       syn_report done; 0.522 sec.
+Execute       syn_report -csynthDesign -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/csynth.rpt 
+Execute         AP::get_flow_target_display_name
+Execute           get_solution -flow_target 
+Execute       get_config_rtl -disable_wave_debug 
+Execute       syn_report -wcfg -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_dataflow_ana.wcfg 
+Execute       syn_report -protoinst -model mlp_dance3 -o D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.protoinst 
+Execute       get_config_debug -directory 
+Execute       sc_get_clocks mlp_dance3 
+Execute       get_config_export -vivado_clock 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       sc_get_portdomain mlp_dance3 
+INFO-FLOW: Model list for RTL component generation: calculate mlp_dance3_Pipeline_layer0 mlp_dance3_Pipeline_layer1 mlp_dance3_Pipeline_output mlp_dance3_Pipeline_retrieve_inputs mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 mlp_dance3_Pipeline_loadbias0 mlp_dance3
+INFO-FLOW: Handling components in module [calculate] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1.
+INFO-FLOW: Append model mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1
+INFO-FLOW: Found component mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1.
+INFO-FLOW: Append model mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1
+INFO-FLOW: Found component mlp_dance3_mul_3ns_8ns_10_1_1.
+INFO-FLOW: Append model mlp_dance3_mul_3ns_8ns_10_1_1
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_layer0] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1.
+INFO-FLOW: Append model mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_layer1] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_mux_32_32_1_1.
+INFO-FLOW: Append model mlp_dance3_mux_32_32_1_1
+INFO-FLOW: Found component mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1.
+INFO-FLOW: Append model mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_output] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_retrieve_inputs] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1.
+INFO-FLOW: Append model mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3_Pipeline_loadbias0] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_flow_control_loop_pipe_sequential_init.
+INFO-FLOW: Append model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: Handling components in module [mlp_dance3] ... 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.compgen.tcl 
+INFO-FLOW: Found component mlp_dance3_input.
+INFO-FLOW: Append model mlp_dance3_input
+INFO-FLOW: Found component mlp_dance3_weights_0.
+INFO-FLOW: Append model mlp_dance3_weights_0
+INFO-FLOW: Found component mlp_dance3_bias_0.
+INFO-FLOW: Append model mlp_dance3_bias_0
+INFO-FLOW: Found component mlp_dance3_regslice_both.
+INFO-FLOW: Append model mlp_dance3_regslice_both
+INFO-FLOW: Found component mlp_dance3_regslice_both.
+INFO-FLOW: Append model mlp_dance3_regslice_both
+INFO-FLOW: Append model calculate
+INFO-FLOW: Append model mlp_dance3_Pipeline_layer0
+INFO-FLOW: Append model mlp_dance3_Pipeline_layer1
+INFO-FLOW: Append model mlp_dance3_Pipeline_output
+INFO-FLOW: Append model mlp_dance3_Pipeline_retrieve_inputs
+INFO-FLOW: Append model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2
+INFO-FLOW: Append model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3
+INFO-FLOW: Append model mlp_dance3_Pipeline_loadbias0
+INFO-FLOW: Append model mlp_dance3
+INFO-FLOW: Generating RTL model list ...
+INFO-FLOW: All models in this session: mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1 mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1 mlp_dance3_mul_3ns_8ns_10_1_1 mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1 mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_mux_32_32_1_1 mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1 mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1 mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_flow_control_loop_pipe_sequential_init mlp_dance3_input mlp_dance3_weights_0 mlp_dance3_bias_0 mlp_dance3_regslice_both mlp_dance3_regslice_both calculate mlp_dance3_Pipeline_layer0 mlp_dance3_Pipeline_layer1 mlp_dance3_Pipeline_output mlp_dance3_Pipeline_retrieve_inputs mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2 mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3 mlp_dance3_Pipeline_loadbias0 mlp_dance3
+INFO-FLOW: Generating D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/autopilot.rtl.models.txt file...
+INFO-FLOW: To file: write model mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1
+INFO-FLOW: To file: write model mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1
+INFO-FLOW: To file: write model mlp_dance3_mul_3ns_8ns_10_1_1
+INFO-FLOW: To file: write model mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_mux_32_32_1_1
+INFO-FLOW: To file: write model mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_flow_control_loop_pipe_sequential_init
+INFO-FLOW: To file: write model mlp_dance3_input
+INFO-FLOW: To file: write model mlp_dance3_weights_0
+INFO-FLOW: To file: write model mlp_dance3_bias_0
+INFO-FLOW: To file: write model mlp_dance3_regslice_both
+INFO-FLOW: To file: write model mlp_dance3_regslice_both
+INFO-FLOW: To file: write model calculate
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_layer0
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_layer1
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_output
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_retrieve_inputs
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3
+INFO-FLOW: To file: write model mlp_dance3_Pipeline_loadbias0
+INFO-FLOW: To file: write model mlp_dance3
+INFO-FLOW: Generating D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/autopilot.rtl.models.tcl file...
+INFO-FLOW: Finished generating RTL model list.
+
+
+INFO-FLOW: RTL Generation done.
+INFO-FLOW: CAS Generation done.
+INFO-FLOW: CBC Generation done.
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::auto_generate_csynth_design
+Execute       get_top 
+Execute       get_config_export -ipname 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       get_config_rtl -module_auto_prefix 
+INFO-FLOW: DBG:PUTS: read_platform_lib D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.114 sec.
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10 (was NA)
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::generate_ip_cores gen_sim_model='1' gen_fp_models='0' gen_for_export='0' dstSCDir='' dstVhdlDir='D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/vhdl' dstVlogDir='D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/vlog' tclDir='D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db' modelList='mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1
+mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1
+mlp_dance3_mul_3ns_8ns_10_1_1
+mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_mux_32_32_1_1
+mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_input
+mlp_dance3_weights_0
+mlp_dance3_bias_0
+mlp_dance3_regslice_both
+mlp_dance3_regslice_both
+calculate
+mlp_dance3_Pipeline_layer0
+mlp_dance3_Pipeline_layer1
+mlp_dance3_Pipeline_output
+mlp_dance3_Pipeline_retrieve_inputs
+mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2
+mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3
+mlp_dance3_Pipeline_loadbias0
+mlp_dance3
+' expOnly='0'
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.compgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.compgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.compgen.tcl 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+WARNING: [RTMG 210-274] Memory 'mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1' is read-only, switch it to a ROM.
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+INFO: [RTMG 210-279] Implementing memory 'mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1' using auto ROMs.
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Command       ap_source done; 0.127 sec.
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.compgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.compgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.compgen.tcl 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.compgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.compgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.compgen.tcl 
+INFO: [RTMG 210-278] Implementing memory 'mlp_dance3_input_ram (RAM)' using auto RAMs.
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+INFO: [RTMG 210-278] Implementing memory 'mlp_dance3_weights_0_ram (RAM)' using auto RAMs.
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+INFO: [RTMG 210-278] Implementing memory 'mlp_dance3_bias_0_ram (RAM)' using auto RAMs.
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute         ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Command       ap_source done; 0.133 sec.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 2 seconds. CPU system time: 1 seconds. Elapsed time: 2.19 seconds; current allocated memory: 442.855 MB.
+INFO-FLOW: DBG:PROC: ::AP::create_csynth_xml outfile=''
+INFO-FLOW: Running: create_csynth_xml read xml data
+INFO-FLOW: Done: create_csynth_xml read xml data time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml bind info
+INFO-FLOW: Done: create_csynth_xml bind info time: 0 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml config info
+Execute       get_config_op mul -impl 
+Execute       get_config_op mul -latency 
+Execute       get_config_op mul -precision 
+Execute       get_config_op add -impl 
+Execute       get_config_op add -latency 
+Execute       get_config_op add -precision 
+Execute       get_config_op sub -impl 
+Execute       get_config_op sub -latency 
+Execute       get_config_op sub -precision 
+Execute       get_config_op fadd -impl 
+Execute       get_config_op fadd -latency 
+Execute       get_config_op fadd -precision 
+Execute       get_config_op fsub -impl 
+Execute       get_config_op fsub -latency 
+Execute       get_config_op fsub -precision 
+Execute       get_config_op fdiv -impl 
+Execute       get_config_op fdiv -latency 
+Execute       get_config_op fdiv -precision 
+Execute       get_config_op fexp -impl 
+Execute       get_config_op fexp -latency 
+Execute       get_config_op fexp -precision 
+Execute       get_config_op flog -impl 
+Execute       get_config_op flog -latency 
+Execute       get_config_op flog -precision 
+Execute       get_config_op fmul -impl 
+Execute       get_config_op fmul -latency 
+Execute       get_config_op fmul -precision 
+Execute       get_config_op frsqrt -impl 
+Execute       get_config_op frsqrt -latency 
+Execute       get_config_op frsqrt -precision 
+Execute       get_config_op frecip -impl 
+Execute       get_config_op frecip -latency 
+Execute       get_config_op frecip -precision 
+Execute       get_config_op fsqrt -impl 
+Execute       get_config_op fsqrt -latency 
+Execute       get_config_op fsqrt -precision 
+Execute       get_config_op dadd -impl 
+Execute       get_config_op dadd -latency 
+Execute       get_config_op dadd -precision 
+Execute       get_config_op dsub -impl 
+Execute       get_config_op dsub -latency 
+Execute       get_config_op dsub -precision 
+Execute       get_config_op ddiv -impl 
+Execute       get_config_op ddiv -latency 
+Execute       get_config_op ddiv -precision 
+Execute       get_config_op dexp -impl 
+Execute       get_config_op dexp -latency 
+Execute       get_config_op dexp -precision 
+Execute       get_config_op dlog -impl 
+Execute       get_config_op dlog -latency 
+Execute       get_config_op dlog -precision 
+Execute       get_config_op dmul -impl 
+Execute       get_config_op dmul -latency 
+Execute       get_config_op dmul -precision 
+Execute       get_config_op drsqrt -impl 
+Execute       get_config_op drsqrt -latency 
+Execute       get_config_op drsqrt -precision 
+Execute       get_config_op drecip -impl 
+Execute       get_config_op drecip -latency 
+Execute       get_config_op drecip -precision 
+Execute       get_config_op dsqrt -impl 
+Execute       get_config_op dsqrt -latency 
+Execute       get_config_op dsqrt -precision 
+Execute       get_config_op hadd -impl 
+Execute       get_config_op hadd -latency 
+Execute       get_config_op hadd -precision 
+Execute       get_config_op hsub -impl 
+Execute       get_config_op hsub -latency 
+Execute       get_config_op hsub -precision 
+Execute       get_config_op hdiv -impl 
+Execute       get_config_op hdiv -latency 
+Execute       get_config_op hdiv -precision 
+Execute       get_config_op hmul -impl 
+Execute       get_config_op hmul -latency 
+Execute       get_config_op hmul -precision 
+Execute       get_config_op hsqrt -impl 
+Execute       get_config_op hsqrt -latency 
+Execute       get_config_op hsqrt -precision 
+Execute       get_config_op facc -impl 
+Execute       get_config_op facc -latency 
+Execute       get_config_op facc -precision 
+Execute       get_config_op fmacc -impl 
+Execute       get_config_op fmacc -latency 
+Execute       get_config_op fmacc -precision 
+Execute       get_config_op fmadd -impl 
+Execute       get_config_op fmadd -latency 
+Execute       get_config_op fmadd -precision 
+Execute       get_config_storage fifo -auto_srl_max_bits 
+Execute       get_config_storage fifo -auto_srl_max_depth 
+Execute       get_config_storage fifo -impl 
+Execute       get_solution -flow_target 
+Execute       get_config_array_partition -complete_threshold 
+Execute       get_config_array_partition -throughput_driven 
+Execute       get_config_compile -enable_auto_rewind 
+Execute       get_config_compile -name_max_length 
+Execute       get_config_compile -no_signed_zeros 
+Execute       get_config_compile -pipeline_loops 
+Execute       get_config_compile -pipeline_style 
+Execute       get_config_compile -pragma_strict_mode 
+Execute       get_config_compile -pre_tcl 
+Execute       get_config_compile -unsafe_math_optimizations 
+Execute       get_config_dataflow -default_channel 
+Execute       get_config_dataflow -disable_fifo_sizing_opt 
+Execute       get_config_dataflow -fifo_depth 
+Execute       get_config_dataflow -override_user_fifo_depth 
+Execute       get_config_dataflow -scalar_fifo_depth 
+Execute       get_config_dataflow -start_fifo_depth 
+Execute       get_config_dataflow -strict_mode 
+Execute       get_config_dataflow -strict_stable_sync 
+Execute       get_config_dataflow -task_level_fifo_depth 
+Execute       get_config_debug -directory 
+Execute       get_config_debug -enable 
+Execute       get_config_export -description 
+Execute       get_config_export -disable_deadlock_detection 
+Execute       get_config_export -display_name 
+Execute       get_config_export -format 
+Execute       get_config_export -ip_xdc_file 
+Execute       get_config_export -ip_xdc_ooc_file 
+Execute       get_config_export -ipname 
+Execute       get_config_export -library 
+Execute       get_config_export -output 
+Execute       get_config_export -rtl 
+Execute       get_config_export -taxonomy 
+Execute       get_config_export -vendor 
+Execute       get_config_export -version 
+Execute       get_config_export -vivado_clock 
+Execute       get_config_export -vivado_impl_strategy 
+Execute       get_config_export -vivado_max_timing_paths 
+Execute       get_config_export -vivado_optimization_level 
+Execute       get_config_export -vivado_pblock 
+Execute       get_config_export -vivado_phys_opt 
+Execute       get_config_export -vivado_report_level 
+Execute       get_config_export -vivado_synth_design_args 
+Execute       get_config_export -vivado_synth_strategy 
+Execute       get_config_interface -clock_enable 
+Execute       get_config_interface -default_slave_interface 
+Execute       get_config_interface -m_axi_addr64 
+Execute       get_config_interface -m_axi_alignment_byte_size 
+Execute       get_config_interface -m_axi_auto_max_ports 
+Execute       get_config_interface -m_axi_buffer_impl 
+Execute       get_config_interface -m_axi_conservative_mode 
+Execute       get_config_interface -m_axi_flush_mode 
+Execute       get_config_interface -m_axi_latency 
+Execute       get_config_interface -m_axi_max_bitwidth 
+Execute       get_config_interface -m_axi_max_read_burst_length 
+Execute       get_config_interface -m_axi_max_widen_bitwidth 
+Execute       get_config_interface -m_axi_max_write_burst_length 
+Execute       get_config_interface -m_axi_min_bitwidth 
+Execute       get_config_interface -m_axi_num_read_outstanding 
+Execute       get_config_interface -m_axi_num_write_outstanding 
+Execute       get_config_interface -m_axi_offset 
+Execute       get_config_interface -register_io 
+Execute       get_config_interface -s_axilite_data64 
+Execute       get_config_interface -s_axilite_mailbox 
+Execute       get_config_interface -s_axilite_status_regs 
+Execute       get_config_interface -s_axilite_sw_reset 
+Execute       get_config_rtl -header 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -module_auto_prefix 
+Execute       get_config_rtl -module_prefix 
+Execute       get_config_rtl -mult_keep_attribute 
+Execute       get_config_rtl -register_all_io 
+Execute       get_config_rtl -register_reset_num 
+Execute       get_config_rtl -reset 
+Execute       get_config_rtl -reset_async 
+Execute       get_config_rtl -reset_level 
+Execute       get_config_schedule -enable_dsp_full_reg 
+Execute       get_config_unroll -tripcount_threshold 
+INFO-FLOW: Done: create_csynth_xml config info time: 0.2 seconds per iteration
+INFO-FLOW: Running: create_csynth_xml write xml
+INFO-FLOW: Done: create_csynth_xml write xml time: 0 seconds per iteration
+INFO-FLOW: DBG:PUTS:       create_csynth_xml wrote csynth_xml=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/syn/report/csynth.xml
+INFO-FLOW: DBG:PROC: ::AP::DESIGN_DATA::generate_json generate_bd_files='0' generate_xo_files='0' modelList='mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1
+mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1
+mlp_dance3_mul_3ns_8ns_10_1_1
+mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_mux_32_32_1_1
+mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_input
+mlp_dance3_weights_0
+mlp_dance3_bias_0
+mlp_dance3_regslice_both
+mlp_dance3_regslice_both
+calculate
+mlp_dance3_Pipeline_layer0
+mlp_dance3_Pipeline_layer1
+mlp_dance3_Pipeline_output
+mlp_dance3_Pipeline_retrieve_inputs
+mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2
+mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3
+mlp_dance3_Pipeline_loadbias0
+mlp_dance3
+' rtl_lang='both' bootstrap_tcl='false' outdir='' outfilename=''
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       get_solution -flow_target 
+Execute       get_config_export -xo 
+Execute       get_config_export -format 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/top-io-be.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.compgen.dataonly.tcl 
+Execute       get_config_export -format 
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute       get_solution -flow_target 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -kernel_profile 
+Execute       get_config_rtl -stall_sig_gen 
+Execute       get_config_rtl -profile 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.constraint.tcl 
+Execute       sc_get_clocks mlp_dance3 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute       get_config_export -ip_xdc_file 
+Execute       get_config_export -ip_xdc_ooc_file 
+Execute       get_config_debug -directory 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_ap_fadd_2_full_dsp_32_ip.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_ap_fcmp_0_no_dsp_32_ip.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_ap_fmul_1_max_dsp_32_ip.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1_ip.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1_ip.tcl 
+Execute       source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1_ip.tcl 
+INFO-FLOW: DBG:PROC: ::AP::add_csynth_report_sections
+INFO-FLOW: DBG:PUTS:       update_csynth_reports json2reportxml
+INFO-FLOW: DBG:PUTS:       update_csynth_reports wrote xml
+INFO-FLOW: DBG:PUTS:       update_csynth_reports appended to csynth rpt file
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.824 seconds; current allocated memory: 449.350 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for mlp_dance3.
+INFO: [VLOG 209-307] Generating Verilog RTL for mlp_dance3.
+Execute       syn_report -model mlp_dance3 -printsummary 
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 145.91 MHz
+Command     autosyn done; 25.828 sec.
+Command   csynth_design done; 36.975 sec.
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 27 seconds. CPU system time: 3 seconds. Elapsed time: 37.159 seconds; current allocated memory: 449.336 MB.
+Command ap_source done; 39.098 sec.
+Execute cleanup_all 
+INFO-FLOW: Workspace D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1 opened at Tue Oct 12 03:48:41 +0800 2021
+Execute     ap_set_clock -name default -period 10 -default=false 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+Execute     set_part xczu3eg-sbva484-1-i 
+Execute       create_platform xczu3eg-sbva484-1-i -board  
+DBG:HLSDevice: Trying to load device library: D:/apps/Xilinx/Vitis_HLS/2021.1\lib\win64.o\librdi_hlsvwrap.dll
+DBG:HLSDevice: first parts/arch.xml in RDI_DATADIR: D:/apps/Xilinx/Vivado/2021.1/data/parts/arch.xml
+DBG:HLSDevice: init success
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+INFO: [HLS 200-1611] Setting target device to 'xczu3eg-sbva484-1-i'
+Command       create_platform done; 1.543 sec.
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute           source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute           source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command       ap_source done; 0.122 sec.
+Execute       ap_part_info -name xczu3eg-sbva484-1-i -data info 
+Execute       config_compile -quiet -complex-mul-dsp=0 
+Command     set_part done; 1.691 sec.
+Execute     send_msg_by_id INFO @200-1505@%s%s  vivado 
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Execute     get_config_interface -m_axi_latency 
+Execute     get_config_interface -m_axi_alignment_byte_size 
+Execute     get_config_interface -m_axi_max_widen_bitwidth 
+Execute     get_config_interface -default_interface 
+Execute     get_config_rtl -register_reset_num 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -format=ip_catalog 
+INFO: [HLS 200-1464] Running solution command: config_export -format=ip_catalog
+Execute     config_export -format=ip_catalog 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -rtl=verilog 
+INFO: [HLS 200-1464] Running solution command: config_export -rtl=verilog
+Execute     config_export -rtl=verilog 
+Execute     send_msg_by_id INFO @200-1464@%s config_export -vivado_clock=10 
+INFO: [HLS 200-1464] Running solution command: config_export -vivado_clock=10
+Execute     config_export -vivado_clock=10 
+Command   open_solution done; 1.719 sec.
+Execute   set_part xczu3eg-sbva484-1-i 
+INFO: [HLS 200-1510] Running: set_part xczu3eg-sbva484-1-i 
+Execute     create_platform xczu3eg-sbva484-1-i -board  
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.hlp 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/zynquplus_dsp48e2.hlp 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.119 sec.
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info 
+Execute     config_compile -quiet -complex-mul-dsp=0 
+Command   set_part done; 0.173 sec.
+Execute   create_clock -period 10 -name default 
+INFO: [HLS 200-1510] Running: create_clock -period 10 -name default 
+Execute   config_export -format ip_catalog -rtl verilog -vivado_clock 10 
+INFO: [HLS 200-1510] Running: config_export -format ip_catalog -rtl verilog -vivado_clock 10 
+Execute   source ./MLP_FINAL/solution1/directives.tcl 
+Execute     set_directive_top -name mlp_dance3 mlp_dance3 
+INFO: [HLS 200-1510] Running: set_directive_top -name mlp_dance3 mlp_dance3 
+Execute   export_design -rtl verilog -format ip_catalog -version 1.0 -output D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/ip/mlp_dance3.zip 
+INFO: [HLS 200-1510] Running: export_design -rtl verilog -format ip_catalog -version 1.0 -output D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/ip/mlp_dance3.zip 
+Execute     get_config_export -clock_margin 
+Execute     get_config_export -custom_script 
+Execute     get_config_export -description 
+Execute     get_config_export -display_name 
+Execute     get_config_export -driver_input_dir 
+Execute     get_config_export -ipname 
+Execute     get_config_export -library 
+Execute     get_config_export -qor_test 
+Execute     get_config_export -sim 
+Execute     get_config_export -taxonomy 
+Execute     get_config_export -use_ip 
+Execute     get_config_export -use_netlist 
+Execute     get_config_export -vendor 
+Execute     get_config_export -xo 
+Execute     config_export -format=ip_catalog -output=D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/ip/mlp_dance3.zip -rtl=verilog -version=1.0 
+INFO-FLOW: DBG:PUTS: export_design_wrap: -format ip_catalog -rtl verilog -version 1.0
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_export -vivado_clock 
+Execute     get_top 
+Execute     get_config_export -ipname 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+Execute     get_config_rtl -module_auto_prefix 
+Execute     get_solution -flow_target 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+INFO-FLOW: DBG:PUTS:   auto_impl: pack: -export -rtl verilog
+INFO-FLOW: DBG:PROC: ::AESL_AUTOIMPL::auto_impl args='-export -rtl verilog'
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+INFO: [IMPL 213-8] Exporting RTL as a Vivado IP.
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS: automg_wrap -export -pcore_version 1.00.a -rtl vlog -tool Vivado -impltomg_flag
+INFO-FLOW: DBG:PROC: ::AESL_AUTOMG::auto_generate args='-export -pcore_version 1.00.a -rtl vlog -tool Vivado -impltomg_flag'
+INFO-FLOW: DBG:PUTS:     auto_generate -export -pcore_version 1.00.a -rtl vlog -tool Vivado -impltomg_flag
+Execute     get_solution -flow_target 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+Execute     get_config_export -ip_xdc_file 
+Execute     get_config_export -ip_xdc_ooc_file 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS: read_platform_lib D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.114 sec.
+INFO-FLOW: DBG:PUTS:   using AESL_AUTOCG::g_clock_period=10 (was NA)
+INFO-FLOW: DBG:PUTS:       initCTypeInfo top_module=mlp_dance3 xml_exists=0
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     get_config_export -disable_deadlock_detection 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     get_config_rtl -module_prefix 
+INFO-FLOW: DBG:PUTS:       cosim_export_main adding deadlock detection to mlp_dance3
+INFO-FLOW: DBG:PUTS: Skipping loadAnalyze_DB, #g_database=2
+INFO-FLOW: DBG:PUTS:       generate_json generate_bd_files=0 generate_xo_files=false #modelList=28 #gSsdmPorts=0
+INFO-FLOW: DBG:PROC: ::AP::DESIGN_DATA::generate_json generate_bd_files='0' generate_xo_files='false' modelList='mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1
+mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1
+mlp_dance3_mul_3ns_8ns_10_1_1
+mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_mux_32_32_1_1
+mlp_dance3_mlp_dance3_Pipeline_layer1_bias_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_mac_muladd_4ns_7ns_7ns_10_4_1
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_flow_control_loop_pipe_sequential_init
+mlp_dance3_input
+mlp_dance3_weights_0
+mlp_dance3_bias_0
+mlp_dance3_regslice_both
+mlp_dance3_regslice_both
+calculate
+mlp_dance3_Pipeline_layer0
+mlp_dance3_Pipeline_layer1
+mlp_dance3_Pipeline_output
+mlp_dance3_Pipeline_retrieve_inputs
+mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2
+mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3
+mlp_dance3_Pipeline_loadbias0
+mlp_dance3
+' rtl_lang='vlog' bootstrap_tcl='false' outdir='' outfilename=''
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/huddle.tcl 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/yaml/json2huddle.tcl 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/tps/tcl/tcllib1.11.1/try/try.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_solution -flow_target 
+Execute     get_config_export -xo 
+Execute     get_config_export -format 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/top-io-be.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.compgen.dataonly.tcl 
+Execute     get_config_export -format 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/calculate.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer0.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_layer1.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_output.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_retrieve_inputs.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights0_VITIS_LOOP_46_2.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadweights1_VITIS_LOOP_52_3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3_Pipeline_loadbias0.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     get_solution -flow_target 
+Execute     get_config_rtl -kernel_profile 
+Execute     get_config_rtl -kernel_profile 
+Execute     get_config_rtl -stall_sig_gen 
+Execute     get_config_rtl -profile 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.constraint.tcl 
+Execute     sc_get_clocks mlp_dance3 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_export -ip_xdc_file 
+Execute     get_config_export -ip_xdc_ooc_file 
+Execute     get_config_debug -directory 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_ap_fadd_2_full_dsp_32_ip.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_ap_fcmp_0_no_dsp_32_ip.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_ap_fmul_1_max_dsp_32_ip.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_fadd_32ns_32ns_32_5_full_dsp_1_ip.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_fcmp_32ns_32ns_1_2_no_dsp_1_ip.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/misc/mlp_dance3_fmul_32ns_32ns_32_4_max_dsp_1_ip.tcl 
+Execute     get_config_export -disable_deadlock_detection 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     get_config_rtl -module_prefix 
+INFO-FLOW: DBG:PUTS:       cosim_export_main adding deadlock detection to mlp_dance3
+Execute     get_config_export -format 
+INFO-FLOW: DBG:PUTS:       generate_ip_script #gSsdmPorts=0 g_lang=vlog is_sdaccel=false is_sdsoc=true xo_file=
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_debug -directory 
+INFO-FLOW: DBG:PUTS:       generate_top_info
+INFO-FLOW: DBG:PUTS:       prepArgInfo -> loadAnalyze_DB top_module=mlp_dance3
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.rtl_wrap.cfg.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     get_config_export -ip_xdc_ooc_file 
+Execute     get_config_export -ip_xdc_file 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.constraint.tcl 
+INFO-FLOW: DBG:PUTS:       generate_ipi_example_script
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+INFO-FLOW: DBG:PUTS:       generate_syn_sh
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+INFO-FLOW: DBG:PUTS:       generate_imp_constraints
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.constraint.tcl 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/mlp_dance3.tbgen.tcl 
+INFO-FLOW: DBG:PUTS:       delete-temp-dirs (skipped for debug)
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data names -quiet 
+Execute     ap_part_info -name xczu3eg-sbva484-1-i -data info -quiet 
+INFO-FLOW: DBG:PUTS: read_platform_lib D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/common.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/APCoreGen.gen 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op.gen 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/op_simcore.gen 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/generic/autopilot/interface.gen 
+Execute     source D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/.autopilot/db/global.setting.tcl 
+Execute     source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/common/xilinx.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/plb46.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/axi4.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/nativeAXI4.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/saxilite.gen 
+Execute         source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/maxi.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/scripts/xilinxcoregen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/interface/XilEDKCoreGen.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/dds_compiler.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/util.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfft.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/ip/xfir.gen 
+Execute       source D:/apps/Xilinx/Vitis_HLS/2021.1/common/technology/xilinx/DSP48/dsp48.gen 
+Command     ap_source done; 0.113 sec.
+INFO-FLOW: DBG:PUTS:     IP package: exec D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/ip/pack.bat
+INFO-FLOW: DBG:PUTS:     IP package: success D:/o/nus_files/2122-Year4-sem-1/CG4002/YETONG-Ultra96/Ultra96-main/FPGA/HLS/MLP_FINAL/MLP_FINAL/solution1/impl/ip/pack.bat
+Execute     get_config_export -output 
+Execute     send_msg_by_id INFO @200-802@%s ip/mlp_dance3.zip 
+INFO: [HLS 200-802] Generated output file ip/mlp_dance3.zip
+Command   export_design done; 12.596 sec.
+INFO: [HLS 200-111] Finished Command export_design CPU user time: 1 seconds. CPU system time: 0 seconds. Elapsed time: 12.746 seconds; current allocated memory: 296.085 MB.
+Command ap_source done; 14.676 sec.
+Execute cleanup_all 

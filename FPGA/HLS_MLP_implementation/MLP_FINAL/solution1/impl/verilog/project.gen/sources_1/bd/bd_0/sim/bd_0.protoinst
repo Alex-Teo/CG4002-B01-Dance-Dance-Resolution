@@ -1,0 +1,29 @@
+{
+	"version": "1.0",
+	"modules": {
+		"bd_0": {
+			"proto_instances": {
+				"/hls_inst/M_AXIS_V": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "M_AXIS_V_TDATA"},
+						"TREADY": { "actual": "M_AXIS_V_TREADY"},
+						"TVALID": { "actual": "M_AXIS_V_TVALID"}
+					}
+				},
+				"/hls_inst/S_AXIS_V": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "S_AXIS_V_TDATA"},
+						"TREADY": { "actual": "S_AXIS_V_TREADY"},
+						"TVALID": { "actual": "S_AXIS_V_TVALID"}
+					}
+				}
+			}
+		}
+	}
+}
